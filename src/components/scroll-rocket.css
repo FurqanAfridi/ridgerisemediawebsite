@@ -1,0 +1,140 @@
+.scroll-rocket {
+  position: fixed;
+  inset: 0;
+  z-index: 22;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.scroll-rocket__trail {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.scroll-rocket__puff {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      ellipse 55% 50% at 30% 45%,
+      rgba(255, 255, 255, 0.95) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 48% at 62% 40%,
+      rgba(255, 255, 255, 0.88) 0%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 48% 45% at 48% 62%,
+      rgba(232, 246, 255, 0.75) 0%,
+      transparent 72%
+    );
+  filter: blur(6px);
+  will-change: transform, opacity;
+}
+
+.scroll-rocket__perspective {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  perspective: 1100px;
+  perspective-origin: 50% 40%;
+}
+
+.scroll-rocket__ship {
+  position: absolute;
+  width: min(168px, 22vw);
+  will-change: transform, opacity;
+}
+
+.scroll-rocket__bob {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  filter: drop-shadow(0 18px 24px rgba(76, 22, 120, 0.22));
+}
+
+.scroll-rocket__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: translateZ(40px);
+  user-select: none;
+  /* Knock out black plate from the PNG on light page backgrounds */
+  mix-blend-mode: screen;
+}
+
+.scroll-rocket__flame {
+  position: absolute;
+  left: 50%;
+  bottom: 2%;
+  width: 28%;
+  height: 34%;
+  transform: translateX(-50%) translateZ(20px);
+  transform-origin: 50% 0%;
+  border-radius: 40% 40% 50% 50%;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    #fff 0%,
+    #7ef9ff 28%,
+    #45e9b5 55%,
+    transparent 78%
+  );
+  filter: blur(3px);
+  opacity: 0.9;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.scroll-rocket__glow {
+  position: absolute;
+  left: 50%;
+  bottom: -4%;
+  width: 70%;
+  height: 40%;
+  transform: translateX(-50%) translateZ(10px);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(69, 233, 181, 0.45) 0%,
+    rgba(93, 98, 221, 0.12) 45%,
+    transparent 70%
+  );
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.scroll-rocket--static .scroll-rocket__ship {
+  left: 14% !important;
+  top: 72% !important;
+  opacity: 0.55;
+}
+
+.scroll-rocket--static .scroll-rocket__bob {
+  transform: rotateZ(-28deg) rotateY(-18deg) !important;
+}
+
+.scroll-rocket--static .scroll-rocket__flame {
+  animation: none;
+}
+
+@media (max-width: 720px) {
+  .scroll-rocket__ship {
+    width: min(120px, 28vw);
+  }
+
+  .scroll-rocket {
+    opacity: 0.92;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-rocket__flame {
+    animation: none;
+  }
+}

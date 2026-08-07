@@ -1,0 +1,228 @@
+.bouncy-features {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding: var(--section-y) var(--page-pad);
+  color: var(--color-text);
+}
+
+.bouncy-features__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--block-gap);
+}
+
+.bouncy-features__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  max-width: 42rem;
+}
+
+.bouncy-features__eyebrow {
+  margin: 0;
+  font-size: clamp(13px, 1.2vw, 14px);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-purple);
+}
+
+.bouncy-features__title {
+  margin: 0;
+  font-size: clamp(32px, 4.6vw, 56px);
+  font-weight: 700;
+  letter-spacing: -1.4px;
+  line-height: 1.08;
+  color: #000;
+}
+
+.bouncy-features__title-muted {
+  color: #8b68e5;
+}
+
+.bouncy-features__sub {
+  margin: 0;
+  max-width: 46ch;
+  font-size: clamp(16px, 1.6vw, 19px);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.bouncy-features__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 14px 24px;
+  border-radius: 12px;
+  background: #4c1678;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(76, 22, 120, 0.28);
+  transition: background 0.2s ease;
+}
+
+.bouncy-features__cta:hover {
+  background: #5d62dd;
+}
+
+.bouncy-features__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.bounce-card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 300px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #f7f5fd;
+  border: 1px solid rgba(76, 22, 120, 0.06);
+  padding: 0;
+  cursor: default;
+}
+
+.bounce-card__copy {
+  position: relative;
+  z-index: 2;
+  padding: 28px 28px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bounce-card__title {
+  margin: 0;
+  text-align: left;
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.7px;
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+.bounce-card__body {
+  margin: 0;
+  max-width: 36ch;
+  text-align: left;
+  font-size: clamp(15px, 1.4vw, 17px);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.bounce-card__demo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 180px;
+  margin: 0 16px 0;
+  padding: 20px 20px 0;
+  border-radius: 18px 18px 0 0;
+  transition: transform 280ms ease;
+}
+
+.bounce-card:hover .bounce-card__demo {
+  transform: translateY(-10px);
+}
+
+.bounce-card__demo img {
+  display: block;
+  width: min(100%, 240px);
+  height: auto;
+  max-height: 168px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.14));
+}
+
+.bounce-card__demo--violet {
+  background: linear-gradient(160deg, #c4b5fd 0%, #5d62dd 100%);
+}
+
+.bounce-card__demo--amber {
+  background: linear-gradient(160deg, #fcd34d 0%, #f97316 100%);
+}
+
+.bounce-card__demo--mint {
+  background: linear-gradient(160deg, #6ff0c8 0%, #2ae2a8 55%, #0d9488 100%);
+}
+
+.bounce-card__demo--rose {
+  background: linear-gradient(160deg, #fda4af 0%, #8b68e5 100%);
+}
+
+@media (min-width: 768px) {
+  .bouncy-features__header {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .bouncy-features__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .bounce-card {
+    min-height: 340px;
+  }
+
+  .bounce-card__demo {
+    min-height: 170px;
+  }
+}
+
+@media (max-width: 767px) {
+  .bouncy-features__intro {
+    max-width: none;
+  }
+
+  .bouncy-features__title {
+    font-size: clamp(30px, 8vw, 42px);
+  }
+
+  .bouncy-features__sub {
+    font-size: 15px;
+  }
+
+  .bounce-card {
+    min-height: 280px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .bounce-card__copy {
+    padding: 32px 32px 20px;
+  }
+
+  .bounce-card__demo img {
+    width: min(100%, 260px);
+    max-height: 180px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bounce-card__demo {
+    transition: none;
+  }
+
+  .bounce-card:hover .bounce-card__demo {
+    transform: none;
+  }
+}

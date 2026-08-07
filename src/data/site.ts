@@ -1,0 +1,36 @@
+export const assets = {
+  money: "/assets/money-1.png",
+  rocket: "/assets/rocket.png",
+  cardPayout: "/assets/card-payout.png",
+  cardCalls: "/assets/card-calls.png",
+  logoIcon: "/assets/logo-icon.svg",
+  logoTextTop: "/assets/logo-text-top.svg",
+  logoTextBottom: "/assets/logo-text-bottom.svg",
+  logoDot: "/assets/logo-dot.svg",
+  verticals: [
+    "/assets/vertical-1.png",
+    "/assets/vertical-2.png",
+    "/assets/vertical-3.png",
+    "/assets/vertical-4.png",
+    "/assets/vertical-5.png",
+    "/assets/vertical-6.png",
+    "/assets/vertical-7.png",
+  ],
+} as const;
+
+export const site = {
+  name: "RidgeRise Media",
+  url: "https://ridgerisemedia.com",
+  email: "hello@ridgerisemedia.com",
+  phone: "+1 (888) 555-0142",
+  phoneHref: "tel:+18885550142",
+  tagline: "Turn Every Call into Revenue",
+} as const;
+
+export const navLinks = [
+  { label: "Publishers", to: "/publishers" },
+  { label: "Buyers", to: "/buyers" },
+  { label: "Verticals", to: "/verticals" },
+  { label: "About", to: "/about" },
+  { label: "Blog", to: "/blog" },
+] as const;

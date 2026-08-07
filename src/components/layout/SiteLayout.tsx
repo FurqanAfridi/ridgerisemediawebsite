@@ -1,0 +1,36 @@
+import { useEffect, useRef, type ReactNode } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { CloudField } from "@/components/CloudField";
+import { ScrollRocket } from "@/components/ScrollRocket";
+import { FooterSitemap } from "@/components/layout/FooterSitemap";
+import { CinematicFooter } from "@/components/ui/motion-footer";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { usePageMotion } from "@/hooks/usePageMotion";
+import "./footer-stack.css";
+
+export function SiteLayout({ children }: { children?: ReactNode }) {
+  const pageRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
+  usePageMotion(pageRef);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  return (
+    <div className="page" ref={pageRef}>
+      <CloudField />
+      {isHome ? <ScrollRocket /> : null}
+      <SiteHeader />
+      <div className={`content-sheet${isHome ? "" : " content-sheet--inner"}`}>
+        {children ?? <Outlet />}
+      </div>
+      <div className="footer-stack">
+        <FooterSitemap />
+        <CinematicFooter />
+      </div>
+    </div>
+  );
+}
