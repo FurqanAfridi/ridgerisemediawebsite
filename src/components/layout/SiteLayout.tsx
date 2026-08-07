@@ -1,7 +1,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { CloudField } from "@/components/CloudField";
-import { ScrollRocket } from "@/components/ScrollRocket";
+import { SiteLoader } from "@/components/SiteLoader";
 import { FooterSitemap } from "@/components/layout/FooterSitemap";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -21,8 +21,8 @@ export function SiteLayout({ children }: { children?: ReactNode }) {
 
   return (
     <div className="page" ref={pageRef}>
+      {isHome ? <SiteLoader /> : null}
       <CloudField />
-      {isHome ? <ScrollRocket /> : null}
       <SiteHeader />
       <div className={`content-sheet${isHome ? "" : " content-sheet--inner"}`}>
         {children ?? <Outlet />}

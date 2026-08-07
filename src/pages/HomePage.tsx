@@ -258,9 +258,6 @@ export default function HomePage() {
           <div className="parallax-wrap parallax--money-roles roles__deco roles__deco--money">
             <img className="float-bob" src={assets.money} alt="" aria-hidden="true" />
           </div>
-          <div className="parallax-wrap parallax--rocket-roles roles__deco roles__deco--rocket">
-            <img className="float-bob" src={assets.rocket} alt="" aria-hidden="true" />
-          </div>
 
           <div className="roles__intro reveal">
             <h2 className="section-title reveal-child">

@@ -126,7 +126,6 @@ export function usePageMotion(rootRef: RefObject<HTMLElement | null>) {
         { sel: ".parallax--money-hero-sm", y: -70, x: 20 },
         { sel: ".parallax--money-cards", y: -80, x: 40 },
         { sel: ".parallax--money-roles", y: -60, x: -24 },
-        { sel: ".parallax--rocket-roles", y: -100, x: 45 },
       ].forEach(({ sel, y, x }) => {
         gsap.utils.toArray<HTMLElement>(sel).forEach((el) => {
           gsap.to(el, {

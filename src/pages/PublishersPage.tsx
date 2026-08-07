@@ -47,7 +47,7 @@ const benefits = [
     title: "Fast buyer matching",
     body: "We connect quality publishers with verified demand in days — not weeks of waiting.",
     icon: Zap,
-    art: assets.rocket,
+    art: assets.verticals[2],
     tone: "violet",
   },
   {
@@ -145,12 +145,6 @@ export default function PublishersPage() {
           <div className="pub-hero__orb pub-hero__orb--mint pub-float" />
           <div className="pub-hero__orb pub-hero__orb--violet pub-float" />
           <img
-            className="pub-hero__rocket float-bob pub-parallax"
-            data-speed="-0.35"
-            src={assets.rocket}
-            alt=""
-          />
-          <img
             className="pub-hero__money float-bob pub-parallax"
             data-speed="0.45"
             src={assets.money}
@@ -212,8 +206,8 @@ export default function PublishersPage() {
             <img src={assets.cardCalls} alt="Live calls tracking graphic" />
           </div>
           <img
-            className="pub-split__deco pub-split__deco--rocket float-bob"
-            src={assets.rocket}
+            className="pub-split__deco pub-split__deco--money float-bob"
+            src={assets.money}
             alt=""
             aria-hidden="true"
           />
@@ -311,7 +305,6 @@ export default function PublishersPage() {
       {/* ——— Closing CTA stage ——— */}
       <section className="pub-cta">
         <div className="pub-cta__art" aria-hidden="true">
-          <img className="pub-cta__rocket float-bob" src={assets.rocket} alt="" />
           <img className="pub-cta__money float-bob" src={assets.money} alt="" />
         </div>
         <div className="pub-cta__panel pub-reveal">

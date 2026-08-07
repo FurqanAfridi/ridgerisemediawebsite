@@ -29,7 +29,7 @@ const features = [
   {
     title: "High-Intent Verticals",
     body: "Insurance specialty plus Legal, Home Services, and performance PPC depth that converts.",
-    art: "/assets/rocket.png",
+    art: "/assets/vertical-2.png",
     artAlt: "Growth across verticals",
     tone: "rose",
   },
