@@ -20,24 +20,18 @@ npm run preview
 
 ## Production
 
-- **Public URL (goal):** `http://ridgerisemedia.com` (port 80 via Docker reverse proxy)
-- **App server:** host nginx on port `786` → files in `/var/www/ridgerisemedia`
+- **Live URL:** https://ridgerisemedia.com (Caddy on 80/443 → host nginx `:786`)
+- **App files:** `/var/www/ridgerisemedia`
 - **Source on server:** `/root/landers/ridgerisemediawebsite/ridgerisemediawebsite`
+- **Caddy route** (with your other landers): `/root/database/supabase/docker/volumes/proxy/caddy/Caddyfile`
 
-Docker already owns port **80** for your other landers. RidgeRise stays on **786**; the proxy only adds a *new* host route for `ridgerisemedia.com` → `172.17.0.1:786`. Other sites are not modified.
-
-### Wire the domain (no `:786`)
-
-On the server:
-
-```bash
-cd ~/landers/ridgerisemediawebsite/ridgerisemediawebsite
-git pull origin main
-chmod +x scripts/wire-domain.sh
-bash scripts/wire-domain.sh
+```caddy
+ridgerisemedia.com, www.ridgerisemedia.com {
+    reverse_proxy 172.17.0.1:786
+}
 ```
 
-Then open `http://ridgerisemedia.com`.
+Other landers are unchanged; only this host block was added.
 
 ## CI/CD (GitHub Actions)
 
