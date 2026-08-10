@@ -1,5 +1,19 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  BookOpen,
+  Car,
+  GraduationCap,
+  HeartPulse,
+  Home,
+  Landmark,
+  Scale,
+  Shield,
+  Sun,
+  Thermometer,
+  Umbrella,
+  Wallet,
+} from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
 import {
@@ -8,6 +22,33 @@ import {
   type Vertical,
 } from "@/data/verticals";
 import "./pages.css";
+
+const categoryIcons = {
+  Insurance: Shield,
+  Legal: Scale,
+  "Home Services": Home,
+  Finance: Wallet,
+  Other: BookOpen,
+} as const;
+
+const slugIcons: Record<string, typeof Car> = {
+  "auto-insurance": Car,
+  "health-insurance": HeartPulse,
+  "life-insurance": Umbrella,
+  "home-insurance": Home,
+  "medicare-advantage": HeartPulse,
+  "final-expense": Umbrella,
+  "personal-injury": Scale,
+  "mass-tort": Scale,
+  "debt-settlement": Wallet,
+  solar: Sun,
+  hvac: Thermometer,
+  roofing: Home,
+  "home-security": Shield,
+  mortgage: Landmark,
+  "tax-relief": Landmark,
+  education: GraduationCap,
+};
 
 export default function VerticalsPage() {
   const [active, setActive] = useState<string>("All");
@@ -94,20 +135,20 @@ export default function VerticalsPage() {
 }
 
 function VerticalCard({ vertical }: { vertical: Vertical }) {
+  const Icon =
+    slugIcons[vertical.slug] ?? categoryIcons[vertical.category] ?? Shield;
+
   return (
     <li>
       <article className="card-grid__item" id={vertical.slug}>
+        <span className="feature-grid__icon" aria-hidden="true">
+          <Icon size={22} strokeWidth={2.25} />
+        </span>
         <span className="card-grid__meta">{vertical.category}</span>
         <h3>
           <Link to={`/verticals/${vertical.slug}`}>{vertical.name}</Link>
         </h3>
         <p>{vertical.summary}</p>
-        <p>
-          <strong>Buyers:</strong> {vertical.buyerFit}
-        </p>
-        <p>
-          <strong>Publishers:</strong> {vertical.publisherFit}
-        </p>
         <Link className="card-grid__link" to={`/verticals/${vertical.slug}`}>
           View {vertical.name} →
         </Link>

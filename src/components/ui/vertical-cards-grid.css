@@ -1,0 +1,67 @@
+/* Vertical cards section — swipe stage with visible Figma pastel colors */
+
+.vcg {
+  position: relative;
+  width: 100%;
+  padding: var(--section-y) var(--page-pad);
+  background:
+    radial-gradient(
+      ellipse 70% 55% at 50% 40%,
+      color-mix(in srgb, var(--color-accent-purple, #8b80f9) 10%, transparent) 0%,
+      transparent 70%
+    ),
+    var(--color-bg);
+  color: var(--color-text);
+}
+
+.vcg__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--title-gap);
+  text-align: center;
+  max-width: var(--max);
+  margin: 0 auto var(--space-2xl);
+}
+
+.vcg__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+}
+
+.vcg__swipe {
+  width: min(100%, 361px);
+  height: 460px;
+}
+
+.vcg__hint {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-muted, #6b7280);
+}
+
+.vcg__outro {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-2xl);
+}
+
+@media (max-width: 640px) {
+  .vcg__swipe {
+    width: min(100%, 320px);
+    height: 430px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vcg__hint {
+    display: none;
+  }
+}

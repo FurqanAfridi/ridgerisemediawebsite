@@ -1,0 +1,231 @@
+/* Scrubbed bento gallery — matches GreenSock CodePen vYMzKZx */
+
+.vfg-section {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  padding-inline: 0;
+  gap: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vfg-section .verticals__intro {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+  width: 100%;
+}
+
+/* CodePen .gallery-wrap */
+.gallery-wrap,
+.vfg-wrap {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* CodePen .gallery — scoped as .vfg to avoid App.css .gallery flex conflict */
+.vfg.gallery--bento {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: none;
+  display: grid;
+  gap: 1vh;
+  grid-template-columns: repeat(3, 32.5vw);
+  grid-template-rows: repeat(4, 23vh);
+  justify-content: center;
+  align-content: center;
+}
+
+/* CodePen .gallery--final.gallery--bento — expanded Flip target */
+.vfg.gallery--bento.gallery--final {
+  grid-template-columns: repeat(3, 100vw);
+  grid-template-rows: repeat(4, 49.5vh);
+  gap: 1vh;
+}
+
+/* CodePen grid areas */
+.gallery--bento .gallery__item:nth-child(1) {
+  grid-area: 1 / 1 / 3 / 2;
+}
+.gallery--bento .gallery__item:nth-child(2) {
+  grid-area: 1 / 2 / 2 / 3;
+}
+.gallery--bento .gallery__item:nth-child(3) {
+  grid-area: 2 / 2 / 4 / 3;
+}
+.gallery--bento .gallery__item:nth-child(4) {
+  grid-area: 1 / 3 / 3 / 4;
+}
+.gallery--bento .gallery__item:nth-child(5) {
+  grid-area: 3 / 1 / 4 / 2;
+}
+.gallery--bento .gallery__item:nth-child(6) {
+  grid-area: 3 / 3 / 5 / 4;
+}
+.gallery--bento .gallery__item:nth-child(7) {
+  grid-area: 4 / 1 / 5 / 2;
+}
+.gallery--bento .gallery__item:nth-child(8) {
+  grid-area: 4 / 2 / 5 / 3;
+}
+
+/* CodePen .gallery__item */
+.gallery__item.vfg__item {
+  position: relative;
+  flex: none;
+  overflow: hidden;
+  border-radius: 12px;
+  background-position: 50% 50%;
+  background-size: cover;
+  background: var(--color-surface);
+  cursor: pointer;
+}
+
+.gallery__item.vfg__item img {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  /* Avoid CSS transforms — Flip owns transform during scrub */
+  transform: none !important;
+}
+
+/* Content overlay — hover / expanded */
+.vfg__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 8px;
+  padding: clamp(14px, 2vw, 28px);
+  background: linear-gradient(
+    180deg,
+    rgba(6, 4, 12, 0.08) 0%,
+    rgba(6, 4, 12, 0.42) 45%,
+    rgba(6, 4, 12, 0.94) 100%
+  );
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+}
+
+.gallery__item:hover .vfg__overlay,
+.gallery__item:focus-within .vfg__overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.gallery--final .gallery__item:hover .vfg__overlay,
+.gallery--final .gallery__item:focus-within .vfg__overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.vfg__category {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-mint);
+}
+
+.vfg__name {
+  margin: 0;
+  font-size: clamp(1.25rem, 1.8vw + 0.4rem, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+.vfg__desc {
+  margin: 0;
+  max-width: 36ch;
+  font-size: clamp(0.9rem, 0.35vw + 0.8rem, 1.1rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.vfg__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.vfg__cta {
+  font-size: 13px;
+  padding: 8px 12px;
+}
+
+.vfg-outro {
+  margin-top: 8px;
+  padding-inline: var(--page-pad);
+  padding-bottom: var(--space-lg);
+}
+
+@media (max-width: 900px) {
+  .gallery-wrap,
+  .vfg-wrap {
+    height: auto;
+    overflow: visible;
+    padding: 0 var(--page-pad) var(--space-lg);
+  }
+
+  .vfg.gallery--bento,
+  .vfg.gallery--bento.gallery--final {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    height: auto;
+    grid-template-columns: none;
+    grid-template-rows: none;
+  }
+
+  .gallery--bento .gallery__item {
+    grid-area: auto !important;
+    width: 100%;
+    min-height: 280px;
+    height: 42vh;
+    border-radius: 16px;
+  }
+
+  .vfg__overlay {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-wrap,
+  .vfg-wrap {
+    height: auto;
+    overflow: visible;
+    padding: 0 var(--page-pad);
+  }
+
+  .vfg.gallery--bento,
+  .vfg.gallery--bento.gallery--final {
+    height: auto;
+  }
+}

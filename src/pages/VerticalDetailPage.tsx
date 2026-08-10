@@ -64,19 +64,23 @@ export default function VerticalDetailPage() {
         secondaryCta={{ label: "Sell this vertical", to: "/publishers" }}
       />
 
-      <section className="inner-section inner-section--tight">
+      <section className="inner-section">
         <article className="prose">
           <p>{vertical.description}</p>
-          <p>
-            <strong>Buyer fit:</strong> {vertical.buyerFit}
-          </p>
-          <p>
-            <strong>Publisher fit:</strong> {vertical.publisherFit}
-          </p>
         </article>
+        <ul className="fit-grid" style={{ marginTop: "var(--space-xl)" }}>
+          <li className="fit-card">
+            <span className="fit-card__label">Buyer fit</span>
+            <p>{vertical.buyerFit}</p>
+          </li>
+          <li className="fit-card">
+            <span className="fit-card__label">Publisher fit</span>
+            <p>{vertical.publisherFit}</p>
+          </li>
+        </ul>
       </section>
 
-      <section className="inner-section">
+      <section className="inner-section inner-section--band">
         <div className="inner-section__head">
           <h2 className="inner-section__title">Related verticals</h2>
           <p className="inner-section__sub">

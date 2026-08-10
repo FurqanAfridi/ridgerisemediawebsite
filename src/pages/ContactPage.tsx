@@ -42,9 +42,9 @@ export default function ContactPage() {
 
       <section className="inner-section">
         {submitted ? (
-          <div className="prose" style={{ textAlign: "center" }}>
+          <div className="contact-success">
             <h2>Thanks — we got your note.</h2>
-            <p>
+            <p className="inner-section__sub" style={{ margin: 0 }}>
               Our team will review your details and follow up shortly. Prefer to
               reach us now? Email{" "}
               <a href={`mailto:${site.email}`}>{site.email}</a> or call{" "}

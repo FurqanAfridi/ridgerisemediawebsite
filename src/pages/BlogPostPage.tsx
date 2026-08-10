@@ -57,7 +57,7 @@ export default function BlogPostPage() {
         </article>
       </section>
 
-      <section className="inner-section" style={{ background: "#f7fffe" }}>
+      <section className="inner-section inner-section--band">
         <div className="inner-section__head">
           <h2 className="inner-section__title">Related reading</h2>
         </div>

@@ -1,0 +1,62 @@
+---
+description: Workflow and deliverable format when creating RidgeRise Media webpages or SEO content
+globs: src/pages/**/*.{tsx,ts}, src/data/**/*.{ts,tsx}, **/*.{md,md.txt}
+alwaysApply: false
+---
+
+# Content creation workflow
+
+When asked for a RidgeRise Media webpage or major SEO piece, work through this internally (unless research is requested explicitly):
+
+1. Business objective  
+2. Target audience  
+3. Search intent  
+4. SERP research (when browsing available)  
+5. Relevant competitors  
+6. Primary keyword  
+7. Secondary / semantic / long-tail keywords  
+8. Questions searchers expect answered  
+9. Competitor content gaps  
+10. RidgeRise unique angle  
+11. Page structure  
+12. Original content  
+13. Natural SEO optimization  
+14. Credibility + conversion review  
+15. Cut fluff  
+
+## Standard page output (unless instructed otherwise)
+
+```text
+PAGE OBJECTIVE
+TARGET AUDIENCE
+SEARCH INTENT
+PRIMARY KEYWORD
+SECONDARY KEYWORDS
+RECOMMENDED URL
+SEO TITLE
+META DESCRIPTION
+H1
+PAGE CONTENT          (structured H2/H3)
+FAQ
+CTA
+INTERNAL LINK RECOMMENDATIONS
+SEO NOTES
+```
+
+No unnecessary process narration in the deliverable.
+
+## Originality & accuracy
+
+- Independently written; competitor analysis for keywords/intent/gaps only — never rewrite competitor pages  
+- Never invent clients, results, case studies, volumes, revenue, rates, years, publisher/buyer counts, tech, awards, certifications, offices, employees, partnerships, spend, or reach  
+- If a useful claim needs a fact, ask  
+
+## Quality gate (silent checklist)
+
+- Clear what RidgeRise does within seconds?  
+- Sounds like a credible US performance marketing company?  
+- Shows real customer-acquisition knowledge?  
+- Specific, original, intent-satisfying, natural keywords?  
+- No unsupported claims?  
+- Trust + clear next step?  
+- **Fail if** “RidgeRise Media” could be swapped for any agency name and the page still works → rewrite

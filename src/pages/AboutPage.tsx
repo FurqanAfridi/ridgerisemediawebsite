@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Gauge, Layers3, ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
 import "./pages.css";
@@ -7,14 +8,20 @@ const values = [
   {
     title: "Compliance-First",
     body: "Every campaign is reviewed against TCPA, DNC, and vertical-specific rules before traffic goes live.",
+    icon: ShieldCheck,
+    tone: "violet" as const,
   },
   {
     title: "Transparent Tracking",
     body: "Publishers and buyers see the same truth: live calls, conversions, and payout visibility.",
+    icon: Gauge,
+    tone: "mint" as const,
   },
   {
     title: "Vertical Expertise",
     body: "Insurance is our specialty, with deep coverage across Legal, Home Services, Finance, and more.",
+    icon: Layers3,
+    tone: "amber" as const,
   },
 ];
 
@@ -82,7 +89,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="inner-section" style={{ background: "#f7fffe" }}>
+      <section className="inner-section inner-section--band">
         <div className="inner-section__head">
           <h2 className="inner-section__title">What we stand for</h2>
           <p className="inner-section__sub">
@@ -90,12 +97,27 @@ export default function AboutPage() {
           </p>
         </div>
         <ul className="feature-grid">
-          {values.map((item) => (
-            <li key={item.title} className="feature-grid__item">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </li>
-          ))}
+          {values.map((item) => {
+            const Icon = item.icon;
+            return (
+              <li key={item.title} className="feature-grid__item">
+                <div
+                  className={`feature-grid__icon${
+                    item.tone === "mint"
+                      ? " feature-grid__icon--mint"
+                      : item.tone === "amber"
+                        ? " feature-grid__icon--amber"
+                        : ""
+                  }`}
+                  aria-hidden="true"
+                >
+                  <Icon size={22} strokeWidth={2.25} />
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </li>
+            );
+          })}
         </ul>
       </section>
 

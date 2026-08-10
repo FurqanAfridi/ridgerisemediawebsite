@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { BouncyCardsFeatures } from "@/components/ui/bounce-card-features";
-import CTAWithVerticalMarquee from "@/components/ui/cta-with-text-marquee";
+import CssImageStacking from "@/components/ui/css-image-stacking";
+import ScrollRocketFlight from "@/components/ui/scroll-rocket-flight";
 import { StaggerTestimonials } from "@/components/ui/stagger-testimonials";
 import { AnimatedGroup } from "@/components/ui/animated-group";
 import { Magnetic } from "@/components/ui/magnetic";
@@ -59,32 +60,15 @@ export default function HomePage() {
       />
 
       <main className="home-main">
+        <ScrollRocketFlight />
+
         <section className="hero">
           <div className="hero__stage">
-            {/* Figma 1:330 — primary rocket, left */}
-            <div className="parallax-wrap parallax--rocket-hero hero__deco hero__deco--rocket">
-              <div className="hero__rocket-tilt">
-                <img
-                  className="float-bob"
-                  src={assets.rocket}
-                  alt=""
-                  aria-hidden="true"
-                />
-              </div>
-            </div>
-
-            {/* Figma 1:331 — secondary blurred rocket, right */}
-            <div className="parallax-wrap parallax--rocket-hero-sm hero__deco hero__deco--rocket-sm">
-              <div className="hero__rocket-tilt">
-                <img
-                  className="float-bob"
-                  src={assets.rocket}
-                  alt=""
-                  aria-hidden="true"
-                />
-              </div>
-            </div>
-
+            {/* Path start — beside hero copy (matches prior deco rocket slot) */}
+            <span
+              className="rocket-marker rocket-marker--start"
+              data-rocket-marker
+            />
             {/* Figma 1:327 — floating money, top-right */}
             <div className="parallax-wrap parallax--money-hero hero__deco hero__deco--money">
               <img
@@ -220,6 +204,7 @@ export default function HomePage() {
         </section>
 
         <section className="stats reveal" aria-label="Platform metrics">
+          <span className="rocket-marker rocket-marker--a" data-rocket-marker />
           <p className="stats__eyebrow reveal-child">
             <span className="stats__eyebrow-text">Proven at scale</span>
           </p>
@@ -242,6 +227,7 @@ export default function HomePage() {
         <BouncyCardsFeatures />
 
         <section className="roles">
+          <span className="rocket-marker rocket-marker--b" data-rocket-marker />
           <div className="parallax-wrap parallax--money-roles roles__deco roles__deco--money">
             <img className="float-bob" src={assets.money} alt="" aria-hidden="true" />
           </div>
@@ -295,69 +281,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="verticals reveal">
-          <div className="verticals__intro">
-            <h2 className="section-title section-title--md reveal-child">
-              One Platform. Every High-Intent Vertical.
-            </h2>
-            <p className="section-sub section-sub--sm reveal-child">
-              Insurance is our specialty — but our network runs deep across
-              performance-driven industries
-            </p>
-          </div>
-
-          <div className="gallery" aria-hidden="true">
-            <div className="gallery__col">
-              <img
-                className="gallery__img gallery__img--tall"
-                src={assets.verticals[0]}
-                alt=""
-              />
-              <img
-                className="gallery__img gallery__img--mid"
-                src={assets.verticals[1]}
-                alt=""
-              />
-            </div>
-            <div className="gallery__col">
-              <img
-                className="gallery__img gallery__img--short"
-                src={assets.verticals[2]}
-                alt=""
-              />
-              <img
-                className="gallery__img gallery__img--mid-sm"
-                src={assets.verticals[3]}
-                alt=""
-              />
-              <img
-                className="gallery__img gallery__img--short"
-                src={assets.verticals[4]}
-                alt=""
-              />
-            </div>
-            <div className="gallery__col">
-              <img
-                className="gallery__img gallery__img--mid-sm"
-                src={assets.verticals[5]}
-                alt=""
-              />
-              <img
-                className="gallery__img gallery__img--tall"
-                src={assets.verticals[6]}
-                alt=""
-              />
-            </div>
-          </div>
-
-          <div className="page-hero__ctas" style={{ marginTop: 8 }}>
-            <Link to="/verticals" className="btn btn--purple">
-              Explore All Verticals
-            </Link>
-          </div>
-        </section>
-
-        <CTAWithVerticalMarquee />
+        <CssImageStacking />
       </main>
 
       <StaggerTestimonials />

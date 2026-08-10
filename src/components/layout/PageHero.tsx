@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { AnimatedGroup } from "@/components/ui/animated-group";
 import { Magnetic } from "@/components/ui/magnetic";
 
 type PageHeroProps = {
@@ -20,7 +19,7 @@ export function PageHero({
 }: PageHeroProps) {
   return (
     <section className="page-hero">
-      <AnimatedGroup className="page-hero__inner">
+      <div className="page-hero__inner">
         {eyebrow ? <p className="page-hero__eyebrow">{eyebrow}</p> : null}
         <h1 className="page-hero__title">{title}</h1>
         <p className="page-hero__desc">{description}</p>
@@ -42,7 +41,7 @@ export function PageHero({
             ) : null}
           </div>
         )}
-      </AnimatedGroup>
+      </div>
     </section>
   );
 }

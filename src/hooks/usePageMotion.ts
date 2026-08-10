@@ -421,44 +421,25 @@ export function usePageMotion(
         );
       });
 
-      // ——— Verticals gallery: cascade + scroll scrub ———
+      // ——— Verticals overview intro (Flip gallery owns its own motion) ———
       revealOnce(
-        ".verticals__intro > *",
-        ".verticals",
-        { y: 40, opacity: 0, filter: "blur(8px)" },
-        { stagger: 0.09 },
+        ".vfg-section .verticals__intro > *",
+        ".vfg-section",
+        { y: 36, opacity: 0 },
+        { stagger: 0.08, duration: 0.75 },
       );
 
-      gsap.utils.toArray<HTMLElement>(".gallery__img").forEach((img, i) => {
-        gsap.from(img, {
-          y: 80 + (i % 3) * 20,
-          opacity: 0,
-          scale: 0.86,
-          rotate: (i % 2 === 0 ? -1 : 1) * (3 + (i % 3)),
-          duration: 0.9,
-          ease: "power3.out",
-          delay: i * 0.07,
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: ".gallery",
-            start: "top 82%",
-            once: true,
-          },
-        });
+      // ——— Verticals sticky stack (optional heading) ———
+      if (root.querySelector(".cis__heading-inner")) {
+        revealOnce(
+          ".cis__heading-inner > :not(.cis__grid)",
+          ".cis",
+          { y: 20, opacity: 0 },
+          { stagger: 0.06, duration: 0.65 },
+        );
+      }
 
-        gsap.to(img, {
-          y: i % 2 === 0 ? -48 : 36,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".gallery",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
-      });
-
-      // ——— CTA (Motion handles enter; light parallax on marquee) ———
+      // ——— CTA marquee (if present on page) ———
       if (root.querySelector(".cta-vertical__marquee-wrap")) {
         gsap.to(".cta-vertical__marquee-wrap", {
           y: -40,

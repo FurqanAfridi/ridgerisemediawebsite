@@ -1,0 +1,408 @@
+/* Sticky heading + footer, wide split cards, tilted sharp deck */
+
+.cis {
+  --cis-heading-h: 120px;
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  width: 100%;
+  color: var(--color-text);
+  background: var(--color-bg);
+  padding-bottom: var(--space-xl);
+  margin-bottom: 0;
+}
+
+/* Always visible while cards stack underneath */
+.cis__heading {
+  position: sticky;
+  top: var(--header-clearance, 72px);
+  z-index: 30;
+  width: 100%;
+  padding: 12px var(--page-pad) 14px;
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cis__heading-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  padding: 6px 8px 2px;
+}
+
+.cis__grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  background-image:
+    linear-gradient(to right, rgba(79, 79, 79, 0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(79, 79, 79, 0.16) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: radial-gradient(
+    ellipse 70% 80% at 50% 0%,
+    #000 55%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 80% at 50% 0%,
+    #000 55%,
+    transparent 100%
+  );
+}
+
+html[data-theme="dark"] .cis__grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+}
+
+.cis__title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: clamp(1.4rem, 1.9vw + 0.5rem, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  color: var(--color-heading);
+  text-wrap: balance;
+}
+
+.cis__sub {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: 48ch;
+  font-size: clamp(13px, 0.35vw + 12px, 15px);
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--color-muted, #5c5c5c);
+}
+
+.cis__stack {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background: var(--color-bg);
+  padding-bottom: 8vh;
+}
+
+.cis__sticky {
+  position: sticky;
+  top: calc(
+    var(--header-clearance, 72px) + var(--cis-heading-h) + var(--cis-top, 0px)
+  );
+  width: 100%;
+  z-index: var(--cis-layer, 1);
+}
+
+.cis__figure {
+  margin: 0;
+  width: 100%;
+  min-height: calc(100vh - var(--header-clearance, 72px) - var(--cis-heading-h) - 24px);
+  min-height: calc(100dvh - var(--header-clearance, 72px) - var(--cis-heading-h) - 24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px var(--page-pad) 40px;
+  background: transparent;
+}
+
+.cis__card {
+  width: min(var(--cis-width, 94%), 1180px);
+  max-width: 1180px;
+  min-height: min(62vh, 520px);
+  border-radius: var(--radius-lg, 16px);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: stretch;
+  color: #313131;
+  transform: rotate(var(--cis-tilt, 0deg));
+  transform-origin: center center;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.16),
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    -6px 10px 0 rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    filter 0.35s ease,
+    width 0.3s ease;
+  will-change: transform;
+  cursor: default;
+}
+
+.cis__card:hover {
+  transform: rotate(var(--cis-tilt, 0deg)) translateY(-10px) scale(1.02);
+  box-shadow:
+    0 28px 56px rgba(0, 0, 0, 0.2),
+    0 10px 24px rgba(0, 0, 0, 0.1),
+    -8px 14px 0 rgba(0, 0, 0, 0.05);
+}
+
+.cis__card:hover .cis__img {
+  animation-duration: 2.8s;
+  transform: translateY(-6px) scale(1.04);
+}
+
+.cis__card--copy-left {
+  grid-template-areas: "body media";
+}
+
+.cis__card--copy-right {
+  grid-template-areas: "media body";
+}
+
+.cis__card--copy-left .cis__body {
+  grid-area: body;
+}
+
+.cis__card--copy-left .cis__media {
+  grid-area: media;
+}
+
+.cis__card--copy-right .cis__body {
+  grid-area: body;
+}
+
+.cis__card--copy-right .cis__media {
+  grid-area: media;
+}
+
+.cis__sticky:not(:first-child) .cis__card {
+  animation: cis-deal-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 45%;
+}
+
+@keyframes cis-deal-in {
+  from {
+    opacity: 0.55;
+    transform: rotate(calc(var(--cis-tilt, 0deg) * 1.8)) translateY(48px)
+      scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(var(--cis-tilt, 0deg)) translateY(0) scale(1);
+  }
+}
+
+@supports not (animation-timeline: view()) {
+  .cis__sticky:not(:first-child) .cis__card {
+    animation: none;
+  }
+}
+
+.cis__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  padding: clamp(28px, 4vw, 48px);
+  min-width: 0;
+}
+
+.cis__name {
+  margin: 0;
+  font-family: var(--font);
+  font-size: clamp(1.65rem, 1.2rem + 1.4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #313131;
+}
+
+.cis__desc {
+  margin: 0;
+  max-width: 36ch;
+  font-family: var(--font);
+  font-size: clamp(0.95rem, 0.85rem + 0.35vw, 1.125rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(49, 49, 49, 0.82);
+}
+
+.cis__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.cis__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 132px;
+  height: 44px;
+  padding: 0 20px;
+  border: 2px solid #313131;
+  border-radius: var(--radius-sm, 8px);
+  background: #313131;
+  color: #fff;
+  font-family: var(--font);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cis__cta--ghost {
+  background: transparent;
+  color: #313131;
+}
+
+.cis__cta:hover,
+.cis__cta:focus-visible {
+  background: transparent;
+  color: #313131;
+  outline: none;
+}
+
+.cis__cta--ghost:hover,
+.cis__cta--ghost:focus-visible {
+  background: #313131;
+  color: #fff;
+}
+
+.cis__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 3vw, 36px);
+  min-height: 280px;
+  min-width: 0;
+}
+
+.cis__img {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  max-height: min(52vh, 440px);
+  object-fit: contain;
+  object-position: center;
+  filter: none;
+  mix-blend-mode: normal;
+  -webkit-user-drag: none;
+  user-select: none;
+  transform-origin: center center;
+  will-change: transform;
+  animation: cis-float 4.8s ease-in-out infinite;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Alternate float phase per card for a livelier deck */
+.cis__sticky:nth-child(even) .cis__img {
+  animation-delay: -1.6s;
+  animation-duration: 5.4s;
+}
+
+.cis__sticky:nth-child(3n) .cis__img {
+  animation-name: cis-float-tilt;
+  animation-duration: 5.2s;
+}
+
+@keyframes cis-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes cis-float-tilt {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.2deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.2deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .cis {
+    --cis-heading-h: 112px;
+  }
+
+  .cis__sticky {
+    position: relative;
+    top: auto;
+  }
+
+  .cis__figure {
+    min-height: 0;
+    padding: 12px var(--page-pad) 16px;
+  }
+
+  .cis__card,
+  .cis__card--copy-left,
+  .cis__card--copy-right {
+    width: 100% !important;
+    max-width: 440px;
+    min-height: 0;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "media"
+      "body" !important;
+    transform: rotate(var(--cis-tilt, 0deg));
+  }
+
+  .cis__media {
+    min-height: 200px;
+    padding: 20px 20px 0;
+  }
+
+  .cis__img {
+    max-height: 220px;
+  }
+
+  .cis__body {
+    padding: 16px 22px 26px;
+  }
+
+  .cis__stack {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: center;
+    padding: 12px 0 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cis__card,
+  .cis__sticky:not(:first-child) .cis__card {
+    transition: box-shadow 0.2s ease;
+    animation: none;
+  }
+
+  .cis__card:hover {
+    transform: rotate(var(--cis-tilt, 0deg));
+  }
+
+  .cis__img,
+  .cis__card:hover .cis__img {
+    animation: none;
+    transform: none;
+    transition: none;
+  }
+}

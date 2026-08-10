@@ -45,6 +45,24 @@ export default function BlogPage() {
           ))}
         </ul>
       </section>
+
+      <section className="cta-band">
+        <div className="cta-band__inner">
+          <h2>Want to put this into practice?</h2>
+          <p>
+            Talk to RidgeRise about publisher campaigns or buyer traffic across
+            high-intent verticals.
+          </p>
+          <div className="cta-band__actions">
+            <Link to="/contact" className="btn btn--purple">
+              Contact us
+            </Link>
+            <Link to="/verticals" className="btn btn--mint">
+              Browse verticals
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

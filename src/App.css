@@ -636,7 +636,15 @@ html[data-theme="dark"] .grad-purple {
 
 /* Hero — Figma 1:318: centered title, sub, CTAs + money deco */
 .home-main {
-  overflow: hidden;
+  position: relative;
+  /* Keep visible so CSS sticky stacking works (clip breaks sticky) */
+  overflow: visible;
+}
+
+/* Keep copy / sections above the flying rocket */
+.home-main > *:not(.rocket-flight) {
+  position: relative;
+  z-index: 1;
 }
 
 .home-main > section,
@@ -1433,6 +1441,7 @@ html[data-theme="dark"] .stats::before {
 
 /* Verticals gallery — Figma: 64px pad, 24px title gap, 64px before images */
 .verticals {
+  position: relative;
   width: 100%;
   max-width: var(--max);
   margin-inline: auto;
