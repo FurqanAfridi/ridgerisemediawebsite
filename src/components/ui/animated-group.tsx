@@ -30,19 +30,15 @@ const defaultContainer: Variants = {
 const defaultItem: Variants = {
   hidden: {
     opacity: 0,
-    filter: "blur(16px)",
-    y: 28,
-    scale: 0.96,
+    y: 20,
   },
   visible: {
     opacity: 1,
-    filter: "blur(0px)",
     y: 0,
-    scale: 1,
     transition: {
       type: "spring",
-      bounce: 0.35,
-      duration: 1.15,
+      bounce: 0.28,
+      duration: 0.85,
     },
   },
 };
@@ -63,11 +59,12 @@ export function AnimatedGroup({
 
   return (
     <motion.div
+      key={inView ? "inview" : "mount"}
       initial="hidden"
       {...(inView
         ? {
             whileInView: "visible",
-            viewport: { once: true, amount: 0.25, margin: "0px 0px -8% 0px" },
+            viewport: { once: true, amount: 0.2, margin: "0px 0px -5% 0px" },
           }
         : { animate: "visible" })}
       variants={container}

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -108,14 +108,23 @@ export function CinematicFooter() {
   const giantTextRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   useEffect(() => {
     if (!wrapperRef.current) return;
 
+    // Ensure footer copy is readable even before scrub progress advances
+    gsap.set([giantTextRef.current, headingRef.current, linksRef.current], {
+      clearProps: "opacity,transform",
+      opacity: 1,
+      y: 0,
+      scale: 1,
+    });
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         giantTextRef.current,
-        { y: "8vh", scale: 0.85, opacity: 0 },
+        { y: "6vh", scale: 0.92, opacity: 0.35 },
         {
           y: "0vh",
           scale: 1,
@@ -123,7 +132,7 @@ export function CinematicFooter() {
           ease: "power1.out",
           scrollTrigger: {
             trigger: wrapperRef.current,
-            start: "top 85%",
+            start: "top 90%",
             end: "bottom bottom",
             scrub: 1,
           },
@@ -132,7 +141,7 @@ export function CinematicFooter() {
 
       gsap.fromTo(
         [headingRef.current, linksRef.current],
-        { y: 40, opacity: 0 },
+        { y: 24, opacity: 0.7 },
         {
           y: 0,
           opacity: 1,
@@ -140,7 +149,7 @@ export function CinematicFooter() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: wrapperRef.current,
-            start: "top 55%",
+            start: "top 70%",
             end: "bottom bottom",
             scrub: 1,
           },
@@ -149,7 +158,7 @@ export function CinematicFooter() {
     }, wrapperRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [location.pathname]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

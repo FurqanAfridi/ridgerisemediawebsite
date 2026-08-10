@@ -3,8 +3,9 @@
   z-index: 2;
   width: 100%;
   padding: clamp(28px, 4vw, 40px) var(--page-pad) clamp(24px, 3vw, 32px);
-  background: linear-gradient(180deg, #ffffff 0%, #f4fbff 40%, #eef5ff 100%);
-  color: #1a1a1a;
+  background: var(--footer-sitemap-bg);
+  color: var(--color-text);
+  border-top: 1px solid var(--color-border);
 }
 
 .footer-sitemap__inner {
@@ -28,7 +29,11 @@
   font-size: var(--text-md);
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #4c1678;
+  color: var(--color-purple-deep);
+}
+
+html[data-theme="dark"] .footer-sitemap__brand {
+  color: var(--color-mint);
 }
 
 .footer-sitemap__desc,
@@ -36,14 +41,14 @@
   margin: 0;
   font-size: var(--text-sm);
   line-height: 1.5;
-  color: rgba(26, 26, 26, 0.58);
+  color: var(--color-muted);
 }
 
 .footer-sitemap__note {
   padding-top: 6px;
-  border-top: 1px solid rgba(76, 22, 120, 0.1);
+  border-top: 1px solid var(--color-border);
   font-size: 12px;
-  color: rgba(76, 22, 120, 0.72);
+  color: var(--color-purple);
 }
 
 .footer-sitemap__title {
@@ -52,7 +57,7 @@
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #1a1a1a;
+  color: var(--color-heading);
 }
 
 .footer-sitemap__list {
@@ -65,7 +70,7 @@
 }
 
 .footer-sitemap__list a {
-  color: rgba(26, 26, 26, 0.58);
+  color: var(--color-muted);
   text-decoration: none;
   font-size: var(--text-sm);
   font-weight: 500;
@@ -74,28 +79,32 @@
 }
 
 .footer-sitemap__list a:hover {
-  color: #5d62dd;
+  color: var(--color-purple);
 }
 
 .footer-sitemap__admin {
-  color: #008a5e !important;
+  color: var(--color-mint-grad-end) !important;
   font-weight: 700 !important;
 }
 
+html[data-theme="dark"] .footer-sitemap__admin {
+  color: var(--color-mint) !important;
+}
+
 .footer-sitemap__admin:hover {
-  color: #2ae2a8 !important;
+  color: var(--color-mint-deep) !important;
 }
 
 .footer-sitemap__support {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(26, 26, 26, 0.58);
+  color: var(--color-muted);
 }
 
 .footer-sitemap__support em {
   font-style: normal;
   font-weight: 700;
-  color: rgba(76, 22, 120, 0.65);
+  color: var(--color-purple);
 }
 
 @media (max-width: 960px) {

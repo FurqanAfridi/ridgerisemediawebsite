@@ -46,7 +46,6 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
     const panel = panelRef.current;
     if (!root || !fill || !mark || !pct || !panel) return;
 
-    const prevOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
 
@@ -58,8 +57,8 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
       } catch {
         /* ignore */
       }
-      document.documentElement.style.overflow = prevOverflow;
-      document.body.style.overflow = "";
+      document.documentElement.style.removeProperty("overflow");
+      document.body.style.removeProperty("overflow");
       setActive(false);
       onDone?.();
     };
@@ -114,8 +113,8 @@ export function SiteLoader({ onDone }: SiteLoaderProps) {
 
     return () => {
       ctx.revert();
-      document.documentElement.style.overflow = prevOverflow;
-      document.body.style.overflow = "";
+      document.documentElement.style.removeProperty("overflow");
+      document.body.style.removeProperty("overflow");
     };
   }, [active, onDone]);
 

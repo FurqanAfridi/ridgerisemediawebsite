@@ -85,17 +85,6 @@ export default function HomePage() {
 
             <div className="hero__content">
               <AnimatedGroup variants={heroItemVariants}>
-                <Link to="/verticals" className="hero__chip">
-                  <span>Live transfers across 12+ high-intent verticals</span>
-                  <span className="hero__chip-sep" aria-hidden="true" />
-                  <span className="hero__chip-arrow" aria-hidden="true">
-                    <span className="hero__chip-arrow-track">
-                      <ArrowRight size={12} />
-                      <ArrowRight size={12} />
-                    </span>
-                  </span>
-                </Link>
-
                 <h1 className="hero__title">
                   Turn Every Call into{" "}
                   <span className="grad-mint">Revenue</span>
@@ -136,6 +125,31 @@ export default function HomePage() {
                     Signup as Buyer
                   </Link>
                 </Magnetic>
+              </AnimatedGroup>
+
+              <AnimatedGroup
+                className="hero__chip-wrap"
+                variants={{
+                  container: {
+                    visible: {
+                      transition: {
+                        delayChildren: 0.7,
+                      },
+                    },
+                  },
+                  ...heroItemVariants,
+                }}
+              >
+                <Link to="/verticals" className="hero__chip">
+                  <span>Live transfers across 12+ high-intent verticals</span>
+                  <span className="hero__chip-sep" aria-hidden="true" />
+                  <span className="hero__chip-arrow" aria-hidden="true">
+                    <span className="hero__chip-arrow-track">
+                      <ArrowRight size={12} />
+                      <ArrowRight size={12} />
+                    </span>
+                  </span>
+                </Link>
               </AnimatedGroup>
             </div>
 
@@ -234,7 +248,9 @@ export default function HomePage() {
         </section>
 
         <section className="stats reveal" aria-label="Platform metrics">
-          <p className="stats__eyebrow reveal-child">Proven at scale</p>
+          <p className="stats__eyebrow reveal-child">
+            <span className="stats__eyebrow-text">Proven at scale</span>
+          </p>
           <ul className="stats__grid">
             {stats.map((stat) => (
               <li key={stat.label} className="stats__item reveal-child">

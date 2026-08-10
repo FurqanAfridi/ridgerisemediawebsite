@@ -20,13 +20,17 @@ function revealOnce(
     ease?: string;
   },
 ) {
-  gsap.from(targets, {
+  const els = gsap.utils.toArray(targets);
+  if (!els.length) return;
+
+  gsap.from(els, {
     ...from,
     duration: options?.duration ?? 1,
     ease: options?.ease ?? "power4.out",
     stagger: options?.stagger,
     delay: options?.delay,
-    clearProps: "transform,filter",
+    immediateRender: false,
+    clearProps: "transform,filter,opacity",
     scrollTrigger: {
       trigger,
       start: options?.start ?? "top 82%",
@@ -297,6 +301,34 @@ export function usePageMotion(
         { y: 40, opacity: 0, filter: "blur(10px)" },
         { duration: 0.8 },
       );
+      gsap.fromTo(
+        ".stats__eyebrow-text",
+        { scale: 0.92, letterSpacing: "0.08em" },
+        {
+          scale: 1,
+          letterSpacing: "0.14em",
+          duration: 1.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".stats",
+            start: "top 82%",
+            once: true,
+          },
+        },
+      );
+      gsap.to(".stats__eyebrow-text", {
+        y: -3,
+        duration: 1.6,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        delay: 1.2,
+        scrollTrigger: {
+          trigger: ".stats",
+          start: "top 82%",
+          once: true,
+        },
+      });
       revealOnce(
         ".stats__item",
         ".stats",
@@ -473,6 +505,16 @@ export function usePageMotion(
     return () => {
       window.removeEventListener("resize", onResize);
       ctx.revert();
+      clearScrollLocksSafe();
     };
   }, [rootRef, routeKey]);
+}
+
+function clearScrollLocksSafe() {
+  try {
+    document.documentElement.style.removeProperty("overflow");
+    document.body.style.removeProperty("overflow");
+  } catch {
+    /* ignore */
+  }
 }

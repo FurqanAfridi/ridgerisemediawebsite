@@ -16,12 +16,7 @@
       rgba(93, 98, 221, 0.14) 0%,
       transparent 65%
     ),
-    linear-gradient(
-      165deg,
-      #f4fbff 0%,
-      #eef5ff 40%,
-      #f7f4ff 100%
-    );
+    var(--loader-bg);
 }
 
 .site-loader__panel {
@@ -39,7 +34,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #4c1678;
+  color: var(--color-purple-deep);
   text-align: center;
 }
 
@@ -47,7 +42,7 @@
   position: relative;
   height: 3px;
   border-radius: 999px;
-  background: rgba(76, 22, 120, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   overflow: visible;
 }
 
@@ -125,7 +120,7 @@
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: #4c1678;
+  color: var(--color-purple-deep);
   font-variant-numeric: tabular-nums;
 }
 
@@ -145,4 +140,8 @@
   .site-loader__mark-glow {
     animation: none;
   }
+}
+
+html[data-theme="dark"] .site-loader__label {
+  color: var(--color-mint);
 }

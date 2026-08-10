@@ -165,8 +165,10 @@ export const StaggerTestimonials: FC = () => {
         start: "top top",
         end: () => `+=${Math.max(total - 1, 1) * window.innerHeight * 0.55}`,
         pin: true,
+        pinSpacing: true,
         scrub: 0.65,
         anticipatePin: 1,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
           const next = Math.round(self.progress * (total - 1));
           setActive((prev) => (prev === next ? prev : next));
@@ -174,7 +176,10 @@ export const StaggerTestimonials: FC = () => {
       });
     }, section);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      ScrollTrigger.refresh();
+    };
   }, []);
 
   return (

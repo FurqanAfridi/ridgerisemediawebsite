@@ -2,9 +2,17 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   BadgeCheck,
+  FileCheck2,
   Gauge,
   Layers3,
+  Mail,
+  Megaphone,
+  PhoneCall,
+  Radio,
+  Search,
+  Share2,
   ShieldCheck,
+  UserPlus,
   Wallet,
   Zap,
 } from "lucide-react";
@@ -19,42 +27,36 @@ const benefits = [
     title: "Exclusive buyer campaigns",
     body: "High-payout offers across Insurance, Legal, Home Services, and Finance — matched to your traffic.",
     icon: Layers3,
-    art: assets.verticals[0],
     tone: "violet",
   },
   {
     title: "Live call dashboard",
     body: "Watch every transfer, duration rule, and earning event in real time. No mystery deductions.",
     icon: Gauge,
-    art: assets.cardCalls,
     tone: "mint",
   },
   {
     title: "Weekly payout rhythm",
     body: "Predictable cash flow so you can scale inventory without chasing invoices.",
     icon: Wallet,
-    art: assets.cardPayout,
     tone: "amber",
   },
   {
     title: "Compliance-first launch",
     body: "Campaigns reviewed against TCPA, DNC, and vertical rules before your traffic goes live.",
     icon: ShieldCheck,
-    art: assets.verticals[3],
     tone: "rose",
   },
   {
     title: "Fast buyer matching",
     body: "We connect quality publishers with verified demand in days — not weeks of waiting.",
     icon: Zap,
-    art: assets.verticals[2],
     tone: "violet",
   },
   {
     title: "Quality that sticks",
     body: "Clear filters and transparent reporting keep accounts healthy as you scale volume.",
     icon: BadgeCheck,
-    art: assets.verticals[5],
     tone: "mint",
   },
 ] as const;
@@ -64,29 +66,32 @@ const steps = [
     num: "01",
     title: "Apply with your sources",
     body: "Share traffic types, geos, and vertical experience. We review for fit and compliance readiness.",
-    art: assets.verticals[1],
+    icon: UserPlus,
+    tone: "violet",
   },
   {
     num: "02",
     title: "Get matched to campaigns",
     body: "Access exclusive buyer offers with clear payout terms, caps, and tracking from day one.",
-    art: assets.cardCalls,
+    icon: FileCheck2,
+    tone: "mint",
   },
   {
     num: "03",
     title: "Launch, track, get paid",
     body: "Optimize live paths in the dashboard and cash out on a reliable weekly payout cycle.",
-    art: assets.cardPayout,
+    icon: Wallet,
+    tone: "amber",
   },
 ] as const;
 
 const sources = [
-  { label: "Search", art: assets.verticals[2] },
-  { label: "Social", art: assets.verticals[4] },
-  { label: "Native", art: assets.verticals[6] },
-  { label: "Call paths", art: assets.verticals[0] },
-  { label: "Email", art: assets.verticals[3] },
-  { label: "Owned media", art: assets.verticals[5] },
+  { label: "Search", body: "Paid & organic intent", icon: Search },
+  { label: "Social", body: "Paid social click-to-call", icon: Share2 },
+  { label: "Native", body: "Content-driven transfers", icon: Megaphone },
+  { label: "Call paths", body: "IVR & warm transfers", icon: PhoneCall },
+  { label: "Email", body: "Nurture to phone", icon: Mail },
+  { label: "Owned media", body: "Sites, apps, communities", icon: Radio },
 ] as const;
 
 const payoutStats = [
@@ -244,11 +249,8 @@ export default function PublishersPage() {
                 key={item.title}
                 className={`pub-benefit pub-benefit--${item.tone} pub-reveal`}
               >
-                <div className="pub-benefit__art">
-                  <img src={item.art} alt="" />
-                </div>
                 <div className="pub-benefit__icon" aria-hidden="true">
-                  <Icon size={20} strokeWidth={2.25} />
+                  <Icon size={22} strokeWidth={2.25} />
                 </div>
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
@@ -263,23 +265,32 @@ export default function PublishersPage() {
         <div className="pub-steps__head pub-reveal">
           <p className="page-hero__eyebrow">Get started</p>
           <h2>Three steps to live payouts</h2>
+          <p>
+            A clear path from application to live campaigns — with tracking and
+            payouts built in from day one.
+          </p>
         </div>
         <ol className="pub-steps__list">
-          {steps.map((step, i) => (
-            <li key={step.num} className="pub-step pub-reveal">
-              <div className="pub-step__media">
-                <img src={step.art} alt="" />
-                <span className="pub-step__num">{step.num}</span>
-              </div>
-              <div className="pub-step__copy">
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
-                {i < steps.length - 1 ? (
-                  <span className="pub-step__connector" aria-hidden="true" />
-                ) : null}
-              </div>
-            </li>
-          ))}
+          {steps.map((step) => {
+            const Icon = step.icon;
+            return (
+              <li
+                key={step.num}
+                className={`pub-step pub-step--${step.tone} pub-reveal`}
+              >
+                <div className="pub-step__media" aria-hidden="true">
+                  <span className="pub-step__num">{step.num}</span>
+                  <span className="pub-step__glyph">
+                    <Icon size={36} strokeWidth={2} />
+                  </span>
+                </div>
+                <div className="pub-step__copy">
+                  <h3>{step.title}</h3>
+                  <p>{step.body}</p>
+                </div>
+              </li>
+            );
+          })}
         </ol>
       </section>
 
@@ -292,21 +303,25 @@ export default function PublishersPage() {
             if intent converts on phone, we can help you monetize it.
           </p>
         </div>
-        <ul className="pub-sources__rail">
-          {sources.map((source) => (
-            <li key={source.label} className="pub-source pub-reveal">
-              <img src={source.art} alt="" />
-              <span>{source.label}</span>
-            </li>
-          ))}
+        <ul className="pub-sources__grid">
+          {sources.map((source) => {
+            const Icon = source.icon;
+            return (
+              <li key={source.label} className="pub-source pub-reveal">
+                <span className="pub-source__icon" aria-hidden="true">
+                  <Icon size={22} strokeWidth={2.25} />
+                </span>
+                <span className="pub-source__label">{source.label}</span>
+                <span className="pub-source__body">{source.body}</span>
+              </li>
+            );
+          })}
         </ul>
       </section>
 
       {/* ——— Closing CTA stage ——— */}
       <section className="pub-cta">
-        <div className="pub-cta__art" aria-hidden="true">
-          <img className="pub-cta__money float-bob" src={assets.money} alt="" />
-        </div>
+        <div className="pub-cta__glow" aria-hidden="true" />
         <div className="pub-cta__panel pub-reveal">
           <h2>Start monetizing calls this week</h2>
           <p>

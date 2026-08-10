@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg" />
@@ -8,6 +8,17 @@
       name="description"
       content="RidgeRise Media connects top Publishers with verified Buyers across Insurance, Home Services, Legal, and 12+ high-intent verticals."
     />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("rr-theme");
+          if (t !== "light" && t !== "dark") t = "dark";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

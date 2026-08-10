@@ -13,12 +13,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(
-    180deg,
-    #f0edff 0%,
-    #e6f9ff 40%,
-    #f3fffe 100%
-  );
+  background: var(--ht-sticky-bg, linear-gradient(180deg, #14101f 0%, #101820 40%, #0c0a14 100%));
 }
 
 .ht-track {
@@ -62,7 +57,7 @@
 
 .ht-card--mint {
   background: linear-gradient(145deg, #45e9b5 0%, #2ae2a8 100%);
-  color: #1a1a1a;
+  color: #0a0810;
 }
 
 .ht-card--accent {
@@ -147,7 +142,7 @@
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.4);
+  color: var(--ht-hint);
   pointer-events: none;
 }
 

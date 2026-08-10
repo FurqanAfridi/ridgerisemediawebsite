@@ -51,9 +51,9 @@
 
 .stagger-card--side {
   z-index: 0;
-  background: #fff;
-  color: #1a1a1a;
-  border-color: #e5e7eb;
+  background: var(--card-bg);
+  color: var(--color-text);
+  border-color: var(--color-border);
 }
 
 .stagger-card__corner {
@@ -69,7 +69,7 @@
   width: 48px;
   height: 56px;
   margin-bottom: 14px;
-  background: #f3f4f6;
+  background: var(--color-surface-2);
   object-fit: cover;
   object-position: top;
   box-shadow: 3px 3px 0 #45e9b5;
@@ -94,7 +94,7 @@
   margin-top: 8px;
   font-size: var(--text-sm);
   font-style: italic;
-  color: #4b5563;
+  color: var(--color-muted);
 }
 
 .stagger-card--center .stagger-card__by {

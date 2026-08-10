@@ -22,13 +22,16 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
             ".pub-reveal-right",
             ".pub-float",
             ".float-bob",
+            ".pub-benefit",
+            ".pub-step",
+            ".pub-source",
+            ".pub-cta__panel",
           ],
           { clearProps: "all", opacity: 1, x: 0, y: 0, scale: 1, rotate: 0 },
         );
         return;
       }
 
-      // Ambient float loops
       gsap.utils.toArray<HTMLElement>(".float-bob").forEach((el, i) => {
         gsap.to(el, {
           y: -(12 + (i % 3) * 4),
@@ -51,27 +54,42 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
         });
       });
 
-      // Hero entrance
-      const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      const heroTl = gsap.timeline({
+        defaults: { ease: "power3.out", immediateRender: false },
+      });
       heroTl
         .from(".pub-hero__copy > *", {
           y: 42,
           opacity: 0,
           duration: 0.75,
           stagger: 0.1,
+          clearProps: "opacity,transform",
         })
         .from(
           ".pub-hero__card",
-          { scale: 0.8, rotate: -12, opacity: 0, duration: 0.9, ease: "back.out(1.4)" },
+          {
+            scale: 0.8,
+            rotate: -12,
+            opacity: 0,
+            duration: 0.9,
+            ease: "back.out(1.4)",
+            clearProps: "opacity,transform",
+          },
           "-=0.45",
         )
         .from(
           [".pub-hero__money", ".pub-hero__orb"],
-          { scale: 0.5, opacity: 0, duration: 0.7, stagger: 0.08, ease: "back.out(1.6)" },
+          {
+            scale: 0.5,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.08,
+            ease: "back.out(1.6)",
+            clearProps: "opacity,transform",
+          },
           "-=0.55",
         );
 
-      // Parallax on hero stage
       gsap.utils.toArray<HTMLElement>(".pub-parallax").forEach((el) => {
         const speed = parseFloat(el.dataset.speed ?? "0.3");
         gsap.to(el, {
@@ -86,106 +104,55 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
         });
       });
 
-      // Generic reveals
+      // One-shot reveals — never reverse to opacity 0
       gsap.utils.toArray<HTMLElement>(".pub-reveal").forEach((el) => {
         gsap.from(el, {
-          y: 56,
+          y: 40,
           opacity: 0,
-          duration: 0.8,
+          duration: 0.75,
           ease: "power3.out",
+          immediateRender: false,
+          clearProps: "opacity,transform",
           scrollTrigger: {
             trigger: el,
-            start: "top 88%",
-            end: "top 55%",
-            toggleActions: "play none none reverse",
+            start: "top 90%",
+            once: true,
           },
         });
       });
 
       gsap.utils.toArray<HTMLElement>(".pub-reveal-left").forEach((el) => {
         gsap.from(el, {
-          x: -70,
+          x: -56,
           opacity: 0,
-          rotate: -2,
-          duration: 0.9,
+          duration: 0.85,
           ease: "power3.out",
+          immediateRender: false,
+          clearProps: "opacity,transform",
           scrollTrigger: {
             trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+            start: "top 88%",
+            once: true,
           },
         });
       });
 
       gsap.utils.toArray<HTMLElement>(".pub-reveal-right").forEach((el) => {
         gsap.from(el, {
-          x: 70,
+          x: 56,
           opacity: 0,
-          rotate: 2,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      });
-
-      // Benefit cards stagger cascade
-      gsap.from(".pub-benefit", {
-        y: 80,
-        opacity: 0,
-        scale: 0.92,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".pub-benefits__grid",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      // Steps: clip wipe + scale
-      gsap.utils.toArray<HTMLElement>(".pub-step").forEach((step, i) => {
-        const media = step.querySelector(".pub-step__media");
-        const copy = step.querySelector(".pub-step__copy");
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: step,
-            start: "top 82%",
-            toggleActions: "play none none reverse",
-          },
-        });
-        tl.from(media, {
-          clipPath: i % 2 === 0 ? "inset(0 40% 0 0)" : "inset(0 0 0 40%)",
-          opacity: 0.4,
           duration: 0.85,
           ease: "power3.out",
-        }).from(
-          copy,
-          { y: 40, opacity: 0, duration: 0.65, ease: "power3.out" },
-          "-=0.45",
-        );
+          immediateRender: false,
+          clearProps: "opacity,transform",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            once: true,
+          },
+        });
       });
 
-      // Sources rail slide-in
-      gsap.from(".pub-source", {
-        y: 60,
-        opacity: 0,
-        rotate: 4,
-        duration: 0.65,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".pub-sources__rail",
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      // Metric count-ups
       gsap.utils
         .toArray<HTMLElement>(".pub-metrics__value[data-count]")
         .forEach((el) => {
@@ -196,6 +163,7 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
           ScrollTrigger.create({
             trigger: el,
             start: "top 90%",
+            once: true,
             onEnter: () => {
               gsap.to(obj, {
                 val: target,
@@ -206,27 +174,8 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
                 },
               });
             },
-            onLeaveBack: () => {
-              gsap.killTweensOf(obj);
-              obj.val = 0;
-              el.textContent = `0${suffix}`;
-            },
           });
         });
-
-      // CTA panel scale-in
-      gsap.from(".pub-cta__panel", {
-        y: 50,
-        scale: 0.94,
-        opacity: 0,
-        duration: 0.85,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".pub-cta",
-          start: "top 75%",
-          toggleActions: "play none none reverse",
-        },
-      });
     }, root);
 
     return () => ctx.revert();

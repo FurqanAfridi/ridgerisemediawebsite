@@ -3,6 +3,7 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { assets, navLinks } from "@/data/site";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function Logo({ className }: { className?: string }) {
   return (
@@ -64,6 +65,7 @@ export function SiteHeader() {
             <div className="header__brand-row">
               <Logo />
               <div className="header__brand-actions">
+                <ThemeToggle />
                 <Link
                   to="/contact"
                   className="header__btn header__btn--solid header__btn--compact"

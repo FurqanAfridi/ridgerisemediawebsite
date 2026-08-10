@@ -17,8 +17,8 @@
   height: min(68vh, 620px);
   width: 100%;
   overflow: hidden;
-  background: linear-gradient(180deg, #f7fffe 0%, #eef5ff 45%, #f0edff 100%);
-  color: #1a1a1a;
+  background: var(--mf-bg);
+  color: var(--color-text);
   font-family: Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -35,8 +35,8 @@
   transform: translate(-50%, -50%);
   background: radial-gradient(
     circle at 50% 50%,
-    rgba(93, 98, 221, 0.22) 0%,
-    rgba(69, 233, 181, 0.16) 40%,
+    rgba(93, 98, 221, 0.35) 0%,
+    rgba(69, 233, 181, 0.22) 40%,
     transparent 70%
   );
   filter: blur(80px);
@@ -50,8 +50,8 @@
   pointer-events: none;
   background-size: 60px 60px;
   background-image:
-    linear-gradient(to right, rgba(76, 22, 120, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(76, 22, 120, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, var(--mf-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--mf-grid-line) 1px, transparent 1px);
   mask-image: linear-gradient(
     to bottom,
     transparent,
@@ -75,10 +75,10 @@
   font-weight: 900;
   letter-spacing: -0.05em;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(76, 22, 120, 0.08);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
   background: linear-gradient(
     180deg,
-    rgba(93, 98, 221, 0.18) 0%,
+    rgba(123, 128, 240, 0.28) 0%,
     transparent 60%
   );
   -webkit-background-clip: text;
@@ -92,12 +92,12 @@
   z-index: 10;
   width: 100%;
   overflow: hidden;
-  border-block: 1px solid rgba(76, 22, 120, 0.12);
-  background: rgba(255, 255, 255, 0.65);
+  border-block: 1px solid var(--color-border);
+  background: var(--color-surface);
   backdrop-filter: blur(12px);
   padding: 10px 0;
   transform: rotate(-1.5deg) scale(1.06);
-  box-shadow: 0 12px 32px rgba(76, 22, 120, 0.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 
 .mf-marquee__track {
@@ -108,7 +108,7 @@
   font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(26, 26, 26, 0.55);
+  color: var(--color-muted);
 }
 
 .mf-marquee__item {
@@ -156,7 +156,7 @@
   font-weight: 900;
   letter-spacing: -0.05em;
   line-height: 1;
-  background: linear-gradient(180deg, #1a1a1a 0%, rgba(76, 22, 120, 0.55) 100%);
+  background: linear-gradient(180deg, var(--color-heading) 0%, var(--color-purple) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -169,7 +169,7 @@
   text-align: center;
   font-size: var(--text-md);
   line-height: 1.5;
-  color: rgba(26, 26, 26, 0.55);
+  color: var(--color-muted);
 }
 
 .mf-contact-row {
@@ -180,18 +180,18 @@
   gap: 10px;
   margin-top: 14px;
   font-size: 14px;
-  color: rgba(26, 26, 26, 0.55);
+  color: var(--color-muted);
 }
 
 .mf-contact-row a {
-  color: #4c1678;
+  color: var(--color-purple-deep);
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s ease;
 }
 
 .mf-contact-row a:hover {
-  color: #5d62dd;
+  color: var(--color-purple);
 }
 
 .mf-actions {
@@ -232,15 +232,11 @@
     border-color 0.35s ease,
     box-shadow 0.35s ease,
     color 0.35s ease;
-  border: 1px solid rgba(76, 22, 120, 0.1);
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.75),
-    rgba(255, 255, 255, 0.35)
-  );
+  border: 1px solid var(--color-border);
+  background: var(--mf-pill-bg);
   box-shadow:
-    0 10px 30px -10px rgba(76, 22, 120, 0.18),
-    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+    0 10px 30px -10px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
 }
 
 .mf-pill--primary {
@@ -257,7 +253,7 @@
 .mf-pill--mint {
   padding: 14px 28px;
   font-size: var(--text-sm);
-  color: #1a1a1a;
+  color: var(--on-mint);
   background: linear-gradient(145deg, #45e9b5, #2ae2a8);
   border-color: rgba(42, 226, 168, 0.45);
   box-shadow:
@@ -269,11 +265,11 @@
   padding: 10px 18px;
   font-size: 13px;
   font-weight: 600;
-  color: rgba(26, 26, 26, 0.55);
+  color: var(--color-muted);
 }
 
 .mf-pill--ghost:hover {
-  color: #1a1a1a;
+  color: var(--color-heading);
   border-color: rgba(93, 98, 221, 0.25);
 }
 
@@ -296,7 +292,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(26, 26, 26, 0.45);
+  color: var(--color-muted);
 }
 
 .mf-legal {
@@ -308,7 +304,7 @@
 }
 
 .mf-legal a {
-  color: rgba(26, 26, 26, 0.55);
+  color: var(--color-muted);
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -318,7 +314,7 @@
 }
 
 .mf-legal span {
-  color: rgba(26, 26, 26, 0.3);
+  color: var(--color-border-strong);
 }
 
 .mf-top {
@@ -328,9 +324,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: rgba(26, 26, 26, 0.5);
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(76, 22, 120, 0.1);
+  color: var(--color-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   backdrop-filter: blur(12px);
   transition: color 0.25s ease;
 }
