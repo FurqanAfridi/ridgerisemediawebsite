@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { AnimatedGroup } from "@/components/ui/animated-group";
+import { Magnetic } from "@/components/ui/magnetic";
 
 type PageHeroProps = {
   eyebrow?: string;
@@ -18,25 +20,29 @@ export function PageHero({
 }: PageHeroProps) {
   return (
     <section className="page-hero">
-      <div className="page-hero__inner">
+      <AnimatedGroup className="page-hero__inner">
         {eyebrow ? <p className="page-hero__eyebrow">{eyebrow}</p> : null}
         <h1 className="page-hero__title">{title}</h1>
         <p className="page-hero__desc">{description}</p>
         {(primaryCta || secondaryCta) && (
           <div className="page-hero__ctas">
             {primaryCta ? (
-              <Link to={primaryCta.to} className="btn btn--purple">
-                {primaryCta.label}
-              </Link>
+              <Magnetic strength={0.35}>
+                <Link to={primaryCta.to} className="btn btn--purple">
+                  {primaryCta.label}
+                </Link>
+              </Magnetic>
             ) : null}
             {secondaryCta ? (
-              <Link to={secondaryCta.to} className="btn btn--mint">
-                {secondaryCta.label}
-              </Link>
+              <Magnetic strength={0.35}>
+                <Link to={secondaryCta.to} className="btn btn--mint">
+                  {secondaryCta.label}
+                </Link>
+              </Magnetic>
             ) : null}
           </div>
         )}
-      </div>
+      </AnimatedGroup>
     </section>
   );
 }

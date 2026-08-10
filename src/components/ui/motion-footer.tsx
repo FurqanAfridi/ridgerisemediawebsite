@@ -115,7 +115,7 @@ export function CinematicFooter() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         giantTextRef.current,
-        { y: "10vh", scale: 0.8, opacity: 0 },
+        { y: "8vh", scale: 0.85, opacity: 0 },
         {
           y: "0vh",
           scale: 1,
@@ -123,7 +123,7 @@ export function CinematicFooter() {
           ease: "power1.out",
           scrollTrigger: {
             trigger: wrapperRef.current,
-            start: "top 80%",
+            start: "top 85%",
             end: "bottom bottom",
             scrub: 1,
           },
@@ -132,15 +132,15 @@ export function CinematicFooter() {
 
       gsap.fromTo(
         [headingRef.current, linksRef.current],
-        { y: 50, opacity: 0 },
+        { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          stagger: 0.15,
+          stagger: 0.12,
           ease: "power3.out",
           scrollTrigger: {
             trigger: wrapperRef.current,
-            start: "top 40%",
+            start: "top 55%",
             end: "bottom bottom",
             scrub: 1,
           },
@@ -179,7 +179,7 @@ export function CinematicFooter() {
         <div className="mf-center">
           <p className="mf-eyebrow">Next step</p>
           <h2 ref={headingRef} className="mf-heading">
-            Ready to grow?
+            Ready to rise?
           </h2>
           <p className="mf-sub">
             Join publishers and buyers scaling pay-per-call with RidgeRise Media.
@@ -243,13 +243,11 @@ export function CinematicFooter() {
             © {new Date().getFullYear()} RidgeRise Media. All rights reserved.
           </p>
 
-          <div className="mf-badge">
-            <span>Crafted for</span>
-            <span className="mf-badge__heart" aria-hidden="true">
-              ❤
-            </span>
-            <span className="mf-badge__brand">Publishers &amp; Buyers</span>
-          </div>
+          <nav className="mf-legal" aria-label="Legal">
+            <Link to="/privacy">Privacy Policy</Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/terms">Terms &amp; Conditions</Link>
+          </nav>
 
           <MagneticButton
             as="button"

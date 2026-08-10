@@ -1,6 +1,7 @@
+/* Compact sliding curtain — shorter than full viewport, same reveal */
 .mf-curtain {
   position: relative;
-  height: 100vh;
+  height: min(68vh, 620px);
   width: 100%;
   z-index: 1;
 }
@@ -12,8 +13,8 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
+  justify-content: flex-start;
+  height: min(68vh, 620px);
   width: 100%;
   overflow: hidden;
   background: linear-gradient(180deg, #f7fffe 0%, #eef5ff 45%, #f0edff 100%);
@@ -25,10 +26,10 @@
 .mf-aurora {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 45%;
   z-index: 0;
-  width: 80vw;
-  height: 60vh;
+  width: min(80vw, 720px);
+  height: min(42vh, 260px);
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
@@ -54,22 +55,22 @@
   mask-image: linear-gradient(
     to bottom,
     transparent,
-    black 30%,
-    black 70%,
+    black 25%,
+    black 75%,
     transparent
   );
 }
 
 .mf-giant {
   position: absolute;
-  bottom: -4vh;
+  bottom: -3vh;
   left: 50%;
   z-index: 0;
   transform: translateX(-50%);
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
-  font-size: clamp(64px, 22vw, 320px);
+  font-size: clamp(56px, 16vw, 220px);
   line-height: 0.75;
   font-weight: 900;
   letter-spacing: -0.05em;
@@ -86,7 +87,7 @@
 
 .mf-marquee {
   position: absolute;
-  top: 48px;
+  top: 28px;
   left: 0;
   z-index: 10;
   width: 100%;
@@ -94,9 +95,9 @@
   border-block: 1px solid rgba(76, 22, 120, 0.12);
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(12px);
-  padding: 14px 0;
-  transform: rotate(-2deg) scale(1.1);
-  box-shadow: 0 16px 40px rgba(76, 22, 120, 0.08);
+  padding: 10px 0;
+  transform: rotate(-1.5deg) scale(1.06);
+  box-shadow: 0 12px 32px rgba(76, 22, 120, 0.08);
 }
 
 .mf-marquee__track {
@@ -129,18 +130,18 @@
   position: relative;
   z-index: 10;
   display: flex;
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  padding: 100px 24px 28px;
+  padding: 72px 24px 12px;
 }
 
 .mf-eyebrow {
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.22em;
@@ -149,9 +150,9 @@
 }
 
 .mf-heading {
-  margin: 0 0 16px;
+  margin: 0 0 10px;
   text-align: center;
-  font-size: clamp(40px, 8vw, 80px);
+  font-size: var(--text-display);
   font-weight: 900;
   letter-spacing: -0.05em;
   line-height: 1;
@@ -163,10 +164,10 @@
 }
 
 .mf-sub {
-  margin: 0 0 28px;
-  max-width: 42ch;
+  margin: 0 0 18px;
+  max-width: 44ch;
   text-align: center;
-  font-size: clamp(15px, 1.6vw, 18px);
+  font-size: var(--text-md);
   line-height: 1.5;
   color: rgba(26, 26, 26, 0.55);
 }
@@ -177,7 +178,7 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 14px;
   font-size: 14px;
   color: rgba(26, 26, 26, 0.55);
 }
@@ -197,7 +198,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   width: 100%;
 }
 
@@ -206,7 +207,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
 }
 
@@ -243,8 +244,8 @@
 }
 
 .mf-pill--primary {
-  padding: 18px 36px;
-  font-size: clamp(14px, 1.5vw, 16px);
+  padding: 14px 28px;
+  font-size: var(--text-sm);
   color: #fff;
   background: linear-gradient(145deg, #5d62dd, #4c1678);
   border-color: rgba(93, 98, 221, 0.4);
@@ -254,8 +255,8 @@
 }
 
 .mf-pill--mint {
-  padding: 18px 36px;
-  font-size: clamp(14px, 1.5vw, 16px);
+  padding: 14px 28px;
+  font-size: var(--text-sm);
   color: #1a1a1a;
   background: linear-gradient(145deg, #45e9b5, #2ae2a8);
   border-color: rgba(42, 226, 168, 0.45);
@@ -265,7 +266,7 @@
 }
 
 .mf-pill--ghost {
-  padding: 12px 22px;
+  padding: 10px 18px;
   font-size: 13px;
   font-weight: 600;
   color: rgba(26, 26, 26, 0.55);
@@ -283,10 +284,10 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 12px 20px;
   width: 100%;
   margin-top: auto;
-  padding: 8px 24px 28px;
+  padding: 8px 24px 18px;
 }
 
 .mf-copy {
@@ -298,39 +299,31 @@
   color: rgba(26, 26, 26, 0.45);
 }
 
-.mf-badge {
+.mf-legal {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(26, 26, 26, 0.5);
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(76, 22, 120, 0.1);
-  backdrop-filter: blur(12px);
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.mf-badge__heart {
+.mf-legal a {
+  color: rgba(26, 26, 26, 0.55);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.mf-legal a:hover {
   color: #5d62dd;
-  animation: mf-heartbeat 2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
 
-.mf-badge__brand {
-  color: #1a1a1a;
-  letter-spacing: 0;
-  text-transform: none;
-  font-weight: 800;
-  font-size: 12px;
-  margin-left: 2px;
+.mf-legal span {
+  color: rgba(26, 26, 26, 0.3);
 }
 
 .mf-top {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -374,25 +367,11 @@
   }
 }
 
-@keyframes mf-heartbeat {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  15%,
-  45% {
-    transform: scale(1.2);
-  }
-  30% {
-    transform: scale(1);
-  }
-}
-
 @media (max-width: 960px) {
   .mf-curtain,
   .mf {
     height: auto;
-    min-height: 100vh;
+    min-height: min(72vh, 620px);
   }
 
   .mf {
@@ -401,25 +380,73 @@
 }
 
 @media (max-width: 720px) {
-  .mf-bottom {
-    flex-direction: column;
-    text-align: center;
+  .mf-curtain,
+  .mf {
+    min-height: 0;
   }
 
   .mf-center {
-    padding-top: 110px;
+    padding: 88px 16px 16px;
+  }
+
+  .mf-bottom {
+    flex-direction: column;
+    text-align: center;
+    padding: 12px 16px 16px;
+    gap: 10px;
+  }
+
+  .mf-heading {
+    font-size: var(--text-3xl);
+  }
+
+  .mf-sub {
+    margin-bottom: 14px;
+  }
+
+  .mf-actions {
+    gap: 10px;
   }
 
   .mf-pill--primary,
   .mf-pill--mint {
     width: min(100%, 280px);
+    padding: 13px 24px;
+  }
+
+  .mf-contact-row {
+    margin-top: 12px;
+    font-size: 13px;
+  }
+
+  .mf-marquee {
+    top: 20px;
+    transform: rotate(-1deg) scale(1.04);
+  }
+
+  .mf-giant {
+    font-size: clamp(40px, 18vw, 120px);
+  }
+}
+
+@media (max-width: 480px) {
+  .mf-center {
+    padding: 80px 14px 12px;
+  }
+
+  .mf-actions__secondary {
+    gap: 8px;
+  }
+
+  .mf-pill--ghost {
+    padding: 8px 14px;
+    font-size: 12px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .mf-aurora,
-  .mf-marquee__track,
-  .mf-badge__heart {
+  .mf-marquee__track {
     animation: none;
   }
 }

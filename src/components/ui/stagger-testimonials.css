@@ -80,9 +80,9 @@
 }
 
 .stagger-card__quote {
-  font-size: clamp(14px, 1.5vw, 18px);
+  font-size: var(--text-md);
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.4;
   color: inherit;
 }
 
@@ -92,7 +92,7 @@
   left: 28px;
   right: 28px;
   margin-top: 8px;
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-style: italic;
   color: #4b5563;
 }

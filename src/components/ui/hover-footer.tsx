@@ -197,8 +197,8 @@ const footerLinks = [
 const contactInfo = [
   {
     icon: Mail,
-    text: "hello@ridgerisemedia.com",
-    href: "mailto:hello@ridgerisemedia.com",
+    text: "info@ridgerisemedia.com",
+    href: "mailto:info@ridgerisemedia.com",
   },
   {
     icon: Phone,

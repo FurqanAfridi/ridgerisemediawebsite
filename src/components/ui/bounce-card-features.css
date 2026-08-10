@@ -2,7 +2,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1120px;
+  max-width: var(--max);
   margin-inline: auto;
   padding: var(--section-y) var(--page-pad);
   color: var(--color-text);
@@ -27,7 +27,7 @@
 
 .bouncy-features__eyebrow {
   margin: 0;
-  font-size: clamp(13px, 1.2vw, 14px);
+  font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -36,7 +36,7 @@
 
 .bouncy-features__title {
   margin: 0;
-  font-size: clamp(32px, 4.6vw, 56px);
+  font-size: var(--text-display);
   font-weight: 700;
   letter-spacing: -1.4px;
   line-height: 1.08;
@@ -49,10 +49,10 @@
 
 .bouncy-features__sub {
   margin: 0;
-  max-width: 46ch;
-  font-size: clamp(16px, 1.6vw, 19px);
+  max-width: 48ch;
+  font-size: var(--text-md);
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--color-muted);
 }
 
@@ -66,7 +66,7 @@
   border-radius: 12px;
   background: #4c1678;
   color: #fff;
-  font-size: 15px;
+  font-size: var(--text-sm);
   font-weight: 600;
   letter-spacing: -0.2px;
   text-decoration: none;
@@ -109,7 +109,7 @@
 .bounce-card__title {
   margin: 0;
   text-align: left;
-  font-size: clamp(24px, 2.6vw, 32px);
+  font-size: var(--text-2xl);
   font-weight: 700;
   letter-spacing: -0.7px;
   line-height: 1.15;
@@ -118,11 +118,11 @@
 
 .bounce-card__body {
   margin: 0;
-  max-width: 36ch;
+  max-width: 38ch;
   text-align: left;
-  font-size: clamp(15px, 1.4vw, 17px);
+  font-size: var(--text-base);
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--color-muted);
 }
 
@@ -191,14 +191,6 @@
 @media (max-width: 767px) {
   .bouncy-features__intro {
     max-width: none;
-  }
-
-  .bouncy-features__title {
-    font-size: clamp(30px, 8vw, 42px);
-  }
-
-  .bouncy-features__sub {
-    font-size: 15px;
   }
 
   .bounce-card {

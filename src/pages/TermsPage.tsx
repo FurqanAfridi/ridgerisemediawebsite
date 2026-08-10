@@ -7,13 +7,13 @@ export default function TermsPage() {
   return (
     <main>
       <Seo
-        title="Terms of Service"
-        description="Terms of Service for RidgeRise Media publishers and buyers using our pay-per-call platform."
+        title="Terms & Conditions"
+        description="Terms & Conditions for RidgeRise Media publishers and buyers using our pay-per-call platform."
         path="/terms"
       />
       <PageHero
         eyebrow="Legal"
-        title="Terms of Service"
+        title="Terms & Conditions"
         description="These terms govern use of the RidgeRise Media website and network. Final legal language should be reviewed by counsel before production launch."
       />
       <section className="inner-section">

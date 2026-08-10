@@ -1,10 +1,16 @@
 import { Children, type ReactNode } from "react";
-import { motion, type Variants } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  type Variants,
+} from "motion/react";
 import { cn } from "@/lib/utils";
 
 type AnimatedGroupProps = {
   children: ReactNode;
   className?: string;
+  /** Use scroll-triggered reveal instead of mount animate */
+  inView?: boolean;
   variants?: {
     container?: Variants;
     item?: Variants;
@@ -15,7 +21,8 @@ const defaultContainer: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.08,
+      staggerChildren: 0.1,
+      delayChildren: 0.08,
     },
   },
 };
@@ -23,17 +30,19 @@ const defaultContainer: Variants = {
 const defaultItem: Variants = {
   hidden: {
     opacity: 0,
-    filter: "blur(12px)",
-    y: 12,
+    filter: "blur(16px)",
+    y: 28,
+    scale: 0.96,
   },
   visible: {
     opacity: 1,
     filter: "blur(0px)",
     y: 0,
+    scale: 1,
     transition: {
       type: "spring",
-      bounce: 0.3,
-      duration: 1.2,
+      bounce: 0.35,
+      duration: 1.15,
     },
   },
 };
@@ -42,14 +51,25 @@ export function AnimatedGroup({
   children,
   className,
   variants,
+  inView = false,
 }: AnimatedGroupProps) {
+  const reduce = useReducedMotion();
   const container = variants?.container ?? defaultContainer;
   const item = variants?.item ?? defaultItem;
+
+  if (reduce) {
+    return <div className={cn(className)}>{children}</div>;
+  }
 
   return (
     <motion.div
       initial="hidden"
-      animate="visible"
+      {...(inView
+        ? {
+            whileInView: "visible",
+            viewport: { once: true, amount: 0.25, margin: "0px 0px -8% 0px" },
+          }
+        : { animate: "visible" })}
       variants={container}
       className={cn(className)}
     >

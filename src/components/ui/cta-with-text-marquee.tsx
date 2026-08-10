@@ -1,6 +1,8 @@
 import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { Magnetic } from "@/components/ui/magnetic";
 import "./cta-with-text-marquee.css";
 
 /** Common pay-per-call / performance marketing verticals */
@@ -126,7 +128,13 @@ export default function CTAWithVerticalMarquee() {
     >
       <div className="cta-vertical__inner">
         <div className="cta-vertical__grid">
-          <div className="cta-vertical__copy">
+          <motion.div
+            className="cta-vertical__copy"
+            initial={{ opacity: 0, x: -48, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ type: "spring", stiffness: 110, damping: 18 }}
+          >
             <h2 id="cta-vertical-heading" className="cta-vertical__title">
               Which Verticals Are You Interested to{" "}
               <span className="cta-vertical__title-accent">Buy/Sell</span>{" "}
@@ -139,16 +147,31 @@ export default function CTAWithVerticalMarquee() {
               fast.
             </p>
             <div className="cta-vertical__actions">
-              <Link to="/publishers" className="cta-vertical__btn cta-vertical__btn--primary">
-                <span>Apply as Publisher</span>
-              </Link>
-              <Link to="/buyers" className="cta-vertical__btn cta-vertical__btn--secondary">
-                <span>Get Started as Buyer</span>
-              </Link>
+              <Magnetic strength={0.35}>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
+                  <Link to="/publishers" className="cta-vertical__btn cta-vertical__btn--primary">
+                    <span>Apply as Publisher</span>
+                  </Link>
+                </motion.div>
+              </Magnetic>
+              <Magnetic strength={0.35}>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
+                  <Link to="/buyers" className="cta-vertical__btn cta-vertical__btn--secondary">
+                    <span>Get Started as Buyer</span>
+                  </Link>
+                </motion.div>
+              </Magnetic>
             </div>
-          </div>
+          </motion.div>
 
-          <div ref={marqueeRef} className="cta-vertical__marquee-wrap">
+          <motion.div
+            ref={marqueeRef}
+            className="cta-vertical__marquee-wrap"
+            initial={{ opacity: 0, x: 64, rotate: 3, scale: 0.94 }}
+            whileInView={{ opacity: 1, x: 0, rotate: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ type: "spring", stiffness: 100, damping: 16, delay: 0.12 }}
+          >
             <div className="cta-vertical__marquee-inner">
               <VerticalMarquee speed={48} pauseOnHover className="cta-vertical__marquee">
                 {marqueeItems.map((item) => (
@@ -160,7 +183,7 @@ export default function CTAWithVerticalMarquee() {
               <div className="cta-vertical__vignette cta-vertical__vignette--top" />
               <div className="cta-vertical__vignette cta-vertical__vignette--bottom" />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -21,9 +21,9 @@ export const assets = {
 export const site = {
   name: "RidgeRise Media",
   url: "https://ridgerisemedia.com",
-  email: "hello@ridgerisemedia.com",
-  phone: "+1 (888) 555-0142",
-  phoneHref: "tel:+18885550142",
+  email: "info@ridgerisemedia.com",
+  phone: "+1 (202) 773-7162",
+  phoneHref: "tel:+12027737162",
   tagline: "Turn Every Call into Revenue",
 } as const;
 

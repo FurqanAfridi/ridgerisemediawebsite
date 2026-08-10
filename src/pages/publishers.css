@@ -41,7 +41,7 @@
 
 .pub-hero__title {
   margin: 0;
-  font-size: clamp(40px, 5.5vw, 64px);
+  font-size: var(--text-4xl);
   font-weight: 700;
   letter-spacing: -1.6px;
   line-height: 1.05;
@@ -49,8 +49,8 @@
 
 .pub-hero__desc {
   margin: 0;
-  max-width: 38ch;
-  font-size: clamp(16px, 1.5vw, 19px);
+  max-width: 40ch;
+  font-size: var(--text-md);
   font-weight: 500;
   line-height: 1.55;
   color: var(--color-muted);
@@ -149,14 +149,14 @@
 }
 
 .pub-metrics__value {
-  font-size: clamp(28px, 3vw, 40px);
+  font-size: var(--text-2xl);
   font-weight: 700;
   letter-spacing: -0.8px;
   color: #4c1678;
 }
 
 .pub-metrics__label {
-  font-size: 14px;
+  font-size: var(--text-sm);
   font-weight: 500;
   color: var(--color-muted);
 }
@@ -246,17 +246,17 @@
 
 .pub-split__copy h2 {
   margin: 0;
-  font-size: clamp(30px, 3.5vw, 42px);
+  font-size: var(--text-3xl);
   letter-spacing: -1px;
   line-height: 1.12;
 }
 
 .pub-split__copy > p {
   margin: 0;
-  font-size: 17px;
+  font-size: var(--text-md);
   line-height: 1.6;
   color: var(--color-muted);
-  max-width: 38ch;
+  max-width: 40ch;
 }
 
 .pub-checklist {
@@ -270,7 +270,7 @@
 .pub-checklist li {
   position: relative;
   padding-left: 28px;
-  font-size: 15px;
+  font-size: var(--text-base);
   font-weight: 500;
   color: #2a2a2a;
 }
@@ -310,7 +310,7 @@
 .pub-steps__head h2,
 .pub-sources__head h2 {
   margin: 0;
-  font-size: clamp(30px, 3.5vw, 42px);
+  font-size: var(--text-3xl);
   letter-spacing: -1px;
 }
 
@@ -474,7 +474,7 @@
 
 .pub-step__copy h3 {
   margin: 0;
-  font-size: clamp(24px, 2.5vw, 32px);
+  font-size: var(--text-2xl);
   letter-spacing: -0.6px;
 }
 
@@ -604,14 +604,15 @@
 
 .pub-cta__panel h2 {
   margin: 0;
-  font-size: clamp(30px, 4vw, 44px);
+  font-size: var(--text-3xl);
   letter-spacing: -1px;
 }
 
 .pub-cta__panel p {
   margin: 0;
-  max-width: 42ch;
+  max-width: 44ch;
   opacity: 0.92;
+  font-size: var(--text-md);
   line-height: 1.55;
 }
 

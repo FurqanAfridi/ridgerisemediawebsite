@@ -4,6 +4,7 @@ import { BouncyCardsFeatures } from "@/components/ui/bounce-card-features";
 import CTAWithVerticalMarquee from "@/components/ui/cta-with-text-marquee";
 import { StaggerTestimonials } from "@/components/ui/stagger-testimonials";
 import { AnimatedGroup } from "@/components/ui/animated-group";
+import { Magnetic } from "@/components/ui/magnetic";
 import { Seo } from "@/components/Seo";
 import { assets } from "@/data/site";
 
@@ -24,17 +25,19 @@ const heroItemVariants = {
   item: {
     hidden: {
       opacity: 0,
-      filter: "blur(12px)",
-      y: 12,
+      filter: "blur(18px)",
+      y: 36,
+      scale: 0.94,
     },
     visible: {
       opacity: 1,
       filter: "blur(0px)",
       y: 0,
+      scale: 1,
       transition: {
         type: "spring" as const,
-        bounce: 0.3,
-        duration: 1.5,
+        bounce: 0.38,
+        duration: 1.35,
       },
     },
   },
@@ -62,15 +65,7 @@ export default function HomePage() {
 
       <main className="home-main">
         <section className="hero">
-          <div className="hero__beams" aria-hidden="true">
-            <div className="hero__beam hero__beam--a" />
-            <div className="hero__beam hero__beam--b" />
-            <div className="hero__beam hero__beam--c" />
-          </div>
-
           <div className="hero__stage">
-            <div className="hero__glow" aria-hidden="true" />
-
             <div className="parallax-wrap parallax--money-hero hero__deco hero__deco--money">
               <img
                 className="float-bob"
@@ -121,22 +116,26 @@ export default function HomePage() {
                   container: {
                     visible: {
                       transition: {
-                        staggerChildren: 0.05,
-                        delayChildren: 0.55,
+                        staggerChildren: 0.08,
+                        delayChildren: 0.45,
                       },
                     },
                   },
                   ...heroItemVariants,
                 }}
               >
-                <div className="hero__cta-shell">
-                  <Link to="/publishers" className="btn btn--purple">
-                    Signup as Publisher
+                <Magnetic strength={0.4}>
+                  <div className="hero__cta-shell">
+                    <Link to="/publishers" className="btn btn--purple">
+                      Signup as Publisher
+                    </Link>
+                  </div>
+                </Magnetic>
+                <Magnetic strength={0.4}>
+                  <Link to="/buyers" className="btn btn--mint">
+                    Signup as Buyer
                   </Link>
-                </div>
-                <Link to="/buyers" className="btn btn--mint">
-                  Signup as Buyer
-                </Link>
+                </Magnetic>
               </AnimatedGroup>
             </div>
 
@@ -281,9 +280,11 @@ export default function HomePage() {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <Link to="/publishers" className="btn btn--role btn--role-mint">
-                Apply as a Publisher →
-              </Link>
+              <Magnetic strength={0.35}>
+                <Link to="/publishers" className="btn btn--role btn--role-mint">
+                  Apply as a Publisher →
+                </Link>
+              </Magnetic>
             </article>
 
             <article className="role-card">
@@ -297,9 +298,11 @@ export default function HomePage() {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <Link to="/buyers" className="btn btn--role btn--role-purple">
-                Get Started as Buyer →
-              </Link>
+              <Magnetic strength={0.35}>
+                <Link to="/buyers" className="btn btn--role btn--role-purple">
+                  Get Started as Buyer →
+                </Link>
+              </Magnetic>
             </article>
           </div>
         </section>

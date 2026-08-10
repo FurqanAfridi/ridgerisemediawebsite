@@ -27,7 +27,7 @@ const inboundLinks = [
 
 const complianceLinks = [
   { label: "Privacy Policy", to: "/privacy" },
-  { label: "Terms of Service", to: "/terms" },
+  { label: "Terms & Conditions", to: "/terms" },
 ] as const;
 
 export function FooterSitemap() {
