@@ -20,11 +20,24 @@ npm run preview
 
 ## Production
 
-- **URL:** `http://ridgerisemedia.com:786`
-- **Served path:** `/var/www/ridgerisemedia` (nginx on port `786`)
+- **Public URL (goal):** `http://ridgerisemedia.com` (port 80 via Docker reverse proxy)
+- **App server:** host nginx on port `786` → files in `/var/www/ridgerisemedia`
 - **Source on server:** `/root/landers/ridgerisemediawebsite/ridgerisemediawebsite`
 
-Other sites on this Contabo box (Docker / other landers) are intentionally left alone.
+Docker already owns port **80** for your other landers. RidgeRise stays on **786**; the proxy only adds a *new* host route for `ridgerisemedia.com` → `172.17.0.1:786`. Other sites are not modified.
+
+### Wire the domain (no `:786`)
+
+On the server:
+
+```bash
+cd ~/landers/ridgerisemediawebsite/ridgerisemediawebsite
+git pull origin main
+chmod +x scripts/wire-domain.sh
+bash scripts/wire-domain.sh
+```
+
+Then open `http://ridgerisemedia.com`.
 
 ## CI/CD (GitHub Actions)
 
