@@ -6,8 +6,6 @@ import "./stagger-testimonials.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SQRT_5000 = Math.sqrt(5000);
-
 const testimonials = [
   {
     id: 0,
@@ -83,51 +81,40 @@ function wrapPosition(index: number, active: number, total: number) {
   return pos;
 }
 
+function headerClearancePx() {
+  const root = getComputedStyle(document.documentElement);
+  const offset = parseFloat(root.getPropertyValue("--header-offset")) || 72;
+  const gap = parseFloat(root.getPropertyValue("--header-gap")) || 36;
+  return offset + gap;
+}
+
 interface TestimonialCardProps {
-  position: number;
   testimonial: (typeof testimonials)[0];
-  cardSize: number;
+  isCenter: boolean;
+  cardWidth: number;
+  cardHeight: number;
+  cardRef: (el: HTMLDivElement | null) => void;
 }
 
 const TestimonialCard: FC<TestimonialCardProps> = ({
-  position,
   testimonial,
-  cardSize,
+  isCenter,
+  cardWidth,
+  cardHeight,
+  cardRef,
 }) => {
-  const isCenter = position === 0;
-
   return (
     <div
+      ref={cardRef}
       className={cn(
         "stagger-card",
         isCenter ? "stagger-card--center" : "stagger-card--side",
       )}
       style={{
-        width: cardSize,
-        height: cardSize,
-        clipPath: `polygon(50px 0%, calc(100% - 50px) 0%, 100% 50px, 100% 100%, calc(100% - 50px) 100%, 50px 100%, 0 100%, 0 0)`,
-        transform: `
-          translate(-50%, -50%)
-          translateX(${(cardSize / 1.5) * position}px)
-          translateY(${isCenter ? -40 : position % 2 ? 18 : -18}px)
-          rotate(${isCenter ? 0 : position % 2 ? 2.5 : -2.5}deg)
-        `,
-        boxShadow: isCenter
-          ? "0px 8px 0px 4px rgba(76, 22, 120, 0.18)"
-          : "0px 0px 0px 0px transparent",
-        zIndex: isCenter ? 10 : Math.max(0, 5 - Math.abs(position)),
-        pointerEvents: "none",
+        width: cardWidth,
+        height: cardHeight,
       }}
     >
-      <span
-        className="stagger-card__corner"
-        style={{
-          right: -2,
-          top: 48,
-          width: SQRT_5000,
-          height: 2,
-        }}
-      />
       <img
         src={testimonial.imgSrc}
         alt={testimonial.by.split(",")[0]}
@@ -140,14 +127,18 @@ const TestimonialCard: FC<TestimonialCardProps> = ({
 };
 
 export const StaggerTestimonials: FC = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [cardSize, setCardSize] = useState(340);
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardEls = useRef<(HTMLDivElement | null)[]>([]);
+  const activeRef = useRef(0);
+  const [cardWidth, setCardWidth] = useState(360);
+  const [cardHeight, setCardHeight] = useState(460);
   const [active, setActive] = useState(0);
 
   useEffect(() => {
     const updateSize = () => {
-      const { matches } = window.matchMedia("(min-width: 640px)");
-      setCardSize(matches ? 340 : 280);
+      const wide = window.matchMedia("(min-width: 640px)").matches;
+      setCardWidth(wide ? 360 : 300);
+      setCardHeight(wide ? 460 : 400);
     };
     updateSize();
     window.addEventListener("resize", updateSize);
@@ -158,29 +149,88 @@ export const StaggerTestimonials: FC = () => {
     const section = sectionRef.current;
     if (!section) return;
 
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const total = testimonials.length;
+
+    const layoutCards = (activeIndex: number, immediate = false) => {
+      cardEls.current.forEach((card, index) => {
+        if (!card) return;
+        const pos = wrapPosition(index, activeIndex, total);
+        const isCenter = pos === 0;
+        const x = (cardWidth / 1.45) * pos;
+        const y = isCenter ? -28 : pos % 2 ? 22 : -22;
+        const rot = isCenter ? 0 : pos % 2 ? 2.5 : -2.5;
+
+        gsap.to(card, {
+          xPercent: -50,
+          yPercent: -50,
+          x,
+          y,
+          rotation: rot,
+          zIndex: isCenter ? 10 : Math.max(0, 5 - Math.abs(pos)),
+          boxShadow: isCenter
+            ? "0px 10px 0px 4px rgba(76, 22, 120, 0.18)"
+            : "0px 0px 0px 0px transparent",
+          duration: immediate || reduceMotion ? 0 : 0.38,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      });
+    };
+
+    // Initial placement before ScrollTrigger measures
+    layoutCards(0, true);
+
+    if (reduceMotion) {
+      return () => {
+        gsap.killTweensOf(cardEls.current.filter(Boolean));
+      };
+    }
+
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
+        id: "partners-testimonials",
         trigger: section,
-        start: "top top",
-        end: () => `+=${Math.max(total - 1, 1) * window.innerHeight * 0.55}`,
+        start: () => `top top+=${headerClearancePx()}`,
+        end: () =>
+          `+=${Math.max(total - 1, 1) * Math.round(window.innerHeight * 0.72)}`,
         pin: true,
+        // Escape overflow-x:clip on .page so pin spacing / sticky work
+        pinReparent: true,
         pinSpacing: true,
-        scrub: 0.65,
+        scrub: 0.55,
         anticipatePin: 1,
         invalidateOnRefresh: true,
+        refreshPriority: 1,
+        snap: {
+          snapTo: 1 / Math.max(total - 1, 1),
+          duration: { min: 0.12, max: 0.28 },
+          ease: "power1.inOut",
+        },
         onUpdate: (self) => {
           const next = Math.round(self.progress * (total - 1));
-          setActive((prev) => (prev === next ? prev : next));
+          if (next === activeRef.current) return;
+          activeRef.current = next;
+          setActive(next);
+          layoutCards(next);
         },
       });
     }, section);
 
+    // Sticky vertical stack / rocket path can shift layout after mount
+    const refreshTimers = [120, 700, 1500].map((ms) =>
+      window.setTimeout(() => ScrollTrigger.refresh(), ms),
+    );
+
     return () => {
+      refreshTimers.forEach((id) => window.clearTimeout(id));
       ctx.revert();
+      ScrollTrigger.getById("partners-testimonials")?.kill();
       ScrollTrigger.refresh();
     };
-  }, []);
+  }, [cardWidth, cardHeight]);
 
   return (
     <section
@@ -199,8 +249,12 @@ export const StaggerTestimonials: FC = () => {
           <TestimonialCard
             key={testimonial.id}
             testimonial={testimonial}
-            position={wrapPosition(index, active, testimonials.length)}
-            cardSize={cardSize}
+            isCenter={wrapPosition(index, active, testimonials.length) === 0}
+            cardWidth={cardWidth}
+            cardHeight={cardHeight}
+            cardRef={(el) => {
+              cardEls.current[index] = el;
+            }}
           />
         ))}
       </div>

@@ -7,18 +7,49 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies & build
 node_modules
 dist
 dist-ssr
 *.local
+.turbo
+.cache
+coverage
+*.tsbuildinfo
 
-# Editor directories and files
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Editor / OS
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
+Thumbs.db
+Desktop.ini
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*~
+
+# Local tooling / deploy leftovers
+.vercel
+.netlify
+*.pem
+*.key
+.npm
+.eslintcache
+.stylelintcache
+.oxlintcache
+
+# Draft / scratch content (not site source)
+*.md.txt
+RidgeRise-Media-Home-Page.md.txt
+
+# Optional local agent scratch (keep committed .cursor/rules)
+.cursor/plans/
+.cursor/*.log
