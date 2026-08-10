@@ -1,0 +1,104 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ridgerisemedia-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+          retention-days: 7
+
+  deploy:
+    name: Deploy to Contabo
+    needs: build
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+
+      - name: Configure SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+        run: |
+          set -euo pipefail
+          test -n "${DEPLOY_SSH_KEY}" || { echo "Missing secret: DEPLOY_SSH_KEY"; exit 1; }
+          test -n "${DEPLOY_HOST}" || { echo "Missing secret: DEPLOY_HOST"; exit 1; }
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "${DEPLOY_PORT:-22}" -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Sync dist to /var/www/ridgerisemedia
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          set -euo pipefail
+          USER="${DEPLOY_USER:-root}"
+          PORT="${DEPLOY_PORT:-22}"
+          PATH_REMOTE="${DEPLOY_PATH:-/var/www/ridgerisemedia}"
+
+          # Only this site path is updated — never landers Docker stack or other vhosts.
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${PORT} -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
+            ./dist/ \
+            "${USER}@${DEPLOY_HOST}:${PATH_REMOTE}/"
+
+      - name: Verify remote index
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          set -euo pipefail
+          USER="${DEPLOY_USER:-root}"
+          PORT="${DEPLOY_PORT:-22}"
+          PATH_REMOTE="${DEPLOY_PATH:-/var/www/ridgerisemedia}"
+
+          ssh -i ~/.ssh/deploy_key -p "${PORT}" -o IdentitiesOnly=yes \
+            "${USER}@${DEPLOY_HOST}" \
+            "test -f '${PATH_REMOTE}/index.html' && ls -la '${PATH_REMOTE}' | head -20"
