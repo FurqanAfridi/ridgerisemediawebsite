@@ -1,0 +1,39 @@
+/* Buyer-specific overrides on shared partner-page (pub-*) styles */
+
+.buy-hero__card {
+  background: linear-gradient(145deg, #2ae2a8 0%, #14b8a6 45%, #5d62dd 100%);
+  transform: rotate(3deg);
+  box-shadow: 0 28px 60px rgba(20, 184, 166, 0.28);
+}
+
+.buy-hero__card img {
+  mix-blend-mode: normal;
+  opacity: 1;
+}
+
+.buy-hero__rocket {
+  display: block;
+  right: -2%;
+  bottom: 2%;
+  width: min(200px, 32vw);
+}
+
+html[data-theme="dark"] .buy-page .pub-hero__glow {
+  background:
+    radial-gradient(
+      ellipse 50% 60% at 72% 38%,
+      rgba(94, 240, 196, 0.2),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 42% 52% at 18% 62%,
+      rgba(139, 104, 229, 0.24),
+      transparent 70%
+    );
+}
+
+@media (max-width: 960px) {
+  .buy-hero__rocket {
+    display: none;
+  }
+}

@@ -8,21 +8,23 @@ const platformLinks = [
   { label: "How It Works", to: "/about" },
   { label: "Verticals", to: "/verticals" },
   { label: "About Us", to: "/about" },
+  { label: "Contact", to: "/contact" },
 ] as const;
 
 const transferLinks = [
-  { label: "Health & Life Insurance", to: "/verticals#health-insurance" },
-  { label: "Medicare Live Transfers", to: "/verticals#medicare-advantage" },
-  { label: "Final Expense Leads", to: "/verticals#final-expense" },
-  { label: "ACA Health Calls", to: "/verticals#health-insurance" },
-  { label: "Home & Auto Insurance", to: "/verticals#auto-insurance" },
-  { label: "Pest Control Leads", to: "/verticals" },
+  { label: "Health & Life Insurance", to: "/verticals/health-insurance" },
+  { label: "Medicare Live Transfers", to: "/verticals/medicare-advantage" },
+  { label: "Final Expense Leads", to: "/verticals/final-expense" },
+  { label: "ACA Health Calls", to: "/verticals/health-insurance" },
+  { label: "Home & Auto Insurance", to: "/verticals/auto-insurance" },
+  { label: "Personal Injury Calls", to: "/verticals/personal-injury" },
 ] as const;
 
 const inboundLinks = [
-  { label: "Solar Leads", to: "/verticals#solar" },
-  { label: "Home Services Leads", to: "/verticals#hvac" },
-  { label: "Debt Relief Leads", to: "/verticals#debt-settlement" },
+  { label: "Solar Leads", to: "/verticals/solar" },
+  { label: "Home Services Leads", to: "/verticals/hvac" },
+  { label: "Debt Relief Leads", to: "/verticals/debt-settlement" },
+  { label: "Blog", to: "/blog" },
 ] as const;
 
 const complianceLinks = [
@@ -75,11 +77,6 @@ export function FooterSitemap() {
                 <Link to={link.to}>{link.label}</Link>
               </li>
             ))}
-            <li>
-              <a href="/admin" className="footer-sitemap__admin">
-                Admin Login
-              </a>
-            </li>
           </ul>
         </div>
 
@@ -87,9 +84,10 @@ export function FooterSitemap() {
           <h2 className="footer-sitemap__title">Contact &amp; Compliance</h2>
           <ul className="footer-sitemap__list">
             <li>
-              <span className="footer-sitemap__support">
-                Support: <em>TBD</em>
-              </span>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </li>
+            <li>
+              <a href={site.phoneHref}>{site.phone}</a>
             </li>
             {complianceLinks.map((link) => (
               <li key={link.label}>

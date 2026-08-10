@@ -634,7 +634,7 @@ html[data-theme="dark"] .grad-purple {
   max-width: 54ch;
 }
 
-/* Hero — centered stage + framed live metrics preview */
+/* Hero — Figma 1:318: centered title, sub, CTAs + money deco */
 .home-main {
   overflow: hidden;
 }
@@ -680,22 +680,56 @@ html[data-theme="dark"] .grad-purple {
   display: block;
 }
 
-/* Figma 1:318 — money bill top-right */
+/* Figma 1:327 — money bill 120×120 at right 46 / top -39 */
 .hero__deco--money {
   right: 46px;
-  top: -12px;
+  top: -39px;
   width: 120px;
-  z-index: 3;
+  height: 120px;
+  z-index: 1;
+}
+
+.hero__deco--money img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
 }
 
 .hero__deco--rocket {
-  left: -8px;
-  top: 8px;
-  width: min(220px, 26vw);
-  transform: rotate(35deg);
-  filter: blur(1.2px);
-  opacity: 0.95;
+  left: clamp(0px, 4vw, 131px);
+  top: -12px;
+  width: min(266px, 28vw);
   z-index: 0;
+  opacity: 0.95;
+}
+
+.hero__deco--rocket .hero__rocket-tilt {
+  transform: rotate(34.8deg);
+  filter: blur(1.2px);
+  transform-origin: center center;
+}
+
+.hero__deco--rocket img,
+.hero__deco--rocket-sm img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Figma 1:331 — smaller blurred rocket, lower-right */
+.hero__deco--rocket-sm {
+  right: clamp(12px, 4vw, 86px);
+  bottom: 24px;
+  width: min(135px, 16vw);
+  z-index: 0;
+  opacity: 0.85;
+}
+
+.hero__deco--rocket-sm .hero__rocket-tilt {
+  transform: rotate(-15.4deg);
+  filter: blur(4.1px);
+  transform-origin: center center;
 }
 
 .hero__deco--money-sm {
@@ -710,16 +744,108 @@ html[data-theme="dark"] .grad-purple {
 
 .hero__content {
   position: relative;
-  z-index: 2;
+  z-index: 4;
   width: 100%;
-  max-width: min(1200px, 100%);
+  max-width: 1152px;
   margin: 0 auto;
-  padding: 0 var(--page-pad);
+  padding: 40px var(--page-pad) 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0;
+  gap: 24px;
+  isolation: isolate;
+}
+
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__title {
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  font-size: clamp(36px, 3.2vw + 18px, 64px);
+  font-weight: 700;
+  letter-spacing: -1.28px;
+  line-height: 1.1;
+  color: var(--color-heading);
+  text-wrap: balance;
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__title .grad-mint {
+  opacity: 1;
+}
+
+.hero__sub {
+  margin: 0;
+  width: 100%;
+  max-width: 58rem;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-muted);
+  text-wrap: pretty;
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero__sub .accent-italic {
+  color: var(--color-accent);
+  font-style: italic;
+  font-weight: 700;
+}
+
+html[data-theme="dark"] .hero__title {
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .hero__sub {
+  color: rgba(245, 242, 251, 0.82);
+}
+
+html[data-theme="light"] .hero__title,
+:root .hero__title {
+  color: #000000;
+}
+
+html[data-theme="light"] .hero__sub,
+:root .hero__sub {
+  color: #555555;
+}
+
+.hero__ctas {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0;
+  width: 100%;
+  max-width: 528px;
+  opacity: 1;
+  visibility: visible;
+  z-index: 4;
+}
+
+.hero__btn {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.09px;
+  line-height: 1.45;
+  padding: 12px 16px;
+  border-radius: 12px;
+  white-space: nowrap;
+  opacity: 1;
 }
 
 .hero__chip {
@@ -790,49 +916,6 @@ html[data-theme="dark"] .grad-purple {
   flex: 0 0 24px;
 }
 
-.hero__title {
-  margin: 0 auto;
-  max-width: 18ch;
-  font-size: var(--text-hero);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.05;
-  color: var(--color-heading);
-  text-wrap: balance;
-}
-
-.hero__sub {
-  margin: 24px auto 0;
-  max-width: 44rem;
-  font-size: var(--text-lg);
-  font-weight: 400;
-  line-height: 1.55;
-  color: var(--color-gray);
-  text-wrap: balance;
-}
-
-.hero__ctas {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 40px;
-}
-
-.hero__cta-shell {
-  padding: 3px;
-  border-radius: 14px;
-  border: 1px solid var(--color-border);
-  background: rgba(93, 98, 221, 0.18);
-}
-
-.hero__cta-shell .btn--purple {
-  border-radius: 12px;
-  padding: 14px 24px;
-  font-size: var(--text-md);
-}
-
 .hero__preview {
   width: 100%;
   margin-top: 56px;
@@ -898,11 +981,6 @@ html[data-theme="dark"] .grad-purple {
 
   .hero__stage {
     padding-top: 0;
-  }
-
-  .hero__ctas {
-    flex-direction: row;
-    margin-top: 48px;
   }
 
   .hero__preview {
@@ -1460,8 +1538,16 @@ html[data-theme="dark"] .stats::before {
 }
 
 @media (max-width: 1100px) {
-  .hero__title {
-    max-width: 14ch;
+  .hero__deco--money {
+    right: 24px;
+    top: -24px;
+    width: 96px;
+    height: 96px;
+  }
+
+  .hero__deco--money img {
+    width: 96px;
+    height: 96px;
   }
 }
 
@@ -1492,6 +1578,7 @@ html[data-theme="dark"] .stats::before {
   }
 
   .hero__deco--rocket,
+  .hero__deco--rocket-sm,
   .hero__deco--money-sm {
     display: none;
   }
@@ -1595,26 +1682,31 @@ html[data-theme="dark"] .stats::before {
 
   .hero__title {
     margin-top: 0;
-    max-width: 12ch;
+  }
+
+  .hero__content {
+    padding-top: 24px;
+    gap: 20px;
+  }
+
+  .hero__text {
+    gap: 16px;
   }
 
   .hero__sub {
-    margin-top: 18px;
+    font-size: 16px;
   }
 
   .hero__ctas {
     width: 100%;
-    margin-top: 28px;
-    gap: 8px;
+    max-width: 100%;
+    gap: 12px;
   }
 
-  .hero__cta-shell,
-  .hero__cta-shell .btn--purple,
-  .btn--mint {
+  .hero__btn {
+    font-size: 16px;
     width: 100%;
-  }
-
-  .btn--mint {
+    max-width: 280px;
     justify-content: center;
   }
 
@@ -1629,9 +1721,15 @@ html[data-theme="dark"] .stats::before {
 
   .hero__deco--money {
     right: 12px;
-    top: 0;
+    top: -8px;
     width: 72px;
-    opacity: 0.8;
+    height: 72px;
+    opacity: 0.85;
+  }
+
+  .hero__deco--money img {
+    width: 72px;
+    height: 72px;
   }
 
   .feature-cards {

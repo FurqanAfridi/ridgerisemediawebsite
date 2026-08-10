@@ -82,31 +82,6 @@ html[data-theme="dark"] .footer-sitemap__brand {
   color: var(--color-purple);
 }
 
-.footer-sitemap__admin {
-  color: var(--color-mint-grad-end) !important;
-  font-weight: 700 !important;
-}
-
-html[data-theme="dark"] .footer-sitemap__admin {
-  color: var(--color-mint) !important;
-}
-
-.footer-sitemap__admin:hover {
-  color: var(--color-mint-deep) !important;
-}
-
-.footer-sitemap__support {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-muted);
-}
-
-.footer-sitemap__support em {
-  font-style: normal;
-  font-weight: 700;
-  color: var(--color-purple);
-}
-
 @media (max-width: 960px) {
   .footer-sitemap {
     padding: 28px var(--page-pad) 24px;

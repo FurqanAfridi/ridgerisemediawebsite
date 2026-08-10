@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import { BouncyCardsFeatures } from "@/components/ui/bounce-card-features";
 import CTAWithVerticalMarquee from "@/components/ui/cta-with-text-marquee";
 import { StaggerTestimonials } from "@/components/ui/stagger-testimonials";
@@ -21,23 +20,19 @@ const roleBullets = [
   "Fast, reliable payouts (weekly, no chasing invoices)",
 ] as const;
 
-const heroItemVariants = {
+const heroPreviewVariants = {
   item: {
     hidden: {
-      opacity: 0,
-      filter: "blur(18px)",
-      y: 36,
-      scale: 0.94,
+      opacity: 1,
+      y: 24,
     },
     visible: {
       opacity: 1,
-      filter: "blur(0px)",
       y: 0,
-      scale: 1,
       transition: {
         type: "spring" as const,
-        bounce: 0.38,
-        duration: 1.35,
+        bounce: 0.28,
+        duration: 0.9,
       },
     },
   },
@@ -66,15 +61,32 @@ export default function HomePage() {
       <main className="home-main">
         <section className="hero">
           <div className="hero__stage">
-            <div className="parallax-wrap parallax--money-hero hero__deco hero__deco--money">
-              <img
-                className="float-bob"
-                src={assets.money}
-                alt=""
-                aria-hidden="true"
-              />
+            {/* Figma 1:330 — primary rocket, left */}
+            <div className="parallax-wrap parallax--rocket-hero hero__deco hero__deco--rocket">
+              <div className="hero__rocket-tilt">
+                <img
+                  className="float-bob"
+                  src={assets.rocket}
+                  alt=""
+                  aria-hidden="true"
+                />
+              </div>
             </div>
-            <div className="parallax-wrap parallax--money-hero-sm hero__deco hero__deco--money-sm">
+
+            {/* Figma 1:331 — secondary blurred rocket, right */}
+            <div className="parallax-wrap parallax--rocket-hero-sm hero__deco hero__deco--rocket-sm">
+              <div className="hero__rocket-tilt">
+                <img
+                  className="float-bob"
+                  src={assets.rocket}
+                  alt=""
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+
+            {/* Figma 1:327 — floating money, top-right */}
+            <div className="parallax-wrap parallax--money-hero hero__deco hero__deco--money">
               <img
                 className="float-bob"
                 src={assets.money}
@@ -84,7 +96,7 @@ export default function HomePage() {
             </div>
 
             <div className="hero__content">
-              <AnimatedGroup variants={heroItemVariants}>
+              <div className="hero__text">
                 <h1 className="hero__title">
                   Turn Every Call into{" "}
                   <span className="grad-mint">Revenue</span>
@@ -94,63 +106,23 @@ export default function HomePage() {
                   RidgeRise Media connects top{" "}
                   <em className="accent-italic">Publishers</em> with verified{" "}
                   <em className="accent-italic">Buyers</em> across Insurance,
-                  Home Services, Legal, and more. Real-time tracking, fast
-                  payouts, zero games.
+                  Home Services, Legal, and 12+ high-intent verticals. Real-time
+                  tracking, fast payouts, zero games.
                 </p>
-              </AnimatedGroup>
+              </div>
 
-              <AnimatedGroup
-                className="hero__ctas"
-                variants={{
-                  container: {
-                    visible: {
-                      transition: {
-                        staggerChildren: 0.08,
-                        delayChildren: 0.45,
-                      },
-                    },
-                  },
-                  ...heroItemVariants,
-                }}
-              >
+              <div className="hero__ctas">
                 <Magnetic strength={0.4}>
-                  <div className="hero__cta-shell">
-                    <Link to="/publishers" className="btn btn--purple">
-                      Signup as Publisher
-                    </Link>
-                  </div>
+                  <Link to="/publishers" className="btn btn--purple hero__btn">
+                    Signup as Publisher
+                  </Link>
                 </Magnetic>
                 <Magnetic strength={0.4}>
-                  <Link to="/buyers" className="btn btn--mint">
+                  <Link to="/buyers" className="btn btn--mint hero__btn">
                     Signup as Buyer
                   </Link>
                 </Magnetic>
-              </AnimatedGroup>
-
-              <AnimatedGroup
-                className="hero__chip-wrap"
-                variants={{
-                  container: {
-                    visible: {
-                      transition: {
-                        delayChildren: 0.7,
-                      },
-                    },
-                  },
-                  ...heroItemVariants,
-                }}
-              >
-                <Link to="/verticals" className="hero__chip">
-                  <span>Live transfers across 12+ high-intent verticals</span>
-                  <span className="hero__chip-sep" aria-hidden="true" />
-                  <span className="hero__chip-arrow" aria-hidden="true">
-                    <span className="hero__chip-arrow-track">
-                      <ArrowRight size={12} />
-                      <ArrowRight size={12} />
-                    </span>
-                  </span>
-                </Link>
-              </AnimatedGroup>
+              </div>
             </div>
 
             <AnimatedGroup
@@ -164,7 +136,7 @@ export default function HomePage() {
                     },
                   },
                 },
-                ...heroItemVariants,
+                ...heroPreviewVariants,
               }}
             >
               <div className="hero__preview-wrap">

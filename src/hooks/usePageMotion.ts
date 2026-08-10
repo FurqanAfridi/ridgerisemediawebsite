@@ -142,7 +142,8 @@ export function usePageMotion(
 
       [
         { sel: ".parallax--money-hero", y: -140, x: 55, rotate: 8 },
-        { sel: ".parallax--money-hero-sm", y: -110, x: 32, rotate: -6 },
+        { sel: ".parallax--rocket-hero", y: -90, x: -40, rotate: 6 },
+        { sel: ".parallax--rocket-hero-sm", y: -70, x: 28, rotate: -5 },
         { sel: ".parallax--money-cards", y: -120, x: 50, rotate: 10 },
         { sel: ".parallax--money-roles", y: -90, x: -40, rotate: -8 },
       ].forEach(({ sel, y, x, rotate }) => {

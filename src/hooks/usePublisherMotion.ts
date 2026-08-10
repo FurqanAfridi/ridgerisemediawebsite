@@ -78,7 +78,7 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
           "-=0.45",
         )
         .from(
-          [".pub-hero__money", ".pub-hero__orb"],
+          [".pub-hero__money", ".pub-hero__rocket", ".pub-hero__orb"],
           {
             scale: 0.5,
             opacity: 0,

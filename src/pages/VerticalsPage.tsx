@@ -98,16 +98,18 @@ function VerticalCard({ vertical }: { vertical: Vertical }) {
     <li>
       <article className="card-grid__item" id={vertical.slug}>
         <span className="card-grid__meta">{vertical.category}</span>
-        <h3>{vertical.name}</h3>
-        <p>{vertical.description}</p>
+        <h3>
+          <Link to={`/verticals/${vertical.slug}`}>{vertical.name}</Link>
+        </h3>
+        <p>{vertical.summary}</p>
         <p>
           <strong>Buyers:</strong> {vertical.buyerFit}
         </p>
         <p>
           <strong>Publishers:</strong> {vertical.publisherFit}
         </p>
-        <Link className="card-grid__link" to="/contact">
-          Inquire about {vertical.name} →
+        <Link className="card-grid__link" to={`/verticals/${vertical.slug}`}>
+          View {vertical.name} →
         </Link>
       </article>
     </li>

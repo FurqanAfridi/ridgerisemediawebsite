@@ -195,3 +195,7 @@ export const verticalCategories = [
   "Finance",
   "Other",
 ] as const;
+
+export function getVerticalBySlug(slug: string): Vertical | undefined {
+  return verticals.find((vertical) => vertical.slug === slug);
+}

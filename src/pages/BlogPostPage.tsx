@@ -24,6 +24,7 @@ export default function BlogPostPage() {
         path={`/blog/${post.slug}`}
         type="article"
         keywords={post.tags}
+        publishedTime={post.date}
       />
 
       <PageHero

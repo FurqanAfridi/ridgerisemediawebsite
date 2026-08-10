@@ -7,6 +7,7 @@ export const assets = {
   logoTextTop: "/assets/logo-text-top.svg",
   logoTextBottom: "/assets/logo-text-bottom.svg",
   logoDot: "/assets/logo-dot.svg",
+  ogDefault: "/assets/og-default.jpg",
   verticals: [
     "/assets/vertical-1.png",
     "/assets/vertical-2.png",

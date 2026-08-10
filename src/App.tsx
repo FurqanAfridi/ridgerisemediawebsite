@@ -10,6 +10,7 @@ import HomePage from "@/pages/HomePage";
 import PrivacyPage from "@/pages/PrivacyPage";
 import PublishersPage from "@/pages/PublishersPage";
 import TermsPage from "@/pages/TermsPage";
+import VerticalDetailPage from "@/pages/VerticalDetailPage";
 import VerticalsPage from "@/pages/VerticalsPage";
 import "./App.css";
 
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="publishers" element={<PublishersPage />} />
             <Route path="buyers" element={<BuyersPage />} />
             <Route path="verticals" element={<VerticalsPage />} />
+            <Route path="verticals/:slug" element={<VerticalDetailPage />} />
             <Route path="blog" element={<BlogPage />} />
             <Route path="blog/:slug" element={<BlogPostPage />} />
             <Route path="contact" element={<ContactPage />} />
