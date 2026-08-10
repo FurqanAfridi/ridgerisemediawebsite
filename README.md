@@ -35,17 +35,20 @@ On every push to `main` (and manual **Run workflow**), Actions:
 
 ### One-time GitHub secrets
 
-Repo → **Settings → Secrets and variables → Actions** → add:
+Add secrets in **both** places if you use the `production` environment (workflow does):
+
+1. Repo → **Settings → Secrets and variables → Actions → Repository secrets**
+2. Repo → **Settings → Environments → production → Environment secrets**
 
 | Secret | Example value |
 |--------|----------------|
 | `DEPLOY_HOST` | `207.244.228.170` |
 | `DEPLOY_USER` | `root` |
-| `DEPLOY_SSH_KEY` | Full private key PEM (including `BEGIN` / `END` lines) |
+| `DEPLOY_SSH_KEY_B64` | Base64 of the **private** key (preferred — avoids newline corruption) |
 | `DEPLOY_PORT` | `22` (optional) |
 | `DEPLOY_PATH` | `/var/www/ridgerisemedia` (optional) |
 
-Also create a GitHub **Environment** named `production` (workflow references it), or remove the `environment:` line from the workflow if you prefer not to use environments.
+`DEPLOY_SSH_KEY` (raw PEM) also works, but `DEPLOY_SSH_KEY_B64` is more reliable.
 
 ### Deploy key on the server
 
@@ -53,14 +56,22 @@ Also create a GitHub **Environment** named `production` (workflow references it)
 # On your laptop
 ssh-keygen -t ed25519 -C "gh-actions-ridgerise" -f ./ridgerise_deploy -N ""
 
-# Copy public key to the server
+# Install the PUBLIC key on the server (password auth once)
 ssh-copy-id -i ./ridgerise_deploy.pub root@207.244.228.170
 
-# Paste the PRIVATE key contents into GitHub secret DEPLOY_SSH_KEY
-cat ./ridgerise_deploy
+# Put the PRIVATE key into GitHub as base64 (macOS)
+base64 -i ./ridgerise_deploy | pbcopy
+# Linux: base64 -w0 ./ridgerise_deploy
+# Paste clipboard into secret name: DEPLOY_SSH_KEY_B64
 ```
 
-Ensure `/var/www/ridgerisemedia` exists and is writable by the deploy user:
+Verify the key works before re-running Actions:
+
+```bash
+ssh -i ./ridgerise_deploy root@207.244.228.170 'echo ok && ls /var/www/ridgerisemedia'
+```
+
+Ensure the web root exists:
 
 ```bash
 mkdir -p /var/www/ridgerisemedia

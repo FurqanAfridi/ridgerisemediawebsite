@@ -57,16 +57,47 @@ jobs:
       - name: Configure SSH
         env:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_SSH_KEY_B64: ${{ secrets.DEPLOY_SSH_KEY_B64 }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
         run: |
           set -euo pipefail
-          test -n "${DEPLOY_SSH_KEY}" || { echo "Missing secret: DEPLOY_SSH_KEY"; exit 1; }
           test -n "${DEPLOY_HOST}" || { echo "Missing secret: DEPLOY_HOST"; exit 1; }
+          if [ -z "${DEPLOY_SSH_KEY:-}" ] && [ -z "${DEPLOY_SSH_KEY_B64:-}" ]; then
+            echo "Missing secret: set DEPLOY_SSH_KEY_B64 (preferred) or DEPLOY_SSH_KEY"
+            exit 1
+          fi
+
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+
+          # Prefer base64 — GitHub secrets often break PEM newlines and cause libcrypto errors.
+          if [ -n "${DEPLOY_SSH_KEY_B64:-}" ]; then
+            echo "$DEPLOY_SSH_KEY_B64" | tr -d '\n\r\t ' | base64 -d > ~/.ssh/deploy_key
+          else
+            KEY="$DEPLOY_SSH_KEY"
+            # If pasted with literal \n sequences, expand them.
+            if printf '%s' "$KEY" | grep -q '\\n'; then
+              KEY="$(printf '%b' "$KEY")"
+            fi
+            printf '%s\n' "$KEY" > ~/.ssh/deploy_key
+          fi
+
+          # Normalize line endings / ensure trailing newline
+          tr -d '\r' < ~/.ssh/deploy_key > ~/.ssh/deploy_key.tmp
+          mv ~/.ssh/deploy_key.tmp ~/.ssh/deploy_key
+          [ -n "$(tail -c1 ~/.ssh/deploy_key)" ] && echo >> ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
+
+          if ! ssh-keygen -y -f ~/.ssh/deploy_key >/dev/null 2>&1; then
+            echo "DEPLOY_SSH_KEY is invalid (libcrypto / bad PEM)."
+            echo "Regenerate and store as base64:"
+            echo "  ssh-keygen -t ed25519 -C gh-actions-ridgerise -f ./ridgerise_deploy -N ''"
+            echo "  ssh-copy-id -i ./ridgerise_deploy.pub root@YOUR_HOST"
+            echo "  base64 -i ./ridgerise_deploy | pbcopy   # macOS — paste into DEPLOY_SSH_KEY_B64"
+            exit 1
+          fi
+
           ssh-keyscan -p "${DEPLOY_PORT:-22}" -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
 
       - name: Sync dist to /var/www/ridgerisemedia
