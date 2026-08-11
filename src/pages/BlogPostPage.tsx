@@ -79,12 +79,12 @@ export default function BlogPostPage() {
         <div className="cta-band__inner">
           <h2>Put these ideas to work</h2>
           <p>
-            Join RidgeRise as a publisher or buyer and scale compliant
-            pay-per-call campaigns.
+            Tell us what a qualified call looks like for your intake team, or
+            apply as a partner if you monetize call traffic.
           </p>
           <div className="cta-band__actions">
             <Link to="/contact" className="btn btn--purple">
-              Get started
+              Discuss a campaign
             </Link>
             <Link to="/blog" className="btn btn--mint">
               Back to blog

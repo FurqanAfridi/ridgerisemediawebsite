@@ -24,20 +24,20 @@ export default function ContactPage() {
     <main>
       <Seo
         title="Contact RidgeRise Media"
-        description="Contact RidgeRise Media to apply as a publisher, buy pay-per-call traffic, or ask about Insurance, Legal, Home Services, and Finance campaigns."
+        description="Talk to RidgeRise about buying qualified inbound calls, leads, or traffic on CPL or cost per call — or apply as a publisher partner."
         path="/contact"
-        keywords={["contact RidgeRise Media", "apply publisher", "buy call leads"]}
+        keywords={["contact RidgeRise Media", "buy pay per call", "apply publisher"]}
       />
 
       <PageHero
         eyebrow="Contact"
         title={
           <>
-            Let&apos;s match you to the right{" "}
-            <span className="grad-mint">campaigns</span>
+            Tell us what you need{" "}
+            <span className="grad-mint">on the phone</span>
           </>
         }
-        description={`Tell us whether you buy or sell calls. Email ${site.email} or use the form — we typically respond within one business day.`}
+        description={`Buyers: vertical, states, hours, and what a qualified call looks like. Publishers: traffic type and verticals. Email ${site.email} or use the form — we usually reply within one business day.`}
       />
 
       <section className="inner-section">
@@ -45,8 +45,8 @@ export default function ContactPage() {
           <div className="contact-success">
             <h2>Thanks — we got your note.</h2>
             <p className="inner-section__sub" style={{ margin: 0 }}>
-              Our team will review your details and follow up shortly. Prefer to
-              reach us now? Email{" "}
+              Someone on the team will review what you sent and follow up. Need
+              us sooner? Email{" "}
               <a href={`mailto:${site.email}`}>{site.email}</a> or call{" "}
               <a href={site.phoneHref}>{site.phone}</a>.
             </p>
@@ -83,7 +83,7 @@ export default function ContactPage() {
               <input
                 name="verticals"
                 type="text"
-                placeholder="Auto Insurance, Solar, Legal…"
+                placeholder="Auto Insurance, Solar, Personal Injury…"
               />
             </label>
             <label>
@@ -91,7 +91,11 @@ export default function ContactPage() {
               <textarea
                 name="message"
                 required
-                placeholder={`I'm a ${roleLabel.toLowerCase()} looking to…`}
+                placeholder={
+                  defaultRole === "buyer"
+                    ? "Buyer: vertical, states, hours, and how you define a qualified call…"
+                    : `Publisher: traffic type and verticals — or describe what you're looking for as a ${roleLabel.toLowerCase()}…`
+                }
               />
             </label>
             <button type="submit" className="btn btn--purple">

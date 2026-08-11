@@ -71,7 +71,7 @@ export function SiteHeader() {
                   className="header__btn header__btn--solid header__btn--compact"
                   onClick={() => setMenuOpen(false)}
                 >
-                  Get Started
+                  Talk to our team
                 </Link>
                 <button
                   type="button"
@@ -155,7 +155,7 @@ export function SiteHeader() {
                   className="header__btn header__btn--solid header__btn--get-started header__btn--desktop-only"
                   onClick={() => setMenuOpen(false)}
                 >
-                  Get Started
+                  Talk to our team
                 </Link>
               </div>
             </div>

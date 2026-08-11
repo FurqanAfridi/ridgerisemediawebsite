@@ -28,7 +28,7 @@ export default function VerticalDetailPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `${vertical.name} Pay-Per-Call`,
+    name: `${vertical.name} Pay Per Call & Leads`,
     description: vertical.description,
     url: `${site.url}/verticals/${vertical.slug}`,
     provider: {
@@ -44,7 +44,7 @@ export default function VerticalDetailPage() {
   return (
     <main>
       <Seo
-        title={`${vertical.name} Pay-Per-Call`}
+        title={`${vertical.name} Pay Per Call & Leads`}
         description={vertical.description}
         path={`/verticals/${vertical.slug}`}
         keywords={vertical.keywords}
@@ -56,12 +56,12 @@ export default function VerticalDetailPage() {
         title={
           <>
             {vertical.name}{" "}
-            <span className="grad-mint">pay-per-call</span>
+            <span className="grad-mint">pay per call & leads</span>
           </>
         }
         description={vertical.summary}
-        primaryCta={{ label: "Buy this vertical", to: "/buyers" }}
-        secondaryCta={{ label: "Sell this vertical", to: "/publishers" }}
+        primaryCta={{ label: "Discuss a campaign", to: "/buyers" }}
+        secondaryCta={{ label: "Apply as a partner", to: "/publishers" }}
       />
 
       <section className="inner-section">
@@ -84,7 +84,8 @@ export default function VerticalDetailPage() {
         <div className="inner-section__head">
           <h2 className="inner-section__title">Related verticals</h2>
           <p className="inner-section__sub">
-            Explore more high-intent categories in {vertical.category}.
+            More {vertical.category} categories where we place calls, leads, and
+            traffic.
           </p>
         </div>
         <ul className="card-grid">
@@ -106,14 +107,14 @@ export default function VerticalDetailPage() {
 
       <section className="cta-band">
         <div className="cta-band__inner">
-          <h2>Ready for {vertical.name} volume?</h2>
+          <h2>Need {vertical.name} calls or leads?</h2>
           <p>
-            Tell us whether you buy or sell calls and we will match you with
-            RidgeRise campaigns fast.
+            Tell us your states, hours, and how you define a qualified call —
+            we&apos;ll talk CPL, cost per call, or traffic into your funnel.
           </p>
           <div className="cta-band__actions">
-            <Link to="/contact" className="btn btn--purple">
-              Get matched
+            <Link to="/contact?role=buyer" className="btn btn--purple">
+              Tell us what a qualified call looks like
             </Link>
             <Link to="/verticals" className="btn btn--mint">
               All verticals

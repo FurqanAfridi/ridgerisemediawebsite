@@ -61,14 +61,14 @@ export default function VerticalsPage() {
   return (
     <main>
       <Seo
-        title="Pay-Per-Call Verticals"
-        description="Explore RidgeRise Media pay-per-call verticals: Auto Insurance, Health, Life, Medicare, Legal, Solar, HVAC, Debt Settlement, Mortgage, and more high-intent categories."
+        title="Pay Per Call & Lead Generation Verticals"
+        description="Browse RidgeRise verticals where buyer demand and campaign supply meet — Insurance, Legal, Home Services, Finance, and more on CPL and cost per call."
         path="/verticals"
         keywords={[
           "pay per call verticals",
           "insurance pay per call",
           "legal call leads",
-          "home services PPC",
+          "home services leads",
         ]}
       />
 
@@ -76,13 +76,13 @@ export default function VerticalsPage() {
         eyebrow="Verticals"
         title={
           <>
-            One platform. Every high-intent{" "}
-            <span className="grad-mint">vertical</span>.
+            Where buyer demand meets{" "}
+            <span className="grad-mint">campaign supply</span>
           </>
         }
-        description="Insurance is our specialty — and our network runs deep across Legal, Home Services, Finance, Education, and more. Buy or sell calls where intent is highest."
-        primaryCta={{ label: "Buy Call Traffic", to: "/buyers" }}
-        secondaryCta={{ label: "Sell Call Traffic", to: "/publishers" }}
+        description="These are the categories we run and fill: qualified inbound calls, leads, and traffic on CPL and cost-per-call. Insurance is the core. Legal, Home Services, and Finance sit alongside it."
+        primaryCta={{ label: "Discuss a campaign", to: "/buyers" }}
+        secondaryCta={{ label: "Apply as a partner", to: "/publishers" }}
       />
 
       <section className="inner-section">
@@ -115,17 +115,17 @@ export default function VerticalsPage() {
 
       <section className="cta-band">
         <div className="cta-band__inner">
-          <h2>Which verticals do you buy or sell?</h2>
+          <h2>Which verticals do you need filled?</h2>
           <p>
-            Tell us your focus and we will match you with RidgeRise campaigns
-            fast.
+            Tell us your category, geos, and what a qualified call looks like —
+            or which verticals you want to monetize as a partner.
           </p>
           <div className="cta-band__actions">
             <Link to="/contact" className="btn btn--purple">
-              Get matched
+              Talk to our team
             </Link>
             <Link to="/blog" className="btn btn--mint">
-              Learn on the blog
+              Read the blog
             </Link>
           </div>
         </div>

@@ -8,13 +8,14 @@ export default function BlogPage() {
   return (
     <main>
       <Seo
-        title="Pay-Per-Call Blog"
-        description="Guides and insights on pay-per-call marketing, insurance call campaigns, publisher payouts, buyer call quality, and compliance from RidgeRise Media."
+        title="Pay-Per-Call Blog for Buyers"
+        description="Buyer-first guides on buying calls and leads, call quality, insurance and home services campaigns, compliance, and how pay per call works."
         path="/blog"
         keywords={[
           "pay per call blog",
-          "call marketing tips",
-          "insurance PPC guides",
+          "buy inbound calls",
+          "call quality",
+          "insurance pay per call",
         ]}
       />
 
@@ -22,11 +23,11 @@ export default function BlogPage() {
         eyebrow="Blog"
         title={
           <>
-            Insights for publishers &amp;{" "}
-            <span className="grad-mint">buyers</span>
+            Insights for buyers &amp;{" "}
+            <span className="grad-mint">partners</span>
           </>
         }
-        description="Practical guides on pay-per-call strategy, vertical performance, compliance, and scaling call revenue with RidgeRise Media."
+        description="Practical guides on buying qualified calls and leads, vertical filters, compliance-conscious campaigns, and call quality—written for intake and media teams."
       />
 
       <section className="inner-section">
@@ -50,8 +51,8 @@ export default function BlogPage() {
         <div className="cta-band__inner">
           <h2>Want to put this into practice?</h2>
           <p>
-            Talk to RidgeRise about publisher campaigns or buyer traffic across
-            high-intent verticals.
+            Discuss a campaign for your vertical, or apply as a partner if you
+            have call traffic to monetize.
           </p>
           <div className="cta-band__actions">
             <Link to="/contact" className="btn btn--purple">

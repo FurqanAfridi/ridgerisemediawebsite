@@ -1,0 +1,46 @@
+---
+description: Writing voice and anti-AI-detection rules for all RidgeRise Media copy — pages, blog, verticals, meta.
+globs: src/pages/**/*.tsx, src/data/**/*.ts, index.html
+alwaysApply: false
+---
+
+# Voice — write like an operator, not a model
+
+RidgeRise copy must read like it was written by someone who has actually run call campaigns: bought media, listened to call recordings, argued with buyers about duration rules, chased quality on a bad traffic source. That lived-in specificity is the entire anti-AI strategy.
+
+## Voice profile
+
+Confident, direct, commercially blunt, American English. A media buyer or insurance intake manager should read it and think "these people do this every day." Not corporate, not salesy, not academic.
+
+## Hard-banned words & phrases (never use, anywhere, including meta)
+
+leverage, unlock, unleash, seamless, seamlessly, robust, cutting-edge, revolutionary, game-changing, next-generation, supercharge, skyrocket, elevate, empower, transform your, unparalleled, unprecedented, holistic, synergy, best-in-class, world-class, state-of-the-art, "in today's digital landscape", "in today's competitive market", "in the ever-evolving world of", "look no further", "whether you're a small business or", "at the end of the day", "it's important to note", "delve", "dive into", "navigate the complexities", "landscape" (as metaphor), "journey" (as metaphor), "tailored solutions", "comprehensive suite", "we understand that".
+
+## Structural AI tells to avoid
+
+- No paragraph triads (three parallel sentences in a row) and no "Not X. Not Y. Just Z." constructions.
+- No sentence that starts with "From ... to ...".
+- No em-dash chains; max one em dash per paragraph.
+- No colon-headline pattern everywhere ("Quality: our promise"). Headings should be plain statements or questions buyers actually have.
+- Don't open sections with a definition ("Pay per call is a model where..."). Open with a situation, a number the reader cares about, a decision they're facing, or a direct claim.
+- Don't summarize what you just said. No "In conclusion", "Overall", "Ultimately" closers.
+- Vary sentence length hard: some 4-word sentences. Some that run longer because the thought needs it. Reading rhythm should be uneven, like speech.
+- It's fine to start sentences with And, But, So. It's fine to use fragments occasionally.
+- Use contractions (you're, we'll, doesn't) in body copy. Skip them in meta titles.
+
+## Specificity rules (what makes copy human)
+
+- Prefer concrete industry mechanics over adjectives: duration thresholds, business-hours routing, geo filters, exclusive vs shared calls, buffer times, IVR qualification, concurrency caps, dispositions, chargeback windows. Mention mechanics generically without inventing our specific numbers.
+- One page = one reader. Buyer pages talk TO a buyer ("your intake team", "your cost per acquisition"), not ABOUT buyers in third person.
+- Every claim must survive the question "how?". "High-quality calls" is banned unless the next sentence explains how quality is enforced (qualification before transfer, duration rules, recording review, source-level cutoffs).
+- Swap test: if you could replace "RidgeRise Media" with any competitor and the sentence still works, rewrite it.
+
+## CTAs
+
+Buyer CTAs: "Discuss a campaign", "Tell us what a qualified call looks like for you", "Get vertical pricing", "Talk to our team".
+Publisher CTAs: "Apply as a partner", "See open campaigns", "Partner with RidgeRise".
+Banned CTAs: "Buy calls now", "Get cheap leads", "Guaranteed customers", "Get started today!" with exclamation marks.
+
+## Length discipline
+
+Say it once, say it plainly, stop. If a section can be 60 words, don't write 150. Cut any sentence that adds no information, trust, or SEO relevance.

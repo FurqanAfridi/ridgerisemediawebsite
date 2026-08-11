@@ -3,8 +3,8 @@ import { site } from "@/data/site";
 import "./footer-sitemap.css";
 
 const platformLinks = [
-  { label: "Buy Live Calls", to: "/buyers" },
-  { label: "Sell Live Calls", to: "/publishers" },
+  { label: "Buy Calls & Leads", to: "/buyers" },
+  { label: "Partner as a Publisher", to: "/publishers" },
   { label: "How It Works", to: "/about" },
   { label: "Verticals", to: "/verticals" },
   { label: "About Us", to: "/about" },
@@ -39,11 +39,12 @@ export function FooterSitemap() {
         <div className="footer-sitemap__col footer-sitemap__col--brand">
           <p className="footer-sitemap__brand">{site.name}</p>
           <p className="footer-sitemap__desc">
-            Pay-per-call network connecting publishers with verified buyers
-            across high-intent verticals.
+            Performance marketing for advertisers: qualified inbound calls,
+            leads, and traffic on CPL and cost-per-call models.
           </p>
           <p className="footer-sitemap__note">
-            Compliance-first live routing with real-time call tracking.
+            In-house media buying plus a vetted partner network, with
+            compliance-conscious, call-level tracking.
           </p>
         </div>
 

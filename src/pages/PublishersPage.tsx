@@ -24,38 +24,38 @@ import "./publishers.css";
 
 const benefits = [
   {
-    title: "Exclusive buyer campaigns",
-    body: "High-payout offers across Insurance, Legal, Home Services, and Finance — matched to your traffic.",
+    title: "Live buyer demand",
+    body: "Open campaigns across Insurance, Legal, Home Services, Finance, and Education — matched to traffic you already run.",
     icon: Layers3,
     tone: "violet",
   },
   {
-    title: "Live call dashboard",
-    body: "Watch every transfer, duration rule, and earning event in real time. No mystery deductions.",
+    title: "Call-level tracking",
+    body: "See transfers, duration rules, and billable events in real time. No mystery deductions.",
     icon: Gauge,
     tone: "mint",
   },
   {
-    title: "Weekly payout rhythm",
-    body: "Predictable cash flow so you can scale inventory without chasing invoices.",
+    title: "Clear payout terms",
+    body: "Rates, caps, and billable rules upfront. We pay what we agree; schedule confirmed when you onboard.",
     icon: Wallet,
     tone: "amber",
   },
   {
-    title: "Compliance-first launch",
-    body: "Campaigns reviewed against TCPA, DNC, and vertical rules before your traffic goes live.",
+    title: "Quality standards that stick",
+    body: "TCPA-aware setup, campaign consent rules, and source expectations before your traffic goes live.",
     icon: ShieldCheck,
     tone: "rose",
   },
   {
-    title: "Fast buyer matching",
-    body: "We connect quality publishers with verified demand in days — not weeks of waiting.",
+    title: "Selective partner review",
+    body: "We don't take every applicant. Fit, traffic type, and vertical experience matter.",
     icon: Zap,
     tone: "violet",
   },
   {
-    title: "Quality that sticks",
-    body: "Clear filters and transparent reporting keep accounts healthy as you scale volume.",
+    title: "Healthy accounts at scale",
+    body: "Filters and reporting keep you aligned with buyer quality so volume doesn't burn the offer.",
     icon: BadgeCheck,
     tone: "mint",
   },
@@ -65,21 +65,21 @@ const steps = [
   {
     num: "01",
     title: "Apply with your sources",
-    body: "Share traffic types, geos, and vertical experience. We review for fit and compliance readiness.",
+    body: "Tell us traffic types, geos, and verticals. We review for fit and compliance readiness.",
     icon: UserPlus,
     tone: "violet",
   },
   {
     num: "02",
-    title: "Get matched to campaigns",
-    body: "Access exclusive buyer offers with clear payout terms, caps, and tracking from day one.",
+    title: "Get matched to live demand",
+    body: "Approved partners see open buyer campaigns with payout terms, caps, and tracking from day one.",
     icon: FileCheck2,
     tone: "mint",
   },
   {
     num: "03",
     title: "Launch, track, get paid",
-    body: "Optimize live paths in the dashboard and cash out on a reliable weekly payout cycle.",
+    body: "Optimize paths that convert. Pause what fails quality. Payouts follow the terms we set together.",
     icon: Wallet,
     tone: "amber",
   },
@@ -95,10 +95,10 @@ const sources = [
 ] as const;
 
 const payoutStats = [
-  { value: "24-48hr", label: "Payout cycle", count: null, suffix: "" },
-  { value: "500K+", label: "Calls routed / yr", count: "500", suffix: "K+" },
-  { value: "30+", label: "Live verticals", count: "30", suffix: "+" },
-  { value: "98%", label: "Quality match", count: "98", suffix: "%" },
+  { value: "Live", label: "Buyer demand open", count: null, suffix: "" },
+  { value: "Tracked", label: "Call-level reporting", count: null, suffix: "" },
+  { value: "Clear", label: "Payout terms upfront", count: null, suffix: "" },
+  { value: "Vetted", label: "Partner review required", count: null, suffix: "" },
 ] as const;
 
 export default function PublishersPage() {
@@ -108,13 +108,13 @@ export default function PublishersPage() {
   return (
     <main className="pub-page" ref={rootRef}>
       <Seo
-        title="Publishers — Monetize Pay-Per-Call Traffic"
-        description="Join RidgeRise Media as a publisher. Access exclusive pay-per-call campaigns, real-time tracking, and reliable weekly payouts across Insurance, Legal, Home Services, and Finance."
+        title="Pay Per Call Network for Publishers"
+        description="Monetize call traffic with RidgeRise Media. Live buyer demand, quality standards, call-level tracking, and clear payout terms. Apply as a partner."
         path="/publishers"
         keywords={[
+          "pay per call network for publishers",
+          "monetize call traffic",
           "pay per call publishers",
-          "affiliate pay per call",
-          "publisher payouts",
           "call transfer network",
         ]}
       />
@@ -125,20 +125,21 @@ export default function PublishersPage() {
         <div className="pub-hero__copy pub-reveal">
           <p className="page-hero__eyebrow">Publishers</p>
           <h1 className="pub-hero__title">
-            You drive the traffic.
+            Monetize call traffic against
             <br />
-            We drive the <span className="grad-mint">payout</span>.
+            live <span className="grad-mint">buyer demand</span>
           </h1>
           <p className="pub-hero__desc">
-            Monetize high-intent callers with exclusive buyer campaigns, live
-            tracking, and weekly payouts across Insurance and 30+ PPC verticals.
+            Selective partner program for publishers and media buyers who can
+            deliver qualified callers — with tracking and payout terms that stay
+            clear.
           </p>
           <div className="page-hero__ctas">
             <Link to="/contact?role=publisher" className="btn btn--purple">
-              Apply as Publisher
+              Apply as a partner
             </Link>
             <Link to="/verticals" className="btn btn--mint">
-              Browse Verticals
+              See open verticals
             </Link>
           </div>
         </div>
@@ -190,16 +191,17 @@ export default function PublishersPage() {
           />
         </div>
         <div className="pub-split__copy pub-reveal-right">
-          <p className="page-hero__eyebrow">Cash flow</p>
-          <h2>Payouts you can plan around</h2>
+          <p className="page-hero__eyebrow">Payouts</p>
+          <h2>Terms you can plan around</h2>
           <p>
-            Weekly publisher payouts, transparent call rules, and a live earnings
-            view — so scaling traffic never means guessing when you get paid.
+            Billable rules, caps, and rates are written before you push volume.
+            You see what converted. You get paid what we agreed. Ask for the
+            current payout schedule when you apply.
           </p>
           <ul className="pub-checklist">
-            <li>Clear duration and conversion rules</li>
+            <li>Duration and conversion rules in writing</li>
             <li>No black-box deductions</li>
-            <li>Reliable 24–48hr payout cycles</li>
+            <li>Payout schedule confirmed at onboarding</li>
           </ul>
         </div>
       </section>
@@ -218,11 +220,11 @@ export default function PublishersPage() {
           />
         </div>
         <div className="pub-split__copy pub-reveal-left">
-          <p className="page-hero__eyebrow">Visibility</p>
-          <h2>Every call. Every dollar. Live.</h2>
+          <p className="page-hero__eyebrow">Tracking</p>
+          <h2>Every transfer. Every billable event.</h2>
           <p>
-            Watch transfers land in real time. Optimize paths that convert and
-            pause what does not — with the same clarity buyers see on quality.
+            Watch calls land live. Keep paths that hold duration and disposition.
+            Kill sources that fail quality before they burn your account.
           </p>
           <ul className="pub-checklist">
             <li>Live transfer and duration tracking</li>
@@ -235,10 +237,10 @@ export default function PublishersPage() {
       {/* ——— Benefit mosaic ——— */}
       <section className="pub-benefits">
         <div className="pub-benefits__head pub-reveal">
-          <h2>Why publishers choose RidgeRise</h2>
+          <h2>Why partners stay with RidgeRise</h2>
           <p>
-            Visual tools, vertical depth, and compliance support — built for
-            affiliates, media buyers, and call-path operators.
+            For publishers, media buyers, and call-path operators who want buyer
+            demand without guessing on quality or pay.
           </p>
         </div>
         <ul className="pub-benefits__grid">
@@ -263,11 +265,11 @@ export default function PublishersPage() {
       {/* ——— Visual steps ——— */}
       <section className="pub-steps">
         <div className="pub-steps__head pub-reveal">
-          <p className="page-hero__eyebrow">Get started</p>
-          <h2>Three steps to live payouts</h2>
+          <p className="page-hero__eyebrow">Partner path</p>
+          <h2>Three steps to live campaigns</h2>
           <p>
-            A clear path from application to live campaigns — with tracking and
-            payouts built in from day one.
+            Apply, get reviewed, then run against open buyer demand with tracking
+            already wired.
           </p>
         </div>
         <ol className="pub-steps__list">
@@ -297,10 +299,10 @@ export default function PublishersPage() {
       {/* ——— Traffic sources gallery ——— */}
       <section className="pub-sources">
         <div className="pub-sources__head pub-reveal">
-          <h2>Bring the traffic you already run</h2>
+          <h2>Traffic types we work with</h2>
           <p>
             Search, social, native, email, owned media, or dedicated call paths —
-            if intent converts on phone, we can help you monetize it.
+            if the caller is qualified for the offer, we want to talk.
           </p>
         </div>
         <ul className="pub-sources__grid">
@@ -323,17 +325,17 @@ export default function PublishersPage() {
       <section className="pub-cta">
         <div className="pub-cta__glow" aria-hidden="true" />
         <div className="pub-cta__panel pub-reveal">
-          <h2>Start monetizing calls this week</h2>
+          <h2>Apply as a RidgeRise partner</h2>
           <p>
-            Apply as a publisher and get matched to high-payout RidgeRise
-            campaigns across Insurance and beyond.
+            Share your traffic type and verticals. If there's fit, we'll match
+            you to live buyer campaigns and confirm payout terms.
           </p>
           <div className="page-hero__ctas">
             <Link to="/contact?role=publisher" className="btn btn--purple">
-              Apply now
+              Apply as a partner
             </Link>
             <Link to="/buyers" className="btn btn--mint">
-              I am a buyer
+              I buy calls & leads
             </Link>
           </div>
         </div>

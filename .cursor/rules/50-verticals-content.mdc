@@ -1,0 +1,40 @@
+---
+description: Rules for vertical copy in src/data/verticals.ts and vertical pages — buyer-first, vertical-specific, no clones.
+globs: src/data/verticals.ts, src/pages/VerticalsPage.tsx, src/pages/VerticalDetailPage.tsx
+alwaysApply: false
+---
+
+# Vertical content rules
+
+Keep the `Vertical` type, slugs, and category taxonomy (Insurance | Legal | Home Services | Finance | Other) exactly as they are. Rewrite values only.
+
+## Buyer-first weighting
+
+`description` and `summary` speak to the BUYER first: what demand exists, who's calling, why intent is high, what filters/models are available (CPL, cost per call, traffic). `publisherFit` stays one tight sentence — that's the 20%.
+
+## Anti-clone rule (critical)
+
+Every vertical must contain at least two facts that are true ONLY for that vertical — otherwise it's a find-and-replace page and Google treats it as thin. Examples of vertical-specific angles:
+
+- Auto insurance: continuous shopping behavior, rate-increase-driven switching, state minimum coverage differences
+- Health insurance: open enrollment vs SEP timing, ACA vs short-term product split, licensing constraints on buyers
+- Medicare Advantage: AEP/OEP seasonality, CMS marketing rules shaping creative and routing
+- Final expense: older demographic, phone-first buyers, smaller policies but fast decisions
+- Personal injury / mass tort: case-type qualification (statute of limitations, injury type, retained-attorney screening), high value per signed case
+- Debt settlement / tax relief: minimum debt thresholds as the core qualifier
+- Solar / roofing / HVAC: geo-dependence, homeownership qualification, storm/season demand spikes
+- Mortgage: rate-environment sensitivity, purchase vs refi intent split
+
+Never invent RidgeRise-specific volumes, payouts, or conversion rates for any vertical.
+
+## Field style
+
+- `summary`: ≤ 12 words, the caller's intent in plain language.
+- `description`: 1–3 sentences — who is calling, why now, what a buyer can filter on.
+- `buyerFit`: name the actual buyer types (carriers, agencies, IMOs, intake teams, law firms, contractors, call centers).
+- `publisherFit`: the traffic types that get approved (search, native, social, SEO/content, call paths).
+- `keywords`: 2–4 phrases with buying intent for that vertical ("buy auto insurance calls", "final expense live transfers") — not generic informational terms.
+
+## Detail page SEO
+
+Title pattern: "{Name} Pay Per Call & Leads" or "{Name} Calls for {buyer type}" (Seo component appends the brand). Description mentions both CPL and cost-per-call availability when true for the vertical.

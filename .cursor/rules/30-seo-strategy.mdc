@@ -1,0 +1,49 @@
+---
+description: SEO strategy — buyer-first keyword targeting, page ownership map for actual routes, intent rules, internal linking.
+globs: src/pages/**/*.tsx, src/data/**/*.ts, src/components/Seo.tsx, public/sitemap.xml, index.html
+alwaysApply: false
+---
+
+# SEO Strategy — buyer-intent first
+
+80% of SEO effort targets what BUYERS search when they want to purchase calls, leads, or traffic. 20% targets publisher/monetization queries.
+
+## Buyer-intent keyword families (primary)
+
+- Transactional: "buy [vertical] calls", "buy [vertical] leads", "[vertical] live transfers", "[vertical] pay per call", "exclusive [vertical] leads", "[vertical] inbound calls for [agents/law firms/contractors]"
+- Model-based: "pay per call network", "cost per call marketing", "CPL lead generation", "pay per call for advertisers", "call generation company", "lead generation company for [vertical]"
+- Problem-based: "[vertical] lead quality", "calls vs web leads", "how to buy insurance calls", "pay per call pricing", "shared vs exclusive calls"
+- Traffic supply: "buy qualified traffic", "performance traffic for [vertical]"
+
+## Publisher-intent families (secondary, ~20%)
+
+"pay per call offers", "pay per call networks for publishers", "monetize call traffic", "[vertical] pay per call payout", "call affiliate programs".
+
+## Page ownership map (actual routes — no cannibalization)
+
+| Route | Primary concept it owns |
+| --- | --- |
+| `/` | pay per call network + performance lead generation (brand + category, buyer-slanted) |
+| `/buyers` | buy qualified calls & leads / pay per call for advertisers / CPL + cost-per-call models |
+| `/publishers` | pay per call network for publishers / monetize call traffic |
+| `/verticals` | pay per call & lead generation verticals (hub) |
+| `/verticals/:slug` | "[vertical] pay per call / [vertical] calls & leads" — buyer intent first |
+| `/about` | brand trust; no head-keyword targeting |
+| `/blog` posts | long-tail informational + commercial-investigation queries |
+
+One primary concept per page. Blog posts must not target a page's primary keyword head-on; they target long-tail variants and link up to the owning page.
+
+## Intent > volume
+
+Rank ideas by: business relevance → buying intent → realistic ranking chance → conversion potential. A 50-search/month "buy final expense calls" query beats a 5,000-search informational query. When browsing is available, check live SERPs before locking a title; match the dominant intent on page one.
+
+## Internal linking (do on every rewrite)
+
+- Every vertical page links to `/buyers` and 1–2 related verticals (same category).
+- Every blog post links to its matching vertical page(s) and either `/buyers` (default) or `/publishers` (publisher posts only).
+- `/buyers` links to top verticals. `/publishers` links to `/verticals`.
+- Anchor text = natural descriptive phrases, never "click here", never exact-match-stuffed.
+
+## E-E-A-T signals to build into copy
+
+Operational detail (how quality is monitored, how routing works), honest limitations (what affects call quality, why some verticals are seasonal), clear pricing-model explanations, and a named point of contact/next step. No fake reviews, fake stats, or fake authors.

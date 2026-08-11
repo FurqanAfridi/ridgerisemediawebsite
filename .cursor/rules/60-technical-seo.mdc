@@ -1,0 +1,32 @@
+---
+description: Technical SEO — Seo component usage, meta patterns, JSON-LD, sitemap, canonicals for RidgeRise pages.
+globs: src/pages/**/*.tsx, src/components/Seo.tsx, index.html, public/sitemap.xml, public/robots.txt
+alwaysApply: false
+---
+
+# Technical SEO
+
+Every routable page uses `<Seo />` from `@/components/Seo` with unique `title`, `description`, and a `path` that exactly matches the live route. The component appends "| RidgeRise Media" — don't add the brand manually.
+
+## Meta patterns
+
+- Titles ≤ ~60 chars before the brand suffix. Lead with the page's owned keyword concept (see 30-seo-strategy), follow with the buyer benefit. Example shapes: "Buy Qualified Insurance Calls & Leads", "Auto Insurance Pay Per Call for Agencies".
+- Descriptions 140–160 chars, one concrete promise, mention CPL / pay-per-call where relevant, end with an implicit next step. No keyword stuffing, no exclamation marks.
+- Home + `/buyers` meta lean buyer (calls, leads, traffic, CPL, cost per call). Only `/publishers` meta leans publisher.
+- `keywords` prop: only phrases that literally appear on the page (vertical keywords, blog tags). Never long invented lists.
+- Blog posts: `type="article"`, `publishedTime` from `post.date`, keywords from `post.tags`.
+
+## Structured data
+
+- Organization + WebSite JSON-LD comes from the Seo defaults — don't duplicate it per page.
+- Add page-level `jsonLd` only where it earns a rich result: `FAQPage` on pages with visible FAQs, `Article` extras on posts, `BreadcrumbList` on vertical detail pages, `Service` on `/buyers`. Schema strings must match visible copy word-for-word.
+
+## URLs, canonicals, sitemap
+
+- Origin is `https://ridgerisemedia.com` from `src/data/site.ts`. No trailing slashes except home. Never invent alternate domains.
+- Every new blog post: add `<url>` to `public/sitemap.xml` with `lastmod` = post date. Never remove existing sitemap entries for live pages.
+- Existing slugs are permanent. Renaming any slug requires the user's explicit approval plus a redirect plan — flag it, don't do it.
+
+## Headings
+
+One `<h1>` per page (already in the JSX — edit its text, not the tag). H1 carries the primary phrase naturally. H2s = real buyer questions or plain statements, with secondary terms worked in only where they read naturally. Never restructure heading levels in the JSX.

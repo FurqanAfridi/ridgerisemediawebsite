@@ -188,27 +188,28 @@ export function CinematicFooter() {
         <div className="mf-center">
           <p className="mf-eyebrow">Next step</p>
           <h2 ref={headingRef} className="mf-heading">
-            Ready to rise?
+            Ready to turn demand into customers?
           </h2>
           <p className="mf-sub">
-            Join publishers and buyers scaling pay-per-call with RidgeRise Media.
+            Tell us who you&apos;re trying to reach. We&apos;ll show you how a
+            pay per call or CPL campaign gets built around it.
           </p>
 
           <div ref={linksRef} className="mf-actions">
             <div className="mf-actions__primary">
               <MagneticButton
                 as={Link}
-                to="/publishers"
+                to="/buyers"
                 className="mf-pill mf-pill--primary"
               >
-                Signup as Publisher
+                Discuss a Campaign
               </MagneticButton>
               <MagneticButton
                 as={Link}
-                to="/buyers"
+                to="/publishers"
                 className="mf-pill mf-pill--mint"
               >
-                Signup as Buyer
+                Apply as a Partner
               </MagneticButton>
             </div>
 

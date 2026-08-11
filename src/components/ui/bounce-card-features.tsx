@@ -7,29 +7,29 @@ import "./bounce-card-features.css";
 
 const features = [
   {
-    title: "Compliance-First",
-    body: "TCPA, DNC & vertical checks before every campaign goes live — so every transfer is clean.",
+    title: "Compliance-conscious setup",
+    body: "Campaign-specific consent and quality rules, TCPA-aware processes, and source checks before volume goes live.",
     art: "/assets/vertical-1.png",
     artAlt: "Compliance-ready verticals",
     tone: "violet",
   },
   {
-    title: "Live Call Transparency",
-    body: "Real-time dashboards with every call, conversion, and payout visible the moment it happens.",
+    title: "Call-level transparency",
+    body: "See calls, sources, and dispositions as they land — so your intake team knows what you're paying for.",
     art: "/assets/card-calls.png",
     artAlt: "Live calls tracking",
     tone: "amber",
   },
   {
-    title: "Fast Match & Payouts",
-    body: "Buyers matched in days. Publishers paid weekly — no chasing invoices or surprise holds.",
+    title: "Hybrid supply, clear filters",
+    body: "In-house media buying plus vetted partners. You set geo, hours, exclusivity, and what counts as qualified.",
     art: "/assets/card-payout.png",
-    artAlt: "Publisher payouts",
+    artAlt: "Campaign filters and routing",
     tone: "mint",
   },
   {
-    title: "High-Intent Verticals",
-    body: "Insurance specialty plus Legal, Home Services, and performance PPC depth that converts.",
+    title: "High-intent verticals",
+    body: "Insurance depth first, with Legal, Home Services, and Finance where a live call still moves acquisition.",
     art: "/assets/vertical-2.png",
     artAlt: "Growth across verticals",
     tone: "rose",
@@ -81,12 +81,12 @@ export function BouncyCardsFeatures() {
         >
           <p className="bouncy-features__eyebrow">Why work with us</p>
           <h2 id="why-heading" className="bouncy-features__title">
-            Built for publishers and buyers who{" "}
-            <span className="bouncy-features__title-muted">want the call to count</span>
+            Built for buyers who need{" "}
+            <span className="bouncy-features__title-muted">the call to count</span>
           </h2>
           <p className="bouncy-features__sub">
-            Compliance, tracking, payouts, and vertical depth — the four things that
-            decide whether pay-per-call scales or stalls.
+            Quality monitoring, tracking, filter control, and vertical depth —
+            the four things that decide whether pay-per-call and CPL scale or stall.
           </p>
         </motion.div>
         <Magnetic strength={0.35}>
@@ -99,7 +99,7 @@ export function BouncyCardsFeatures() {
             transition={{ type: "spring", stiffness: 200, damping: 16, delay: 0.2 }}
           >
             <Link to="/contact" className="bouncy-features__cta">
-              Get Started
+              Discuss a campaign
             </Link>
           </motion.div>
         </Magnetic>

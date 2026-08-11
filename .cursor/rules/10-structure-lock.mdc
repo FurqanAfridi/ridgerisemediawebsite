@@ -1,0 +1,37 @@
+---
+description: HARD LOCK — content rewrites only. Never change site structure, components, routes, styling, animations, or data schemas.
+alwaysApply: true
+---
+
+# Structure Lock — content-only edits
+
+The website structure is final. Your job is rewriting words, not rebuilding the site.
+
+## Never do any of the following (even if it seems like an improvement)
+
+- Do NOT add, remove, rename, or reorder routes in `src/App.tsx`.
+- Do NOT create new pages, new components, or new files unless the user explicitly asks.
+- Do NOT edit any `.css` file, Tailwind classes, animation code, motion hooks (`usePageMotion`, `usePublisherMotion`), or anything in `src/components/ui/`.
+- Do NOT change JSX structure: keep the same elements, wrappers, class names, component props, section order, and markup. Only replace the human-readable strings inside them.
+- Do NOT change the TypeScript types/shapes in `src/data/blog.ts`, `src/data/verticals.ts`, or `src/data/site.ts`. You may edit field VALUES and add new array ITEMS that match the existing type exactly.
+- Do NOT touch `vite.config.ts`, `tsconfig*`, `package.json`, deployment workflow, `_redirects`, or `src/main.tsx`.
+- Do NOT remove or restructure the `<Seo />` component usage — only edit the string values passed to it.
+
+## Where content lives (the ONLY things you edit)
+
+| Content | File(s) |
+| --- | --- |
+| Page copy (headlines, paragraphs, button labels, FAQ text) | string literals inside `src/pages/*.tsx` |
+| Blog posts | `src/data/blog.ts` (edit posts / append new posts matching `BlogPost` type) |
+| Vertical copy + keywords | `src/data/verticals.ts` (edit values; keep slugs and categories stable) |
+| Tagline, nav labels | `src/data/site.ts` (values only) |
+| Meta titles/descriptions/keywords/JSON-LD | `Seo` props inside each page; `index.html` defaults |
+| Sitemap entries for new blog posts | `public/sitemap.xml` |
+
+## If a rewrite seems to require a structural change
+
+Stop and tell the user what you'd want to change and why. Do not make the change yourself.
+
+## Slugs and URLs
+
+Existing blog and vertical slugs are live URLs. Never rename an existing `slug`. New blog posts get new kebab-case slugs and a matching `<url>` entry in `public/sitemap.xml`.

@@ -1,0 +1,38 @@
+---
+description: Rules for writing and rewriting blog posts in src/data/blog.ts — topic mix, structure, SEO fields, human tone.
+globs: src/data/blog.ts, src/pages/BlogPage.tsx, src/pages/BlogPostPage.tsx, public/sitemap.xml
+alwaysApply: false
+---
+
+# Blog rules (`src/data/blog.ts`)
+
+Posts are plain-paragraph arrays (`content: string[]`). Match the existing `BlogPost` type exactly. Never rename existing slugs.
+
+## Topic mix — enforce 80/20
+
+Out of every 5 posts, roughly 4 target buyers (people who purchase calls/leads/traffic) and 1 targets publishers. Buyer post angles:
+
+- Buying guides: how to buy [vertical] calls, what a qualified call looks like, shared vs exclusive, CPL vs cost per call, how call pricing works
+- Vertical deep-dives tied to `src/data/verticals.ts` slugs: seasonality, filters that matter, intake mistakes that burn spend
+- Comparison/decision posts: calls vs web leads, in-house media buying vs buying from a network, agency vs network
+- Operations posts: intake team readiness, answer rates, duration rules, dispositions, why buyers lose money on good calls
+
+Publisher post angles (the 20%): payout mechanics, quality standards, which verticals have buyer demand, how to get traffic approved.
+
+## Per-field rules
+
+- `slug`: kebab-case, contains the target phrase naturally, never changes after publish. Add a matching `<url>` to `public/sitemap.xml` for every new post.
+- `title`: ≤ ~65 chars, specific promise, written for the SERP. Include the year only for genuinely time-sensitive topics.
+- `excerpt`: 140–160 chars, doubles as meta description. Front-load the search phrase, end with the reader benefit. No brand-slogan filler.
+- `tags`: 3–5 real search phrases; reuse tags across related posts so related-reading works.
+- `date`: realistic, not all posts on the same day. `readTime` should match actual word count (~200 wpm).
+- `author`: "RidgeRise Team" unless the user provides a real name.
+
+## Content rules
+
+- First paragraph answers the title's question or states the core claim. No throat-clearing intro.
+- Middle paragraphs: concrete mechanics, trade-offs, and at least one honest caveat (what can go wrong, when this model is a bad fit). Honest caveats are the strongest anti-AI and trust signal.
+- Mention RidgeRise once or twice max, tied to a real capability (verticals covered, CPL + cost-per-call models, hybrid in-house + partner supply, quality monitoring). Never invent results.
+- Last paragraph: soft CTA pointing to `/buyers`, `/publishers`, or the matching `/verticals/{slug}` — pick the one that matches the post's reader.
+- Length follows intent: a pricing-explainer might need 900 words; a definition post might need 500. Never pad.
+- Apply every rule in 20-voice-anti-ai-writing.mdc. Read a draft aloud mentally; if any paragraph sounds like a chatbot summary, rewrite it with a concrete example or cut it.

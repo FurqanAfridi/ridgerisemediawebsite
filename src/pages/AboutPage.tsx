@@ -6,20 +6,20 @@ import "./pages.css";
 
 const values = [
   {
-    title: "Compliance-First",
-    body: "Every campaign is reviewed against TCPA, DNC, and vertical-specific rules before traffic goes live.",
+    title: "Hybrid supply on purpose",
+    body: "We buy media in-house and work a vetted partner network. Controlling some traffic and vetting the rest is how volume scales without quality collapse.",
     icon: ShieldCheck,
     tone: "violet" as const,
   },
   {
-    title: "Transparent Tracking",
-    body: "Publishers and buyers see the same truth: live calls, conversions, and payout visibility.",
+    title: "Call-first measurement",
+    body: "Campaigns are judged on conversations — duration, disposition, source — not vanity clicks. Buyers and publishers see the same call-level truth.",
     icon: Gauge,
     tone: "mint" as const,
   },
   {
-    title: "Vertical Expertise",
-    body: "Insurance is our specialty, with deep coverage across Legal, Home Services, Finance, and more.",
+    title: "Quality before volume",
+    body: "Qualification rules, geo and hours filters, recording review where applicable, and source cutoffs. Compliance-conscious and TCPA-aware — never a legal guarantee.",
     icon: Layers3,
     tone: "amber" as const,
   },
@@ -27,16 +27,16 @@ const values = [
 
 const timeline = [
   {
-    title: "Match quality traffic",
-    body: "We connect publishers with verified buyers across high-intent pay-per-call verticals.",
+    title: "Generate and aggregate demand",
+    body: "In-house campaigns plus vetted publishers and media buyers feed high-intent verticals: Insurance, Legal, Home Services, Finance, and Education.",
   },
   {
-    title: "Route with controls",
-    body: "Geo, hours, exclusivity, and compliance filters keep campaigns clean and conversion-ready.",
+    title: "Route with buyer rules",
+    body: "Vertical, geo, schedule, concurrency, and exclusivity filters decide where each call, lead, or click goes — matched to intake capacity.",
   },
   {
-    title: "Pay and scale",
-    body: "Reliable publisher payouts and buyer ROI reporting make growth sustainable on both sides.",
+    title: "Price on CPL or cost per call",
+    body: "Buyers pay for qualified inbound calls, live transfers, CPL leads, or traffic. Publishers monetize against live demand with clear terms.",
   },
 ];
 
@@ -44,13 +44,14 @@ export default function AboutPage() {
   return (
     <main>
       <Seo
-        title="About RidgeRise Media"
-        description="Learn about RidgeRise Media — a compliance-first pay-per-call network connecting publishers and buyers across Insurance, Legal, Home Services, and Finance."
+        title="About Our Pay Per Call Model"
+        description="RidgeRise Media is a US pay-per-call demand aggregator. Hybrid media buying plus vetted partners deliver qualified calls, leads, and traffic. Talk to our team."
         path="/about"
         keywords={[
-          "about RidgeRise Media",
-          "pay per call network",
-          "call marketing company",
+          "demand aggregator",
+          "cost per call",
+          "CPL leads",
+          "qualified inbound calls",
         ]}
       />
 
@@ -58,33 +59,34 @@ export default function AboutPage() {
         eyebrow="About us"
         title={
           <>
-            Built for both sides of the <span className="grad-mint">call</span>
+            A demand aggregator built around the{" "}
+            <span className="grad-mint">call</span>
           </>
         }
-        description="RidgeRise Media is a pay-per-call network designed for publishers who need reliable payouts and buyers who need high-intent phone traffic — with compliance and transparency at the core."
-        primaryCta={{ label: "Become a Publisher", to: "/publishers" }}
-        secondaryCta={{ label: "Advertise as a Buyer", to: "/buyers" }}
+        description="RidgeRise Media is a US performance marketing company. We generate consumer demand through our own media buying, add volume from vetted publishers, and deliver qualified inbound calls, leads, and traffic to buyers on CPL and cost-per-call."
+        primaryCta={{ label: "Discuss a campaign", to: "/buyers" }}
+        secondaryCta={{ label: "Apply as a partner", to: "/publishers" }}
       />
 
       <section className="inner-section">
         <div className="inner-section__head">
-          <h2 className="inner-section__title">Our mission</h2>
+          <h2 className="inner-section__title">Why this model</h2>
           <p className="inner-section__sub">
-            Make pay-per-call simple, compliant, and profitable — so publishers
-            can monetize intent and buyers can speak with people ready to convert.
+            Phone still closes deals that forms alone miss. Our job is to put the
+            right caller on the line — and prove what happened after they dialed.
           </p>
         </div>
         <div className="prose">
           <p>
-            Phone conversations still close deals that clicks cannot. RidgeRise
-            Media exists to route those conversations fairly: quality traffic for
-            buyers, clear earnings for publishers, and no black-box reporting in
-            between.
+            Pure in-house buying caps scale. Pure network reselling loses control.
+            RidgeRise sits in the middle on purpose: we run our own campaigns so
+            we own messaging and source quality, then add vetted partner traffic
+            when buyers need more volume in the same verticals.
           </p>
           <p>
-            From Insurance and Medicare to Legal, Solar, HVAC, and Finance, we
-            help partners scale campaigns with real-time tracking, vertical
-            expertise, and payout reliability.
+            Call-first means we care about duration rules, dispositions, and
+            source cutoffs — the mechanics that decide whether your cost per
+            acquisition holds. Quality monitoring is operational, not a slogan.
           </p>
         </div>
       </section>
@@ -93,7 +95,7 @@ export default function AboutPage() {
         <div className="inner-section__head">
           <h2 className="inner-section__title">What we stand for</h2>
           <p className="inner-section__sub">
-            Three principles guide every campaign on the RidgeRise network.
+            Three operating bets that show up in every campaign we run.
           </p>
         </div>
         <ul className="feature-grid">
@@ -140,14 +142,15 @@ export default function AboutPage() {
 
       <section className="cta-band">
         <div className="cta-band__inner">
-          <h2>Ready to grow with RidgeRise?</h2>
+          <h2>Talk to our team</h2>
           <p>
-            Whether you sell call traffic or buy high-intent transfers, our team
-            will match you to the right verticals fast.
+            Buyers: bring vertical, states, hours, and what a qualified call
+            looks like. Publishers: bring traffic type and verticals. We'll tell
+            you if there's a fit.
           </p>
           <div className="cta-band__actions">
             <Link to="/contact" className="btn btn--purple">
-              Contact us
+              Discuss a campaign
             </Link>
             <Link to="/blog" className="btn btn--mint">
               Read the blog

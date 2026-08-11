@@ -27,6 +27,7 @@ coverage
 !.vscode/extensions.json
 .idea
 .DS_Store
+**/.DS_Store
 Thumbs.db
 Desktop.ini
 *.suo
@@ -49,7 +50,13 @@ Desktop.ini
 # Draft / scratch content (not site source)
 *.md.txt
 RidgeRise-Media-Home-Page.md.txt
+*.draft.md
+*.scratch.*
+tmp/
+temp/
+.temp/
 
 # Optional local agent scratch (keep committed .cursor/rules)
 .cursor/plans/
 .cursor/*.log
+.cursor/agent-transcripts/

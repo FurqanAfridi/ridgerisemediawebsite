@@ -25,12 +25,12 @@ export const site = {
   email: "info@ridgerisemedia.com",
   phone: "+1 (202) 773-7162",
   phoneHref: "tel:+12027737162",
-  tagline: "Turn Every Call into Revenue",
+  tagline: "Qualified calls, leads & traffic",
 } as const;
 
 export const navLinks = [
-  { label: "Publishers", to: "/publishers" },
   { label: "Buyers", to: "/buyers" },
+  { label: "Publishers", to: "/publishers" },
   { label: "Verticals", to: "/verticals" },
   { label: "About", to: "/about" },
   { label: "Blog", to: "/blog" },

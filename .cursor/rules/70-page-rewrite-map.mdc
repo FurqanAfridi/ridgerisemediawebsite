@@ -1,0 +1,46 @@
+---
+description: Page-by-page rewrite direction — what each page must say, in what order, with the 80/20 buyer weighting applied.
+globs: src/pages/**/*.tsx, src/data/site.ts
+alwaysApply: false
+---
+
+# Page rewrite map
+
+Rewrite copy inside the existing JSX only. Section order and components stay as-is; if the current section order fights the message, flag it — don't restructure.
+
+## Home (`/`)
+
+Hero: buyer-facing. One line that says what RidgeRise sells (qualified inbound calls, leads, and traffic in high-intent verticals) and one line on how (in-house media buying + a vetted partner network, CPL and pay-per-call models). Primary CTA → `/buyers` or `/contact`.
+Body sections: verticals showcase (buyer framing), how it works for buyers, quality/compliance approach, then ONE publisher section near the bottom with CTA → `/publishers`. Publisher content never appears above buyer content.
+Tagline in `src/data/site.ts` may be rewritten to a buyer-slanted line if the user approves — propose options first.
+
+## Buyers (`/buyers`) — the money page
+
+Must cover, in the reader's order of concern:
+1. What they can buy: exclusive/shared inbound calls, live transfers, CPL leads, qualified traffic.
+2. Pricing models: cost per call (pay per call) and CPL, plus traffic deals — explained in one plain paragraph each, no jargon walls.
+3. Where volume comes from: hybrid model stated honestly (own campaigns + vetted partners) and why that helps them scale without quality collapse.
+4. Quality controls: qualification before transfer, duration rules, tracking, source-level monitoring, dispute handling — described as practices, no invented numbers.
+5. Filters they control: vertical, geo, schedule, concurrency, exclusivity.
+6. Verticals list linking to `/verticals/{slug}`.
+7. CTA: discuss a campaign / get vertical pricing.
+
+## Publishers (`/publishers`)
+
+Shorter and denser than Buyers. Cover: live buyer demand across listed verticals, accepted traffic types, quality standards, tracking transparency, payout reliability (no invented payout numbers or cycles — placeholder if needed), application CTA. Tone: selective partner program, not an open affiliate signup.
+
+## Verticals hub + detail
+
+Hub intro frames verticals as "where we have buyer demand and campaign supply." Detail pages follow 50-verticals-content.mdc.
+
+## About
+
+Story of the model, not a founder biography with invented history. Why hybrid supply, why call-first, why quality obsession — written concretely. No fake years/team/office claims.
+
+## Contact
+
+Split the ask: buyers → "tell us your vertical, states, hours, and what a qualified call looks like"; publishers → "tell us your traffic type and verticals." Keep forms/markup untouched.
+
+## Privacy / Terms
+
+Do not rewrite legal pages unless explicitly asked.

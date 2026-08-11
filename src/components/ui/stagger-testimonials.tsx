@@ -10,64 +10,64 @@ const testimonials = [
   {
     id: 0,
     testimonial:
-      "RidgeRise matched us with high-intent Insurance traffic in days. Payouts hit on schedule — no chasing invoices.",
-    by: "Sarah Chen, Publisher Partner",
+      "We buy auto insurance calls on cost per call. Clear duration rules and source notes made disputes easier to handle.",
+    by: "Intake Manager, Insurance Agency",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=SarahChen&backgroundColor=5d62dd&textColor=ffffff",
   },
   {
     id: 1,
     testimonial:
-      "Real-time call tracking that actually matches the buyer side. Transparency changed everything.",
-    by: "Marcus Johnson, Media Buyer",
+      "Hybrid supply helped when our in-house hours filled up — same filters, more concurrency without opening a free-for-all.",
+    by: "Media Buyer, Performance Team",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=MarcusJohnson&backgroundColor=45e9b5&textColor=000000",
   },
   {
     id: 2,
     testimonial:
-      "Compliance-first routing gave our Legal campaigns peace of mind. Quality match rate stayed above 95%.",
-    by: "Priya Patel, Compliance Lead",
+      "Legal intake needs case-type screening before transfer. Write that into the campaign up front, not after the fact.",
+    by: "Ops Lead, Personal Injury Firm",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=PriyaPatel&backgroundColor=8b68e5&textColor=ffffff",
   },
   {
     id: 3,
     testimonial:
-      "From Home Services to Insurance, RidgeRise's vertical depth meant we never had to juggle five networks.",
-    by: "David Rodriguez, Growth Director",
+      "One network for Insurance and Home Services beats juggling five vendors with five definitions of 'qualified.'",
+    by: "Growth Director, Multi-Vertical Buyer",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=DavidRodriguez&backgroundColor=4c1678&textColor=ffffff",
   },
   {
     id: 4,
     testimonial:
-      "Fast matching and weekly payouts let us scale publisher inventory without cash-flow stress.",
-    by: "Emma Thompson, Affiliate Owner",
+      "As a publisher, payouts and dispositions are visible. No mystery holds — just the quality rules we already agreed to.",
+    by: "Publisher Partner",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=EmmaThompson&backgroundColor=2ae2a8&textColor=000000",
   },
   {
     id: 5,
     testimonial:
-      "I've been searching for a pay-per-call partner like RidgeRise for years. Glad we finally found one.",
-    by: "Pete Alvarez, Sales Director",
+      "CPL for web leads, cost per call for phone. Same team, same vertical map — that cut the back-and-forth.",
+    by: "Campaign Lead, Call Center",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=PeteAlvarez&backgroundColor=5d62dd&textColor=ffffff",
   },
   {
     id: 6,
     testimonial:
-      "Call quality is consistent and the dashboard is clear. No black-box deductions.",
-    by: "Aisha Mohammed, Campaign Manager",
+      "Geo and schedule filters stuck. When a source drifted, they cut it instead of arguing about billable minutes.",
+    by: "Buyer, Home Services Contractor",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=AishaMohammed&backgroundColor=8b68e5&textColor=ffffff",
   },
   {
     id: 7,
     testimonial:
-      "We switched years of volume over and never looked back. RidgeRise just works.",
-    by: "Alex Kim, Ops Lead",
+      "Not flashy. Just inbound calls that match the hours and states we can actually staff.",
+    by: "Sales Ops, Finance Vertical",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=AlexKim&backgroundColor=45e9b5&textColor=000000",
   },
@@ -239,9 +239,9 @@ export const StaggerTestimonials: FC = () => {
       aria-label="Testimonials"
     >
       <div className="stagger-section__intro">
-        <h2 className="section-title section-title--md">What Partners Say</h2>
+        <h2 className="section-title section-title--md">How call teams talk</h2>
         <p className="section-sub section-sub--sm">
-          Scroll to browse · Publishers &amp; Buyers on RidgeRise Media
+          Scroll to browse · Composite notes from intake and media conversations
         </p>
       </div>
       <div className="stagger-testimonials">
