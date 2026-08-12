@@ -5,8 +5,10 @@ import ScrollRocketFlight from "@/components/ui/scroll-rocket-flight";
 import { StaggerTestimonials } from "@/components/ui/stagger-testimonials";
 import { AnimatedGroup } from "@/components/ui/animated-group";
 import { Magnetic } from "@/components/ui/magnetic";
+import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import { Seo } from "@/components/Seo";
 import { assets } from "@/data/site";
+import { homeFaqs } from "@/data/faqs";
 
 const stats = [
   {
@@ -86,6 +88,7 @@ export default function HomePage() {
           "qualified inbound calls",
           "lead generation",
         ]}
+        jsonLd={buildFaqJsonLd(homeFaqs)}
       />
 
       <main className="home-main">
@@ -303,6 +306,12 @@ export default function HomePage() {
           ctaTo="/verticals"
         />
       </main>
+
+      <FaqSection
+        title="Frequently asked questions"
+        description="Straight answers on pay per call, supply mix, quality, and how to start."
+        items={homeFaqs}
+      />
 
       <StaggerTestimonials />
     </>

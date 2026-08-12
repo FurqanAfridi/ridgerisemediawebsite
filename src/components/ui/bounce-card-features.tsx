@@ -48,19 +48,19 @@ function BounceCard({
   return (
     <motion.article
       className={cn("bounce-card", className)}
-      initial={{ opacity: 0, y: 56, rotate: index % 2 === 0 ? -3 : 3 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.12, margin: "0px 0px -8% 0px" }}
       transition={{
         type: "spring",
-        stiffness: 120,
-        damping: 16,
-        delay: index * 0.08,
+        stiffness: 140,
+        damping: 18,
+        delay: index * 0.06,
       }}
       whileHover={{
-        y: -10,
-        scale: 1.02,
-        transition: { type: "spring", stiffness: 360, damping: 20 },
+        y: -8,
+        scale: 1.015,
+        transition: { type: "spring", stiffness: 360, damping: 22 },
       }}
     >
       {children}
@@ -74,10 +74,10 @@ export function BouncyCardsFeatures() {
       <div className="bouncy-features__header">
         <motion.div
           className="bouncy-features__intro"
-          initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ type: "spring", stiffness: 110, damping: 18 }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2, margin: "0px 0px -6% 0px" }}
+          transition={{ type: "spring", stiffness: 120, damping: 18 }}
         >
           <p className="bouncy-features__eyebrow">Why work with us</p>
           <h2 id="why-heading" className="bouncy-features__title">
@@ -93,10 +93,10 @@ export function BouncyCardsFeatures() {
           <motion.div
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, scale: 0.85 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 200, damping: 16, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ type: "spring", stiffness: 200, damping: 18, delay: 0.12 }}
           >
             <Link to="/contact" className="bouncy-features__cta">
               Discuss a campaign

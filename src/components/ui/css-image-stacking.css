@@ -1,7 +1,7 @@
 /* Sticky heading + footer, wide split cards, tilted sharp deck */
 
 .cis {
-  --cis-heading-h: 120px;
+  --cis-heading-h: 140px;
   position: relative;
   z-index: 1;
   isolation: isolate;
@@ -34,9 +34,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: var(--title-gap, 12px);
   text-align: center;
-  padding: 6px 8px 2px;
+  padding: 10px 8px 8px;
 }
 
 .cis__grid {
@@ -67,27 +67,17 @@ html[data-theme="dark"] .cis__grid {
     linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
 }
 
+/* Match shared .section-title / .section-sub — keep sticky shell only */
 .cis__title {
   position: relative;
   z-index: 1;
   margin: 0;
-  font-size: clamp(1.4rem, 1.9vw + 0.5rem, 2.35rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.15;
-  color: var(--color-heading);
-  text-wrap: balance;
 }
 
 .cis__sub {
   position: relative;
   z-index: 1;
   margin: 0;
-  max-width: 48ch;
-  font-size: clamp(13px, 0.35vw + 12px, 15px);
-  font-weight: 500;
-  line-height: 1.45;
-  color: var(--color-muted, #5c5c5c);
 }
 
 .cis__stack {
@@ -340,12 +330,28 @@ html[data-theme="dark"] .cis__grid {
 
 @media (max-width: 900px) {
   .cis {
-    --cis-heading-h: 112px;
+    --cis-heading-h: 128px;
   }
 
   .cis__sticky {
     position: relative;
     top: auto;
+  }
+
+  .cis__sticky .cis__card {
+    animation: cis-deal-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .cis__sticky:nth-child(2) .cis__card {
+    animation-delay: 0.06s;
+  }
+
+  .cis__sticky:nth-child(3) .cis__card {
+    animation-delay: 0.12s;
+  }
+
+  .cis__sticky:nth-child(4) .cis__card {
+    animation-delay: 0.18s;
   }
 
   .cis__figure {

@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { assets } from "@/data/site";
+import { isNarrowViewport } from "@/lib/motion-env";
 import "./scroll-rocket-flight.css";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -212,7 +213,9 @@ export default function ScrollRocketFlight() {
               ? rect.top + rect.height * 0.18
               : rect.top + rect.height * 0.82;
 
-            const burst = gsap.utils.random(2, 3, 1);
+            const burst = isNarrowViewport(900)
+              ? gsap.utils.random(1, 2, 1)
+              : gsap.utils.random(2, 3, 1);
             for (let i = 0; i < burst; i++) {
               const puff = document.createElement("span");
               const size = gsap.utils.random(1, 3, 1);

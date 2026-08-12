@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 import { Seo } from "@/components/Seo";
 import { assets } from "@/data/site";
+import { buyersFaqs } from "@/data/faqs";
+import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import { usePublisherMotion } from "@/hooks/usePublisherMotion";
 import "./pages.css";
 import "./publishers.css";
@@ -146,6 +148,7 @@ export default function BuyersPage() {
           "exclusive calls",
           "shared calls",
         ]}
+        jsonLd={buildFaqJsonLd(buyersFaqs)}
       />
 
       <section className="pub-hero">
@@ -344,6 +347,12 @@ export default function BuyersPage() {
           })}
         </ul>
       </section>
+
+      <FaqSection
+        title="Buyer FAQ"
+        description="CPL vs cost per call, supply mix, quality rules, and how campaigns start."
+        items={buyersFaqs}
+      />
 
       <section className="pub-cta">
         <div className="pub-cta__glow" aria-hidden="true" />

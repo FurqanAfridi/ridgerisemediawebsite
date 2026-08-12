@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
 import { blogPosts } from "@/data/blog";
+import { blogFaqs } from "@/data/faqs";
+import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import "./pages.css";
 
 export default function BlogPage() {
@@ -17,6 +19,7 @@ export default function BlogPage() {
           "call quality",
           "insurance pay per call",
         ]}
+        jsonLd={buildFaqJsonLd(blogFaqs)}
       />
 
       <PageHero
@@ -46,6 +49,12 @@ export default function BlogPage() {
           ))}
         </ul>
       </section>
+
+      <FaqSection
+        title="Blog FAQ"
+        description="Who these posts are for and where to go next."
+        items={blogFaqs}
+      />
 
       <section className="cta-band">
         <div className="cta-band__inner">

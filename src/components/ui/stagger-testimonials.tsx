@@ -1,7 +1,12 @@
-import { useEffect, useRef, useState, type FC } from "react";
+import { useEffect, useRef, type FC } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
+import {
+  bindScrollTriggerRefreshListeners,
+  configureScrollTriggerForDevices,
+  scheduleScrollTriggerRefresh,
+} from "@/lib/motion-env";
 import "./stagger-testimonials.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -88,32 +93,28 @@ function headerClearancePx() {
   return offset + gap;
 }
 
+function cardSize() {
+  const wide = window.matchMedia("(min-width: 640px)").matches;
+  return {
+    width: wide ? 360 : 300,
+    height: wide ? 460 : 400,
+  };
+}
+
 interface TestimonialCardProps {
   testimonial: (typeof testimonials)[0];
-  isCenter: boolean;
-  cardWidth: number;
-  cardHeight: number;
   cardRef: (el: HTMLDivElement | null) => void;
 }
 
 const TestimonialCard: FC<TestimonialCardProps> = ({
   testimonial,
-  isCenter,
-  cardWidth,
-  cardHeight,
   cardRef,
 }) => {
   return (
     <div
       ref={cardRef}
-      className={cn(
-        "stagger-card",
-        isCenter ? "stagger-card--center" : "stagger-card--side",
-      )}
-      style={{
-        width: cardWidth,
-        height: cardHeight,
-      }}
+      className={cn("stagger-card", "stagger-card--side")}
+      data-stagger-card
     >
       <img
         src={testimonial.imgSrc}
@@ -130,38 +131,43 @@ export const StaggerTestimonials: FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const cardEls = useRef<(HTMLDivElement | null)[]>([]);
   const activeRef = useRef(0);
-  const [cardWidth, setCardWidth] = useState(360);
-  const [cardHeight, setCardHeight] = useState(460);
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    const updateSize = () => {
-      const wide = window.matchMedia("(min-width: 640px)").matches;
-      setCardWidth(wide ? 360 : 300);
-      setCardHeight(wide ? 460 : 400);
-    };
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
+  const sizeRef = useRef(cardSize());
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
+    configureScrollTriggerForDevices();
+
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const total = testimonials.length;
+    let st: ScrollTrigger | undefined;
+    let cancelled = false;
+
+    const applySize = () => {
+      sizeRef.current = cardSize();
+      const { width, height } = sizeRef.current;
+      cardEls.current.forEach((card) => {
+        if (!card) return;
+        card.style.width = `${width}px`;
+        card.style.height = `${height}px`;
+      });
+    };
 
     const layoutCards = (activeIndex: number, immediate = false) => {
+      const { width } = sizeRef.current;
       cardEls.current.forEach((card, index) => {
         if (!card) return;
         const pos = wrapPosition(index, activeIndex, total);
         const isCenter = pos === 0;
-        const x = (cardWidth / 1.45) * pos;
+        const x = (width / 1.45) * pos;
         const y = isCenter ? -28 : pos % 2 ? 22 : -22;
         const rot = isCenter ? 0 : pos % 2 ? 2.5 : -2.5;
+
+        card.classList.toggle("stagger-card--center", isCenter);
+        card.classList.toggle("stagger-card--side", !isCenter);
 
         gsap.to(card, {
           xPercent: -50,
@@ -173,64 +179,93 @@ export const StaggerTestimonials: FC = () => {
           boxShadow: isCenter
             ? "0px 10px 0px 4px rgba(76, 22, 120, 0.18)"
             : "0px 0px 0px 0px transparent",
-          duration: immediate || reduceMotion ? 0 : 0.38,
+          duration: immediate || reduceMotion ? 0 : 0.34,
           ease: "power2.out",
           overwrite: "auto",
+          force3D: true,
         });
       });
     };
 
-    // Initial placement before ScrollTrigger measures
-    layoutCards(0, true);
+    const createTrigger = () => {
+      if (cancelled) return;
+      ScrollTrigger.getById("partners-testimonials")?.kill();
 
-    if (reduceMotion) {
-      return () => {
-        gsap.killTweensOf(cardEls.current.filter(Boolean));
-      };
-    }
+      // Wait until card nodes exist
+      if (cardEls.current.filter(Boolean).length < total) {
+        window.requestAnimationFrame(createTrigger);
+        return;
+      }
 
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
+      applySize();
+      layoutCards(activeRef.current, true);
+
+      if (reduceMotion) return;
+
+      st = ScrollTrigger.create({
         id: "partners-testimonials",
         trigger: section,
         start: () => `top top+=${headerClearancePx()}`,
-        end: () =>
-          `+=${Math.max(total - 1, 1) * Math.round(window.innerHeight * 0.72)}`,
+        end: () => {
+          const perCard = window.matchMedia("(max-width: 640px)").matches
+            ? 0.58
+            : 0.7;
+          return `+=${Math.max(total - 1, 1) * Math.round(window.innerHeight * perCard)}`;
+        },
         pin: true,
-        // Escape overflow-x:clip on .page so pin spacing / sticky work
         pinReparent: true,
         pinSpacing: true,
-        scrub: 0.55,
+        scrub: 0.75,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        refreshPriority: 1,
-        snap: {
-          snapTo: 1 / Math.max(total - 1, 1),
-          duration: { min: 0.12, max: 0.28 },
-          ease: "power1.inOut",
+        refreshPriority: 2,
+        onRefresh: (self) => {
+          applySize();
+          const next = Math.round(self.progress * (total - 1));
+          activeRef.current = next;
+          layoutCards(next, true);
         },
         onUpdate: (self) => {
           const next = Math.round(self.progress * (total - 1));
           if (next === activeRef.current) return;
           activeRef.current = next;
-          setActive(next);
+          // DOM-only updates — no React setState during scrub (avoids ST breakage)
           layoutCards(next);
         },
       });
-    }, section);
 
-    // Sticky vertical stack / rocket path can shift layout after mount
-    const refreshTimers = [120, 700, 1500].map((ms) =>
-      window.setTimeout(() => ScrollTrigger.refresh(), ms),
-    );
-
-    return () => {
-      refreshTimers.forEach((id) => window.clearTimeout(id));
-      ctx.revert();
-      ScrollTrigger.getById("partners-testimonials")?.kill();
       ScrollTrigger.refresh();
     };
-  }, [cardWidth, cardHeight]);
+
+    // Defer until after paint so pin measures correctly with FAQ / sticky sections above
+    const boot = window.setTimeout(() => {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(createTrigger);
+      });
+    }, 60);
+
+    const onResize = () => {
+      applySize();
+      layoutCards(activeRef.current, true);
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener("resize", onResize);
+    const clearScheduled = scheduleScrollTriggerRefresh([200, 800, 1600]);
+    const unbindRefresh = bindScrollTriggerRefreshListeners();
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(boot);
+      window.removeEventListener("resize", onResize);
+      clearScheduled();
+      unbindRefresh();
+      st?.kill();
+      ScrollTrigger.getById("partners-testimonials")?.kill();
+      gsap.killTweensOf(cardEls.current.filter(Boolean));
+      ScrollTrigger.refresh();
+    };
+  }, []);
 
   return (
     <section
@@ -249,9 +284,6 @@ export const StaggerTestimonials: FC = () => {
           <TestimonialCard
             key={testimonial.id}
             testimonial={testimonial}
-            isCenter={wrapPosition(index, active, testimonials.length) === 0}
-            cardWidth={cardWidth}
-            cardHeight={cardHeight}
             cardRef={(el) => {
               cardEls.current[index] = el;
             }}

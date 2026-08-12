@@ -8,6 +8,10 @@ import { FooterSitemap } from "@/components/layout/FooterSitemap";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { usePageMotion } from "@/hooks/usePageMotion";
+import {
+  configureScrollTriggerForDevices,
+  scheduleScrollTriggerRefresh,
+} from "@/lib/motion-env";
 import "./footer-stack.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -29,6 +33,7 @@ export function SiteLayout({ children }: { children?: ReactNode }) {
 
   // Reset scroll locks / pin leftovers before page motion re-inits
   useEffect(() => {
+    configureScrollTriggerForDevices();
     clearScrollLocks();
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 
@@ -42,8 +47,11 @@ export function SiteLayout({ children }: { children?: ReactNode }) {
       ScrollTrigger.refresh();
     }, 40);
 
+    const clearScheduled = scheduleScrollTriggerRefresh([120, 500, 1200]);
+
     return () => {
       window.clearTimeout(id);
+      clearScheduled();
       clearScrollLocks();
     };
   }, [location.pathname]);

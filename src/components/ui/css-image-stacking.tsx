@@ -145,10 +145,10 @@ export default function CssImageStacking({
       <header className="cis__heading">
         <div className="cis__heading-inner">
           <div className="cis__grid" aria-hidden="true" />
-          <h2 id="cis-heading" className="cis__title">
+          <h2 id="cis-heading" className="section-title section-title--md cis__title">
             {title}
           </h2>
-          <p className="cis__sub">{description}</p>
+          <p className="section-sub section-sub--sm cis__sub">{description}</p>
         </div>
       </header>
 

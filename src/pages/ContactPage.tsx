@@ -3,6 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
 import { site } from "@/data/site";
+import { contactFaqs } from "@/data/faqs";
+import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import "./pages.css";
 
 export default function ContactPage() {
@@ -27,6 +29,7 @@ export default function ContactPage() {
         description="Talk to RidgeRise about buying qualified inbound calls, leads, or traffic on CPL or cost per call — or apply as a publisher partner."
         path="/contact"
         keywords={["contact RidgeRise Media", "buy pay per call", "apply publisher"]}
+        jsonLd={buildFaqJsonLd(contactFaqs)}
       />
 
       <PageHero
@@ -104,6 +107,12 @@ export default function ContactPage() {
           </form>
         )}
       </section>
+
+      <FaqSection
+        title="Contact FAQ"
+        description="What to include as a buyer or publisher, and how we follow up."
+        items={contactFaqs}
+      />
     </main>
   );
 }

@@ -41,16 +41,20 @@
   position: absolute;
   left: 50%;
   top: 52%;
+  width: 360px;
+  height: 460px;
   border: 2px solid;
   border-radius: var(--radius-lg, 16px);
   padding: 32px 28px 36px;
   overflow: hidden;
   will-change: transform;
-  /* Transform is GSAP-driven — only style colors here */
+  transform: translate(-50%, -50%);
+  /* Colors only — transforms are GSAP-owned */
   transition:
-    background 0.35s ease,
-    color 0.35s ease,
-    border-color 0.35s ease;
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .stagger-card--center {

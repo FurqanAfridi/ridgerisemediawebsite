@@ -21,6 +21,8 @@ import {
   verticals,
   type Vertical,
 } from "@/data/verticals";
+import { verticalsFaqs } from "@/data/faqs";
+import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import "./pages.css";
 
 const categoryIcons = {
@@ -70,6 +72,7 @@ export default function VerticalsPage() {
           "legal call leads",
           "home services leads",
         ]}
+        jsonLd={buildFaqJsonLd(verticalsFaqs)}
       />
 
       <PageHero
@@ -112,6 +115,12 @@ export default function VerticalsPage() {
           ))}
         </ul>
       </section>
+
+      <FaqSection
+        title="Verticals FAQ"
+        description="How we define categories, models, filters, and partner fit."
+        items={verticalsFaqs}
+      />
 
       <section className="cta-band">
         <div className="cta-band__inner">

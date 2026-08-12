@@ -49,8 +49,8 @@ const variantMap: Record<RevealVariant, Variants> = {
     visible: { opacity: 1, scale: 1 },
   },
   blur: {
-    hidden: { opacity: 0, y: 28, filter: "blur(14px)" },
-    visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+    hidden: { opacity: 0, y: 28 },
+    visible: { opacity: 1, y: 0 },
   },
   pop: {
     hidden: { opacity: 0, scale: 0.72, y: 24 },
@@ -83,11 +83,11 @@ export function Reveal({
       variants={variants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, amount, margin: "0px 0px -8% 0px" }}
+      viewport={{ once, amount: typeof amount === "number" ? Math.min(amount, 0.15) : 0.15, margin: "0px 0px -6% 0px" }}
       transition={{
         type: "spring",
-        stiffness: 120,
-        damping: 18,
+        stiffness: 130,
+        damping: 20,
         mass: 0.85,
         delay,
         duration,

@@ -33,6 +33,23 @@
   filter: drop-shadow(0 16px 24px rgba(76, 22, 120, 0.28));
 }
 
+@media (max-width: 900px) {
+  .rocket-flight__ship {
+    width: min(140px, 32vw);
+    filter: drop-shadow(0 10px 16px rgba(76, 22, 120, 0.22));
+  }
+
+  .rocket-flight__puff--3 {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rocket-flight {
+    display: none;
+  }
+}
+
 .rocket-flight__inner {
   width: 100%;
   height: 100%;
@@ -149,8 +166,11 @@ html[data-theme="dark"] .rocket-flight__puff--3 {
 }
 
 @media (max-width: 900px) {
-  .rocket-flight {
-    display: none;
+  .rocket-marker--start {
+    width: min(140px, 32vw);
+    height: calc(min(140px, 32vw) * 1.25);
+    top: 24px;
+    left: clamp(0px, 2vw, 40px);
   }
 }
 

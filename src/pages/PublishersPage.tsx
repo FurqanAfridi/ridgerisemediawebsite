@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import { Seo } from "@/components/Seo";
 import { assets } from "@/data/site";
+import { publishersFaqs } from "@/data/faqs";
+import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import { usePublisherMotion } from "@/hooks/usePublisherMotion";
 import "./pages.css";
 import "./publishers.css";
@@ -117,6 +119,7 @@ export default function PublishersPage() {
           "pay per call publishers",
           "call transfer network",
         ]}
+        jsonLd={buildFaqJsonLd(publishersFaqs)}
       />
 
       {/* ——— Visual hero ——— */}
@@ -320,6 +323,12 @@ export default function PublishersPage() {
           })}
         </ul>
       </section>
+
+      <FaqSection
+        title="Publisher FAQ"
+        description="Demand, traffic types, tracking, payouts, and how to apply."
+        items={publishersFaqs}
+      />
 
       {/* ——— Closing CTA stage ——— */}
       <section className="pub-cta">

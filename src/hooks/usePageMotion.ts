@@ -1,12 +1,16 @@
 import { useEffect, type RefObject } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  bindScrollTriggerRefreshListeners,
+  configureScrollTriggerForDevices,
+  ensureMotionTargetsVisible,
+  isNarrowViewport,
+  prefersReducedMotion,
+  scheduleScrollTriggerRefresh,
+} from "@/lib/motion-env";
 
 gsap.registerPlugin(ScrollTrigger);
-
-function prefersReducedMotion() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
 
 function revealOnce(
   targets: gsap.TweenTarget,
@@ -23,17 +27,25 @@ function revealOnce(
   const els = gsap.utils.toArray(targets);
   if (!els.length) return;
 
+  const narrow = isNarrowViewport();
+  const safeFrom = { ...from };
+  // Blur filters frequently fail / stick on mobile Safari
+  if (narrow && "filter" in safeFrom) {
+    delete safeFrom.filter;
+  }
+
   gsap.from(els, {
-    ...from,
-    duration: options?.duration ?? 1,
-    ease: options?.ease ?? "power4.out",
+    ...safeFrom,
+    duration: options?.duration ?? (narrow ? 0.75 : 1),
+    ease: options?.ease ?? "power3.out",
     stagger: options?.stagger,
     delay: options?.delay,
     immediateRender: false,
     clearProps: "transform,filter,opacity",
+    force3D: true,
     scrollTrigger: {
       trigger,
-      start: options?.start ?? "top 82%",
+      start: options?.start ?? (narrow ? "top 92%" : "top 82%"),
       toggleActions: "play none none none",
       once: true,
     },
@@ -47,6 +59,9 @@ export function usePageMotion(
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+
+    configureScrollTriggerForDevices();
+    const narrow = isNarrowViewport();
 
     const ctx = gsap.context(() => {
       if (prefersReducedMotion()) {
@@ -65,26 +80,26 @@ export function usePageMotion(
             ".gallery__img",
             ".stats__item",
             ".hero__deco",
+            ".cis__heading-inner",
+            ".footer-sitemap__col",
+            ".stagger-section__intro > *",
           ],
           { clearProps: "all", opacity: 1, y: 0, x: 0, scale: 1, rotate: 0 },
         );
         return;
       }
 
-      // Refresh after layout settles (fonts / images)
-      requestAnimationFrame(() => ScrollTrigger.refresh());
-
       gsap.set(
         [".metric-card", ".bounce-card", ".role-card", ".gallery__img"],
-        { transformOrigin: "center center", willChange: "transform" },
+        { transformOrigin: "center center", force3D: true },
       );
 
-      // ——— Ambient loops (more presence) ———
+      // ——— Ambient loops ———
       gsap.utils.toArray<HTMLElement>(".cloud").forEach((cloud, i) => {
         gsap.to(cloud, {
-          x: i % 2 === 0 ? 28 : -22,
-          y: i % 2 === 0 ? 10 : -8,
-          duration: 18 + i * 5,
+          x: i % 2 === 0 ? (narrow ? 14 : 28) : narrow ? -12 : -22,
+          y: i % 2 === 0 ? (narrow ? 6 : 10) : narrow ? -5 : -8,
+          duration: (narrow ? 14 : 18) + i * 5,
           ease: "sine.inOut",
           yoyo: true,
           repeat: -1,
@@ -94,8 +109,8 @@ export function usePageMotion(
 
       gsap.utils.toArray<HTMLElement>(".float-bob").forEach((el, i) => {
         gsap.to(el, {
-          y: -(16 + (i % 4) * 5),
-          rotate: i % 2 === 0 ? 6 : -7,
+          y: -(narrow ? 10 : 16) - (i % 4) * (narrow ? 3 : 5),
+          rotate: i % 2 === 0 ? (narrow ? 4 : 6) : narrow ? -5 : -7,
           duration: 2.2 + (i % 5) * 0.25,
           ease: "sine.inOut",
           yoyo: true,
@@ -111,35 +126,40 @@ export function usePageMotion(
         scrub: true,
       } as const;
 
+      const yFar = narrow ? -60 : -120;
+      const yMid = narrow ? -90 : -180;
+      const yNear = narrow ? -120 : -240;
+
       gsap.to(".cloud--far", {
-        y: -120,
+        y: yFar,
         ease: "none",
         scrollTrigger: { ...cloudScroll, scrub: 1.8 },
       });
       gsap.to(".cloud--mid", {
-        y: -180,
+        y: yMid,
         ease: "none",
         scrollTrigger: { ...cloudScroll, scrub: 1.4 },
       });
       gsap.to(".cloud--near:not(.cloud--header)", {
-        y: -240,
-        scale: 1.08,
+        y: yNear,
+        scale: narrow ? 1.04 : 1.08,
         ease: "none",
         scrollTrigger: { ...cloudScroll, scrub: 1.1 },
       });
       gsap.to(".cloud--header", {
-        y: -48,
+        y: narrow ? -28 : -48,
         opacity: 0.35,
         ease: "none",
         scrollTrigger: { ...cloudScroll, scrub: 2 },
       });
       gsap.to(".sky-layer__haze--mist", {
-        y: 80,
+        y: narrow ? 40 : 80,
         opacity: 0.15,
         ease: "none",
         scrollTrigger: { ...cloudScroll, scrub: 1.6 },
       });
 
+      const parallaxScale = narrow ? 0.45 : 1;
       [
         { sel: ".parallax--money-hero", y: -140, x: 55, rotate: 8 },
         { sel: ".parallax--rocket-hero", y: -90, x: -40, rotate: 6 },
@@ -149,9 +169,9 @@ export function usePageMotion(
       ].forEach(({ sel, y, x, rotate }) => {
         gsap.utils.toArray<HTMLElement>(sel).forEach((el) => {
           gsap.to(el, {
-            y,
-            x,
-            rotate,
+            y: y * parallaxScale,
+            x: x * parallaxScale,
+            rotate: rotate * parallaxScale,
             ease: "none",
             scrollTrigger: {
               trigger: root,
@@ -165,27 +185,35 @@ export function usePageMotion(
 
       // ——— Header load ———
       gsap.from(".header__shell", {
-        y: -48,
+        y: narrow ? -28 : -48,
         opacity: 0,
-        scale: 0.94,
-        duration: 1,
-        ease: "back.out(1.5)",
+        scale: 0.96,
+        duration: narrow ? 0.75 : 1,
+        ease: "power3.out",
+        clearProps: "transform,opacity",
       });
 
       // ——— Hero deco pop ———
       gsap.from(".hero .parallax-wrap", {
-        scale: 0.2,
+        scale: narrow ? 0.55 : 0.2,
         opacity: 0,
-        rotate: -18,
-        duration: 1.25,
-        stagger: 0.14,
-        ease: "elastic.out(1, 0.55)",
-        delay: 0.15,
+        rotate: narrow ? -8 : -18,
+        duration: narrow ? 0.9 : 1.25,
+        stagger: 0.1,
+        ease: narrow ? "power3.out" : "elastic.out(1, 0.55)",
+        delay: 0.1,
+        clearProps: "transform,opacity",
       });
 
-      // ——— Metric cards: cinematic entrance ———
+      // ——— Metric cards ———
       gsap.utils.toArray<HTMLElement>(".metric-card").forEach((card, i) => {
-        const fromX = i % 2 === 0 ? -120 : 120;
+        const fromX = narrow
+          ? i % 2 === 0
+            ? -36
+            : 36
+          : i % 2 === 0
+            ? -120
+            : 120;
         const text = card.querySelectorAll(".metric-card__text > *");
         const art = card.querySelector(".metric-card__art");
         const artWrap = card.querySelector(".metric-card__art-wrap");
@@ -194,68 +222,72 @@ export function usePageMotion(
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: ".feature-cards",
-            start: "top 88%",
+            start: narrow ? "top 95%" : "top 88%",
             toggleActions: "play none none none",
             once: true,
           },
-          delay: i * 0.16,
+          delay: i * (narrow ? 0.1 : 0.16),
         });
 
         tl.from(card, {
-          y: 100,
+          y: narrow ? 48 : 100,
           x: fromX,
-          rotateY: i % 2 === 0 ? -18 : 18,
-          rotateZ: i % 2 === 0 ? -8 : 8,
-          scale: 0.82,
+          ...(narrow
+            ? {}
+            : {
+                rotateY: i % 2 === 0 ? -18 : 18,
+                rotateZ: i % 2 === 0 ? -8 : 8,
+              }),
+          scale: narrow ? 0.92 : 0.82,
           opacity: 0,
-          duration: 1.05,
-          ease: "power4.out",
-          clearProps: "transform",
+          duration: narrow ? 0.75 : 1.05,
+          ease: "power3.out",
+          clearProps: "transform,opacity",
+          force3D: true,
         })
           .from(
             text,
             {
-              y: 36,
+              y: narrow ? 18 : 36,
               opacity: 0,
-              filter: "blur(8px)",
-              duration: 0.65,
-              stagger: 0.12,
+              duration: 0.55,
+              stagger: 0.08,
               ease: "power3.out",
               clearProps: "all",
             },
-            "-=0.5",
+            "-=0.4",
           )
           .from(
             art,
             {
-              y: 80,
-              scale: 0.65,
-              rotate: i % 2 === 0 ? 14 : -14,
+              y: narrow ? 36 : 80,
+              scale: 0.8,
+              rotate: narrow ? 0 : i % 2 === 0 ? 14 : -14,
               opacity: 0,
-              duration: 0.95,
-              ease: "back.out(1.7)",
-              clearProps: "transform",
+              duration: narrow ? 0.7 : 0.95,
+              ease: "power3.out",
+              clearProps: "transform,opacity",
             },
-            "-=0.55",
+            "-=0.45",
           )
           .from(
             glow,
-            { opacity: 0, scale: 0.6, duration: 0.6, ease: "power2.out" },
-            "-=0.5",
+            { opacity: 0, scale: 0.7, duration: 0.5, ease: "power2.out" },
+            "-=0.4",
           );
 
         if (artWrap) {
           gsap.to(artWrap, {
-            y: i % 2 === 0 ? -16 : 16,
+            y: i % 2 === 0 ? (narrow ? -10 : -16) : narrow ? 10 : 16,
             duration: 2.4 + i * 0.25,
             ease: "sine.inOut",
             yoyo: true,
             repeat: -1,
-            delay: 1 + i * 0.15,
+            delay: 0.8 + i * 0.12,
           });
 
           gsap.to(artWrap, {
-            yPercent: i % 2 === 0 ? -14 : 14,
+            yPercent: i % 2 === 0 ? (narrow ? -8 : -14) : narrow ? 8 : 14,
             ease: "none",
             scrollTrigger: {
               trigger: ".feature-cards",
@@ -267,7 +299,6 @@ export function usePageMotion(
         }
       });
 
-      // Count-ups with overshoot feel
       gsap.utils
         .toArray<HTMLElement>(".metric-card__count[data-count]")
         .forEach((el) => {
@@ -280,12 +311,12 @@ export function usePageMotion(
 
           ScrollTrigger.create({
             trigger: el,
-            start: "top 92%",
+            start: "top 96%",
             once: true,
             onEnter: () => {
               gsap.to(obj, {
                 val: target,
-                duration: 1.7,
+                duration: 1.4,
                 ease: "power3.out",
                 onUpdate: () => {
                   el.textContent = format(obj.val);
@@ -295,24 +326,23 @@ export function usePageMotion(
           });
         });
 
-      // ——— Stats: punchy stagger + scale ———
+      // ——— Stats ———
       revealOnce(
         ".stats__eyebrow",
         ".stats",
-        { y: 40, opacity: 0, filter: "blur(10px)" },
-        { duration: 0.8 },
+        { y: narrow ? 24 : 40, opacity: 0 },
+        { duration: 0.7 },
       );
       gsap.fromTo(
         ".stats__eyebrow-text",
-        { scale: 0.92, letterSpacing: "0.08em" },
+        { scale: 0.94 },
         {
           scale: 1,
-          letterSpacing: "0.14em",
-          duration: 1.1,
+          duration: 0.9,
           ease: "power3.out",
           scrollTrigger: {
             trigger: ".stats",
-            start: "top 82%",
+            start: narrow ? "top 92%" : "top 82%",
             once: true,
           },
         },
@@ -323,18 +353,22 @@ export function usePageMotion(
         ease: "sine.inOut",
         yoyo: true,
         repeat: -1,
-        delay: 1.2,
+        delay: 1,
         scrollTrigger: {
           trigger: ".stats",
-          start: "top 82%",
+          start: narrow ? "top 92%" : "top 82%",
           once: true,
         },
       });
       revealOnce(
         ".stats__item",
         ".stats",
-        { y: 56, opacity: 0, scale: 0.88 },
-        { stagger: 0.1, start: "top 84%", ease: "back.out(1.4)" },
+        { y: narrow ? 32 : 56, opacity: 0, scale: 0.92 },
+        {
+          stagger: 0.08,
+          start: narrow ? "top 92%" : "top 84%",
+          ease: "power3.out",
+        },
       );
 
       gsap.utils
@@ -346,17 +380,22 @@ export function usePageMotion(
           const obj = { val: 0 };
           ScrollTrigger.create({
             trigger: el,
-            start: "top 90%",
+            start: "top 95%",
             once: true,
             onEnter: () => {
               gsap.fromTo(
                 el,
-                { scale: 0.7, opacity: 0.4 },
-                { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" },
+                { scale: 0.85, opacity: 0.5 },
+                {
+                  scale: 1,
+                  opacity: 1,
+                  duration: 0.45,
+                  ease: "power3.out",
+                },
               );
               gsap.to(obj, {
                 val: target,
-                duration: 1.4,
+                duration: 1.2,
                 ease: "power3.out",
                 onUpdate: () => {
                   el.textContent = `${Math.round(obj.val)}${suffix}`;
@@ -366,10 +405,10 @@ export function usePageMotion(
           });
         });
 
-      // ——— Why / bouncy features (Motion handles card enter; light GSAP scrub) ———
+      // ——— Bounce cards scrub ———
       gsap.utils.toArray<HTMLElement>(".bounce-card").forEach((card, i) => {
         gsap.to(card, {
-          y: i % 2 === 0 ? -18 : 14,
+          y: i % 2 === 0 ? (narrow ? -10 : -18) : narrow ? 8 : 14,
           ease: "none",
           scrollTrigger: {
             trigger: ".bouncy-features",
@@ -384,65 +423,83 @@ export function usePageMotion(
       revealOnce(
         ".roles__intro > *",
         ".roles",
-        { y: 40, opacity: 0, filter: "blur(8px)" },
-        { stagger: 0.1 },
+        { y: narrow ? 24 : 40, opacity: 0 },
+        { stagger: 0.08 },
       );
       gsap.utils.toArray<HTMLElement>(".role-card").forEach((card, i) => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: ".roles",
-            start: "top 70%",
+            start: narrow ? "top 88%" : "top 70%",
             once: true,
           },
-          delay: i * 0.14,
+          delay: i * (narrow ? 0.08 : 0.14),
         });
         tl.from(card, {
-          y: 64,
-          x: i === 0 ? -80 : 80,
-          rotateY: i === 0 ? 18 : -18,
+          y: narrow ? 40 : 64,
+          x: narrow ? 0 : i === 0 ? -80 : 80,
           opacity: 0,
-          scale: 0.9,
-          duration: 1,
-          ease: "power4.out",
-          clearProps: "transform",
+          scale: narrow ? 0.96 : 0.9,
+          duration: narrow ? 0.7 : 1,
+          ease: "power3.out",
+          clearProps: "transform,opacity",
+          force3D: true,
         }).from(
           card.querySelectorAll(
             ".ppc-badge, .role-card__title, .role-card__tagline, .role-card__list li, .btn--role",
           ),
           {
-            y: 24,
+            y: 16,
             opacity: 0,
-            stagger: 0.07,
-            duration: 0.5,
+            stagger: 0.05,
+            duration: 0.45,
             ease: "power2.out",
             clearProps: "all",
           },
-          "-=0.45",
+          "-=0.35",
         );
       });
 
-      // ——— Verticals overview intro (Flip gallery owns its own motion) ———
       revealOnce(
         ".vfg-section .verticals__intro > *",
         ".vfg-section",
-        { y: 36, opacity: 0 },
-        { stagger: 0.08, duration: 0.75 },
+        { y: 28, opacity: 0 },
+        { stagger: 0.08, duration: 0.7 },
       );
 
-      // ——— Verticals sticky stack (optional heading) ———
       if (root.querySelector(".cis__heading-inner")) {
         revealOnce(
           ".cis__heading-inner > :not(.cis__grid)",
           ".cis",
-          { y: 20, opacity: 0 },
-          { stagger: 0.06, duration: 0.65 },
+          { y: 16, opacity: 0 },
+          { stagger: 0.05, duration: 0.6 },
         );
       }
 
-      // ——— CTA marquee (if present on page) ———
+      // Mobile: animate CIS cards in as they enter (sticky is off under 900px)
+      if (narrow) {
+        gsap.utils.toArray<HTMLElement>(".cis__card").forEach((card, i) => {
+          gsap.from(card, {
+            y: 40,
+            opacity: 0,
+            scale: 0.96,
+            duration: 0.7,
+            ease: "power3.out",
+            immediateRender: false,
+            clearProps: "transform,opacity",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 92%",
+              once: true,
+            },
+            delay: (i % 3) * 0.04,
+          });
+        });
+      }
+
       if (root.querySelector(".cta-vertical__marquee-wrap")) {
         gsap.to(".cta-vertical__marquee-wrap", {
-          y: -40,
+          y: narrow ? -20 : -40,
           ease: "none",
           scrollTrigger: {
             trigger: ".cta-vertical",
@@ -453,39 +510,50 @@ export function usePageMotion(
         });
       }
 
-      // ——— Testimonials section pin-feel (gentle scale) ———
       if (root.querySelector(".stagger-section")) {
         gsap.from(".stagger-section__intro > *", {
-          y: 40,
+          y: narrow ? 24 : 40,
           opacity: 0,
-          filter: "blur(10px)",
-          stagger: 0.1,
-          duration: 0.9,
+          stagger: 0.08,
+          duration: 0.75,
           ease: "power3.out",
+          clearProps: "transform,opacity",
           scrollTrigger: {
             trigger: ".stagger-section",
-            start: "top 80%",
+            start: narrow ? "top 90%" : "top 80%",
             once: true,
           },
         });
       }
 
-      // ——— Footer sitemap cascade ———
       if (root.querySelector(".footer-sitemap")) {
         revealOnce(
           ".footer-sitemap__col",
           ".footer-sitemap",
-          { y: 36, opacity: 0 },
-          { stagger: 0.08, start: "top 88%" },
+          { y: narrow ? 24 : 36, opacity: 0 },
+          { stagger: 0.06, start: "top 92%" },
         );
       }
     }, root);
 
-    const onResize = () => ScrollTrigger.refresh();
-    window.addEventListener("resize", onResize);
+    const clearScheduled = scheduleScrollTriggerRefresh();
+    const unbindRefresh = bindScrollTriggerRefreshListeners();
+    const clearSafety = ensureMotionTargetsVisible([
+      ".metric-card",
+      ".bounce-card",
+      ".role-card",
+      ".stats__item",
+      ".stats__eyebrow",
+      ".cis__card",
+      ".footer-sitemap__col",
+      ".stagger-section__intro > *",
+      ".header__shell",
+    ]);
 
     return () => {
-      window.removeEventListener("resize", onResize);
+      clearScheduled();
+      unbindRefresh();
+      clearSafety();
       ctx.revert();
       clearScrollLocksSafe();
     };

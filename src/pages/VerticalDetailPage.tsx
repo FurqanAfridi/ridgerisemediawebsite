@@ -3,6 +3,8 @@ import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
 import { getVerticalBySlug, verticals } from "@/data/verticals";
 import { site } from "@/data/site";
+import { verticalDetailFaqs } from "@/data/faqs";
+import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import "./pages.css";
 
 export default function VerticalDetailPage() {
@@ -25,21 +27,26 @@ export default function VerticalDetailPage() {
       ? related
       : verticals.filter((item) => item.slug !== vertical.slug).slice(0, 3);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: `${vertical.name} Pay Per Call & Leads`,
-    description: vertical.description,
-    url: `${site.url}/verticals/${vertical.slug}`,
-    provider: {
-      "@type": "Organization",
-      name: site.name,
-      url: site.url,
+  const faqs = verticalDetailFaqs(vertical.name);
+
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: `${vertical.name} Pay Per Call & Leads`,
+      description: vertical.description,
+      url: `${site.url}/verticals/${vertical.slug}`,
+      provider: {
+        "@type": "Organization",
+        name: site.name,
+        url: site.url,
+      },
+      areaServed: "US",
+      serviceType: "Pay-per-call marketing",
+      category: vertical.category,
     },
-    areaServed: "US",
-    serviceType: "Pay-per-call marketing",
-    category: vertical.category,
-  };
+    buildFaqJsonLd(faqs),
+  ];
 
   return (
     <main>
@@ -104,6 +111,12 @@ export default function VerticalDetailPage() {
           ))}
         </ul>
       </section>
+
+      <FaqSection
+        title={`${vertical.name} FAQ`}
+        description={`Buying ${vertical.name} calls and leads — models, qualification, and supply.`}
+        items={faqs}
+      />
 
       <section className="cta-band">
         <div className="cta-band__inner">

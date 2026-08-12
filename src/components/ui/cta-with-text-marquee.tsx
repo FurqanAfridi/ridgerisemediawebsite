@@ -130,9 +130,9 @@ export default function CTAWithVerticalMarquee() {
         <div className="cta-vertical__grid">
           <motion.div
             className="cta-vertical__copy"
-            initial={{ opacity: 0, x: -48, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, amount: 0.35 }}
+            initial={{ opacity: 0, x: -32 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.15, margin: "0px 0px -6% 0px" }}
             transition={{ type: "spring", stiffness: 110, damping: 18 }}
           >
             <h2 id="cta-vertical-heading" className="cta-vertical__title">
@@ -169,7 +169,7 @@ export default function CTAWithVerticalMarquee() {
             className="cta-vertical__marquee-wrap"
             initial={{ opacity: 0, x: 64, rotate: 3, scale: 0.94 }}
             whileInView={{ opacity: 1, x: 0, rotate: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.15, margin: "0px 0px -6% 0px" }}
             transition={{ type: "spring", stiffness: 100, damping: 16, delay: 0.12 }}
           >
             <div className="cta-vertical__marquee-inner">

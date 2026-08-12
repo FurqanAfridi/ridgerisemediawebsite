@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { Gauge, Layers3, ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
+import { aboutFaqs } from "@/data/faqs";
+import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import "./pages.css";
 
 const values = [
@@ -53,6 +55,7 @@ export default function AboutPage() {
           "CPL leads",
           "qualified inbound calls",
         ]}
+        jsonLd={buildFaqJsonLd(aboutFaqs)}
       />
 
       <PageHero
@@ -139,6 +142,12 @@ export default function AboutPage() {
           ))}
         </ol>
       </section>
+
+      <FaqSection
+        title="About FAQ"
+        description="Hybrid supply, call-first measurement, and who we work with."
+        items={aboutFaqs}
+      />
 
       <section className="cta-band">
         <div className="cta-band__inner">

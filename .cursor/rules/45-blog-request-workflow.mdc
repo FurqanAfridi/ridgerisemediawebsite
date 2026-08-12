@@ -1,0 +1,48 @@
+---
+description: Workflow for writing a new blog post from a topic I provide — keyword handling, image handling with default fallback, output checklist.
+globs: src/data/blog.ts, src/pages/BlogPostPage.tsx, src/pages/BlogPage.tsx, public/sitemap.xml, public/assets/**
+alwaysApply: false
+---
+
+# Blog request workflow
+
+When I ask for a new blog post, I will give you a topic or a short brief. Sometimes I'll also give keywords and/or an image. Follow this exact process. All rules in 40-blog-content.mdc and 20-voice-anti-ai-writing.mdc still apply on top of this.
+
+## Inputs and how to treat them
+
+**Topic/brief (always provided):** This defines the post. Don't drift into a different angle than the brief. If the brief is one line, expand it into the post a buyer (or publisher, if the brief says so) would actually search for. If the brief is ambiguous about audience, default to BUYER (80/20 rule).
+
+**Keywords (sometimes provided):**
+- If I provide keywords, they are the SEO targets. Use them as-is — do not swap them for "better" keywords:
+  - Pick the strongest one as primary → it goes in `slug`, `title`, `excerpt`, and the first ~100 words of `content`, naturally worded.
+  - Remaining keywords → `tags` and worked into body paragraphs/headings where they read naturally. Never force a keyword into a sentence that sounds stuffed — rephrase the sentence instead.
+- If I provide NO keywords, derive 3–5 buyer-intent phrases yourself from the topic (per 30-seo-strategy.mdc), state them at the top of your reply so I can veto them, then write with those.
+- Never use a keyword more times than it reads naturally. Density is not a goal; placement is.
+
+**Image (sometimes provided):**
+- If I provide an image file or path: save/copy it to `public/assets/blog/{slug}.{ext}` and set the post's `image` field to `/assets/blog/{slug}.{ext}`.
+- If I provide NO image: use the default blog image at `/assets/blog/default.png`. Never invent, generate, or hotlink an image, and never reuse another post's custom image.
+- Alt text: the post title (or a more descriptive variant of it) — set wherever the image is rendered.
+
+## One-time image setup (authorized exception to structure lock)
+
+The `BlogPost` type currently has no image field. The FIRST time an image is needed, make exactly this minimal change and nothing more:
+1. In `src/data/blog.ts`, add `image?: string;` to the `BlogPost` type.
+2. In `src/pages/BlogPostPage.tsx`, render `post.image` once (falling back to `/assets/blog/default.png`) near the top of the article, using a plain `<img>` with existing styling patterns — no new components, no new CSS files.
+3. Optionally pass `image` into the post's `<Seo />` so it becomes the OG image.
+Do not restructure anything else. After this exists, never touch the type or page again — just set the `image` value per post.
+
+## Output per request (all in one pass)
+
+1. New entry appended to `blogPosts` in `src/data/blog.ts` matching the type exactly — slug (kebab-case, contains primary keyword, permanent), title ≤ ~65 chars, excerpt 140–160 chars usable as meta description, real category, correct readTime for the word count, today's date unless I specify one.
+2. Image handled per the rules above.
+3. New `<url>` entry in `public/sitemap.xml` with `lastmod` = post date.
+4. Internal links inside content: matching `/verticals/{slug}` page(s) where relevant, plus `/buyers` (default) or `/publishers` (only for publisher-audience posts).
+5. A short summary back to me: primary keyword chosen, secondary keywords, audience (buyer/publisher), image used, and any `{TODO: confirm with owner}` placeholders inserted.
+
+## Don'ts
+
+- Don't write multiple posts from one brief unless I ask.
+- Don't change existing posts while adding a new one.
+- Don't pad length to hit a word count — length follows the brief and search intent.
+- Don't invent stats, results, payouts, or volumes to make the post stronger — placeholder and flag instead.

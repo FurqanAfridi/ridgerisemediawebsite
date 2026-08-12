@@ -64,7 +64,7 @@ export function AnimatedGroup({
       {...(inView
         ? {
             whileInView: "visible",
-            viewport: { once: true, amount: 0.2, margin: "0px 0px -5% 0px" },
+            viewport: { once: true, amount: 0.12, margin: "0px 0px -6% 0px" },
           }
         : { animate: "visible" })}
       variants={container}
