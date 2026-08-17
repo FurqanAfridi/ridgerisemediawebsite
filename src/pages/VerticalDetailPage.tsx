@@ -2,6 +2,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
 import { getVerticalBySlug, verticals } from "@/data/verticals";
+import { getVerticalGuide } from "@/data/vertical-guides";
 import { site } from "@/data/site";
 import { verticalDetailFaqs } from "@/data/faqs";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
@@ -14,6 +15,8 @@ export default function VerticalDetailPage() {
   if (!vertical) {
     return <Navigate to="/verticals" replace />;
   }
+
+  const guide = getVerticalGuide(vertical.slug);
 
   const related = verticals
     .filter(
@@ -52,7 +55,7 @@ export default function VerticalDetailPage() {
     <main>
       <Seo
         title={`${vertical.name} Pay Per Call & Leads`}
-        description={vertical.description}
+        description={`${vertical.name} pay per call and CPL. ${vertical.summary} Filters for geo, hours, and exclusivity. Discuss a campaign.`}
         path={`/verticals/${vertical.slug}`}
         keywords={vertical.keywords}
         jsonLd={jsonLd}
@@ -72,8 +75,22 @@ export default function VerticalDetailPage() {
       />
 
       <section className="inner-section">
-        <article className="prose">
-          <p>{vertical.description}</p>
+        <figure className="vert-guide__media">
+          <img
+            src={`/assets/verticals/${vertical.slug}.jpg`}
+            alt=""
+          />
+        </figure>
+        <article className="prose prose--guide">
+          <p>{guide?.lede ?? vertical.description}</p>
+          {guide?.sections.map((section) => (
+            <section key={section.heading}>
+              <h2>{section.heading}</h2>
+              {section.paragraphs.map((paragraph, index) => (
+                <p key={`${section.heading}-${index}`}>{paragraph}</p>
+              ))}
+            </section>
+          ))}
         </article>
         <ul className="fit-grid" style={{ marginTop: "var(--space-xl)" }}>
           <li className="fit-card">
@@ -114,7 +131,7 @@ export default function VerticalDetailPage() {
 
       <FaqSection
         title={`${vertical.name} FAQ`}
-        description={`Buying ${vertical.name} calls and leads — models, qualification, and supply.`}
+        description={`Buying ${vertical.name} calls and leads. Models, qualification, and supply.`}
         items={faqs}
       />
 
@@ -122,15 +139,15 @@ export default function VerticalDetailPage() {
         <div className="cta-band__inner">
           <h2>Need {vertical.name} calls or leads?</h2>
           <p>
-            Tell us your states, hours, and how you define a qualified call —
-            we&apos;ll talk CPL, cost per call, or traffic into your funnel.
+            Tell us your states, hours, and how you define a qualified call.
+            We&apos;ll talk CPL, cost per call, or traffic into your funnel.
           </p>
           <div className="cta-band__actions">
             <Link to="/contact?role=buyer" className="btn btn--purple">
-              Tell us what a qualified call looks like
+              Discuss a campaign
             </Link>
             <Link to="/verticals" className="btn btn--mint">
-              All verticals
+              Browse verticals
             </Link>
           </div>
         </div>

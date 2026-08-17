@@ -41,10 +41,10 @@
 
 .cta-vertical__title {
   margin: 0;
-  font-size: var(--text-display);
+  font-size: var(--text-3xl);
   font-weight: 600;
-  letter-spacing: -1.6px;
-  line-height: 1.08;
+  letter-spacing: -1.2px;
+  line-height: 1.12;
   color: var(--color-heading);
 }
 

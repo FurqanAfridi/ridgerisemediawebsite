@@ -1,21 +1,14 @@
-import { useMemo, useState } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
-import {
-  BookOpen,
-  Car,
-  GraduationCap,
-  HeartPulse,
-  Home,
-  Landmark,
-  Scale,
-  Shield,
-  Sun,
-  Thermometer,
-  Umbrella,
-  Wallet,
-} from "lucide-react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
+import {
+  CardStack,
+  type CardStackItem,
+} from "@/components/ui/card-stack";
 import {
   verticalCategories,
   verticals,
@@ -23,48 +16,117 @@ import {
 } from "@/data/verticals";
 import { verticalsFaqs } from "@/data/faqs";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
+import { prefersReducedMotion } from "@/lib/motion-env";
 import "./pages.css";
 
-const categoryIcons = {
-  Insurance: Shield,
-  Legal: Scale,
-  "Home Services": Home,
-  Finance: Wallet,
-  Other: BookOpen,
-} as const;
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const slugIcons: Record<string, typeof Car> = {
-  "auto-insurance": Car,
-  "health-insurance": HeartPulse,
-  "life-insurance": Umbrella,
-  "home-insurance": Home,
-  "medicare-advantage": HeartPulse,
-  "final-expense": Umbrella,
-  "personal-injury": Scale,
-  "mass-tort": Scale,
-  "debt-settlement": Wallet,
-  solar: Sun,
-  hvac: Thermometer,
-  roofing: Home,
-  "home-security": Shield,
-  mortgage: Landmark,
-  "tax-relief": Landmark,
-  education: GraduationCap,
+const categoryCopy: Record<Vertical["category"], string> = {
+  Insurance:
+    "The core of what we fill: auto, health, life, home, Medicare Advantage, and final expense on CPL and cost per call.",
+  Legal:
+    "Personal injury and mass tort intake. Exclusive transfers, case-type screens, and hours that match your attorneys.",
+  "Home Services":
+    "Solar, HVAC, roofing, and home security. Geo, homeownership, and capacity filters before volume scales.",
+  Finance:
+    "Debt settlement, mortgage, and tax relief with the debt, credit, and product floors your closers actually need.",
+  Other:
+    "Education enrollment calls where program and geo match what the school can start.",
 };
 
-export default function VerticalsPage() {
-  const [active, setActive] = useState<string>("All");
+const categoryIds: Record<Vertical["category"], string> = {
+  Insurance: "insurance",
+  Legal: "legal",
+  "Home Services": "home-services",
+  Finance: "finance",
+  Other: "other",
+};
 
-  const filtered = useMemo(() => {
-    if (active === "All") return verticals;
-    return verticals.filter((v) => v.category === active);
-  }, [active]);
+const verticalTone: Record<string, string> = {
+  "auto-insurance": "linear-gradient(160deg, #d7e584 0%, #14b8a6 100%)",
+  "health-insurance": "linear-gradient(160deg, #f1a8ec 0%, #8b68e5 100%)",
+  "life-insurance": "linear-gradient(160deg, #7dd3fc 0%, #5eccdb 100%)",
+  "home-insurance": "linear-gradient(160deg, #c4b5fd 0%, #5d62dd 100%)",
+  "medicare-advantage": "linear-gradient(160deg, #c4b5fd 0%, #aaa0ec 100%)",
+  "final-expense": "linear-gradient(160deg, #6ff0c8 0%, #2ae2a8 55%, #0d9488 100%)",
+  "personal-injury": "linear-gradient(160deg, #c4b5fd 0%, #5d62dd 100%)",
+  "mass-tort": "linear-gradient(160deg, #fda4af 0%, #8b68e5 100%)",
+  "debt-settlement": "linear-gradient(160deg, #fcd34d 0%, #f97316 100%)",
+  solar: "linear-gradient(160deg, #ffebf1 0%, #f9a8d4 100%)",
+  hvac: "linear-gradient(160deg, #7dd3fc 0%, #0ea5e9 100%)",
+  roofing: "linear-gradient(160deg, #fda4af 0%, #eb807b 100%)",
+  "home-security": "linear-gradient(160deg, #eb807b 0%, #f97316 100%)",
+  mortgage: "linear-gradient(160deg, #6ff0c8 0%, #14b8a6 100%)",
+  "tax-relief": "linear-gradient(160deg, #fcd34d 0%, #f59e0b 100%)",
+  education: "linear-gradient(160deg, #c4b5fd 0%, #8b68e5 100%)",
+};
+
+function toStackItem(vertical: Vertical): CardStackItem {
+  return {
+    id: vertical.slug,
+    title: vertical.name,
+    description: vertical.summary,
+    tag: vertical.category,
+    href: `/verticals/${vertical.slug}`,
+    ctaLabel: `View ${vertical.name} →`,
+    imageSrc: `/assets/verticals/${vertical.slug}.jpg`,
+    background: verticalTone[vertical.slug],
+  };
+}
+
+export default function VerticalsPage() {
+  const catsRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+
+      const cats = gsap.utils.toArray<HTMLElement>(".vert-cat");
+      cats.forEach((cat, index) => {
+        const head = cat.querySelector(".inner-section__head");
+        const stack = cat.querySelector(".card-stack");
+        if (!head || !stack) return;
+
+        gsap.from(head, {
+          y: 32,
+          opacity: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: cat,
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+            id: `vert-head-${index}`,
+          },
+        });
+
+        gsap.from(stack, {
+          y: 80,
+          opacity: 0,
+          scale: 0.9,
+          rotateX: 14,
+          transformOrigin: "50% 100%",
+          duration: 0.95,
+          ease: "power3.out",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: cat,
+            start: "top 78%",
+            toggleActions: "play none none reverse",
+            id: `vert-stack-${index}`,
+          },
+        });
+      });
+    },
+    { scope: catsRef },
+  );
 
   return (
     <main>
       <Seo
         title="Pay Per Call & Lead Generation Verticals"
-        description="Browse RidgeRise verticals where buyer demand and campaign supply meet — Insurance, Legal, Home Services, Finance, and more on CPL and cost per call."
+        description="Browse RidgeRise verticals where buyer demand and campaign supply meet. Insurance, Legal, Home Services, Finance, and Education on CPL and cost per call."
         path="/verticals"
         keywords={[
           "pay per call verticals",
@@ -88,32 +150,58 @@ export default function VerticalsPage() {
         secondaryCta={{ label: "Apply as a partner", to: "/publishers" }}
       />
 
-      <section className="inner-section">
-        <div className="pill-row" role="tablist" aria-label="Filter verticals">
-          <button
-            type="button"
-            className={active === "All" ? "pill pill--active" : "pill"}
-            onClick={() => setActive("All")}
-          >
-            All
-          </button>
+      <section className="inner-section" ref={catsRef}>
+        <div className="pill-row" aria-label="Jump to a category">
           {verticalCategories.map((cat) => (
-            <button
-              key={cat}
-              type="button"
-              className={active === cat ? "pill pill--active" : "pill"}
-              onClick={() => setActive(cat)}
-            >
+            <a key={cat} className="pill" href={`#${categoryIds[cat]}`}>
               {cat}
-            </button>
+            </a>
           ))}
         </div>
 
-        <ul className="card-grid">
-          {filtered.map((vertical) => (
-            <VerticalCard key={vertical.slug} vertical={vertical} />
-          ))}
-        </ul>
+        <div className="vert-cats">
+          {verticalCategories.map((cat) => {
+            const items = verticals
+              .filter((vertical) => vertical.category === cat)
+              .map((vertical) => toStackItem(vertical));
+
+            return (
+              <section
+                key={cat}
+                className="vert-cat"
+                id={categoryIds[cat]}
+                aria-labelledby={`${categoryIds[cat]}-heading`}
+              >
+                <div className="inner-section__head">
+                  <h2
+                    id={`${categoryIds[cat]}-heading`}
+                    className="inner-section__title"
+                  >
+                    {cat}
+                  </h2>
+                  <p className="inner-section__sub">{categoryCopy[cat]}</p>
+                </div>
+                <CardStack
+                  items={items}
+                  initialIndex={0}
+                  cardWidth={560}
+                  cardHeight={360}
+                  maxVisible={Math.min(7, Math.max(3, items.length))}
+                  autoAdvance={items.length > 1}
+                  intervalMs={3400}
+                  pauseOnHover
+                  showDots={items.length > 1}
+                  loop={items.length > 1}
+                />
+                {items.length > 1 ? (
+                  <p className="vert-cat__hint" aria-hidden="true">
+                    Drag, tilt, or tap a card to browse
+                  </p>
+                ) : null}
+              </section>
+            );
+          })}
+        </div>
       </section>
 
       <FaqSection
@@ -126,42 +214,19 @@ export default function VerticalsPage() {
         <div className="cta-band__inner">
           <h2>Which verticals do you need filled?</h2>
           <p>
-            Tell us your category, geos, and what a qualified call looks like —
-            or which verticals you want to monetize as a partner.
+            Tell us your category, geos, and what a qualified call looks like.
+            Publishers: which verticals you want to monetize.
           </p>
           <div className="cta-band__actions">
-            <Link to="/contact" className="btn btn--purple">
-              Talk to our team
+            <Link to="/contact?role=buyer" className="btn btn--purple">
+              Discuss a campaign
             </Link>
-            <Link to="/blog" className="btn btn--mint">
-              Read the blog
+            <Link to="/publishers" className="btn btn--mint">
+              Apply as a partner
             </Link>
           </div>
         </div>
       </section>
     </main>
-  );
-}
-
-function VerticalCard({ vertical }: { vertical: Vertical }) {
-  const Icon =
-    slugIcons[vertical.slug] ?? categoryIcons[vertical.category] ?? Shield;
-
-  return (
-    <li>
-      <article className="card-grid__item" id={vertical.slug}>
-        <span className="feature-grid__icon" aria-hidden="true">
-          <Icon size={22} strokeWidth={2.25} />
-        </span>
-        <span className="card-grid__meta">{vertical.category}</span>
-        <h3>
-          <Link to={`/verticals/${vertical.slug}`}>{vertical.name}</Link>
-        </h3>
-        <p>{vertical.summary}</p>
-        <Link className="card-grid__link" to={`/verticals/${vertical.slug}`}>
-          View {vertical.name} →
-        </Link>
-      </article>
-    </li>
   );
 }

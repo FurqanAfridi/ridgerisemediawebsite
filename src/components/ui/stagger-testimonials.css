@@ -111,28 +111,56 @@
   color: rgba(255, 255, 255, 0.75);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
+  .stagger-section {
+    gap: 10px;
+    padding: 20px 0 24px;
+  }
+
+  .stagger-section__intro {
+    margin-bottom: 0;
+    padding: 0 16px;
+    gap: 8px;
+  }
+
   .stagger-testimonials {
-    height: min(520px, 68vh);
+    height: min(400px, 52dvh);
   }
 
   .stagger-card {
-    padding: 22px 18px 28px;
-    max-width: min(300px, calc(100vw - 40px));
+    width: min(280px, calc(100vw - 48px));
+    height: min(360px, 46dvh);
+    padding: 20px 16px 24px;
+    max-width: calc(100vw - 48px);
   }
 
   .stagger-card__quote {
-    font-size: var(--text-sm);
+    font-size: 15px;
+    line-height: 1.4;
+    max-width: none;
   }
 
   .stagger-card__by {
-    bottom: 22px;
-    left: 18px;
-    right: 18px;
+    bottom: 18px;
+    left: 16px;
+    right: 16px;
+    font-size: 13px;
   }
 
-  .stagger-section {
-    padding-bottom: var(--space-2xl);
+  .stagger-card__avatar {
+    width: 44px;
+    height: 50px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .stagger-testimonials {
+    height: min(360px, 50dvh);
+  }
+
+  .stagger-card {
+    padding: 16px 14px 22px;
   }
 }
 

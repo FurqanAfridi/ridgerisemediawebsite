@@ -36,10 +36,10 @@
 
 .bouncy-features__title {
   margin: 0;
-  font-size: var(--text-display);
+  font-size: var(--text-3xl);
   font-weight: 700;
-  letter-spacing: -1.4px;
-  line-height: 1.08;
+  letter-spacing: -1.1px;
+  line-height: 1.12;
   color: var(--color-heading);
 }
 
@@ -168,6 +168,14 @@
   background: linear-gradient(160deg, #fda4af 0%, #8b68e5 100%);
 }
 
+.bounce-card__demo--pink {
+  background: linear-gradient(160deg, #f1a8ec 0%, #8b68e5 100%);
+}
+
+.bounce-card__demo--lime {
+  background: linear-gradient(160deg, #d7e584 0%, #14b8a6 100%);
+}
+
 @media (min-width: 768px) {
   .bouncy-features__header {
     flex-direction: row;
@@ -189,12 +197,25 @@
 }
 
 @media (max-width: 767px) {
+  .bouncy-features {
+    padding-block: var(--section-y);
+  }
+
   .bouncy-features__intro {
     max-width: none;
   }
 
+  .bouncy-features__title {
+    letter-spacing: -0.8px;
+  }
+
   .bounce-card {
-    min-height: 280px;
+    min-height: 0;
+    border-radius: 18px;
+  }
+
+  .bounce-card__title {
+    font-size: var(--text-xl);
   }
 }
 

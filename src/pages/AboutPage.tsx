@@ -1,168 +1,354 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { Gauge, Layers3, ShieldCheck } from "lucide-react";
-import { PageHero } from "@/components/layout/PageHero";
+import {
+  Filter,
+  Headphones,
+  PhoneCall,
+  Radio,
+  Shield,
+  SlidersHorizontal,
+} from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Seo } from "@/components/Seo";
 import { aboutFaqs } from "@/data/faqs";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
+import { Magnetic } from "@/components/ui/magnetic";
+import { prefersReducedMotion } from "@/lib/motion-env";
 import "./pages.css";
+import "./about.css";
 
-const values = [
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+const buyables = [
   {
-    title: "Hybrid supply on purpose",
-    body: "We buy media in-house and work a vetted partner network. Controlling some traffic and vetting the rest is how volume scales without quality collapse.",
-    icon: ShieldCheck,
-    tone: "violet" as const,
+    title: "Exclusive or shared calls",
+    body: "Exclusive when your agents need the only line. Shared when you're testing a geo or filling leftover capacity.",
+    to: "/buyers",
+    label: "Pay per call",
   },
   {
-    title: "Call-first measurement",
-    body: "Campaigns are judged on conversations — duration, disposition, source — not vanity clicks. Buyers and publishers see the same call-level truth.",
-    icon: Gauge,
-    tone: "mint" as const,
+    title: "Live and warm transfers",
+    body: "Qualification before the handoff. Duration rules and hours matched to the board you actually staff.",
+    to: "/buyers",
+    label: "Live transfers",
   },
   {
-    title: "Quality before volume",
-    body: "Qualification rules, geo and hours filters, recording review where applicable, and source cutoffs. Compliance-conscious and TCPA-aware — never a legal guarantee.",
-    icon: Layers3,
-    tone: "amber" as const,
+    title: "CPL leads",
+    body: "Form or application events you define. Useful when the phone isn't the first step, or you want a record plus a call.",
+    to: "/buyers",
+    label: "CPL",
+  },
+  {
+    title: "Qualified traffic",
+    body: "Clicks and redirects into your own funnel when you already have intake and just need cleaner demand.",
+    to: "/buyers",
+    label: "Traffic",
   },
 ];
 
-const timeline = [
+const quality = [
   {
-    title: "Generate and aggregate demand",
-    body: "In-house campaigns plus vetted publishers and media buyers feed high-intent verticals: Insurance, Legal, Home Services, Finance, and Education.",
+    title: "Qualification before transfer",
+    body: "Geo, product, hours, and any IVR or agent screen get written into the brief. A call that misses those rules shouldn't hit your queue.",
   },
   {
-    title: "Route with buyer rules",
-    body: "Vertical, geo, schedule, concurrency, and exclusivity filters decide where each call, lead, or click goes — matched to intake capacity.",
+    title: "Duration and dispositions",
+    body: "Billable isn't 'they talked.' It's the floor you set, plus whether the caller was the right person for the right product.",
   },
   {
-    title: "Price on CPL or cost per call",
-    body: "Buyers pay for qualified inbound calls, live transfers, CPL leads, or traffic. Publishers monetize against live demand with clear terms.",
+    title: "Source-level cutoffs",
+    body: "We monitor paths, not just campaign averages. A publisher or in-house cell that drifts gets paused. The rest keeps running.",
   },
+  {
+    title: "TCPA-aware process",
+    body: "Campaign-specific consent and quality requirements. Compliance-conscious. Not a courtroom promise, and we won't pretend otherwise.",
+  },
+];
+
+const verticalLinks = [
+  { label: "Insurance", to: "/verticals#insurance" },
+  { label: "Legal", to: "/verticals#legal" },
+  { label: "Home Services", to: "/verticals#home-services" },
+  { label: "Finance", to: "/verticals#finance" },
+  { label: "Education", to: "/verticals#other" },
 ];
 
 export default function AboutPage() {
+  const rootRef = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+
+      const blocks = gsap.utils.toArray<HTMLElement>(".about-reveal");
+      blocks.forEach((el) => {
+        gsap.from(el, {
+          y: 36,
+          opacity: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: el,
+            start: "top 84%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+    },
+    { scope: rootRef },
+  );
+
   return (
-    <main>
+    <main className="about-page" ref={rootRef}>
       <Seo
-        title="About Our Pay Per Call Model"
-        description="RidgeRise Media is a US pay-per-call demand aggregator. Hybrid media buying plus vetted partners deliver qualified calls, leads, and traffic. Talk to our team."
+        title="How RidgeRise Buys and Places Calls"
+        description="RidgeRise Media is a US demand aggregator. Hybrid in-house buying plus vetted partners. Buy qualified calls, leads, and traffic on CPL or cost per call."
         path="/about"
         keywords={[
           "demand aggregator",
+          "pay per call",
           "cost per call",
-          "CPL leads",
+          "CPL",
           "qualified inbound calls",
         ]}
         jsonLd={buildFaqJsonLd(aboutFaqs)}
       />
 
-      <PageHero
-        eyebrow="About us"
-        title={
-          <>
-            A demand aggregator built around the{" "}
-            <span className="grad-mint">call</span>
-          </>
-        }
-        description="RidgeRise Media is a US performance marketing company. We generate consumer demand through our own media buying, add volume from vetted publishers, and deliver qualified inbound calls, leads, and traffic to buyers on CPL and cost-per-call."
-        primaryCta={{ label: "Discuss a campaign", to: "/buyers" }}
-        secondaryCta={{ label: "Apply as a partner", to: "/publishers" }}
-      />
-
-      <section className="inner-section">
-        <div className="inner-section__head">
-          <h2 className="inner-section__title">Why this model</h2>
-          <p className="inner-section__sub">
-            Phone still closes deals that forms alone miss. Our job is to put the
-            right caller on the line — and prove what happened after they dialed.
+      <section className="about-hero">
+        <div className="about-hero__copy">
+          <p className="page-hero__eyebrow">About us</p>
+          <h1 className="about-hero__title">
+            We buy the demand. We also vet the partners.{" "}
+            <span className="grad-mint">You get the call.</span>
+          </h1>
+          <p className="about-hero__desc">
+            RidgeRise Media is a US pay-per-call and CPL shop that operates as a
+            demand aggregator. Qualified inbound calls, leads, and traffic for
+            buyers who need intake to keep up. Volume comes from campaigns we
+            run and a vetted partner network, with filters and quality
+            monitoring on both.
           </p>
+          <div className="about-hero__ctas">
+            <Magnetic strength={0.35}>
+              <Link to="/buyers" className="btn btn--purple">
+                Discuss a campaign
+              </Link>
+            </Magnetic>
+            <Magnetic strength={0.35}>
+              <Link to="/publishers" className="btn btn--mint">
+                Apply as a partner
+              </Link>
+            </Magnetic>
+          </div>
         </div>
-        <div className="prose">
+
+        <div className="about-hero__stage" aria-hidden="true">
+          <div className="about-flow">
+            <div className="about-flow__node about-flow__node--in">
+              <Radio size={18} strokeWidth={2.2} />
+              <span>In-house media</span>
+            </div>
+            <div className="about-flow__node about-flow__node--out">
+              <Headphones size={18} strokeWidth={2.2} />
+              <span>Vetted partners</span>
+            </div>
+            <div className="about-flow__merge" />
+            <div className="about-flow__node about-flow__node--end">
+              <PhoneCall size={20} strokeWidth={2.2} />
+              <strong>Your intake</strong>
+              <em>Calls · CPL · Traffic</em>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="about-split" aria-labelledby="about-hybrid-heading">
+        <header className="about-head about-reveal">
+          <h2 id="about-hybrid-heading">Why we refuse to pick one supply lane</h2>
           <p>
-            Pure in-house buying caps scale. Pure network reselling loses control.
-            RidgeRise sits in the middle on purpose: we run our own campaigns so
-            we own messaging and source quality, then add vetted partner traffic
-            when buyers need more volume in the same verticals.
+            Pure in-house buying hits a ceiling. Pure network reselling turns
+            into someone else's leftover traffic. We sit in the middle on
+            purpose.
+          </p>
+        </header>
+        <div className="about-split__grid">
+          <motion.article
+            className="about-panel about-reveal"
+            whileHover={reduce ? undefined : { y: -8 }}
+            transition={{ type: "spring", stiffness: 280, damping: 22 }}
+          >
+            <span className="about-panel__kicker">What we run</span>
+            <h3>Owned media buying</h3>
+            <p>
+              We build and buy campaigns ourselves. That means we own the
+              creative, the offer path, and the first look at whether a source
+              can hold a duration rule. When a buyer says the Monday dump is
+              killing answer rate, we can change the media, not just forward a
+              complaint.
+            </p>
+          </motion.article>
+          <motion.article
+            className="about-panel about-panel--mint about-reveal"
+            whileHover={reduce ? undefined : { y: -8 }}
+            transition={{ type: "spring", stiffness: 280, damping: 22 }}
+          >
+            <span className="about-panel__kicker">What we add</span>
+            <h3>Vetted partner volume</h3>
+            <p>
+              Publishers, media buyers, and aggregators fill the rest, after
+              they clear quality standards. More volume in the same vertical
+              without opening the floodgates. If a path fails review, it gets
+              cut. The campaign doesn't have to die with it.
+            </p>
+          </motion.article>
+        </div>
+        <p className="about-split__note about-reveal">
+          Hybrid isn't a slogan. It's how you scale Insurance, Legal, Home
+          Services, and Finance without watching cost per acquisition fall
+          apart the week you ask for more.
+        </p>
+      </section>
+
+      <section className="about-band" aria-labelledby="about-call-heading">
+        <div className="about-band__inner about-reveal">
+          <h2 id="about-call-heading">The phone is still the product</h2>
+          <p>
+            In these verticals a shopper often needs an agent, an intake rep, or
+            a setter on the line. A form fill can wait overnight. A live
+            transfer can't. We design around conversations: duration floors,
+            dispositions, exclusive vs shared, concurrency caps so your board
+            isn't drowning at 9:05.
           </p>
           <p>
-            Call-first means we care about duration rules, dispositions, and
-            source cutoffs — the mechanics that decide whether your cost per
-            acquisition holds. Quality monitoring is operational, not a slogan.
+            That doesn't mean every qualified call becomes a sale. Answer rate
+            and talk track still sit on your side. We can enforce the brief. We
+            can't close for you.
           </p>
         </div>
       </section>
 
-      <section className="inner-section inner-section--band">
-        <div className="inner-section__head">
-          <h2 className="inner-section__title">What we stand for</h2>
-          <p className="inner-section__sub">
-            Three operating bets that show up in every campaign we run.
+      <section className="about-buy" aria-labelledby="about-buy-heading">
+        <header className="about-head about-reveal">
+          <h2 id="about-buy-heading">What a buyer actually purchases</h2>
+          <p>
+            Cost per call (pay per call) and CPL, plus traffic into your funnel.
+            Filters for vertical, geo, hours, exclusivity, and duration get
+            agreed before anything goes live.{" "}
+            <Link to="/buyers">See buying models</Link>.
           </p>
-        </div>
-        <ul className="feature-grid">
-          {values.map((item) => {
-            const Icon = item.icon;
-            return (
-              <li key={item.title} className="feature-grid__item">
-                <div
-                  className={`feature-grid__icon${
-                    item.tone === "mint"
-                      ? " feature-grid__icon--mint"
-                      : item.tone === "amber"
-                        ? " feature-grid__icon--amber"
-                        : ""
-                  }`}
-                  aria-hidden="true"
-                >
-                  <Icon size={22} strokeWidth={2.25} />
-                </div>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </li>
-            );
-          })}
+        </header>
+        <ul className="about-buy__grid">
+          {buyables.map((item, index) => (
+            <motion.li
+              key={item.title}
+              className="about-buy__card about-reveal"
+              whileHover={reduce ? undefined : { y: -8, rotate: index % 2 ? 0.6 : -0.6 }}
+              transition={{ type: "spring", stiffness: 300, damping: 22 }}
+            >
+              <span>{item.label}</span>
+              <h3>
+                <Link to={item.to}>{item.title}</Link>
+              </h3>
+              <p>{item.body}</p>
+            </motion.li>
+          ))}
         </ul>
       </section>
 
-      <section className="inner-section">
-        <div className="inner-section__head">
-          <h2 className="inner-section__title">How RidgeRise works</h2>
-        </div>
-        <ol className="step-list">
-          {timeline.map((step, i) => (
-            <li key={step.title} className="step-list__item">
-              <span className="step-list__num">{i + 1}</span>
+      <section className="about-quality" aria-labelledby="about-quality-heading">
+        <header className="about-head about-reveal">
+          <h2 id="about-quality-heading">How quality gets enforced</h2>
+          <p>
+            "High-quality calls" is a useless phrase until you say how. These
+            are the practices. No invented rates. No guarantee a caller buys.
+          </p>
+        </header>
+        <ol className="about-quality__list">
+          {quality.map((item, i) => (
+            <li key={item.title} className="about-quality__item about-reveal">
+              <span className="about-quality__num">0{i + 1}</span>
               <div>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
               </div>
             </li>
           ))}
         </ol>
+        <ul className="about-quality__icons" aria-hidden="true">
+          <li>
+            <Filter size={18} /> Filters
+          </li>
+          <li>
+            <SlidersHorizontal size={18} /> Duration
+          </li>
+          <li>
+            <Shield size={18} /> Source cuts
+          </li>
+        </ul>
+      </section>
+
+      <section className="about-verts" aria-labelledby="about-verts-heading">
+        <header className="about-head about-reveal">
+          <h2 id="about-verts-heading">Verticals we fill</h2>
+          <p>
+            Insurance is the core. Legal, Home Services, Finance, and Education
+            sit next to it. If you buy in one of these, start with the category
+            and tell us what qualified means for your intake.
+          </p>
+        </header>
+        <ul className="about-verts__row about-reveal">
+          {verticalLinks.map((item) => (
+            <li key={item.label}>
+              <Link to={item.to} className="about-verts__chip">
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p className="about-verts__more about-reveal">
+          <Link to="/verticals">Browse all verticals</Link>
+        </p>
+      </section>
+
+      <section className="about-pub" aria-labelledby="about-pub-heading">
+        <div className="about-pub__inner about-reveal">
+          <h2 id="about-pub-heading">If you monetize call traffic</h2>
+          <p>
+            We have live buyer demand across those same verticals. Tracking
+            stays visible. Quality standards are the price of admission. This
+            is a selective partner program, not an open affiliate signup.
+          </p>
+          <Link to="/publishers" className="btn btn--mint">
+            Apply as a partner
+          </Link>
+        </div>
       </section>
 
       <FaqSection
         title="About FAQ"
-        description="Hybrid supply, call-first measurement, and who we work with."
+        description="Hybrid supply, call-first campaigns, and who this model is for."
         items={aboutFaqs}
       />
 
       <section className="cta-band">
         <div className="cta-band__inner">
-          <h2>Talk to our team</h2>
+          <h2>Tell us what a qualified call looks like</h2>
           <p>
-            Buyers: bring vertical, states, hours, and what a qualified call
-            looks like. Publishers: bring traffic type and verticals. We'll tell
-            you if there's a fit.
+            Bring vertical, states, hours, and how you define qualified. We'll
+            talk CPL or cost per call from there. Publishers: traffic type and
+            verticals.
           </p>
           <div className="cta-band__actions">
-            <Link to="/contact" className="btn btn--purple">
+            <Link to="/contact?role=buyer" className="btn btn--purple">
               Discuss a campaign
             </Link>
-            <Link to="/blog" className="btn btn--mint">
-              Read the blog
+            <Link to="/publishers" className="btn btn--mint">
+              Apply as a partner
             </Link>
           </div>
         </div>

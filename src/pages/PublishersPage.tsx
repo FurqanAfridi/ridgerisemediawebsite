@@ -1,65 +1,63 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  BadgeCheck,
-  FileCheck2,
-  Gauge,
-  Layers3,
-  Mail,
-  Megaphone,
-  PhoneCall,
-  Radio,
-  Search,
-  Share2,
-  ShieldCheck,
-  UserPlus,
-  Wallet,
-  Zap,
-} from "lucide-react";
 import { Seo } from "@/components/Seo";
-import { assets } from "@/data/site";
 import { publishersFaqs } from "@/data/faqs";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import { usePublisherMotion } from "@/hooks/usePublisherMotion";
 import "./pages.css";
+import "./buyers.css";
 import "./publishers.css";
 
-const benefits = [
+const A = "/assets/publishers";
+
+const whyCards = [
   {
+    id: "demand",
+    num: "01",
     title: "Live buyer demand",
-    body: "Open campaigns across Insurance, Legal, Home Services, Finance, and Education — matched to traffic you already run.",
-    icon: Layers3,
-    tone: "violet",
+    body: "Open campaigns across Insurance, Legal, Home Services, Finance, and Education, matched to traffic you already run.",
+    tone: "mint",
+    art: "phone",
   },
   {
+    id: "tracking",
+    num: "02",
     title: "Call-level tracking",
     body: "See transfers, duration rules, and billable events in real time. No mystery deductions.",
-    icon: Gauge,
-    tone: "mint",
+    tone: "violet",
+    art: "transfers",
   },
   {
+    id: "payouts",
+    num: "03",
     title: "Clear payout terms",
     body: "Rates, caps, and billable rules upfront. We pay what we agree; schedule confirmed when you onboard.",
-    icon: Wallet,
-    tone: "amber",
+    tone: "pink",
+    art: "cpl",
   },
   {
+    id: "quality",
+    num: "04",
     title: "Quality standards that stick",
     body: "TCPA-aware setup, campaign consent rules, and source expectations before your traffic goes live.",
-    icon: ShieldCheck,
-    tone: "rose",
+    tone: "lime",
+    art: "quality",
   },
   {
+    id: "review",
+    num: "05",
     title: "Selective partner review",
     body: "We don't take every applicant. Fit, traffic type, and vertical experience matter.",
-    icon: Zap,
-    tone: "violet",
+    tone: "amber",
+    art: "insurance",
   },
   {
+    id: "scale",
+    num: "06",
     title: "Healthy accounts at scale",
     body: "Filters and reporting keep you aligned with buyer quality so volume doesn't burn the offer.",
-    icon: BadgeCheck,
-    tone: "mint",
+    tone: "rose",
+    art: "legal",
   },
 ] as const;
 
@@ -68,44 +66,108 @@ const steps = [
     num: "01",
     title: "Apply with your sources",
     body: "Tell us traffic types, geos, and verticals. We review for fit and compliance readiness.",
-    icon: UserPlus,
+    icon: `${A}/step-1.svg`,
     tone: "violet",
   },
   {
     num: "02",
     title: "Get matched to live demand",
     body: "Approved partners see open buyer campaigns with payout terms, caps, and tracking from day one.",
-    icon: FileCheck2,
+    icon: `${A}/step-2.svg`,
     tone: "mint",
   },
   {
     num: "03",
     title: "Launch, track, get paid",
     body: "Optimize paths that convert. Pause what fails quality. Payouts follow the terms we set together.",
-    icon: Wallet,
+    icon: `${A}/step-3.svg`,
     tone: "amber",
   },
 ] as const;
 
 const sources = [
-  { label: "Search", body: "Paid & organic intent", icon: Search },
-  { label: "Social", body: "Paid social click-to-call", icon: Share2 },
-  { label: "Native", body: "Content-driven transfers", icon: Megaphone },
-  { label: "Call paths", body: "IVR & warm transfers", icon: PhoneCall },
-  { label: "Email", body: "Nurture to phone", icon: Mail },
-  { label: "Owned media", body: "Sites, apps, communities", icon: Radio },
+  { label: "Search", body: "Paid & organic intent", icon: `${A}/source-search.svg` },
+  { label: "Social", body: "Paid social click-to-call", icon: `${A}/source-social.svg` },
+  { label: "Native", body: "Content-driven transfers", icon: `${A}/source-native.svg` },
+  { label: "Call paths", body: "IVR & warm transfers", icon: `${A}/source-calls.svg` },
+  { label: "Email", body: "Nurture to phone", icon: `${A}/source-email.svg` },
+  { label: "Owned media", body: "Sites, apps, communities", icon: `${A}/source-owned.svg` },
 ] as const;
 
 const payoutStats = [
-  { value: "Live", label: "Buyer demand open", count: null, suffix: "" },
-  { value: "Tracked", label: "Call-level reporting", count: null, suffix: "" },
-  { value: "Clear", label: "Payout terms upfront", count: null, suffix: "" },
-  { value: "Vetted", label: "Partner review required", count: null, suffix: "" },
+  { value: "Live", label: "Buyer demand open" },
+  { value: "Tracked", label: "Call-level reporting" },
+  { value: "Clear", label: "Payout terms upfront" },
+  { value: "Vetted", label: "Partner review required" },
 ] as const;
+
+function WhyArt({ art }: { art: (typeof whyCards)[number]["art"] }) {
+  if (art === "phone") {
+    return (
+      <div className="buy-why__art buy-why__art--phone" aria-hidden="true">
+        <img className="buy-why__layer buy-why__layer--o" src={`${A}/phone-ring-outer.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--m" src={`${A}/phone-ring-mid.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--i" src={`${A}/phone-ring-inner.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--h" src={`${A}/phone-handset.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--dot" src={`${A}/phone-dot.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--mark" src={`${A}/phone-mark.svg`} alt="" />
+      </div>
+    );
+  }
+  if (art === "transfers") {
+    return (
+      <div className="buy-why__art" aria-hidden="true">
+        <img src={`${A}/icon-transfers.svg`} alt="" width={156} height={156} />
+      </div>
+    );
+  }
+  if (art === "cpl") {
+    return (
+      <div className="buy-why__art buy-why__art--cpl" aria-hidden="true">
+        <img className="buy-why__layer buy-why__layer--frame" src={`${A}/cpl-frame.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--c1" src={`${A}/cpl-1.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--c2" src={`${A}/cpl-2.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--c3" src={`${A}/cpl-3.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--c4" src={`${A}/cpl-4.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--c5" src={`${A}/cpl-5.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--pulse" src={`${A}/cpl-pulse.svg`} alt="" />
+      </div>
+    );
+  }
+  if (art === "quality") {
+    return (
+      <div className="buy-why__art" aria-hidden="true">
+        <img src={`${A}/icon-quality.svg`} alt="" width={156} height={156} />
+      </div>
+    );
+  }
+  if (art === "insurance") {
+    return (
+      <div className="buy-why__art buy-why__art--ins" aria-hidden="true">
+        <img className="buy-why__layer buy-why__layer--ib" src={`${A}/ins-base.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--i2" src={`${A}/ins-2.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--i3" src={`${A}/ins-3.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--i4" src={`${A}/ins-4.svg`} alt="" />
+        <img className="buy-why__layer buy-why__layer--ip" src={`${A}/ins-pulse.svg`} alt="" />
+      </div>
+    );
+  }
+  return (
+    <div className="buy-why__art buy-why__art--legal" aria-hidden="true">
+      <img className="buy-why__layer buy-why__layer--lb" src={`${A}/legal-base.svg`} alt="" />
+      <img className="buy-why__layer buy-why__layer--b1" src={`${A}/legal-bar-1.svg`} alt="" />
+      <img className="buy-why__layer buy-why__layer--b2" src={`${A}/legal-bar-2.svg`} alt="" />
+      <img className="buy-why__layer buy-why__layer--b3" src={`${A}/legal-bar-3.svg`} alt="" />
+      <img className="buy-why__layer buy-why__layer--b4" src={`${A}/legal-bar-4.svg`} alt="" />
+      <img className="buy-why__layer buy-why__layer--lt" src={`${A}/legal-top.svg`} alt="" />
+    </div>
+  );
+}
 
 export default function PublishersPage() {
   const rootRef = useRef<HTMLElement>(null);
   usePublisherMotion(rootRef);
+  const [openWhy, setOpenWhy] = useState(0);
 
   return (
     <main className="pub-page" ref={rootRef}>
@@ -122,7 +184,6 @@ export default function PublishersPage() {
         jsonLd={buildFaqJsonLd(publishersFaqs)}
       />
 
-      {/* ——— Visual hero ——— */}
       <section className="pub-hero">
         <div className="pub-hero__glow" aria-hidden="true" />
         <div className="pub-hero__copy pub-reveal">
@@ -134,7 +195,7 @@ export default function PublishersPage() {
           </h1>
           <p className="pub-hero__desc">
             Selective partner program for publishers and media buyers who can
-            deliver qualified callers — with tracking and payout terms that stay
+            deliver qualified callers, with tracking and payout terms that stay
             clear.
           </p>
           <div className="page-hero__ctas">
@@ -149,49 +210,71 @@ export default function PublishersPage() {
 
         <div className="pub-hero__stage" aria-hidden="true">
           <div className="pub-hero__card pub-float pub-parallax" data-speed="0.2">
-            <img src={assets.cardPayout} alt="" />
+            <article className="pub-mock pub-mock--live">
+              <div className="pub-mock__top">
+                <span className="pub-mock__live-dot" />
+                <p className="pub-mock__kicker">Live call</p>
+                <span className="pub-mock__time">02:14</span>
+              </div>
+              <div className="pub-mock__bars pub-mock__bars--hero">
+                <span className="pub-mock__bar pub-mock__bar--lilac" style={{ height: "62%" }} />
+                <span className="pub-mock__bar pub-mock__bar--violet" style={{ height: "46%" }} />
+                <span className="pub-mock__bar pub-mock__bar--lilac" style={{ height: "37%" }} />
+                <span className="pub-mock__bar pub-mock__bar--mint" style={{ height: "36%" }} />
+                <span className="pub-mock__bar pub-mock__bar--lilac" style={{ height: "42%" }} />
+                <span className="pub-mock__bar pub-mock__bar--violet" style={{ height: "56%" }} />
+                <span className="pub-mock__bar pub-mock__bar--lilac" style={{ height: "74%" }} />
+                <span className="pub-mock__bar pub-mock__bar--mint" style={{ height: "90%" }} />
+                <span className="pub-mock__bar pub-mock__bar--lilac" style={{ height: "99%" }} />
+                <span className="pub-mock__bar pub-mock__bar--violet" style={{ height: "100%" }} />
+              </div>
+              <div className="pub-mock__foot">
+                <span>Qualified transfer</span>
+                <strong>Quoted</strong>
+              </div>
+            </article>
           </div>
           <div className="pub-hero__orb pub-hero__orb--mint pub-float" />
           <div className="pub-hero__orb pub-hero__orb--violet pub-float" />
-          <img
-            className="pub-hero__money float-bob pub-parallax"
-            data-speed="0.45"
-            src={assets.money}
-            alt=""
-          />
         </div>
       </section>
 
-      {/* ——— Live metrics strip ——— */}
       <section className="pub-metrics" aria-label="Publisher metrics">
         <ul className="pub-metrics__grid">
           {payoutStats.map((stat) => (
             <li key={stat.label} className="pub-metrics__item pub-reveal">
-              <span
-                className="pub-metrics__value"
-                data-count={stat.count ?? undefined}
-                data-suffix={stat.suffix || undefined}
-              >
-                {stat.value}
-              </span>
+              <span className="pub-metrics__value">{stat.value}</span>
               <span className="pub-metrics__label">{stat.label}</span>
             </li>
           ))}
         </ul>
       </section>
 
-      {/* ——— Split feature: payouts ——— */}
       <section className="pub-split">
         <div className="pub-split__visual pub-reveal-left">
-          <div className="pub-split__frame pub-split__frame--mint">
-            <img src={assets.cardPayout} alt="Publisher payout dashboard graphic" />
-          </div>
-          <img
-            className="pub-split__deco float-bob"
-            src={assets.money}
-            alt=""
-            aria-hidden="true"
-          />
+          <article className="pub-mock pub-mock--payout" aria-hidden="true">
+            <div className="pub-mock__top">
+              <p className="pub-mock__kicker pub-mock__kicker--mint">Payout schedule</p>
+              <span className="pub-mock__meta">On brief</span>
+            </div>
+            <ul className="pub-mock__rows">
+              <li>
+                <span>Legal · duration floor</span>
+                <strong>Quoted</strong>
+              </li>
+              <li>
+                <span>Home Services · duration floor</span>
+                <strong>Quoted</strong>
+              </li>
+            </ul>
+            <div className="pub-mock__foot">
+              <span>Deductions</span>
+              <em>None</em>
+            </div>
+            <div className="pub-mock__track" aria-hidden="true">
+              <span className="pub-mock__shimmer" />
+            </div>
+          </article>
         </div>
         <div className="pub-split__copy pub-reveal-right">
           <p className="page-hero__eyebrow">Payouts</p>
@@ -209,18 +292,59 @@ export default function PublishersPage() {
         </div>
       </section>
 
-      {/* ——— Split feature: tracking (reversed) ——— */}
       <section className="pub-split pub-split--reverse">
         <div className="pub-split__visual pub-reveal-right">
-          <div className="pub-split__frame pub-split__frame--violet">
-            <img src={assets.cardCalls} alt="Live calls tracking graphic" />
-          </div>
-          <img
-            className="pub-split__deco pub-split__deco--money float-bob"
-            src={assets.money}
-            alt=""
-            aria-hidden="true"
-          />
+          <article className="pub-mock pub-mock--track" aria-hidden="true">
+            <div className="pub-mock__top">
+              <p className="pub-mock__kicker">Transfers today</p>
+              <span className="pub-mock__live-pill">
+                <span className="pub-mock__live-dot" />
+                Live
+              </span>
+            </div>
+            <div className="pub-track__chart">
+              <img
+                className="pub-track__chart-line"
+                src={`${A}/chart-line-1.svg`}
+                alt=""
+                width={343}
+                height={69}
+              />
+              <img
+                className="pub-track__chart-line pub-track__chart-line--dash"
+                src={`${A}/chart-line-2.svg`}
+                alt=""
+                width={343}
+                height={69}
+              />
+              <img
+                className="pub-track__chart-dot"
+                src={`${A}/chart-dot.svg`}
+                alt=""
+                width={10}
+                height={10}
+              />
+            </div>
+            <div className="pub-mock__bars">
+              <span className="pub-mock__bar pub-mock__bar--wash" style={{ height: "57%" }} />
+              <span className="pub-mock__bar pub-mock__bar--lilac" style={{ height: "67%" }} />
+              <span className="pub-mock__bar pub-mock__bar--violet" style={{ height: "76%" }} />
+              <span className="pub-mock__bar pub-mock__bar--lilac" style={{ height: "84%" }} />
+              <span className="pub-mock__bar pub-mock__bar--mint" style={{ height: "91%" }} />
+              <span className="pub-mock__bar pub-mock__bar--wash" style={{ height: "96%" }} />
+              <span className="pub-mock__bar pub-mock__bar--violet" style={{ height: "100%" }} />
+            </div>
+            <div className="pub-track__stats">
+              <div>
+                <strong>Live</strong>
+                <span>Calls</span>
+              </div>
+              <div>
+                <strong>Tracked</strong>
+                <span>Billable</span>
+              </div>
+            </div>
+          </article>
         </div>
         <div className="pub-split__copy pub-reveal-left">
           <p className="page-hero__eyebrow">Tracking</p>
@@ -237,35 +361,48 @@ export default function PublishersPage() {
         </div>
       </section>
 
-      {/* ——— Benefit mosaic ——— */}
-      <section className="pub-benefits">
-        <div className="pub-benefits__head pub-reveal">
-          <h2>Why partners stay with RidgeRise</h2>
+      <section className="buy-why" aria-labelledby="why-partners-heading">
+        <div className="buy-why__head">
+          <h2 id="why-partners-heading">
+            Why partners stay
+            <br />
+            with RidgeRise
+          </h2>
           <p>
             For publishers, media buyers, and call-path operators who want buyer
             demand without guessing on quality or pay.
           </p>
         </div>
-        <ul className="pub-benefits__grid">
-          {benefits.map((item) => {
-            const Icon = item.icon;
-            return (
-              <li
-                key={item.title}
-                className={`pub-benefit pub-benefit--${item.tone} pub-reveal`}
+        <ul className="buy-why__track">
+          {whyCards.map((card, index) => (
+            <li
+              key={card.id}
+              className={`buy-why__card buy-why__card--${card.tone}${openWhy === index ? " is-open" : ""}`}
+              onMouseEnter={() => setOpenWhy(index)}
+              onFocus={() => setOpenWhy(index)}
+            >
+              <button
+                type="button"
+                className="buy-why__hit"
+                aria-expanded={openWhy === index}
+                onClick={() => setOpenWhy(index)}
               >
-                <div className="pub-benefit__icon" aria-hidden="true">
-                  <Icon size={22} strokeWidth={2.25} />
-                </div>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </li>
-            );
-          })}
+                <WhyArt art={card.art} />
+                {card.art === "phone" ? (
+                  <span className="buy-why__badge" aria-hidden="true">
+                    <img src={`${A}/icon-check.svg`} alt="" width={20} height={20} />
+                  </span>
+                ) : null}
+                <span className="buy-why__num">{card.num}</span>
+                <span className="buy-why__title">{card.title}</span>
+                <span className="buy-why__body">{card.body}</span>
+                <span className="buy-why__spine">{card.title}</span>
+              </button>
+            </li>
+          ))}
         </ul>
       </section>
 
-      {/* ——— Visual steps ——— */}
       <section className="pub-steps">
         <div className="pub-steps__head pub-reveal">
           <p className="page-hero__eyebrow">Partner path</p>
@@ -276,51 +413,44 @@ export default function PublishersPage() {
           </p>
         </div>
         <ol className="pub-steps__list">
-          {steps.map((step) => {
-            const Icon = step.icon;
-            return (
-              <li
-                key={step.num}
-                className={`pub-step pub-step--${step.tone} pub-reveal`}
-              >
-                <div className="pub-step__media" aria-hidden="true">
-                  <span className="pub-step__num">{step.num}</span>
-                  <span className="pub-step__glyph">
-                    <Icon size={36} strokeWidth={2} />
-                  </span>
-                </div>
-                <div className="pub-step__copy">
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </div>
-              </li>
-            );
-          })}
+          {steps.map((step) => (
+            <li
+              key={step.num}
+              className={`pub-step pub-step--${step.tone} pub-reveal`}
+            >
+              <div className="pub-step__media" aria-hidden="true">
+                <span className="pub-step__num">{step.num}</span>
+                <span className="pub-step__glyph">
+                  <img src={step.icon} alt="" width={30} height={30} />
+                </span>
+              </div>
+              <div className="pub-step__copy">
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </div>
+            </li>
+          ))}
         </ol>
       </section>
 
-      {/* ——— Traffic sources gallery ——— */}
       <section className="pub-sources">
         <div className="pub-sources__head pub-reveal">
           <h2>Traffic types we work with</h2>
           <p>
-            Search, social, native, email, owned media, or dedicated call paths —
-            if the caller is qualified for the offer, we want to talk.
+            Search, social, native, email, owned media, or dedicated call paths.
+            If the caller is qualified for the offer, we want to talk.
           </p>
         </div>
         <ul className="pub-sources__grid">
-          {sources.map((source) => {
-            const Icon = source.icon;
-            return (
-              <li key={source.label} className="pub-source pub-reveal">
-                <span className="pub-source__icon" aria-hidden="true">
-                  <Icon size={22} strokeWidth={2.25} />
-                </span>
-                <span className="pub-source__label">{source.label}</span>
-                <span className="pub-source__body">{source.body}</span>
-              </li>
-            );
-          })}
+          {sources.map((source) => (
+            <li key={source.label} className="pub-source pub-reveal">
+              <span className="pub-source__icon" aria-hidden="true">
+                <img src={source.icon} alt="" width={20} height={20} />
+              </span>
+              <span className="pub-source__label">{source.label}</span>
+              <span className="pub-source__body">{source.body}</span>
+            </li>
+          ))}
         </ul>
       </section>
 
@@ -330,7 +460,6 @@ export default function PublishersPage() {
         items={publishersFaqs}
       />
 
-      {/* ——— Closing CTA stage ——— */}
       <section className="pub-cta">
         <div className="pub-cta__glow" aria-hidden="true" />
         <div className="pub-cta__panel pub-reveal">

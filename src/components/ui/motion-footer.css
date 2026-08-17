@@ -70,7 +70,7 @@
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
-  font-size: clamp(56px, 16vw, 220px);
+  font-size: clamp(40px, 8vw, 96px);
   line-height: 0.75;
   font-weight: 900;
   letter-spacing: -0.05em;
@@ -382,7 +382,7 @@
   }
 
   .mf-center {
-    padding: 88px 16px 16px;
+    padding: 64px 16px 16px;
   }
 
   .mf-bottom {
@@ -427,7 +427,7 @@
 
 @media (max-width: 480px) {
   .mf-center {
-    padding: 80px 14px 12px;
+    padding: 56px 14px 12px;
   }
 
   .mf-actions__secondary {

@@ -40,7 +40,7 @@ const stackCards: StackCard[] = [
     id: "home-services",
     name: "Home Services",
     summary:
-      "HVAC, roofing, cleaning, and repairs — route ready-to-book homeowners to verified buyers.",
+      "HVAC, roofing, solar, and home security. Route homeowners who are ready to book.",
     to: "/verticals",
     image: "/assets/vertical-cards/home-services.png",
     background: "#ffebf1",
@@ -134,7 +134,7 @@ type CssImageStackingProps = {
 
 export default function CssImageStacking({
   title = "One Platform. Every High-Intent Vertical.",
-  description = "Insurance is our specialty — but our network runs deep across performance-driven industries.",
+  description = "Insurance is the core. Legal, Home Services, Finance, and Education sit next to it.",
   ctaTo = "/verticals",
 }: CssImageStackingProps) {
   return (
@@ -174,10 +174,10 @@ export default function CssImageStacking({
                   <p className="cis__desc">{card.summary}</p>
                   <div className="cis__actions">
                     <Link to={card.to} className="cis__cta">
-                      Get Access
+                      View vertical
                     </Link>
                     <Link to={ctaTo} className="cis__cta cis__cta--ghost">
-                      Explore All
+                      Browse all
                     </Link>
                   </div>
                 </div>

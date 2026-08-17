@@ -41,13 +41,13 @@ const advertiserBullets = [
   "Qualified inbound calls, live transfers, CPL leads, and traffic matched to your vertical",
   "Filters for geo, hours, product, exclusivity, and duration so intake can keep up",
   "Volume from our own media buying plus a vetted partner network, with source-level monitoring",
-  "Call-level tracking so you can see quality, conversion behavior, and acquisition cost",
+  "Call-level tracking so you can see quality, dispositions, and acquisition cost",
 ] as const;
 
 const publisherBullets = [
-  "Access to active buyer campaigns across Insurance, Legal, Home Services, and more",
-  "Real-time call tracking so you see every call and every conversion",
-  "Clear quality standards and payment terms agreed before you send traffic",
+  "Live buyer demand across Insurance, Legal, Home Services, Finance, and Education",
+  "Call-level tracking so you see transfers, duration, and dispositions",
+  "Quality standards and payout terms agreed before you send traffic",
   "A partner that runs its own media, so we know what good traffic looks like",
 ] as const;
 
@@ -78,7 +78,7 @@ export default function HomePage() {
     <>
       <Seo
         title="Pay Per Call Network for Advertisers"
-        description="Buy qualified inbound calls, leads, and traffic on CPL or cost per call. RidgeRise Media mixes in-house media buying with a vetted partner network across high-intent verticals."
+        description="Buy qualified inbound calls, leads, and traffic on CPL or cost per call. Hybrid in-house buying plus a vetted partner network. Discuss a campaign."
         path="/"
         keywords={[
           "pay per call network",
@@ -120,22 +120,22 @@ export default function HomePage() {
 
                 <p className="hero__sub">
                   RidgeRise Media is a pay per call and CPL network for
-                  advertisers. We generate consumer demand through in-house media
-                  buying and a vetted partner network, then deliver qualified
-                  inbound calls, leads, and traffic in Insurance, Legal, Home
-                  Services, and other high-intent verticals.
+                  advertisers. We generate demand through in-house media buying
+                  and a vetted partner network, then deliver qualified inbound
+                  calls, leads, and traffic in Insurance, Legal, Home Services,
+                  and other high-intent verticals.
                 </p>
               </div>
 
               <div className="hero__ctas">
                 <Magnetic strength={0.4}>
                   <Link to="/buyers" className="btn btn--purple hero__btn">
-                    Discuss a Campaign
+                    Discuss a campaign
                   </Link>
                 </Magnetic>
                 <Magnetic strength={0.4}>
                   <Link to="/publishers" className="btn btn--mint hero__btn">
-                    Apply as a Partner
+                    Apply as a partner
                   </Link>
                 </Magnetic>
               </div>
@@ -256,8 +256,8 @@ export default function HomePage() {
               <span className="muted-brand">call</span>
             </h2>
             <p className="section-sub reveal-child">
-              Advertisers buy qualified demand. Partners supply traffic that can
-              hold up under call-level review.
+              Advertisers buy qualified inbound demand. Partners supply traffic
+              that can hold up under call-level review.
             </p>
           </div>
 
@@ -266,7 +266,7 @@ export default function HomePage() {
               <PayPerCallBadge />
               <h3 className="role-card__title grad-purple">Advertiser</h3>
               <p className="role-card__tagline">
-                You need customers. We put them on the phone.
+                You need inbound. We put qualified callers on the phone.
               </p>
               <ul className="role-card__list">
                 {advertiserBullets.map((item) => (
@@ -275,7 +275,7 @@ export default function HomePage() {
               </ul>
               <Magnetic strength={0.35}>
                 <Link to="/buyers" className="btn btn--role btn--role-mint">
-                  Discuss a Campaign →
+                  Discuss a campaign →
                 </Link>
               </Magnetic>
             </article>
@@ -293,7 +293,7 @@ export default function HomePage() {
               </ul>
               <Magnetic strength={0.35}>
                 <Link to="/publishers" className="btn btn--role btn--role-purple">
-                  Apply as a Partner →
+                  Apply as a partner →
                 </Link>
               </Magnetic>
             </article>
@@ -302,14 +302,14 @@ export default function HomePage() {
 
         <CssImageStacking
           title="High-intent verticals with live buyer demand"
-          description="Insurance is the core specialty, with active depth across Legal, Home Services, Finance, and Education. Buy calls, leads, or traffic where consumers already pick up the phone."
+          description="Insurance is the core. Legal, Home Services, Finance, and Education sit next to it. Buy calls, leads, or traffic where shoppers already pick up the phone."
           ctaTo="/verticals"
         />
       </main>
 
       <FaqSection
-        title="Frequently asked questions"
-        description="Straight answers on pay per call, supply mix, quality, and how to start."
+        title="Questions buyers actually ask"
+        description="Pay per call, supply mix, quality rules, and how a campaign starts."
         items={homeFaqs}
       />
 

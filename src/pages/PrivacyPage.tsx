@@ -8,7 +8,7 @@ export default function PrivacyPage() {
     <main>
       <Seo
         title="Privacy Policy"
-        description="Privacy Policy for RidgeRise Media — how we collect, use, and protect information across our pay-per-call platform."
+        description="How RidgeRise Media collects, uses, and protects information on this site and in campaign work."
         path="/privacy"
       />
       <PageHero

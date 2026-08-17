@@ -25,7 +25,7 @@ export const site = {
   email: "info@ridgerisemedia.com",
   phone: "+1 (202) 773-7162",
   phoneHref: "tel:+12027737162",
-  tagline: "Qualified calls, leads & traffic",
+  tagline: "Qualified inbound calls, leads, and traffic",
 } as const;
 
 export const navLinks = [

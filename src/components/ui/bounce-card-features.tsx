@@ -14,29 +14,29 @@ const features = [
     tone: "violet",
   },
   {
-    title: "Call-level transparency",
-    body: "See calls, sources, and dispositions as they land — so your intake team knows what you're paying for.",
+    title: "Call-level tracking",
+    body: "See calls, sources, and dispositions as they land, so your intake team knows what you're paying for.",
     art: "/assets/card-calls.png",
     artAlt: "Live calls tracking",
     tone: "amber",
   },
   {
-    title: "Hybrid supply, clear filters",
+    title: "Hybrid supply, your filters",
     body: "In-house media buying plus vetted partners. You set geo, hours, exclusivity, and what counts as qualified.",
     art: "/assets/card-payout.png",
     artAlt: "Campaign filters and routing",
     tone: "mint",
   },
   {
-    title: "High-intent verticals",
-    body: "Insurance depth first, with Legal, Home Services, and Finance where a live call still moves acquisition.",
+    title: "Verticals where the phone still matters",
+    body: "Insurance first, with Legal, Home Services, and Finance where a live call still moves acquisition.",
     art: "/assets/vertical-2.png",
     artAlt: "Growth across verticals",
     tone: "rose",
   },
 ] as const;
 
-function BounceCard({
+export function BounceCard({
   className,
   children,
   index,
@@ -85,8 +85,8 @@ export function BouncyCardsFeatures() {
             <span className="bouncy-features__title-muted">the call to count</span>
           </h2>
           <p className="bouncy-features__sub">
-            Quality monitoring, tracking, filter control, and vertical depth —
-            the four things that decide whether pay-per-call and CPL scale or stall.
+            Quality monitoring, tracking, filter control, and vertical depth.
+            Those four things decide whether pay-per-call and CPL scale or stall.
           </p>
         </motion.div>
         <Magnetic strength={0.35}>
@@ -98,7 +98,7 @@ export function BouncyCardsFeatures() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ type: "spring", stiffness: 200, damping: 18, delay: 0.12 }}
           >
-            <Link to="/contact" className="bouncy-features__cta">
+            <Link to="/contact?role=buyer" className="btn btn--purple">
               Discuss a campaign
             </Link>
           </motion.div>

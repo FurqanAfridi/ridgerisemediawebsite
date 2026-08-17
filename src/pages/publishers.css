@@ -90,20 +90,9 @@ html[data-theme="dark"] .pub-hero__glow {
 }
 
 .pub-hero__card {
-  width: min(100%, 380px);
-  border-radius: 24px;
-  overflow: hidden;
-  background: linear-gradient(145deg, #5d62dd, #4c1678);
-  box-shadow: 0 28px 60px rgba(76, 22, 120, 0.28);
-  transform: rotate(-4deg);
-}
-
-.pub-hero__card img {
-  width: 100%;
-  height: auto;
-  display: block;
-  mix-blend-mode: screen;
-  opacity: 0.95;
+  width: min(100%, 420px);
+  background: transparent;
+  transform: rotate(-6deg);
 }
 
 .pub-hero__orb {
@@ -209,58 +198,8 @@ html[data-theme="dark"] .pub-hero__glow {
 
 .pub-split__visual {
   position: relative;
-}
-
-.pub-split__frame {
-  border-radius: 28px;
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  display: grid;
-  place-items: center;
-  padding: clamp(20px, 4vw, 40px);
-}
-
-.pub-split__frame img {
-  width: min(100%, 360px);
-  height: auto;
-  max-height: 260px;
-  object-fit: contain;
-  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.14));
-}
-
-.pub-split__frame--mint {
-  background: linear-gradient(145deg, #45e9b5 0%, #2ae2a8 50%, #14b8a6 100%);
-}
-
-.pub-split__frame--violet {
-  background: linear-gradient(145deg, #8b68e5 0%, #5d62dd 55%, #4c1678 100%);
-}
-
-.pub-split__deco {
-  position: absolute;
-  width: 88px;
-  right: -12px;
-  bottom: -18px;
-  transform: rotate(22deg);
-  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.15));
-}
-
-.pub-split__deco--rocket {
-  width: 120px;
-  left: -20px;
-  right: auto;
-  top: -24px;
-  bottom: auto;
-  transform: rotate(-30deg);
-}
-
-.pub-split__deco--money {
-  width: 100px;
-  left: -16px;
-  right: auto;
-  top: -18px;
-  bottom: auto;
-  transform: rotate(18deg);
+  display: flex;
+  justify-content: center;
 }
 
 .pub-split__copy {
@@ -501,12 +440,20 @@ html[data-theme="dark"] .pub-step--amber .pub-step__media {
 .pub-step__glyph {
   display: grid;
   place-items: center;
-  width: 88px;
-  height: 88px;
+  width: 78px;
+  height: 78px;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.72);
+  background: #e9e0fb;
+  border: 1px solid #d8caf3;
   color: var(--color-purple-deep);
-  box-shadow: 0 12px 28px rgba(76, 22, 120, 0.12);
+  box-shadow: 0 1.5px 1.5px rgba(109, 40, 217, 0.03);
+}
+
+.pub-step__glyph img {
+  width: 30px;
+  height: 30px;
+  display: block;
+  object-fit: contain;
 }
 
 html[data-theme="dark"] .pub-step__glyph {
@@ -516,10 +463,14 @@ html[data-theme="dark"] .pub-step__glyph {
 }
 
 .pub-step--mint .pub-step__glyph {
+  background: #efe9fc;
+  border-color: #ddd2f5;
   color: #0f766e;
 }
 
 .pub-step--amber .pub-step__glyph {
+  background: #f6f3fe;
+  border-color: #e3dbf6;
   color: #c2410c;
 }
 
@@ -627,16 +578,22 @@ html[data-theme="dark"] .pub-source {
 .pub-source__icon {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: rgba(93, 98, 221, 0.12);
+  width: 20px;
+  height: 20px;
+  border-radius: 0;
+  background: transparent;
   color: var(--color-purple-deep);
 }
 
+.pub-source__icon img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+}
+
 html[data-theme="dark"] .pub-source__icon {
-  background: rgba(158, 162, 255, 0.16);
-  color: var(--color-mint);
+  background: transparent;
 }
 
 .pub-source__label {
@@ -786,6 +743,32 @@ html[data-theme="dark"] .pub-cta__panel {
 }
 
 @media (max-width: 600px) {
+  .pub-hero {
+    gap: var(--space-lg);
+    padding-bottom: var(--space-lg);
+  }
+
+  .pub-hero__title {
+    font-size: var(--text-3xl);
+    letter-spacing: -0.9px;
+  }
+
+  .pub-hero__stage {
+    height: auto;
+    min-height: 0;
+  }
+
+  .pub-hero__card {
+    width: min(100%, 280px);
+    transform: none;
+  }
+
+  .pub-hero__orb--mint,
+  .pub-hero__orb--violet,
+  .pub-hero__money {
+    display: none;
+  }
+
   .pub-benefits__grid,
   .pub-sources__grid {
     grid-template-columns: 1fr;
@@ -793,5 +776,255 @@ html[data-theme="dark"] .pub-cta__panel {
 
   .pub-metrics__grid {
     grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
+/* ——— Figma mocks ——— */
+.pub-mock {
+  width: 100%;
+  max-width: 520px;
+  padding: 28px 26px 24px;
+  border-radius: 26px;
+  background: var(--card-bg, #fff);
+  box-shadow: 0 36px 36px rgba(23, 8, 60, 0.18);
+}
+
+.pub-mock--payout {
+  box-shadow: 0 37px 36px rgba(6, 58, 40, 0.28);
+}
+
+.pub-mock--live {
+  padding: 24px 22px 20px;
+  box-shadow: 0 37px 73px rgba(23, 8, 60, 0.45);
+}
+
+.pub-mock__top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pub-mock__kicker {
+  margin: 0;
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1.88px;
+  text-transform: uppercase;
+  color: #6d28d9;
+}
+
+.pub-mock__kicker--mint {
+  color: #1fa97f;
+}
+
+.pub-mock__meta,
+.pub-mock__time {
+  font-size: 15px;
+  color: #6b6386;
+}
+
+.pub-mock__live-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: #2ed3a3;
+  flex-shrink: 0;
+}
+
+.pub-mock__live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1fa97f;
+}
+
+.pub-mock__rows {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+}
+
+.pub-mock__rows li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 18px;
+  color: #6b6386;
+}
+
+.pub-mock__rows strong,
+.pub-mock__foot strong {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.pub-mock__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1.4px solid #eef3f1;
+  font-size: 16px;
+  color: #6b6386;
+}
+
+.pub-mock__foot em {
+  font-style: normal;
+  font-weight: 600;
+  color: #1fa97f;
+}
+
+.pub-mock__track {
+  position: relative;
+  height: 9px;
+  margin-top: 22px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e4faf2;
+}
+
+.pub-mock__shimmer {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 40%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, #2ed3a3, transparent);
+  animation: pub-shimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes pub-shimmer {
+  0% {
+    transform: translateX(-40%);
+  }
+  100% {
+    transform: translateX(280%);
+  }
+}
+
+.pub-mock__bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  height: 58px;
+  margin-top: 18px;
+}
+
+.pub-mock__bars--hero {
+  height: 68px;
+  margin-top: 28px;
+}
+
+.pub-mock__bar {
+  flex: 1;
+  border-radius: 4px;
+  min-height: 16px;
+}
+
+.pub-mock__bar--lilac {
+  background: #ddd2fa;
+}
+
+.pub-mock__bar--violet {
+  background: #7c3aed;
+}
+
+.pub-mock__bar--mint {
+  background: #2ed3a3;
+}
+
+.pub-mock__bar--wash {
+  background: #f0ebfe;
+}
+
+.pub-track__chart {
+  position: relative;
+  height: 72px;
+  margin-top: 18px;
+}
+
+.pub-track__chart-line {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 13%;
+  width: 80%;
+  height: 65%;
+  display: block;
+  object-fit: fill;
+}
+
+.pub-track__chart-dot {
+  position: absolute;
+  top: 22%;
+  left: 62%;
+  width: 10px;
+  height: 10px;
+  display: block;
+}
+
+.pub-track__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.pub-track__stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 13px;
+  background: #f6f3fe;
+}
+
+.pub-track__stats div:last-child {
+  background: #e4faf2;
+}
+
+.pub-track__stats strong {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.pub-track__stats span {
+  font-size: 15px;
+  color: #6b6386;
+}
+
+html[data-theme="dark"] .pub-mock {
+  background: var(--card-bg);
+}
+
+html[data-theme="dark"] .pub-mock__rows li,
+html[data-theme="dark"] .pub-mock__foot,
+html[data-theme="dark"] .pub-mock__meta,
+html[data-theme="dark"] .pub-mock__time,
+html[data-theme="dark"] .pub-track__stats span {
+  color: var(--color-muted);
+}
+
+html[data-theme="dark"] .pub-mock__foot {
+  border-top-color: var(--color-border);
+}
+
+html[data-theme="dark"] .pub-track__stats div {
+  background: var(--color-surface-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pub-mock__shimmer {
+    animation: none;
   }
 }

@@ -77,17 +77,17 @@ export default function BlogPostPage() {
 
       <section className="cta-band">
         <div className="cta-band__inner">
-          <h2>Put these ideas to work</h2>
+          <h2>Use this on your next campaign</h2>
           <p>
             Tell us what a qualified call looks like for your intake team, or
             apply as a partner if you monetize call traffic.
           </p>
           <div className="cta-band__actions">
-            <Link to="/contact" className="btn btn--purple">
+            <Link to="/contact?role=buyer" className="btn btn--purple">
               Discuss a campaign
             </Link>
-            <Link to="/blog" className="btn btn--mint">
-              Back to blog
+            <Link to="/publishers" className="btn btn--mint">
+              Apply as a partner
             </Link>
           </div>
         </div>

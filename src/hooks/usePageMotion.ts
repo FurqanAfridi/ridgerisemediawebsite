@@ -83,6 +83,9 @@ export function usePageMotion(
             ".cis__heading-inner",
             ".footer-sitemap__col",
             ".stagger-section__intro > *",
+            ".buy-hero__copy > *",
+            ".buy-flow__step",
+            ".buy-teams__item",
           ],
           { clearProps: "all", opacity: 1, y: 0, x: 0, scale: 1, rotate: 0 },
         );
@@ -407,17 +410,68 @@ export function usePageMotion(
 
       // ——— Bounce cards scrub ———
       gsap.utils.toArray<HTMLElement>(".bounce-card").forEach((card, i) => {
+        const trigger = card.closest(".bouncy-features");
+        if (!trigger) return;
         gsap.to(card, {
           y: i % 2 === 0 ? (narrow ? -10 : -18) : narrow ? 8 : 14,
           ease: "none",
           scrollTrigger: {
-            trigger: ".bouncy-features",
+            trigger,
             start: "top bottom",
             end: "bottom top",
             scrub: 1.1,
           },
         });
       });
+
+      if (root.querySelector(".buy-page")) {
+        gsap.from(".buy-hero__copy > *", {
+          y: narrow ? 28 : 42,
+          opacity: 0,
+          duration: narrow ? 0.6 : 0.75,
+          stagger: 0.08,
+          ease: "power3.out",
+          clearProps: "opacity,transform",
+        });
+        gsap.utils.toArray<HTMLElement>(".buy-split").forEach((section) => {
+          revealOnce(
+            section.querySelectorAll(".buy-split__copy > *, .buy-mock"),
+            section,
+            { y: narrow ? 24 : 40, opacity: 0 },
+            { stagger: 0.08 },
+          );
+        });
+        revealOnce(
+          ".buy-flow__head > *",
+          ".buy-flow",
+          { y: 28, opacity: 0 },
+          { stagger: 0.08 },
+        );
+        revealOnce(
+          ".buy-flow__step",
+          ".buy-flow",
+          { y: narrow ? 32 : 48, opacity: 0 },
+          { stagger: 0.1, start: narrow ? "top 88%" : "top 75%" },
+        );
+        revealOnce(
+          ".buy-teams__head > *",
+          ".buy-teams",
+          { y: 28, opacity: 0 },
+          { stagger: 0.08 },
+        );
+        revealOnce(
+          ".buy-teams__item",
+          ".buy-teams",
+          { y: 24, opacity: 0 },
+          { stagger: 0.06 },
+        );
+        revealOnce(
+          ".buy-cta__panel > *",
+          ".buy-cta",
+          { y: 32, opacity: 0 },
+          { stagger: 0.08 },
+        );
+      }
 
       // ——— Roles ———
       revealOnce(
@@ -548,6 +602,8 @@ export function usePageMotion(
       ".footer-sitemap__col",
       ".stagger-section__intro > *",
       ".header__shell",
+      ".buy-flow__step",
+      ".buy-teams__item",
     ]);
 
     return () => {

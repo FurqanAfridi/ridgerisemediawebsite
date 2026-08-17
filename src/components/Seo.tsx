@@ -51,7 +51,7 @@ export function Seo({
     telephone: site.phone,
     logo: `${site.url}/assets/logo-icon.svg`,
     description:
-      "Pay-per-call network connecting publishers with verified buyers across high-intent verticals.",
+      "US demand aggregator delivering qualified inbound calls, leads, and traffic on CPL and cost per call.",
   };
 
   const websiteLd = {

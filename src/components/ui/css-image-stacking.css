@@ -100,8 +100,10 @@ html[data-theme="dark"] .cis__grid {
 .cis__figure {
   margin: 0;
   width: 100%;
-  min-height: calc(100vh - var(--header-clearance, 72px) - var(--cis-heading-h) - 24px);
-  min-height: calc(100dvh - var(--header-clearance, 72px) - var(--cis-heading-h) - 24px);
+  min-height: min(
+    560px,
+    calc(100dvh - var(--header-clearance, 72px) - var(--cis-heading-h) - 24px)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -330,7 +332,26 @@ html[data-theme="dark"] .cis__grid {
 
 @media (max-width: 900px) {
   .cis {
-    --cis-heading-h: 128px;
+    --cis-heading-h: auto;
+    overflow-x: clip;
+  }
+
+  .cis__heading {
+    position: relative;
+    top: auto;
+    padding: 8px var(--page-pad) 12px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--color-bg);
+  }
+
+  .cis__heading-inner {
+    padding: 4px 0 0;
+    gap: 8px;
+  }
+
+  .cis__sub {
+    max-width: 36ch;
   }
 
   .cis__sticky {
@@ -356,41 +377,83 @@ html[data-theme="dark"] .cis__grid {
 
   .cis__figure {
     min-height: 0;
-    padding: 12px var(--page-pad) 16px;
+    padding: 8px var(--page-pad) 4px;
   }
 
   .cis__card,
   .cis__card--copy-left,
   .cis__card--copy-right {
     width: 100% !important;
-    max-width: 440px;
+    max-width: 100%;
     min-height: 0;
     grid-template-columns: 1fr;
     grid-template-areas:
       "media"
       "body" !important;
-    transform: rotate(var(--cis-tilt, 0deg));
+    transform: none;
+    --cis-tilt: 0deg;
+  }
+
+  .cis__card:hover {
+    transform: none;
+  }
+
+  .cis__card:hover .cis__img {
+    transform: none;
+    animation: none;
   }
 
   .cis__media {
-    min-height: 200px;
-    padding: 20px 20px 0;
+    min-height: 0;
+    padding: 16px 16px 0;
   }
 
   .cis__img {
-    max-height: 220px;
+    max-height: 180px;
+    max-width: min(280px, 70vw);
+    animation: none;
   }
 
   .cis__body {
-    padding: 16px 22px 26px;
+    padding: 12px 16px 20px;
+    gap: 10px;
+  }
+
+  .cis__name {
+    font-size: clamp(1.25rem, 5vw, 1.6rem);
+  }
+
+  .cis__desc {
+    font-size: 0.95rem;
+    max-width: none;
+  }
+
+  .cis__actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .cis__cta {
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+    font-size: 1rem;
   }
 
   .cis__stack {
     display: flex;
     flex-direction: column;
-    gap: 28px;
-    align-items: center;
-    padding: 12px 0 24px;
+    gap: 16px;
+    align-items: stretch;
+    padding: 8px 0 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cis__img {
+    max-height: 150px;
   }
 }
 

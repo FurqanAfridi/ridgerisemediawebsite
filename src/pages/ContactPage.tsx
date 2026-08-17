@@ -26,7 +26,7 @@ export default function ContactPage() {
     <main>
       <Seo
         title="Contact RidgeRise Media"
-        description="Talk to RidgeRise about buying qualified inbound calls, leads, or traffic on CPL or cost per call — or apply as a publisher partner."
+        description="Talk to RidgeRise about buying qualified inbound calls, leads, or traffic on CPL or cost per call. Publishers can apply as a partner. Tell us your brief."
         path="/contact"
         keywords={["contact RidgeRise Media", "buy pay per call", "apply publisher"]}
         jsonLd={buildFaqJsonLd(contactFaqs)}
@@ -40,13 +40,13 @@ export default function ContactPage() {
             <span className="grad-mint">on the phone</span>
           </>
         }
-        description={`Buyers: vertical, states, hours, and what a qualified call looks like. Publishers: traffic type and verticals. Email ${site.email} or use the form — we usually reply within one business day.`}
+        description={`Buyers: vertical, states, hours, and what a qualified call looks like. Publishers: traffic type and verticals. Email ${site.email} or use the form. We review every serious inquiry.`}
       />
 
       <section className="inner-section">
         {submitted ? (
           <div className="contact-success">
-            <h2>Thanks — we got your note.</h2>
+            <h2>Thanks. We got your note.</h2>
             <p className="inner-section__sub" style={{ margin: 0 }}>
               Someone on the team will review what you sent and follow up. Need
               us sooner? Email{" "}
@@ -97,7 +97,7 @@ export default function ContactPage() {
                 placeholder={
                   defaultRole === "buyer"
                     ? "Buyer: vertical, states, hours, and how you define a qualified call…"
-                    : `Publisher: traffic type and verticals — or describe what you're looking for as a ${roleLabel.toLowerCase()}…`
+                    : `Publisher: traffic type and verticals, or describe what you're looking for as a ${roleLabel.toLowerCase()}…`
                 }
               />
             </label>

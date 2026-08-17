@@ -23,7 +23,7 @@ const testimonials = [
   {
     id: 1,
     testimonial:
-      "Hybrid supply helped when our in-house hours filled up — same filters, more concurrency without opening a free-for-all.",
+      "Hybrid supply helped when our in-house hours filled up. Same filters, more concurrency, no free-for-all.",
     by: "Media Buyer, Performance Team",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=MarcusJohnson&backgroundColor=45e9b5&textColor=000000",
@@ -47,7 +47,7 @@ const testimonials = [
   {
     id: 4,
     testimonial:
-      "As a publisher, payouts and dispositions are visible. No mystery holds — just the quality rules we already agreed to.",
+      "As a publisher, payouts and dispositions are visible. No mystery holds. Just the quality rules we already agreed to.",
     by: "Publisher Partner",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=EmmaThompson&backgroundColor=2ae2a8&textColor=000000",
@@ -55,7 +55,7 @@ const testimonials = [
   {
     id: 5,
     testimonial:
-      "CPL for web leads, cost per call for phone. Same team, same vertical map — that cut the back-and-forth.",
+      "CPL for web leads, cost per call for phone. Same team, same vertical map. That cut the back-and-forth.",
     by: "Campaign Lead, Call Center",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=PeteAlvarez&backgroundColor=5d62dd&textColor=ffffff",
@@ -71,7 +71,7 @@ const testimonials = [
   {
     id: 7,
     testimonial:
-      "Not flashy. Just inbound calls that match the hours and states we can actually staff.",
+      "Inbound calls that match the hours and states we can actually staff. That's the whole brief.",
     by: "Sales Ops, Finance Vertical",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=AlexKim&backgroundColor=45e9b5&textColor=000000",
@@ -95,10 +95,12 @@ function headerClearancePx() {
 
 function cardSize() {
   const wide = window.matchMedia("(min-width: 640px)").matches;
-  return {
-    width: wide ? 360 : 300,
-    height: wide ? 460 : 400,
-  };
+  if (wide) {
+    return { width: 360, height: 460 };
+  }
+  const width = Math.min(280, Math.max(232, window.innerWidth - 48));
+  const height = Math.min(360, Math.round(width * 1.28));
+  return { width, height };
 }
 
 interface TestimonialCardProps {
@@ -158,13 +160,25 @@ export const StaggerTestimonials: FC = () => {
 
     const layoutCards = (activeIndex: number, immediate = false) => {
       const { width } = sizeRef.current;
+      const narrow = window.matchMedia("(max-width: 640px)").matches;
       cardEls.current.forEach((card, index) => {
         if (!card) return;
         const pos = wrapPosition(index, activeIndex, total);
         const isCenter = pos === 0;
-        const x = (width / 1.45) * pos;
-        const y = isCenter ? -28 : pos % 2 ? 22 : -22;
-        const rot = isCenter ? 0 : pos % 2 ? 2.5 : -2.5;
+        const spread = narrow ? width * 0.38 : width / 1.45;
+        const x = spread * pos;
+        const y = isCenter
+          ? narrow
+            ? -8
+            : -28
+          : pos % 2
+            ? narrow
+              ? 8
+              : 22
+            : narrow
+              ? -8
+              : -22;
+        const rot = isCenter ? 0 : pos % 2 ? (narrow ? 1.4 : 2.5) : narrow ? -1.4 : -2.5;
 
         card.classList.toggle("stagger-card--center", isCenter);
         card.classList.toggle("stagger-card--side", !isCenter);
@@ -208,7 +222,7 @@ export const StaggerTestimonials: FC = () => {
         start: () => `top top+=${headerClearancePx()}`,
         end: () => {
           const perCard = window.matchMedia("(max-width: 640px)").matches
-            ? 0.58
+            ? 0.42
             : 0.7;
           return `+=${Math.max(total - 1, 1) * Math.round(window.innerHeight * perCard)}`;
         },

@@ -39,7 +39,7 @@ export function FooterSitemap() {
         <div className="footer-sitemap__col footer-sitemap__col--brand">
           <p className="footer-sitemap__brand">{site.name}</p>
           <p className="footer-sitemap__desc">
-            Performance marketing for advertisers: qualified inbound calls,
+          Performance marketing for advertisers: qualified inbound calls,
             leads, and traffic on CPL and cost-per-call models.
           </p>
           <p className="footer-sitemap__note">

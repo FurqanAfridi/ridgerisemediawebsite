@@ -204,8 +204,8 @@
   .gallery--bento .gallery__item {
     grid-area: auto !important;
     width: 100%;
-    min-height: 280px;
-    height: 42vh;
+    min-height: 200px;
+    height: 32vh;
     border-radius: 16px;
   }
 

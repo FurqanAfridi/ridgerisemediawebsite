@@ -35,8 +35,8 @@
 
 @media (max-width: 900px) {
   .rocket-flight__ship {
-    width: min(140px, 32vw);
-    filter: drop-shadow(0 10px 16px rgba(76, 22, 120, 0.22));
+    width: min(96px, 22vw);
+    filter: drop-shadow(0 8px 12px rgba(76, 22, 120, 0.18));
   }
 
   .rocket-flight__puff--3 {
@@ -167,10 +167,10 @@ html[data-theme="dark"] .rocket-flight__puff--3 {
 
 @media (max-width: 900px) {
   .rocket-marker--start {
-    width: min(140px, 32vw);
-    height: calc(min(140px, 32vw) * 1.25);
-    top: 24px;
-    left: clamp(0px, 2vw, 40px);
+    width: min(96px, 22vw);
+    height: calc(min(96px, 22vw) * 1.25);
+    top: 16px;
+    left: clamp(0px, 2vw, 24px);
   }
 }
 
