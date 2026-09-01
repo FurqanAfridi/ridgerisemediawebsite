@@ -17,7 +17,7 @@ export const homeFaqs: FaqProItem[] = [
     id: "home-supply",
     question: "Where does your traffic come from?",
     answer:
-      "Two places. Campaigns we build and buy ourselves, and approved publishers who meet our quality standards. We tell you the mix on a campaign. We don't pretend it's all in-house, and we don't dump unmanaged leftover traffic on your board.",
+      "Two places. Media buying we run in-house on paid search, paid social, and display, and approved publishers who meet our quality standards. We tell you the mix on a campaign. We don't pretend it's all in-house, and we don't dump unmanaged leftover traffic on your board.",
   },
   {
     id: "home-quality",

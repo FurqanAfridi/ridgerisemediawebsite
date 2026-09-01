@@ -5,11 +5,13 @@ import { publishersFaqs } from "@/data/faqs";
 import { pageSeo } from "@/data/seo";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import { usePublisherMotion } from "@/hooks/usePublisherMotion";
+import { trafficSources } from "@/data/traffic-sources";
 import "./pages.css";
 import "./buyers.css";
 import "./publishers.css";
 
 const A = "/assets/publishers";
+const PARTNER_PATH_IMG_V = "2";
 
 const whyCards = [
   {
@@ -66,82 +68,37 @@ const steps = [
   {
     num: "01",
     title: "Apply with your sources",
-    body: "Tell us traffic types, geos, and verticals. We review for fit and compliance readiness.",
+    body: "Tell us traffic types, geos, and verticals. We review fit, compliance readiness, and whether we buy on call or rev share.",
     icon: `${A}/step-1.svg`,
-    image: `${A}/path-apply.webp`,
-    imageAlt: "Partners reviewing campaign sources together at a desk",
+    image: `${A}/path-apply.webp?v=${PARTNER_PATH_IMG_V}`,
+    imageAlt: "Multiple traffic streams filtered and refined into qualified call demand",
     tone: "violet",
   },
   {
     num: "02",
     title: "Get matched to live demand",
-    body: "Approved partners see open buyer campaigns with payout terms, caps, and tracking from day one.",
+    body: "Approved partners plug into campaigns RidgeRise buys on. Payout or rev-share terms, caps, and tracking are set before you send volume.",
     icon: `${A}/step-2.svg`,
-    image: `${A}/path-match.webp`,
-    imageAlt: "Live analytics dashboard showing demand and performance",
+    image: `${A}/path-match.webp?v=${PARTNER_PATH_IMG_V}`,
+    imageAlt: "Publisher traffic paths connected to buyer campaign nodes",
     tone: "mint",
   },
   {
     num: "03",
     title: "Launch, track, get paid",
-    body: "Optimize paths that convert. Pause what fails quality. Payouts follow the terms we set together.",
+    body: "Watch billable calls on your dashboard. Scale paths that hold quality. We cut what slips and pay against the terms we agreed.",
     icon: `${A}/step-3.svg`,
-    image: `${A}/path-launch.webp`,
-    imageAlt: "Partnership handshake after launching a paid campaign",
+    image: `${A}/path-launch.webp?v=${PARTNER_PATH_IMG_V}`,
+    imageAlt: "Performance analytics showing campaign growth and reporting layers",
     tone: "amber",
-  },
-] as const;
-
-const sources = [
-  {
-    label: "Search",
-    body: "Paid & organic intent",
-    detail: "High-intent queries that convert into qualified inbound calls.",
-    icon: `${A}/source-search.svg`,
-    tone: "violet",
-  },
-  {
-    label: "Social",
-    body: "Paid social click-to-call",
-    detail: "Click-to-call and form-to-phone paths from paid social traffic.",
-    icon: `${A}/source-social.svg`,
-    tone: "mint",
-  },
-  {
-    label: "Native",
-    body: "Content-driven transfers",
-    detail: "Content placements that move readers into tracked call offers.",
-    icon: `${A}/source-native.svg`,
-    tone: "amber",
-  },
-  {
-    label: "Call paths",
-    body: "IVR & warm transfers",
-    detail: "IVR, warm transfers, and dedicated call routing into live buyers.",
-    icon: `${A}/source-calls.svg`,
-    tone: "rose",
-  },
-  {
-    label: "Email",
-    body: "Nurture to phone",
-    detail: "Nurture sequences that land in a phone conversation, not just a click.",
-    icon: `${A}/source-email.svg`,
-    tone: "pink",
-  },
-  {
-    label: "Owned media",
-    body: "Sites, apps, communities",
-    detail: "Sites, apps, and communities with steady qualified caller volume.",
-    icon: `${A}/source-owned.svg`,
-    tone: "lime",
   },
 ] as const;
 
 const payoutStats = [
-  { value: "Live", label: "Buyer demand open" },
-  { value: "Tracked", label: "Call-level reporting" },
+  { value: "Buy", label: "Call purchases and rev share" },
+  { value: "Track", label: "Call-level reporting" },
   { value: "Clear", label: "Payout terms upfront" },
-  { value: "Vetted", label: "Partner review required" },
+  { value: "Direct", label: "Work with the buyer" },
 ] as const;
 
 function WhyArt({ art }: { art: (typeof whyCards)[number]["art"] }) {
@@ -272,7 +229,7 @@ export default function PublishersPage() {
         </div>
       </section>
 
-      <section className="pub-metrics" aria-label="Publisher metrics">
+      <section className="pub-metrics" aria-label="What publishers get from RidgeRise">
         <ul className="pub-metrics__grid">
           {payoutStats.map((stat) => (
             <li key={stat.label} className="pub-metrics__item pub-reveal">
@@ -445,10 +402,10 @@ export default function PublishersPage() {
       <section className="pub-steps">
         <div className="pub-steps__head pub-reveal">
           <p className="page-hero__eyebrow">Partner path</p>
-          <h2>Three steps to live campaigns</h2>
+          <h2>Three steps to partnering with us</h2>
           <p>
-            Apply, get reviewed, then run against open buyer demand with tracking
-            already wired.
+            Apply, get reviewed, then run traffic against campaigns we buy on
+            call or rev share, with tracking wired before volume starts.
           </p>
         </div>
         <ol className="pub-steps__list">
@@ -462,8 +419,8 @@ export default function PublishersPage() {
                   className="pub-step__image"
                   src={step.image}
                   alt={step.imageAlt}
-                  width={600}
-                  height={480}
+                  width={1200}
+                  height={960}
                   loading="lazy"
                   decoding="async"
                 />
@@ -493,7 +450,7 @@ export default function PublishersPage() {
               If the caller is qualified for the offer, we want to talk.
             </p>
             <ol className="pub-sources__toc" aria-hidden="true">
-              {sources.map((source, index) => (
+              {trafficSources.map((source, index) => (
                 <li
                   key={source.label}
                   className={`pub-sources__toc-item${index === 0 ? " is-active" : ""}`}
@@ -514,7 +471,7 @@ export default function PublishersPage() {
               <span className="pub-sources__rail-fill" />
             </div>
             <ul className="pub-sources__list">
-              {sources.map((source, index) => (
+              {trafficSources.map((source, index) => (
                 <li
                   key={source.label}
                   className={`pub-source pub-source--${source.tone}${index === 0 ? " is-active" : ""}`}

@@ -124,7 +124,7 @@ const TestimonialCard: FC<TestimonialCardProps> = ({
         className="stagger-card__avatar"
       />
       <h3 className="stagger-card__quote">"{testimonial.testimonial}"</h3>
-      <p className="stagger-card__by">- {testimonial.by}</p>
+      <p className="stagger-card__by">{testimonial.by}</p>
     </div>
   );
 };

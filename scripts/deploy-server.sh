@@ -27,6 +27,15 @@ echo "==> Publish dist -> ${WEB_ROOT}"
 mkdir -p "${WEB_ROOT}"
 rsync -a --delete "${REPO_DIR}/dist/" "${WEB_ROOT}/"
 
+if [ -f "${REPO_DIR}/.env" ]; then
+  echo "==> Lead API (.env present)"
+  chmod +x "${REPO_DIR}/scripts/setup-leads-api.sh"
+  "${REPO_DIR}/scripts/setup-leads-api.sh"
+else
+  echo "WARN: No ${REPO_DIR}/.env — lead API not restarted."
+  echo "      Copy .env to the server, then run: ./scripts/setup-leads-api.sh"
+fi
+
 echo "==> Done"
 ls -la "${WEB_ROOT}" | head -20
-echo "Site: http://ridgerisemedia.com:786"
+echo "Site: https://ridgerisemedia.com"

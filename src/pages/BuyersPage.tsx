@@ -14,9 +14,8 @@ const A = "/assets/buyers";
 
 const stats = [
   { value: "CPL", label: "Cost-per-lead campaigns" },
-  { value: "CPP", label: "Pay-per-call buying" },
-  { value: "Hybrid", label: "In-house + partner supply" },
-  { value: "US", label: "High-intent vertical coverage" },
+  { value: "CPC", label: "Cost-per-click traffic" },
+  { value: "Hybrid", label: "In-house media + screened partners" },
 ] as const;
 
 const modelTabs = [
@@ -121,69 +120,167 @@ const whyCards = [
 const steps = [
   {
     num: "01",
-    title: "Tell us what a qualified call looks like",
-    body: "Vertical, states, hours, concurrency, exclusivity, and your duration or disposition rules.",
+    title: "Your vertical and product",
+    body: "Which vertical, and which product inside it. Medicare and final expense are different campaigns with different callers, so we build to the product, not the category.",
     icon: `${A}/step-1.svg`,
     mint: false,
   },
   {
     num: "02",
-    title: "Pick CPL, cost per call, or traffic",
-    body: "We price to the model that matches your funnel. Pay per call for live transfers, CPL for leads, or qualified traffic into your pages.",
+    title: "Your states and licensing",
+    body: "Where you are licensed and where you want volume. We filter by geo before transfer, so anything outside your footprint never reaches your agents.",
     icon: `${A}/step-2.svg`,
     mint: false,
   },
   {
     num: "03",
-    title: "Scale sources that hold quality",
-    body: "In-house media buying plus vetted partners. Source-level monitoring, recording review where applicable, and cutoffs when quality slips.",
+    title: "Your hours and capacity",
+    body: "Operating hours, timezone, weekend coverage, and how many calls your floor can hold at once. Concurrency limits are set here so we never send more than you can answer.",
     icon: `${A}/step-3.svg`,
+    mint: true,
+  },
+  {
+    num: "04",
+    title: "What counts as qualified",
+    body: "The criteria a caller must meet before we transfer. Age, homeowner status, coverage situation, intent. This becomes the IVR script, so the more specific you are, the fewer bad calls reach you.",
+    icon: `${A}/step-1.svg`,
+    mint: false,
+  },
+  {
+    num: "05",
+    title: "Your billable duration and buffer",
+    body: "The threshold a call must clear to be billable, and the buffer before the clock starts. We recommend setting this from your own conversion data rather than an industry default.",
+    icon: `${A}/step-2.svg`,
+    mint: false,
+  },
+  {
+    num: "06",
+    title: "Traffic sources and exclusivity",
+    body: "Which sources you will accept, which you want excluded, and whether calls are exclusive to you or shared. Every source is named, so you can cut one at any time without cutting the campaign.",
+    icon: `${A}/step-3.svg`,
+    mint: true,
+  },
+  {
+    num: "07",
+    title: "Your caps and budget",
+    body: "Daily and weekly call caps, plus your test budget and target acquisition cost. Caps protect your floor. The budget tells us how fast we can learn.",
+    icon: `${A}/step-1.svg`,
+    mint: false,
+  },
+  {
+    num: "08",
+    title: "Routing and tracking",
+    body: "Your tracking platform, your numbers, and where calls land. You can run us on your own ring pool and verify every figure we report against your own data.",
+    icon: `${A}/step-2.svg`,
+    mint: false,
+  },
+  {
+    num: "09",
+    title: "Compliance requirements",
+    body: "Your consent standard, DNC scrubbing, documentation retention, and any state rules specific to your product. We capture consent on every call and can produce it on request.",
+    icon: `${A}/step-3.svg`,
+    mint: true,
+  },
+  {
+    num: "10",
+    title: "Go live",
+    body: "We come back with pricing, realistic volume, and the sources we will run. Traffic starts, you watch it on your platform, and anything underperforming gets cut in week one.",
+    icon: `${A}/step-1.svg`,
     mint: true,
   },
 ] as const;
 
-const teams = [
+const hotVerticals = [
   {
-    label: "Insurance",
-    body: "Agencies, carriers & call centers",
+    label: "SSI - Signed Retainer",
+    body: "Disability intake with retainer-ready callers",
+    icon: `${A}/team-legal.svg`,
+    tone: "violet",
+    to: "/verticals/disability-ssdi",
+  },
+  {
+    label: "Hospital Indemnity",
+    body: "Supplemental health phone demand",
     icon: `${A}/team-insurance.svg`,
+    tone: "mint",
+    to: "/verticals/health-insurance",
+  },
+  {
+    label: "Home Insurance",
+    body: "Homeowners shopping coverage by phone",
+    icon: `${A}/team-insurance.svg`,
+    tone: "amber",
+    to: "/verticals/home-insurance",
+  },
+  {
+    label: "Pest control",
+    body: "Local-intent home services calls",
+    icon: `${A}/team-home.svg`,
+    tone: "lime",
+    to: "/verticals",
+  },
+  {
+    label: "Final Expense Inbounds",
+    body: "Senior inbound final expense transfers",
+    icon: `${A}/team-insurance.svg`,
+    tone: "pink",
+    to: "/verticals/final-expense",
+  },
+  {
+    label: "SSDI Signed Retainer",
+    body: "SSDI callers matched to intake criteria",
+    icon: `${A}/team-legal.svg`,
+    tone: "rose",
+    to: "/verticals/disability-ssdi",
+  },
+  {
+    label: "Bathroom",
+    body: "Remodel and bath replacement intent",
+    icon: `${A}/team-home.svg`,
     tone: "violet",
     to: "/verticals",
   },
   {
-    label: "Legal",
-    body: "PI firms & intake partners",
+    label: "Medicare",
+    body: "Medicare Advantage and senior phone demand",
+    icon: `${A}/team-insurance.svg`,
+    tone: "mint",
+    to: "/verticals/medicare-advantage",
+  },
+  {
+    label: "Pharmacy",
+    body: "Prescription and benefit-related call paths",
+    icon: `${A}/team-insurance.svg`,
+    tone: "amber",
+    to: "/verticals/health-insurance",
+  },
+  {
+    label: "ACA",
+    body: "ACA and individual health quote seekers",
+    icon: `${A}/team-insurance.svg`,
+    tone: "lime",
+    to: "/verticals/health-insurance",
+  },
+  {
+    label: "Final Expense",
+    body: "Burial and final expense phone intake",
+    icon: `${A}/team-insurance.svg`,
+    tone: "pink",
+    to: "/verticals/final-expense",
+  },
+  {
+    label: "MVA",
+    body: "Motor vehicle accident injury intake",
     icon: `${A}/team-legal.svg`,
     tone: "rose",
     to: "/verticals/personal-injury",
   },
   {
-    label: "Home services",
-    body: "HVAC, solar, roofing & more",
-    icon: `${A}/team-home.svg`,
-    tone: "mint",
-    to: "/verticals",
-  },
-  {
-    label: "Finance",
-    body: "Debt, tax, mortgage buyers",
-    icon: `${A}/team-finance.svg`,
-    tone: "amber",
-    to: "/verticals",
-  },
-  {
-    label: "Education",
-    body: "Enrollment & career programs",
-    icon: `${A}/team-education.svg`,
-    tone: "pink",
-    to: "/verticals/education",
-  },
-  {
-    label: "Performance teams",
-    body: "Buyers scaling phone CPA",
-    icon: `${A}/team-performance.svg`,
-    tone: "lime",
-    to: "/contact?role=buyer",
+    label: "AUTO Insurance",
+    body: "Auto quote and renewal call demand",
+    icon: `${A}/team-insurance.svg`,
+    tone: "violet",
+    to: "/verticals/auto-insurance",
   },
 ] as const;
 
@@ -269,14 +366,15 @@ export default function BuyersPage() {
         <div className="buy-hero__copy">
           <p className="page-hero__eyebrow">Buyers / Advertisers</p>
           <h1 className="buy-hero__title">
-            We buy the media. You pay for the{" "}
-            <span className="grad-mint">call.</span>
+            Qualified demand from a media buyer who owns the{" "}
+            <span className="grad-mint">campaigns.</span>
           </h1>
           <p className="buy-hero__desc">
-            RidgeRise Media is a pay-per-call media buyer. We run our own
-            campaigns on paid search, social and display. A screened publisher
-            layer adds volume when you need more than we can produce in-house.
-            Buy on cost per call or CPL. We take the media risk.
+            RidgeRise runs paid search, paid social, and display on accounts we
+            control, then layers screened partners when you need more volume.
+            Buy on cost per call, CPL, or CPC with geo, IVR, and billable rules
+            matched to your intake capacity. We take the media risk. You pay for
+            demand that clears your criteria.
           </p>
           <div className="buy-hero__ctas">
             <Magnetic strength={0.4}>
@@ -332,7 +430,7 @@ export default function BuyersPage() {
         <p className="stats__eyebrow">
           <span className="stats__eyebrow-text">What advertisers buy with us</span>
         </p>
-        <ul className="stats__grid">
+        <ul className="stats__grid stats__grid--triple">
           {stats.map((stat) => (
             <li key={stat.value} className="stats__item">
               <span className="stats__value">{stat.value}</span>
@@ -345,23 +443,24 @@ export default function BuyersPage() {
       <section className="buy-split">
         <div className="buy-split__copy">
           <p className="page-hero__eyebrow">How we work</p>
-          <h2>Most pay-per-call companies are brokers. We are buyers.</h2>
+          <h2>In-house media buying. Demand built to your intake rules.</h2>
           <p>
-            A broker collects calls from publishers it does not control, adds a
-            margin, and passes them on. When quality drops it files a ticket
-            with the publisher and you wait.
+            RidgeRise runs paid search, paid social, and display on accounts we
+            own. We generate demand through in-house media buying, then screen
+            every caller with IVR pre-qualification, geo filters, and duplicate
+            suppression before a transfer reaches your queue.
           </p>
           <p>
-            We buy media directly. Our own campaigns, our own creative, our own
-            budget. When a source stops performing we shut it off the same day,
-            because it is our money running, not someone else&apos;s. When a
-            buyer says the Monday dump is killing answer rate, we can change
-            the media, not just forward a complaint.
+            We are not a broker passing blind publisher volume. When a source
+            slips, we cut it the same day because our media budget is on the
+            line. When you need more scale, screened partners extend reach under
+            the same brief, with source-level monitoring and named paths.
           </p>
           <p>
-            Where we go beyond in-house, every partner is screened before
-            activation and held to the same call-quality standards as our own
-            campaigns.
+            You buy qualified inbound calls, live transfers, CPL leads, or CPC
+            traffic that already cleared our filters. We take the media risk.
+            You pay for billable conversions that match the intake rules you set
+            upfront.
           </p>
         </div>
         <div className="buy-split__visual">
@@ -573,11 +672,12 @@ export default function BuyersPage() {
           <div className="buy-flow__sticky">
             <p className="page-hero__eyebrow">How buying works</p>
             <h2 id="buy-flow-heading" className="section-title section-title--md">
-              Brief, model, then live transfers
+              What we need to build your campaign
             </h2>
             <p className="section-sub section-sub--sm">
-              You define demand. We match hybrid supply, price the model, and keep
-              tracking open so you can see what holds.
+              Ten inputs define how we run media, qualify callers, and route
+              demand to your floor. Share them upfront and we return pricing,
+              realistic volume, and named sources before traffic goes live.
             </p>
             <ol className="buy-flow__toc" aria-hidden="true">
               {steps.map((step, index) => (
@@ -631,11 +731,11 @@ export default function BuyersPage() {
             <div className="buy-teams__head">
               <p className="page-hero__eyebrow">Who we supply</p>
               <h2 id="buy-teams-heading" className="section-title section-title--md">
-                Built for teams ready to answer
+                Hot verticals with live demand
               </h2>
               <p className="section-sub section-sub--sm">
-                See open demand by vertical on our verticals hub. Insurance, Legal,
-                Home Services, Finance, and Education.
+                Programs we run media buying for today. Calls, transfers, CPL
+                leads, and CPC traffic matched to buyer intake capacity.
               </p>
               <div className="buy-teams__progress" aria-hidden="true">
                 <span className="buy-teams__progress-fill" />
@@ -644,24 +744,24 @@ export default function BuyersPage() {
 
             <div className="buy-teams__stage">
               <ul className="buy-teams__track">
-                {teams.map((team, index) => (
-                  <li key={team.label} className="buy-teams__slide">
+                {hotVerticals.map((vertical, index) => (
+                  <li key={vertical.label} className="buy-teams__slide">
                     <Link
-                      to={team.to}
-                      className={`buy-teams__card buy-teams__card--${team.tone}`}
+                      to={vertical.to}
+                      className={`buy-teams__card buy-teams__card--${vertical.tone}`}
                     >
                       <span className="buy-teams__index">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <span className="buy-teams__icon" aria-hidden="true">
-                        <img src={team.icon} alt="" width={32} height={32} />
+                        <img src={vertical.icon} alt="" width={32} height={32} />
                       </span>
                       <span className="buy-teams__copy">
-                        <strong>{team.label}</strong>
-                        <em>{team.body}</em>
+                        <strong>{vertical.label}</strong>
+                        <em>{vertical.body}</em>
                       </span>
                       <span className="buy-teams__cta">
-                        Explore vertical
+                        View program
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                           <path
                             d="M3 8h10M9 4l4 4-4 4"

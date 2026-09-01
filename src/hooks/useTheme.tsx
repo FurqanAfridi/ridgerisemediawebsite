@@ -20,8 +20,16 @@ const STORAGE_KEY = "rr-theme";
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
+function applyFavicon(theme: Theme) {
+  const link = document.querySelector<HTMLLinkElement>("#site-favicon");
+  if (!link) return;
+  link.href =
+    theme === "dark" ? "/assets/logo-icon.svg" : "/assets/logo-icon-dark.svg";
+}
+
 function applyTheme(theme: Theme) {
   document.documentElement.setAttribute("data-theme", theme);
+  applyFavicon(theme);
 }
 
 function readStoredTheme(): Theme {
@@ -78,4 +86,4 @@ export function useTheme() {
   return ctx;
 }
 
-export { readStoredTheme, applyTheme, STORAGE_KEY };
+export { readStoredTheme, applyTheme, applyFavicon, STORAGE_KEY };

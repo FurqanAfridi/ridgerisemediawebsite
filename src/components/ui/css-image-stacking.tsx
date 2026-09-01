@@ -40,7 +40,7 @@ const stackCards: StackCard[] = [
     id: "home-services",
     name: "Home Services",
     summary:
-      "HVAC, roofing, solar, and home security. Route homeowners who are ready to book.",
+      "Pest control, HVAC, roofing, solar, and home security. Route homeowners who are ready to book.",
     to: "/verticals",
     image: "/assets/vertical-cards/home-services.webp",
     background: "#ffebf1",

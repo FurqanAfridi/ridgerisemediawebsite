@@ -26,6 +26,8 @@ coverage
 .vscode/*
 !.vscode/extensions.json
 .idea
+.fleet
+*.iml
 .DS_Store
 **/.DS_Store
 Thumbs.db
@@ -42,6 +44,7 @@ Desktop.ini
 .netlify
 *.pem
 *.key
+*.pfx
 .npm
 .eslintcache
 .stylelintcache
@@ -56,7 +59,70 @@ tmp/
 temp/
 .temp/
 
-# Optional local agent scratch (keep committed .cursor/rules)
+# Local agent / AI tooling (keep committed .cursor/rules)
 .cursor/plans/
 .cursor/*.log
 .cursor/agent-transcripts/
+.cursor/projects/
+.claude/
+.windsurf/
+.continue/
+
+# Scratch / source images (production assets are WebP/SVG)
+public/assets/Gemini_*
+public/assets/Image *.jpeg
+public/assets/**/Image *.jpeg
+public/assets/**/*.jpeg
+public/assets/**/*.jpg
+!public/assets/og-default.jpg
+public/assets/**/*.png
+public/assets/**/*.psd
+public/assets/**/*.ai
+public/assets/**/*.gif
+public/assets/**/*.html
+!index.html
+
+# Vite / tooling caches
+vite.config.ts.timestamp-*
+*.vite
+
+# Local database / deploy tooling
+.supabase/
+.deploy-*.log
+deploy-*.local.*
+*.sqlite
+*.sqlite3
+*.db
+
+# Test / e2e artifacts
+playwright-report/
+test-results/
+blob-report/
+storybook-static/
+
+# Package manager extras
+.pnpm-store/
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# macOS extras
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Editor swap / backup files
+*.swp
+*.swo
+*.bak
+*.backup
+*.orig
+
+# Local archives (often dropped during deploy/asset work)
+*.zip
+*.tar.gz
+*.tgz

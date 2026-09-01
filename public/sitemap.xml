@@ -252,4 +252,40 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/ssi-signed-retainer</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/hospital-indemnity</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/pest-control</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/final-expense-inbounds</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/bathroom-remodel</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/pharmacy</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

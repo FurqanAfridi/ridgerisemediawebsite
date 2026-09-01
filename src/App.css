@@ -1288,6 +1288,10 @@ html[data-theme="dark"] .stats::before {
   padding-block: var(--space-sm);
 }
 
+.stats__grid--triple {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .stats__item {
   display: flex;
   flex-direction: column;
@@ -1624,6 +1628,10 @@ html[data-theme="dark"] .stats::before {
     gap: var(--space-md) var(--space-sm);
   }
 
+  .stats__grid.stats__grid--triple {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .stats__item {
     padding: var(--space-sm);
   }
@@ -1834,6 +1842,11 @@ html[data-theme="dark"] .stats::before {
   .stats__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px 8px;
+  }
+
+  .stats__grid.stats__grid--triple {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px 6px;
   }
 
   .stats__value {

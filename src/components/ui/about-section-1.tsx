@@ -54,32 +54,32 @@ const revealFade = {
 
 const shots = [
   {
-    src: "/assets/verticals/auto-insurance.webp",
-    alt: "Auto insurance campaigns",
+    src: "/assets/about/media-buying-auto.webp?v=1",
+    alt: "Auto insurance media buying campaigns",
     clip: "url(#rr-clip-squiggle)",
     tilt: "pos" as const,
     animationNum: 2,
     variants: revealUp,
   },
   {
-    src: "/assets/verticals/personal-injury.webp",
-    alt: "Personal injury call campaigns",
+    src: "/assets/about/media-buying-legal.webp?v=1",
+    alt: "Legal intake media buying campaigns",
     clip: "url(#rr-clip-star)",
     tilt: "neg" as const,
     animationNum: 3,
     variants: revealDown,
   },
   {
-    src: "/assets/verticals/solar.webp",
-    alt: "Solar home services campaigns",
+    src: "/assets/about/media-buying-home.webp?v=1",
+    alt: "Home services media buying campaigns",
     clip: "url(#rr-clip-clover)",
     tilt: "neg" as const,
     animationNum: 4,
     variants: revealDown,
   },
   {
-    src: "/assets/verticals/medicare-advantage.webp",
-    alt: "Medicare Advantage campaigns",
+    src: "/assets/about/media-buying-medicare.webp?v=1",
+    alt: "Medicare and health media buying campaigns",
     clip: "url(#rr-clip-blob)",
     tilt: "pos" as const,
     animationNum: 5,
@@ -121,9 +121,9 @@ export default function AboutSection1() {
       />
 
       <div className="home-about__copy">
-        <p className="home-about__eyebrow">About us</p>
+        <p className="home-about__eyebrow">Media buying</p>
         <h2 id="home-about-heading" className="home-about__title">
-          We buy demand. We vet partners. You get the call.
+          In-house media buying. Vetted partners. You get the call.
         </h2>
 
         <TimelineContent
@@ -133,11 +133,12 @@ export default function AboutSection1() {
           timelineRef={heroRef}
           className="home-about__body"
         >
-          RidgeRise Media is a US performance marketing company at
-          ridgerisemedia.com. We generate consumer demand through in-house media
-          buying and screened partners, then deliver qualified inbound
-          calls, leads, and traffic on CPL and cost per call across Insurance,
-          Legal, Home Services, Finance, and Education.
+          RidgeRise Media is a US performance marketing company. Our in-house
+          media buying runs paid search, paid social, and display campaigns on
+          accounts we own, and we extend reach through partners screened
+          against the same standards. We deliver qualified inbound calls, live
+          transfers, CPL leads, and CPC traffic across Insurance, Legal, Home
+          Services, Finance, and Education.
         </TimelineContent>
 
         <TimelineContent

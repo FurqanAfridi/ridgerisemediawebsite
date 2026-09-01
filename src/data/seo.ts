@@ -36,7 +36,7 @@ export function ogImageUrl(image = DEFAULT_OG) {
 
 const homeAndBuyersTitle = "Pay Per Call Media Buyer for Advertisers";
 const homeAndBuyersDescription =
-  "We buy the media ourselves and you pay per billable call. In-house campaigns on search, social and display, plus a screened publisher layer. Start a test campaign.";
+  "In-house media buying on search, social, and display. You pay per billable call. Campaigns we run ourselves, plus a screened publisher layer. Start a test campaign.";
 
 export const pageSeo = {
   home: {

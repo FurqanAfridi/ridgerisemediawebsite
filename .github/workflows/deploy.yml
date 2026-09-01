@@ -48,6 +48,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Download dist artifact
         uses: actions/download-artifact@v4
         with:
@@ -133,3 +136,50 @@ jobs:
           ssh -i ~/.ssh/deploy_key -p "${PORT}" -o IdentitiesOnly=yes \
             "${USER}@${DEPLOY_HOST}" \
             "test -f '${PATH_REMOTE}/index.html' && ls -la '${PATH_REMOTE}' | head -20"
+
+      - name: Sync lead API source to server repo
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_REPO_DIR: ${{ secrets.DEPLOY_REPO_DIR }}
+        run: |
+          set -euo pipefail
+          USER="${DEPLOY_USER:-root}"
+          PORT="${DEPLOY_PORT:-22}"
+          REPO_REMOTE="${DEPLOY_REPO_DIR:-/root/landers/ridgerisemediawebsite/ridgerisemediawebsite}"
+
+          ssh -i ~/.ssh/deploy_key -p "${PORT}" -o IdentitiesOnly=yes \
+            "${USER}@${DEPLOY_HOST}" "mkdir -p '${REPO_REMOTE}'"
+
+          rsync -az \
+            -e "ssh -i ~/.ssh/deploy_key -p ${PORT} -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
+            server package.json package-lock.json scripts/setup-leads-api.sh \
+            "${USER}@${DEPLOY_HOST}:${REPO_REMOTE}/"
+
+      - name: Write server .env and restart lead API
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_REPO_DIR: ${{ secrets.DEPLOY_REPO_DIR }}
+          LEAD_API_ENV_B64: ${{ secrets.LEAD_API_ENV_B64 }}
+        run: |
+          set -euo pipefail
+          USER="${DEPLOY_USER:-root}"
+          PORT="${DEPLOY_PORT:-22}"
+          REPO_REMOTE="${DEPLOY_REPO_DIR:-/root/landers/ridgerisemediawebsite/ridgerisemediawebsite}"
+
+          if [ -z "${LEAD_API_ENV_B64:-}" ]; then
+            echo "LEAD_API_ENV_B64 not set — skipping .env update and API restart."
+            exit 0
+          fi
+
+          echo "$LEAD_API_ENV_B64" | tr -d '\n\r\t ' | base64 -d > /tmp/rrm-leads.env
+          scp -i ~/.ssh/deploy_key -P "${PORT}" -o IdentitiesOnly=yes \
+            /tmp/rrm-leads.env "${USER}@${DEPLOY_HOST}:${REPO_REMOTE}/.env"
+          rm -f /tmp/rrm-leads.env
+
+          ssh -i ~/.ssh/deploy_key -p "${PORT}" -o IdentitiesOnly=yes \
+            "${USER}@${DEPLOY_HOST}" \
+            "cd '${REPO_REMOTE}' && chmod +x scripts/setup-leads-api.sh && ./scripts/setup-leads-api.sh"

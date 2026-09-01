@@ -54,6 +54,17 @@ Add secrets in **both** places if you use the `production` environment (workflow
 | `DEPLOY_SSH_KEY_B64` | Base64 of the **private** key (preferred — avoids newline corruption) |
 | `DEPLOY_PORT` | `22` (optional) |
 | `DEPLOY_PATH` | `/var/www/ridgerisemedia` (optional) |
+| `DEPLOY_REPO_DIR` | `/root/landers/ridgerisemediawebsite/ridgerisemediawebsite` (optional) |
+| `LEAD_API_ENV_B64` | Base64 of production `.env` for the lead API (see below) |
+
+`LEAD_API_ENV_B64` (macOS):
+
+```bash
+base64 -i .env | pbcopy
+# Paste into GitHub secret LEAD_API_ENV_B64 (repo + production environment)
+```
+
+This deploys the contact-form API (`server/`) and writes `.env` on the server. Without this secret, the static site still deploys; the API step is skipped.
 
 `DEPLOY_SSH_KEY` (raw PEM) also works, but `DEPLOY_SSH_KEY_B64` is more reliable.
 

@@ -418,6 +418,96 @@ export const verticals: Vertical[] = [
       "online education pay per call",
     ],
   },
+  {
+    slug: "ssi-signed-retainer",
+    name: "SSI Signed Retainer",
+    category: "Legal",
+    summary: "SSI claimants ready for retainer-ready intake.",
+    description:
+      "Callers need help with SSI eligibility, denials, and representation before a case opens. Screen for claim status, prior counsel, and whether the caller meets your retainer criteria. Buy CPL or cost per call with those rules in writing before volume scales.",
+    buyerFit: "Disability and SSI intake teams buying retainer-ready phone demand.",
+    publisherFit: "Benefits and disability-intent traffic with compliant consent paths.",
+    keywords: [
+      "buy SSI calls",
+      "SSI signed retainer live transfers",
+      "SSI pay per call",
+    ],
+  },
+  {
+    slug: "hospital-indemnity",
+    name: "Hospital Indemnity",
+    category: "Insurance",
+    summary: "Shoppers comparing supplemental hospital coverage.",
+    description:
+      "Callers want hospital cash benefits and gap coverage explained on the phone. Filter by state licensing, age band, and product type so licensed agents only take calls they can place. Buy on CPL or cost per call with those rules in the brief.",
+    buyerFit: "Health agencies and call centers writing supplemental health products.",
+    publisherFit: "Health and senior-intent traffic with clear product positioning.",
+    keywords: [
+      "buy hospital indemnity calls",
+      "hospital indemnity live transfers",
+      "hospital indemnity pay per call",
+    ],
+  },
+  {
+    slug: "pest-control",
+    name: "Pest Control",
+    category: "Home Services",
+    summary: "Homeowners requesting pest treatment and prevention.",
+    description:
+      "Local-intent callers want same-week service, treatment type, and pricing explained before they book. Geo, homeownership, and pest type filters keep technicians on jobs they can run. Cap concurrency to match crew availability.",
+    buyerFit: "Pest control operators and home-services networks with local capacity.",
+    publisherFit: "Local service-area and emergency-intent traffic with ZIP targeting.",
+    keywords: [
+      "buy pest control calls",
+      "pest control live transfers",
+      "pest control pay per call",
+    ],
+  },
+  {
+    slug: "final-expense-inbounds",
+    name: "Final Expense Inbounds",
+    category: "Insurance",
+    summary: "Senior inbound final expense calls and transfers.",
+    description:
+      "Inbound callers are typically older and phone-first, asking about burial and final expense coverage. Age bands, state, and exclusive routing keep FE agents on conversations they can underwrite. Duration and disposition rules should match how your desk closes.",
+    buyerFit: "Final expense specialists buying inbound and transfer volume.",
+    publisherFit: "Senior and protection audiences on search, native, and call-path offers.",
+    keywords: [
+      "buy final expense inbound calls",
+      "final expense inbound live transfers",
+      "final expense inbound pay per call",
+    ],
+  },
+  {
+    slug: "bathroom-remodel",
+    name: "Bathroom Remodel",
+    category: "Home Services",
+    summary: "Homeowners requesting bath replacement and remodel quotes.",
+    description:
+      "Homeownership, project scope, and geo decide whether a call becomes an in-home estimate. Filter for exclusive vs shared based on setter capacity. Buy CPL or cost per call with those rules before scaling bath remodel volume.",
+    buyerFit: "Bath remodel contractors and home-improvement networks with appointment teams.",
+    publisherFit: "Home improvement traffic with ZIP-level targeting and quote intent.",
+    keywords: [
+      "buy bathroom remodel calls",
+      "bathroom remodel live transfers",
+      "bath remodel pay per call",
+    ],
+  },
+  {
+    slug: "pharmacy",
+    name: "Pharmacy",
+    category: "Insurance",
+    summary: "Callers asking about prescription benefits and pharmacy programs.",
+    description:
+      "Demand often ties to benefit enrollment, prescription savings, and supplemental health products. Filter by state, product type, and licensed hours so agents only take calls they can place. Campaign-specific consent and positioning matter on health-adjacent offers.",
+    buyerFit: "Health agencies and benefit enrollment teams with licensed phone capacity.",
+    publisherFit: "Health and senior-intent publishers with compliant call paths.",
+    keywords: [
+      "buy pharmacy benefit calls",
+      "pharmacy live transfers",
+      "pharmacy pay per call",
+    ],
+  },
 ];
 
 export const verticalCategories = [

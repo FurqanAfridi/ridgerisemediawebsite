@@ -49,12 +49,12 @@ export default function GlassmorphismTrustHero() {
             <h2 id="why-heading" className="why-trust__title why-trust__fade why-trust__fade--2">
               Built for buyers who need
               <br />
-              <span className="why-trust__title-accent">the call to count</span>
+              <span className="why-trust__title-accent">the conversion to count</span>
             </h2>
 
             <p className="why-trust__sub why-trust__fade why-trust__fade--3">
-              Quality monitoring, tracking, filter control, and vertical depth.
-              Those four things decide whether pay-per-call and CPL scale or stall.
+              Quality monitoring, call-level tracking, filter control, and vertical depth.
+              Those four things decide whether pay-per-call, CPL, and CPC campaigns scale or stall.
             </p>
 
             <div className="why-trust__ctas why-trust__fade why-trust__fade--4">
@@ -77,7 +77,7 @@ export default function GlassmorphismTrustHero() {
                     <Target size={22} />
                   </div>
                   <div>
-                    <div className="why-trust__lead-value">CPL + CPP</div>
+                    <div className="why-trust__lead-value">CPL + CPC</div>
                     <div className="why-trust__lead-label">Buying models on every campaign</div>
                   </div>
                 </div>
@@ -110,7 +110,7 @@ export default function GlassmorphismTrustHero() {
                   <span className="why-trust__mini-div" />
                   <StatItem value="Tracked" label="Calls" />
                   <span className="why-trust__mini-div" />
-                  <StatItem value="US" label="Verticals" />
+                  <StatItem value="Verified" label="Conversions" />
                 </div>
 
                 <div className="why-trust__pills">
