@@ -17,16 +17,16 @@ if [ ! -f "${ENV_FILE}" ]; then
   exit 1
 fi
 
-SSH_OPTS=(-p "${PORT}" -o StrictHostKeyChecking=accept-new)
+SSH_BASE=(-o StrictHostKeyChecking=accept-new)
 if [ -n "${SSH_KEY}" ]; then
-  SSH_OPTS+=(-i "${SSH_KEY}" -o IdentitiesOnly=yes)
+  SSH_BASE+=(-i "${SSH_KEY}" -o IdentitiesOnly=yes)
 fi
 
 echo "==> Upload .env -> ${USER}@${HOST}:${REPO_REMOTE}/.env"
-scp "${SSH_OPTS[@]}" "${ENV_FILE}" "${USER}@${HOST}:${REPO_REMOTE}/.env"
+scp -P "${PORT}" "${SSH_BASE[@]}" "${ENV_FILE}" "${USER}@${HOST}:${REPO_REMOTE}/.env"
 
 echo "==> Restart lead API"
-ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
+ssh -p "${PORT}" "${SSH_BASE[@]}" "${USER}@${HOST}" \
   "cd '${REPO_REMOTE}' && chmod +x scripts/setup-leads-api.sh && ./scripts/setup-leads-api.sh"
 
 echo "==> Done"
