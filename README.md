@@ -64,7 +64,38 @@ base64 -i .env | pbcopy
 # Paste into GitHub secret LEAD_API_ENV_B64 (repo + production environment)
 ```
 
-This deploys the contact-form API (`server/`) and writes `.env` on the server. Without this secret, the static site still deploys; the API step is skipped.
+### Lead API on production
+
+The contact form posts to `/api/leads`. On the server:
+
+1. Add **`LEAD_API_ENV_B64`** to GitHub Actions secrets (repo + `production` environment):
+
+```bash
+base64 -i .env | pbcopy   # paste into secret LEAD_API_ENV_B64
+```
+
+2. Each deploy syncs `server/`, writes `.env`, and restarts the `rrm-leads-api` systemd service.
+
+**Or** push env manually (from a machine with SSH access):
+
+```bash
+DEPLOY_HOST=207.244.228.170 DEPLOY_USER=root DEPLOY_SSH_KEY=~/.ssh/your_key ./scripts/push-env-to-server.sh
+```
+
+3. Ensure host nginx on `:786` proxies `/api` to the Node API:
+
+```nginx
+location /api/ {
+    proxy_pass http://127.0.0.1:3020;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+```
+
+Health check: `curl http://127.0.0.1:3020/api/health`
 
 `DEPLOY_SSH_KEY` (raw PEM) also works, but `DEPLOY_SSH_KEY_B64` is more reliable.
 
