@@ -155,9 +155,18 @@ html[data-theme="dark"] .home-about {
     padding-block: var(--space-2xl);
   }
 
+  .home-about__title {
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+  }
+
   .home-about__gallery {
     grid-template-columns: 1fr 1fr;
-    height: 18rem;
+    height: auto;
+    gap: 10px;
+  }
+
+  .home-about__shot {
+    min-height: 140px;
   }
 
   .home-about__body,

@@ -977,8 +977,21 @@ html[data-theme="dark"] .pub-cta__panel {
   }
 
   .pub-hero__stage {
-    height: 360px;
-    order: -1;
+    height: auto;
+    min-height: 0;
+    order: 0;
+  }
+
+  .pub-sources__progress {
+    display: none;
+  }
+
+  .pub-sources__sticky {
+    gap: 8px;
+  }
+
+  .pub-sources__sticky h2 {
+    font-size: var(--text-2xl);
   }
 
   .pub-split--reverse .pub-split__visual,
@@ -1039,7 +1052,7 @@ html[data-theme="dark"] .pub-cta__panel {
   }
 
   .pub-hero__card {
-    width: min(100%, 280px);
+    width: min(100%, 260px);
     transform: none;
   }
 
@@ -1056,6 +1069,27 @@ html[data-theme="dark"] .pub-cta__panel {
   .pub-metrics__grid {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
+  }
+
+  .pub-metrics__value {
+    white-space: normal;
+    font-size: var(--text-lg);
+    text-wrap: balance;
+  }
+
+  .pub-sources__board {
+    padding-left: 20px;
+  }
+
+  .pub-source__node {
+    left: -20px;
+    margin-left: -10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .pub-sources__rail {
+    left: 9px;
   }
 }
 

@@ -288,19 +288,23 @@ html:not([data-theme="dark"]) .cis {
     gap: var(--space-sm);
   }
 
+  .cis__stack {
+    padding-bottom: 0;
+  }
+
   .cis__sticky {
-    position: sticky;
-    top: calc(var(--header-clearance, 64px) + var(--cis-top, 0px));
+    position: relative;
+    top: auto;
   }
 
   .cis__figure {
-    min-height: min(72dvh, 520px);
-    padding: 8px var(--page-pad) 28px;
+    min-height: 0;
+    padding: 8px var(--page-pad) 16px;
   }
 
   .cis__card {
     width: min(var(--cis-width, 94%), 100%);
-    min-height: min(58dvh, 440px);
+    min-height: 0;
     grid-template-columns: 1fr;
   }
 

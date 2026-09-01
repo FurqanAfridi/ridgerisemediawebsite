@@ -72,7 +72,7 @@ export default function VerticalDetailPage() {
       <section className="inner-section">
         <figure className="vert-guide__media">
           <img
-            src={`/assets/verticals/${vertical.slug}.jpg`}
+            src={`/assets/verticals/${vertical.slug}.webp`}
             alt=""
           />
         </figure>

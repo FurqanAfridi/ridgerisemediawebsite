@@ -32,7 +32,7 @@ const buyables = [
     body: "Exclusive when your agents need the only line. Shared when you're testing a geo or filling leftover capacity.",
     to: "/buyers",
     label: "Pay per call",
-    image: "/assets/about/buy-calls.jpg",
+    image: "/assets/about/buy-calls.webp",
     Icon: PhoneCall,
     tone: "violet",
   },
@@ -42,7 +42,7 @@ const buyables = [
     body: "Qualification before the handoff. Duration rules and hours matched to the board you actually staff.",
     to: "/buyers",
     label: "Live transfers",
-    image: "/assets/about/buy-transfers.jpg",
+    image: "/assets/about/buy-transfers.webp",
     Icon: Headphones,
     tone: "mint",
   },
@@ -52,7 +52,7 @@ const buyables = [
     body: "Form or application events you define. Useful when the phone isn't the first step, or you want a record plus a call.",
     to: "/buyers",
     label: "CPL",
-    image: "/assets/about/buy-cpl.jpg",
+    image: "/assets/about/buy-cpl.webp",
     Icon: ClipboardList,
     tone: "amber",
   },
@@ -62,7 +62,7 @@ const buyables = [
     body: "Clicks and redirects into your own funnel when you already have intake and just need cleaner demand.",
     to: "/buyers",
     label: "Traffic",
-    image: "/assets/about/buy-traffic.jpg",
+    image: "/assets/about/buy-traffic.webp",
     Icon: MousePointerClick,
     tone: "rose",
   },
@@ -447,7 +447,7 @@ export default function AboutPage() {
             <div className="about-quality__shots">
               <img
                 className="about-quality__shot about-quality__shot--main"
-                src="/assets/about/quality-ops.jpg"
+                src="/assets/about/quality-ops.webp"
                 alt=""
                 width={700}
                 height={500}
@@ -455,7 +455,7 @@ export default function AboutPage() {
               />
               <img
                 className="about-quality__shot about-quality__shot--float"
-                src="/assets/about/quality-review.jpg"
+                src="/assets/about/quality-review.webp"
                 alt=""
                 width={420}
                 height={320}

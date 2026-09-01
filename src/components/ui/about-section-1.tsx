@@ -54,7 +54,7 @@ const revealFade = {
 
 const shots = [
   {
-    src: "/assets/verticals/auto-insurance.jpg",
+    src: "/assets/verticals/auto-insurance.webp",
     alt: "Auto insurance campaigns",
     clip: "url(#rr-clip-squiggle)",
     tilt: "pos" as const,
@@ -62,7 +62,7 @@ const shots = [
     variants: revealUp,
   },
   {
-    src: "/assets/verticals/personal-injury.jpg",
+    src: "/assets/verticals/personal-injury.webp",
     alt: "Personal injury call campaigns",
     clip: "url(#rr-clip-star)",
     tilt: "neg" as const,
@@ -70,7 +70,7 @@ const shots = [
     variants: revealDown,
   },
   {
-    src: "/assets/verticals/solar.jpg",
+    src: "/assets/verticals/solar.webp",
     alt: "Solar home services campaigns",
     clip: "url(#rr-clip-clover)",
     tilt: "neg" as const,
@@ -78,7 +78,7 @@ const shots = [
     variants: revealDown,
   },
   {
-    src: "/assets/verticals/medicare-advantage.jpg",
+    src: "/assets/verticals/medicare-advantage.webp",
     alt: "Medicare Advantage campaigns",
     clip: "url(#rr-clip-blob)",
     tilt: "pos" as const,

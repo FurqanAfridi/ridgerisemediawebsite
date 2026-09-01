@@ -1693,8 +1693,20 @@ html[data-theme="dark"] .stats::before {
   }
 
   .header__menu-btn {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .btn {
+    white-space: normal;
+    text-wrap: balance;
+    min-height: 48px;
+  }
+
+  .stats__value {
+    white-space: normal;
+    font-size: var(--text-lg);
+    text-wrap: balance;
   }
 
   .hero {

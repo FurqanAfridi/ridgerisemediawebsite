@@ -422,6 +422,22 @@ html[data-theme="dark"] .prose a {
   object-fit: cover;
 }
 
+@media (max-width: 600px) {
+  .vert-guide__media {
+    border-radius: 14px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .prose--guide {
+    gap: var(--space-sm);
+  }
+
+  .prose p {
+    font-size: var(--text-base);
+    line-height: 1.65;
+  }
+}
+
 /* Verticals catalog — searchable grid (replaces card stack) */
 .sr-only {
   position: absolute;
@@ -482,6 +498,40 @@ html[data-theme="dark"] .vert-catalog__toolbar {
 .vert-catalog .pill-row {
   justify-content: flex-start;
   margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .vert-catalog .pill-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  .vert-catalog .pill-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .vert-catalog .pill {
+    flex: 0 0 auto;
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+
+  .page-hero__title {
+    font-size: clamp(26px, 7vw, 32px);
+    line-height: 1.15;
+  }
+
+  .page-hero {
+    padding-bottom: var(--space-md);
+  }
+
+  .cta-band__actions .btn {
+    width: 100%;
+  }
 }
 
 .vert-catalog__count {

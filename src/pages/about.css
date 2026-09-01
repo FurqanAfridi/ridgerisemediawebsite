@@ -818,29 +818,42 @@ html[data-theme="dark"] .about-verts__more a {
   .about-quality__media {
     position: relative;
     top: auto;
+    order: 2;
+  }
+
+  .about-buy__rail,
+  .about-quality__board {
+    order: 1;
   }
 
   .about-buy__progress {
     display: none;
   }
 
-  .about-buy__visual {
-    grid-template-columns: 1fr;
-  }
-
   .about-buy__frames {
-    max-width: 520px;
+    max-width: 280px;
+    aspect-ratio: 16 / 10;
     margin-inline: auto;
   }
 
   .about-quality__shots {
-    max-width: 520px;
+    overflow: hidden;
+    max-width: 320px;
+    min-height: 0;
     margin-inline: auto;
   }
 
   .about-quality__shot--float {
-    right: 4%;
-    bottom: -6%;
+    display: none;
+  }
+
+  .about-quality__dial {
+    width: 96px;
+    height: 96px;
+  }
+
+  .about-buy__visual {
+    grid-template-columns: 1fr;
   }
 
   .about-quality__grid {
@@ -853,6 +866,14 @@ html[data-theme="dark"] .about-verts__more a {
 }
 
 @media (max-width: 600px) {
+  .about-buy__visual {
+    display: none;
+  }
+
+  .about-quality__media {
+    display: none;
+  }
+
   .about-buy__card {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -869,11 +890,11 @@ html[data-theme="dark"] .about-verts__more a {
     padding: 18px 16px 20px;
   }
 
-  .about-quality__shot--float {
-    display: none;
+  .about-hero__title {
+    font-size: clamp(26px, 7vw, 32px);
+    letter-spacing: -0.7px;
   }
 
-  .about-hero__title,
   .about-head h2,
   .about-band h2 {
     letter-spacing: -0.7px;

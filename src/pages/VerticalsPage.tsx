@@ -214,7 +214,7 @@ export default function VerticalsPage() {
                       >
                         <span className="vert-card__media">
                           <img
-                            src={`/assets/verticals/${vertical.slug}.jpg`}
+                            src={`/assets/verticals/${vertical.slug}.webp`}
                             alt=""
                             width={640}
                             height={420}

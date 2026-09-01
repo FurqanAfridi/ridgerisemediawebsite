@@ -1788,30 +1788,50 @@ html[data-theme="dark"] .buy-teams__index {
     max-width: none;
     min-width: 0;
     height: auto;
-    min-height: 280px;
+    min-height: 0;
   }
 
   .buy-why__spine {
     display: none;
   }
 
+  .buy-why__hit {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 22px 18px 24px;
+    min-height: 0;
+  }
+
   .buy-why__num,
   .buy-why__title,
   .buy-why__body,
   .buy-why__badge {
+    position: static;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    max-width: 100%;
     opacity: 1;
     visibility: visible;
     transform: none;
   }
 
+  .buy-why__title {
+    font-size: clamp(22px, 6vw, 26px);
+    padding-right: 100px;
+  }
+
   .buy-why__art,
   .buy-why__card.is-open .buy-why__art {
-    width: 156px;
-    height: 156px;
-    top: 24px;
+    width: 88px;
+    height: 88px;
+    top: 16px;
     bottom: auto;
     left: auto;
-    right: 24px;
+    right: 16px;
     opacity: 0.95;
     filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.28));
     transform: none;
@@ -1857,12 +1877,22 @@ html[data-theme="dark"] .buy-teams__index {
   }
 
   .buy-hero__stage {
-    min-height: 320px;
+    min-height: 0;
     width: 100%;
   }
 
   .buy-hero__float {
-    width: min(100%, 380px);
+    width: min(100%, 320px);
+  }
+
+  .buy-flow__sticky {
+    gap: 8px;
+    padding-block: 0;
+    margin-bottom: 8px;
+  }
+
+  .buy-flow__sticky .section-sub {
+    font-size: var(--text-base);
   }
 
   .buy-queue {
@@ -1954,7 +1984,7 @@ html[data-theme="dark"] .buy-teams__index {
     max-width: none;
     min-width: 0;
     height: auto;
-    min-height: 280px;
+    min-height: 0;
   }
 
   .buy-why__spine {
@@ -1988,6 +2018,34 @@ html[data-theme="dark"] .buy-teams__index {
   .buy-hero__orb--mint,
   .buy-hero__orb--violet {
     display: none;
+  }
+
+  .buy-hero__stage {
+    min-height: 0;
+  }
+
+  .buy-hero__float {
+    width: min(100%, 300px);
+  }
+
+  .buy-flow__board {
+    padding-left: 20px;
+  }
+
+  .buy-flow__node {
+    left: -20px;
+    margin-left: -10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .buy-flow__rail {
+    left: 9px;
+  }
+
+  .buy-cta__panel {
+    padding: 28px 16px;
+    border-radius: 20px;
   }
 
   .buy-hero__ctas,
