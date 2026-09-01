@@ -1,9 +1,6 @@
 ---
-description: Workflow for writing a new blog post from a topic I provide — keyword handling, image handling with default fallback, output checklist.
-globs: src/data/blog.ts, src/pages/BlogPostPage.tsx, src/pages/BlogPage.tsx, public/sitemap.xml, public/assets/**
 alwaysApply: false
 ---
-
 # Blog request workflow
 
 When I ask for a new blog post, I will give you a topic or a short brief. Sometimes I'll also give keywords and/or an image. Follow this exact process. All rules in 40-blog-content.mdc and 20-voice-anti-ai-writing.mdc still apply on top of this.

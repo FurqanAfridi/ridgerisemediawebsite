@@ -2,6 +2,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
 import { blogPosts, getPostBySlug } from "@/data/blog";
+import { postSeo } from "@/data/seo";
 import "./pages.css";
 
 export default function BlogPostPage() {
@@ -18,14 +19,7 @@ export default function BlogPostPage() {
 
   return (
     <main>
-      <Seo
-        title={post.title}
-        description={post.excerpt}
-        path={`/blog/${post.slug}`}
-        type="article"
-        keywords={post.tags}
-        publishedTime={post.date}
-      />
+      <Seo {...postSeo(post)} />
 
       <PageHero
         eyebrow={post.category}
@@ -84,7 +78,7 @@ export default function BlogPostPage() {
           </p>
           <div className="cta-band__actions">
             <Link to="/contact?role=buyer" className="btn btn--purple">
-              Discuss a campaign
+              Start a test campaign
             </Link>
             <Link to="/publishers" className="btn btn--mint">
               Apply as a partner

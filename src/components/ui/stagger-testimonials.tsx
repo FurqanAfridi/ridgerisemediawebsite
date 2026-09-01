@@ -39,7 +39,7 @@ const testimonials = [
   {
     id: 3,
     testimonial:
-      "One network for Insurance and Home Services beats juggling five vendors with five definitions of 'qualified.'",
+      "One media buyer for Insurance and Home Services beats juggling five vendors with five definitions of 'qualified.'",
     by: "Growth Director, Multi-Vertical Buyer",
     imgSrc:
       "https://api.dicebear.com/7.x/initials/svg?seed=DavidRodriguez&backgroundColor=4c1678&textColor=ffffff",

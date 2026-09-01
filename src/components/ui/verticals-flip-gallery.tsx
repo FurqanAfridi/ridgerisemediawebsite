@@ -160,7 +160,7 @@ export default function VerticalsFlipGallery() {
           One Platform. Every High-Intent Vertical.
         </h2>
         <p className="section-sub section-sub--sm">
-          Insurance is our specialty — but our network runs deep across
+          Insurance is our specialty — but we buy media across
           performance-driven industries. Hover a tile, then scroll to zoom.
         </p>
       </div>

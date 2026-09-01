@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { BouncyCardsFeatures } from "@/components/ui/bounce-card-features";
+import GlassmorphismTrustHero from "@/components/ui/glassmorphism-trust-hero";
 import CssImageStacking from "@/components/ui/css-image-stacking";
+import AboutSection1 from "@/components/ui/about-section-1";
 import ScrollRocketFlight from "@/components/ui/scroll-rocket-flight";
 import { StaggerTestimonials } from "@/components/ui/stagger-testimonials";
 import { AnimatedGroup } from "@/components/ui/animated-group";
@@ -9,6 +10,7 @@ import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import { Seo } from "@/components/Seo";
 import { assets } from "@/data/site";
 import { homeFaqs } from "@/data/faqs";
+import { pageSeo } from "@/data/seo";
 
 const stats = [
   {
@@ -40,7 +42,7 @@ const stats = [
 const advertiserBullets = [
   "Qualified inbound calls, live transfers, CPL leads, and traffic matched to your vertical",
   "Filters for geo, hours, product, exclusivity, and duration so intake can keep up",
-  "Volume from our own media buying plus a vetted partner network, with source-level monitoring",
+  "Volume from media we buy ourselves plus a screened publisher layer, with source-level monitoring",
   "Call-level tracking so you can see quality, dispositions, and acquisition cost",
 ] as const;
 
@@ -76,20 +78,7 @@ function PayPerCallBadge() {
 export default function HomePage() {
   return (
     <>
-      <Seo
-        title="Pay Per Call Network for Advertisers"
-        description="Buy qualified inbound calls, leads, and traffic on CPL or cost per call. Hybrid in-house buying plus a vetted partner network. Discuss a campaign."
-        path="/"
-        keywords={[
-          "pay per call network",
-          "pay per call",
-          "cost per call",
-          "CPL",
-          "qualified inbound calls",
-          "lead generation",
-        ]}
-        jsonLd={buildFaqJsonLd(homeFaqs)}
-      />
+      <Seo {...pageSeo.home} jsonLd={buildFaqJsonLd(homeFaqs)} />
 
       <main className="home-main">
         <ScrollRocketFlight />
@@ -119,9 +108,9 @@ export default function HomePage() {
                 </h1>
 
                 <p className="hero__sub">
-                  RidgeRise Media is a pay per call and CPL network for
+                  RidgeRise Media is a pay-per-call media buyer for
                   advertisers. We generate demand through in-house media buying
-                  and a vetted partner network, then deliver qualified inbound
+                  and screened partners, then deliver qualified inbound
                   calls, leads, and traffic in Insurance, Legal, Home Services,
                   and other high-intent verticals.
                 </p>
@@ -130,7 +119,7 @@ export default function HomePage() {
               <div className="hero__ctas">
                 <Magnetic strength={0.4}>
                   <Link to="/buyers" className="btn btn--purple hero__btn">
-                    Discuss a campaign
+                    Start a test campaign
                   </Link>
                 </Magnetic>
                 <Magnetic strength={0.4}>
@@ -242,7 +231,7 @@ export default function HomePage() {
           </ul>
         </section>
 
-        <BouncyCardsFeatures />
+        <GlassmorphismTrustHero />
 
         <section className="roles">
           <span className="rocket-marker rocket-marker--b" data-rocket-marker />
@@ -275,7 +264,7 @@ export default function HomePage() {
               </ul>
               <Magnetic strength={0.35}>
                 <Link to="/buyers" className="btn btn--role btn--role-mint">
-                  Discuss a campaign →
+                  Start a test campaign →
                 </Link>
               </Magnetic>
             </article>
@@ -306,6 +295,9 @@ export default function HomePage() {
           ctaTo="/verticals"
         />
       </main>
+
+      <AboutSection1 />
+
 
       <FaqSection
         title="Questions buyers actually ask"

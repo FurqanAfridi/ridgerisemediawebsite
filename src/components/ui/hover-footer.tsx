@@ -207,7 +207,7 @@ const contactInfo = [
   },
   {
     icon: MapPin,
-    text: "United States · Pay Per Call Network",
+    text: "United States · Pay Per Call Media Buyer",
   },
 ];
 

@@ -142,14 +142,11 @@ export default function CssImageStacking({
       <span className="rocket-marker rocket-marker--c" data-rocket-marker />
       <span className="rocket-marker rocket-marker--end" data-rocket-marker />
 
-      <header className="cis__heading">
-        <div className="cis__heading-inner">
-          <div className="cis__grid" aria-hidden="true" />
-          <h2 id="cis-heading" className="section-title section-title--md cis__title">
-            {title}
-          </h2>
-          <p className="section-sub section-sub--sm cis__sub">{description}</p>
-        </div>
+      <header className="cis__intro">
+        <h2 id="cis-heading" className="section-title section-title--md">
+          {title}
+        </h2>
+        <p className="section-sub section-sub--sm">{description}</p>
       </header>
 
       <div className="cis__stack">

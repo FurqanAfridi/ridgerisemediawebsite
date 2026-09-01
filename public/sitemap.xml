@@ -111,12 +111,57 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ridgerisemedia.com/verticals/mass-tort</loc>
+    <loc>https://ridgerisemedia.com/verticals/workers-compensation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/disability-ssdi</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/bankruptcy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/renters-insurance</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/commercial-auto-insurance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ridgerisemedia.com/verticals/debt-settlement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/personal-loans</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/credit-repair</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/plumbing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/windows</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/water-damage</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -152,6 +197,16 @@
   </url>
   <url>
     <loc>https://ridgerisemedia.com/verticals/education</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/trade-schools</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ridgerisemedia.com/verticals/online-education</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

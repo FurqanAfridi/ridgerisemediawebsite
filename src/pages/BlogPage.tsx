@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "motion/react";
 import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
+import { pageSeo } from "@/data/seo";
 import { blogPosts } from "@/data/blog";
 import { blogFaqs } from "@/data/faqs";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
@@ -24,18 +25,7 @@ export default function BlogPage() {
 
   return (
     <main>
-      <Seo
-        title="Pay-Per-Call Blog for Buyers"
-        description="Buyer-first guides on buying calls and leads, call quality, insurance campaigns, and how pay per call works. Written for intake and media teams."
-        path="/blog"
-        keywords={[
-          "pay per call blog",
-          "buy inbound calls",
-          "call quality",
-          "insurance pay per call",
-        ]}
-        jsonLd={buildFaqJsonLd(blogFaqs)}
-      />
+      <Seo {...pageSeo.blog} jsonLd={buildFaqJsonLd(blogFaqs)} />
 
       <PageHero
         eyebrow="Blog"
@@ -122,12 +112,12 @@ export default function BlogPage() {
         <div className="cta-band__inner">
           <h2>Ready to run a campaign, not just read about one?</h2>
           <p>
-            Discuss a campaign for your vertical, or apply as a partner if you
+            Start a test campaign for your vertical, or apply as a partner if you
             have call traffic to monetize.
           </p>
           <div className="cta-band__actions">
             <Link to="/contact?role=buyer" className="btn btn--purple">
-              Discuss a campaign
+              Start a test campaign
             </Link>
             <Link to="/publishers" className="btn btn--mint">
               Apply as a partner

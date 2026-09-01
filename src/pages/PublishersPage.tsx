@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { publishersFaqs } from "@/data/faqs";
+import { pageSeo } from "@/data/seo";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import { usePublisherMotion } from "@/hooks/usePublisherMotion";
 import "./pages.css";
@@ -67,6 +68,8 @@ const steps = [
     title: "Apply with your sources",
     body: "Tell us traffic types, geos, and verticals. We review for fit and compliance readiness.",
     icon: `${A}/step-1.svg`,
+    image: `${A}/path-apply.jpg`,
+    imageAlt: "Partners reviewing campaign sources together at a desk",
     tone: "violet",
   },
   {
@@ -74,6 +77,8 @@ const steps = [
     title: "Get matched to live demand",
     body: "Approved partners see open buyer campaigns with payout terms, caps, and tracking from day one.",
     icon: `${A}/step-2.svg`,
+    image: `${A}/path-match.jpg`,
+    imageAlt: "Live analytics dashboard showing demand and performance",
     tone: "mint",
   },
   {
@@ -81,17 +86,55 @@ const steps = [
     title: "Launch, track, get paid",
     body: "Optimize paths that convert. Pause what fails quality. Payouts follow the terms we set together.",
     icon: `${A}/step-3.svg`,
+    image: `${A}/path-launch.jpg`,
+    imageAlt: "Partnership handshake after launching a paid campaign",
     tone: "amber",
   },
 ] as const;
 
 const sources = [
-  { label: "Search", body: "Paid & organic intent", icon: `${A}/source-search.svg` },
-  { label: "Social", body: "Paid social click-to-call", icon: `${A}/source-social.svg` },
-  { label: "Native", body: "Content-driven transfers", icon: `${A}/source-native.svg` },
-  { label: "Call paths", body: "IVR & warm transfers", icon: `${A}/source-calls.svg` },
-  { label: "Email", body: "Nurture to phone", icon: `${A}/source-email.svg` },
-  { label: "Owned media", body: "Sites, apps, communities", icon: `${A}/source-owned.svg` },
+  {
+    label: "Search",
+    body: "Paid & organic intent",
+    detail: "High-intent queries that convert into qualified inbound calls.",
+    icon: `${A}/source-search.svg`,
+    tone: "violet",
+  },
+  {
+    label: "Social",
+    body: "Paid social click-to-call",
+    detail: "Click-to-call and form-to-phone paths from paid social traffic.",
+    icon: `${A}/source-social.svg`,
+    tone: "mint",
+  },
+  {
+    label: "Native",
+    body: "Content-driven transfers",
+    detail: "Content placements that move readers into tracked call offers.",
+    icon: `${A}/source-native.svg`,
+    tone: "amber",
+  },
+  {
+    label: "Call paths",
+    body: "IVR & warm transfers",
+    detail: "IVR, warm transfers, and dedicated call routing into live buyers.",
+    icon: `${A}/source-calls.svg`,
+    tone: "rose",
+  },
+  {
+    label: "Email",
+    body: "Nurture to phone",
+    detail: "Nurture sequences that land in a phone conversation, not just a click.",
+    icon: `${A}/source-email.svg`,
+    tone: "pink",
+  },
+  {
+    label: "Owned media",
+    body: "Sites, apps, communities",
+    detail: "Sites, apps, and communities with steady qualified caller volume.",
+    icon: `${A}/source-owned.svg`,
+    tone: "lime",
+  },
 ] as const;
 
 const payoutStats = [
@@ -171,18 +214,7 @@ export default function PublishersPage() {
 
   return (
     <main className="pub-page" ref={rootRef}>
-      <Seo
-        title="Pay Per Call Network for Publishers"
-        description="Monetize call traffic with RidgeRise Media. Live buyer demand, quality standards, call-level tracking, and clear payout terms. Apply as a partner."
-        path="/publishers"
-        keywords={[
-          "pay per call network for publishers",
-          "monetize call traffic",
-          "pay per call publishers",
-          "call transfer network",
-        ]}
-        jsonLd={buildFaqJsonLd(publishersFaqs)}
-      />
+      <Seo {...pageSeo.publishers} jsonLd={buildFaqJsonLd(publishersFaqs)} />
 
       <section className="pub-hero">
         <div className="pub-hero__glow" aria-hidden="true" />
@@ -283,6 +315,12 @@ export default function PublishersPage() {
             Billable rules, caps, and rates are written before you push volume.
             You see what converted. You get paid what we agreed. Ask for the
             current payout schedule when you apply.
+          </p>
+          <p>
+            We buy most of our own media. We run this programme because in-house
+            capacity has a ceiling in every vertical, and we would rather raise
+            it with a small number of partners we know than open the floodgates.
+            That is why the standards are what they are.
           </p>
           <ul className="pub-checklist">
             <li>Duration and conversion rules in writing</li>
@@ -418,9 +456,20 @@ export default function PublishersPage() {
               key={step.num}
               className={`pub-step pub-step--${step.tone} pub-reveal`}
             >
-              <div className="pub-step__media" aria-hidden="true">
-                <span className="pub-step__num">{step.num}</span>
-                <span className="pub-step__glyph">
+              <div className="pub-step__media">
+                <img
+                  className="pub-step__image"
+                  src={step.image}
+                  alt={step.imageAlt}
+                  width={600}
+                  height={480}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className="pub-step__num" aria-hidden="true">
+                  {step.num}
+                </span>
+                <span className="pub-step__glyph" aria-hidden="true">
                   <img src={step.icon} alt="" width={30} height={30} />
                 </span>
               </div>
@@ -433,25 +482,61 @@ export default function PublishersPage() {
         </ol>
       </section>
 
-      <section className="pub-sources">
-        <div className="pub-sources__head pub-reveal">
-          <h2>Traffic types we work with</h2>
-          <p>
-            Search, social, native, email, owned media, or dedicated call paths.
-            If the caller is qualified for the offer, we want to talk.
-          </p>
+      <section className="pub-sources" aria-labelledby="pub-sources-heading">
+        <div className="pub-sources__layout">
+          <div className="pub-sources__sticky">
+            <p className="page-hero__eyebrow">Traffic types</p>
+            <h2 id="pub-sources-heading">Traffic types we work with</h2>
+            <p>
+              Search, social, native, email, owned media, or dedicated call paths.
+              If the caller is qualified for the offer, we want to talk.
+            </p>
+            <ol className="pub-sources__toc" aria-hidden="true">
+              {sources.map((source, index) => (
+                <li
+                  key={source.label}
+                  className="pub-sources__toc-item"
+                  data-source={source.label}
+                >
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <em>{source.label}</em>
+                </li>
+              ))}
+            </ol>
+            <div className="pub-sources__progress" aria-hidden="true">
+              <span className="pub-sources__progress-fill" />
+            </div>
+          </div>
+
+          <div className="pub-sources__board">
+            <div className="pub-sources__rail" aria-hidden="true">
+              <span className="pub-sources__rail-fill" />
+            </div>
+            <ul className="pub-sources__list">
+              {sources.map((source, index) => (
+                <li
+                  key={source.label}
+                  className={`pub-source pub-source--${source.tone}`}
+                  data-source={source.label}
+                >
+                  <span className="pub-source__node" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <article className="pub-source__card">
+                    <span className="pub-source__icon" aria-hidden="true">
+                      <img src={source.icon} alt="" width={28} height={28} />
+                    </span>
+                    <div className="pub-source__copy">
+                      <span className="pub-source__kicker">{source.body}</span>
+                      <h3 className="pub-source__label">{source.label}</h3>
+                      <p className="pub-source__body">{source.detail}</p>
+                    </div>
+                  </article>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <ul className="pub-sources__grid">
-          {sources.map((source) => (
-            <li key={source.label} className="pub-source pub-reveal">
-              <span className="pub-source__icon" aria-hidden="true">
-                <img src={source.icon} alt="" width={20} height={20} />
-              </span>
-              <span className="pub-source__label">{source.label}</span>
-              <span className="pub-source__body">{source.body}</span>
-            </li>
-          ))}
-        </ul>
       </section>
 
       <FaqSection

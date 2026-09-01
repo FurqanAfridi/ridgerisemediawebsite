@@ -5,7 +5,7 @@ export const homeFaqs: FaqProItem[] = [
     id: "home-what",
     question: "What does RidgeRise Media do?",
     answer:
-      "We're a US performance marketing company that operates as a demand aggregator. We generate consumer demand through in-house media buying and a vetted partner network, then deliver qualified inbound calls, leads, and traffic to buyers in high-intent verticals.",
+      "We're a US pay-per-call media buyer. We generate consumer demand through in-house media buying and screened partners, then deliver qualified inbound calls, leads, and traffic to buyers in high-intent verticals.",
   },
   {
     id: "home-ppc",
@@ -29,7 +29,7 @@ export const homeFaqs: FaqProItem[] = [
     id: "home-start",
     question: "How do we get started?",
     answer:
-      "Talk to the team. We'll walk through who you want on the phone, your campaign economics, and whether there's a fit before anything launches.",
+      "Start a test campaign. Send your vertical, states, hours, and what a qualified call means for your intake. We will come back with volume and pricing within one business day.",
   },
 ];
 
@@ -50,7 +50,7 @@ export const buyersFaqs: FaqProItem[] = [
     id: "buyers-hybrid",
     question: "Is all volume from RidgeRise's own media buying?",
     answer:
-      "No. Volume is a controlled mix of in-house campaigns and vetted partners. That hybrid model helps you scale without opening the floodgates to unmanaged traffic.",
+      "Most of it, and in-house is where every campaign starts. Partner volume adds reach once in-house is at capacity. Every partner is screened before activation, named to you, and held to the same duration and billable-rate standards as our own campaigns. You can exclude any source at any time.",
   },
   {
     id: "buyers-quality",
@@ -60,9 +60,9 @@ export const buyersFaqs: FaqProItem[] = [
   },
   {
     id: "buyers-start",
-    question: "How do I discuss a campaign?",
+    question: "How do I start a test campaign?",
     answer:
-      "Tell us your vertical, states, hours, and what a qualified call looks like for your intake. We'll map CPL or cost-per-call options from there.",
+      "Send your vertical, states, hours, and what a qualified call means for your intake. We will come back with volume and pricing within one business day.",
   },
 ];
 
@@ -143,7 +143,7 @@ export const contactFaqs: FaqProItem[] = [
     id: "contact-response",
     question: "How fast do you respond?",
     answer:
-      "We review every serious inquiry. Timing depends on campaign fit and capacity. If there's a match, we'll say so plainly and outline next steps.",
+      "We will come back with volume and pricing within one business day.",
   },
   {
     id: "contact-channels",
@@ -197,7 +197,7 @@ export const blogFaqs: FaqProItem[] = [
     id: "blog-next",
     question: "Where do I go to buy or partner?",
     answer:
-      "Buyers: discuss a campaign on the Buyers page. Publishers: apply as a partner on the Publishers page.",
+      "Buyers: start a test campaign on the Buyers page. Publishers: apply as a partner on the Publishers page.",
   },
 ];
 
@@ -222,7 +222,7 @@ export function verticalDetailFaqs(name: string): FaqProItem[] {
     {
       id: `${name}-start`,
       question: `How do I start a ${name} campaign?`,
-      answer: `Tell us your states, hours, exclusivity needs, and what a qualified call looks like. We'll discuss CPL or cost-per-call options from there.`,
+      answer: `Send your states, hours, exclusivity needs, and what a qualified call looks like. We will come back with volume and pricing within one business day.`,
     },
   ];
 }

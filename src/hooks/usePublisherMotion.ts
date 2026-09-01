@@ -32,12 +32,16 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
             ".pub-benefit",
             ".pub-step",
             ".pub-source",
+            ".pub-sources__toc-item",
             ".pub-cta__panel",
             ".pub-hero__copy > *",
             ".pub-hero__card",
           ],
           { clearProps: "all", opacity: 1, x: 0, y: 0, scale: 1, rotate: 0 },
         );
+        root
+          .querySelectorAll(".pub-source, .pub-sources__toc-item")
+          .forEach((el) => el.classList.add("is-active", "is-done"));
         return;
       }
 
@@ -189,6 +193,94 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
             },
           });
         });
+
+      const sourcesSection = root.querySelector<HTMLElement>(".pub-sources");
+      const sourcesBoard = root.querySelector<HTMLElement>(".pub-sources__board");
+      const sourcesRail = root.querySelector<HTMLElement>(
+        ".pub-sources__rail-fill",
+      );
+      const sourcesProgress = root.querySelector<HTMLElement>(
+        ".pub-sources__progress-fill",
+      );
+      const sourceItems = gsap.utils.toArray<HTMLElement>(".pub-source");
+      const sourceToc = gsap.utils.toArray<HTMLElement>(
+        ".pub-sources__toc-item",
+      );
+
+      const syncSourceActive = (index: number) => {
+        sourceItems.forEach((item, i) => {
+          item.classList.toggle("is-active", i === index);
+          item.classList.toggle("is-done", i < index);
+        });
+        sourceToc.forEach((item, i) => {
+          item.classList.toggle("is-active", i === index);
+          item.classList.toggle("is-done", i < index);
+        });
+      };
+
+      if (sourcesSection && sourcesBoard && sourceItems.length) {
+        syncSourceActive(0);
+
+        if (sourcesRail) {
+          gsap.fromTo(
+            sourcesRail,
+            { height: "0%" },
+            {
+              height: "100%",
+              ease: "none",
+              scrollTrigger: {
+                trigger: sourcesBoard,
+                start: narrow ? "top 75%" : "top 70%",
+                end: "bottom 55%",
+                scrub: 0.55,
+              },
+            },
+          );
+        }
+
+        if (sourcesProgress) {
+          gsap.fromTo(
+            sourcesProgress,
+            { width: "0%" },
+            {
+              width: "100%",
+              ease: "none",
+              scrollTrigger: {
+                trigger: sourcesBoard,
+                start: narrow ? "top 75%" : "top 70%",
+                end: "bottom 55%",
+                scrub: 0.55,
+              },
+            },
+          );
+        }
+
+        sourceItems.forEach((item, index) => {
+          ScrollTrigger.create({
+            trigger: item,
+            start: narrow ? "top 82%" : "top 68%",
+            end: "bottom 42%",
+            onEnter: () => syncSourceActive(index),
+            onEnterBack: () => syncSourceActive(index),
+          });
+
+          gsap.fromTo(
+            item,
+            { autoAlpha: 0.35, y: narrow ? 22 : 34 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.65,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: item,
+                start: narrow ? "top 90%" : "top 82%",
+                once: true,
+              },
+            },
+          );
+        });
+      }
     }, root);
 
     const clearScheduled = scheduleScrollTriggerRefresh();
@@ -202,6 +294,7 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
       ".pub-benefit",
       ".pub-step",
       ".pub-source",
+      ".pub-sources__toc-item",
       ".pub-cta__panel",
     ]);
 

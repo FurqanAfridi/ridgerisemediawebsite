@@ -70,8 +70,15 @@
 .faq-pro__row {
   overflow: hidden;
   border-radius: var(--radius-lg, 16px);
-  background: color-mix(in srgb, var(--color-surface-2, #f5f5f5) 88%, transparent);
+  background: var(--color-surface-2);
   border: 1px solid var(--color-border);
+  box-shadow: 0 8px 22px rgba(55, 18, 95, 0.05);
+}
+
+html[data-theme="dark"] .faq-pro__row {
+  background: color-mix(in srgb, var(--color-surface-2, #1a1a1a) 90%, transparent);
+  border-color: var(--color-border);
+  box-shadow: none;
 }
 
 .faq-pro__trigger {
@@ -142,8 +149,11 @@
 .faq-section {
   width: 100%;
   padding: var(--section-y, 64px) var(--page-pad, 24px);
+  background: var(--color-surface);
+}
+
+html[data-theme="dark"] .faq-section {
   background: var(--color-bg);
-  border-top: 1px solid var(--color-border);
 }
 
 .faq-section__inner {
@@ -171,10 +181,6 @@
 
 .faq-section__intro .section-sub {
   margin: 0;
-}
-
-html[data-theme="dark"] .faq-pro__row {
-  background: color-mix(in srgb, var(--color-surface-2, #1a1a1a) 90%, transparent);
 }
 
 html[data-theme="dark"] .faq-pro__mark {

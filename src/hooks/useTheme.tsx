@@ -31,7 +31,7 @@ function readStoredTheme(): Theme {
   } catch {
     /* ignore */
   }
-  return "dark";
+  return "light";
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -40,7 +40,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       const attr = document.documentElement.getAttribute("data-theme");
       if (attr === "light" || attr === "dark") return attr;
     }
-    return "dark";
+    return "light";
   });
 
   useEffect(() => {

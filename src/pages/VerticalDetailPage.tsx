@@ -4,6 +4,7 @@ import { Seo } from "@/components/Seo";
 import { getVerticalBySlug, verticals } from "@/data/verticals";
 import { getVerticalGuide } from "@/data/vertical-guides";
 import { site } from "@/data/site";
+import { verticalSeo } from "@/data/seo";
 import { verticalDetailFaqs } from "@/data/faqs";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import "./pages.css";
@@ -53,13 +54,7 @@ export default function VerticalDetailPage() {
 
   return (
     <main>
-      <Seo
-        title={`${vertical.name} Pay Per Call & Leads`}
-        description={`${vertical.name} pay per call and CPL. ${vertical.summary} Filters for geo, hours, and exclusivity. Discuss a campaign.`}
-        path={`/verticals/${vertical.slug}`}
-        keywords={vertical.keywords}
-        jsonLd={jsonLd}
-      />
+      <Seo {...verticalSeo(vertical)} jsonLd={jsonLd} />
 
       <PageHero
         eyebrow={vertical.category}
@@ -70,7 +65,7 @@ export default function VerticalDetailPage() {
           </>
         }
         description={vertical.summary}
-        primaryCta={{ label: "Discuss a campaign", to: "/buyers" }}
+        primaryCta={{ label: "Start a test campaign", to: "/buyers" }}
         secondaryCta={{ label: "Apply as a partner", to: "/publishers" }}
       />
 
@@ -144,7 +139,7 @@ export default function VerticalDetailPage() {
           </p>
           <div className="cta-band__actions">
             <Link to="/contact?role=buyer" className="btn btn--purple">
-              Discuss a campaign
+              Start a test campaign
             </Link>
             <Link to="/verticals" className="btn btn--mint">
               Browse verticals

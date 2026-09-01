@@ -25,8 +25,20 @@ export const site = {
   email: "info@ridgerisemedia.com",
   phone: "+1 (202) 773-7162",
   phoneHref: "tel:+12027737162",
+  address: "82 Navratil Rd, Willington, CT 06279",
+  addressLines: ["82 Navratil Rd", "Willington, CT 06279"] as const,
+  mapsHref:
+    "https://maps.google.com/?q=82+Navratil+Rd+Willington+CT+06279",
   tagline: "Qualified inbound calls, leads, and traffic",
 } as const;
+
+/** Flip `live` after legal entity, address, and leadership are confirmed. Do not invent these. */
+export const trustSignals = {
+  live: false,
+  legalName: "",
+  registeredAddress: "",
+  leadership: [] as { name: string; role: string; linkedin: string }[],
+};
 
 export const navLinks = [
   { label: "Buyers", to: "/buyers" },

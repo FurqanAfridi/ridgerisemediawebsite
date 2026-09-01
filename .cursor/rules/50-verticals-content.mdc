@@ -20,10 +20,12 @@ Every vertical must contain at least two facts that are true ONLY for that verti
 - Health insurance: open enrollment vs SEP timing, ACA vs short-term product split, licensing constraints on buyers
 - Medicare Advantage: AEP/OEP seasonality, CMS marketing rules shaping creative and routing
 - Final expense: older demographic, phone-first buyers, smaller policies but fast decisions
-- Personal injury / mass tort: case-type qualification (statute of limitations, injury type, retained-attorney screening), high value per signed case
+- Personal injury: case-type qualification (statute of limitations, injury type, retained-attorney screening), high value per signed case
+- Workers' compensation / SSDI / bankruptcy: claim status, prior representation, and product-specific screens
 - Debt settlement / tax relief: minimum debt thresholds as the core qualifier
-- Solar / roofing / HVAC: geo-dependence, homeownership qualification, storm/season demand spikes
-- Mortgage: rate-environment sensitivity, purchase vs refi intent split
+- Solar / roofing / HVAC / plumbing / windows / water damage: geo-dependence, homeownership qualification, storm/season demand spikes
+- Mortgage / personal loans / credit repair: credit band and product-purpose filters
+- Education / trade schools / online education: program and start-date matching for enrollment teams
 
 Never invent RidgeRise-specific volumes, payouts, or conversion rates for any vertical.
 

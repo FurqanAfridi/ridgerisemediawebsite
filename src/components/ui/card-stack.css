@@ -68,6 +68,11 @@ html[data-theme="dark"] .card-stack__wash--bottom {
   background: var(--color-surface-2);
 }
 
+html:not([data-theme="dark"]) .card-stack__card {
+  box-shadow: 0 14px 36px rgba(55, 18, 95, 0.1);
+  border-color: var(--color-border);
+}
+
 html[data-theme="dark"] .card-stack__card {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
 }

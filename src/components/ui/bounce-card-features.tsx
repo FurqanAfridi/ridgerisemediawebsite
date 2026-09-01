@@ -99,7 +99,7 @@ export function BouncyCardsFeatures() {
             transition={{ type: "spring", stiffness: 200, damping: 18, delay: 0.12 }}
           >
             <Link to="/contact?role=buyer" className="btn btn--purple">
-              Discuss a campaign
+              Start a test campaign
             </Link>
           </motion.div>
         </Magnetic>

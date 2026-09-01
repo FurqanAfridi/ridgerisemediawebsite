@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { site } from "@/data/site";
+import { site, trustSignals } from "@/data/site";
 import "./footer-sitemap.css";
 
 const platformLinks = [
@@ -43,8 +43,7 @@ export function FooterSitemap() {
             leads, and traffic on CPL and cost-per-call models.
           </p>
           <p className="footer-sitemap__note">
-            In-house media buying plus a vetted partner network, with
-            compliance-conscious, call-level tracking.
+            We buy our own media and add volume through screened partners. Call-level tracking on every campaign.
           </p>
         </div>
 
@@ -90,6 +89,35 @@ export function FooterSitemap() {
             <li>
               <a href={site.phoneHref}>{site.phone}</a>
             </li>
+            <li>
+              <a
+                className="footer-sitemap__address"
+                href={site.mapsHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {site.addressLines[0]}
+                <br />
+                {site.addressLines[1]}
+              </a>
+            </li>
+            {trustSignals.live && trustSignals.legalName ? (
+              <li>{trustSignals.legalName}</li>
+            ) : null}
+            {trustSignals.live
+              ? trustSignals.leadership.map((person) => (
+                  <li key={person.name}>
+                    <a
+                      href={person.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {person.name}
+                      {person.role ? ` · ${person.role}` : ""}
+                    </a>
+                  </li>
+                ))
+              : null}
             {complianceLinks.map((link) => (
               <li key={link.label}>
                 <Link to={link.to}>{link.label}</Link>

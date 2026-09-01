@@ -4,6 +4,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
 import { site } from "@/data/site";
 import { contactFaqs } from "@/data/faqs";
+import { pageSeo } from "@/data/seo";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import "./pages.css";
 
@@ -24,13 +25,7 @@ export default function ContactPage() {
 
   return (
     <main>
-      <Seo
-        title="Contact RidgeRise Media"
-        description="Talk to RidgeRise about buying qualified inbound calls, leads, or traffic on CPL or cost per call. Publishers can apply as a partner. Tell us your brief."
-        path="/contact"
-        keywords={["contact RidgeRise Media", "buy pay per call", "apply publisher"]}
-        jsonLd={buildFaqJsonLd(contactFaqs)}
-      />
+      <Seo {...pageSeo.contact} jsonLd={buildFaqJsonLd(contactFaqs)} />
 
       <PageHero
         eyebrow="Contact"
@@ -40,7 +35,7 @@ export default function ContactPage() {
             <span className="grad-mint">on the phone</span>
           </>
         }
-        description={`Buyers: vertical, states, hours, and what a qualified call looks like. Publishers: traffic type and verticals. Email ${site.email} or use the form. We review every serious inquiry.`}
+        description={`Buyers: vertical, states, hours, and what a qualified call looks like. Publishers: traffic type and verticals. Email ${site.email} or use the form. We will come back with volume and pricing within one business day.`}
       />
 
       <section className="inner-section">

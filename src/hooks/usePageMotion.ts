@@ -80,7 +80,7 @@ export function usePageMotion(
             ".gallery__img",
             ".stats__item",
             ".hero__deco",
-            ".cis__heading-inner",
+            ".cis__intro",
             ".footer-sitemap__col",
             ".stagger-section__intro > *",
             ".buy-hero__copy > *",
@@ -521,34 +521,13 @@ export function usePageMotion(
         { stagger: 0.08, duration: 0.7 },
       );
 
-      if (root.querySelector(".cis__heading-inner")) {
+      if (root.querySelector(".cis__intro")) {
         revealOnce(
-          ".cis__heading-inner > :not(.cis__grid)",
+          ".cis__intro > *",
           ".cis",
           { y: 16, opacity: 0 },
           { stagger: 0.05, duration: 0.6 },
         );
-      }
-
-      // Mobile: animate CIS cards in as they enter (sticky is off under 900px)
-      if (narrow) {
-        gsap.utils.toArray<HTMLElement>(".cis__card").forEach((card, i) => {
-          gsap.from(card, {
-            y: 40,
-            opacity: 0,
-            scale: 0.96,
-            duration: 0.7,
-            ease: "power3.out",
-            immediateRender: false,
-            clearProps: "transform,opacity",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 92%",
-              once: true,
-            },
-            delay: (i % 3) * 0.04,
-          });
-        });
       }
 
       if (root.querySelector(".cta-vertical__marquee-wrap")) {

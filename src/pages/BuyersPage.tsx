@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { buyersFaqs } from "@/data/faqs";
+import { pageSeo } from "@/data/seo";
+import { PROOF_METRICS_LIVE, proofFootnote, proofMetrics } from "@/data/proof";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import { Magnetic } from "@/components/ui/magnetic";
 import { useBuyerMotion } from "@/hooks/useBuyerMotion";
@@ -40,6 +42,27 @@ const modelTabs = [
     rows: [
       { name: "Qualified click · Auto", value: "Click" },
       { name: "Redirect · Home Services", value: "Click" },
+    ],
+  },
+] as const;
+
+const workTabs = [
+  {
+    id: "broker",
+    label: "Broker",
+    rows: [
+      { name: "Publisher they don't control", value: "Ticket filed" },
+      { name: "Quality drops", value: "You wait" },
+      { name: "Sub-affiliate chain", value: "Blind" },
+    ],
+  },
+  {
+    id: "buyer",
+    label: "Media buyer",
+    rows: [
+      { name: "Paid search · our account", value: "Live" },
+      { name: "Social + display · our budget", value: "Live" },
+      { name: "Screened partner · named", value: "On brief" },
     ],
   },
 ] as const;
@@ -89,7 +112,7 @@ const whyCards = [
     id: "multi",
     num: "06",
     title: "Legal, home services, finance",
-    body: "Personal injury, mass tort, solar, HVAC, roofing, home security, debt, mortgage, tax relief, and education.",
+    body: "Personal injury, workers' comp, SSDI, bankruptcy, solar, HVAC, roofing, plumbing, debt, mortgage, tax relief, and education.",
     tone: "rose",
     art: "legal",
   },
@@ -231,42 +254,33 @@ export default function BuyersPage() {
   const rootRef = useRef<HTMLElement>(null);
   useBuyerMotion(rootRef);
   const [model, setModel] = useState<(typeof modelTabs)[number]["id"]>("ppc");
+  const [workModel, setWorkModel] = useState<(typeof workTabs)[number]["id"]>("buyer");
   const [openWhy, setOpenWhy] = useState(0);
   const activeModel = modelTabs.find((tab) => tab.id === model) ?? modelTabs[0];
+  const activeWork = workTabs.find((tab) => tab.id === workModel) ?? workTabs[1];
 
   return (
     <main className="buy-page" ref={rootRef}>
-      <Seo
-        title="Buy Qualified Calls, Leads & Traffic"
-        description="Buy exclusive or shared calls, live transfers, CPL leads, and traffic. Cost per call or CPL with geo, hours, and exclusivity filters. Discuss a campaign."
-        path="/buyers"
-        keywords={[
-          "buy qualified calls",
-          "pay per call",
-          "cost per call",
-          "CPL leads",
-          "live transfers",
-          "exclusive calls",
-          "shared calls",
-        ]}
-        jsonLd={buildFaqJsonLd(buyersFaqs)}
-      />
+      <Seo {...pageSeo.buyers} jsonLd={buildFaqJsonLd(buyersFaqs)} />
 
       <section className="buy-hero">
+        <div className="buy-hero__glow" aria-hidden="true" />
         <div className="buy-hero__copy">
           <p className="page-hero__eyebrow">Buyers / Advertisers</p>
           <h1 className="buy-hero__title">
-            Buy qualified calls, leads, and{" "}
-            <span className="grad-mint">traffic</span>
+            We buy the media. You pay for the{" "}
+            <span className="grad-mint">call.</span>
           </h1>
           <p className="buy-hero__desc">
-            Exclusive or shared inbound calls, live transfers, CPL leads, and
-            qualified traffic on cost per call or CPL, filtered to your intake.
+            RidgeRise Media is a pay-per-call media buyer. We run our own
+            campaigns on paid search, social and display. A screened publisher
+            layer adds volume when you need more than we can produce in-house.
+            Buy on cost per call or CPL. We take the media risk.
           </p>
           <div className="buy-hero__ctas">
             <Magnetic strength={0.4}>
               <Link to="/contact?role=buyer" className="btn btn--purple">
-                Discuss a campaign
+                Start a test campaign
               </Link>
             </Magnetic>
             <Magnetic strength={0.4}>
@@ -278,8 +292,6 @@ export default function BuyersPage() {
         </div>
 
         <div className="buy-hero__stage" aria-hidden="true">
-          <div className="buy-hero__orbit buy-hero__orbit--outer" />
-          <div className="buy-hero__orbit buy-hero__orbit--inner" />
           <div className="buy-hero__float">
             <div className="buy-queue">
             <div className="buy-queue__top">
@@ -310,6 +322,8 @@ export default function BuyersPage() {
             </div>
             </div>
           </div>
+          <div className="buy-hero__orb buy-hero__orb--mint" />
+          <div className="buy-hero__orb buy-hero__orb--violet" />
         </div>
       </section>
 
@@ -326,6 +340,85 @@ export default function BuyersPage() {
           ))}
         </ul>
       </section>
+
+      <section className="buy-split">
+        <div className="buy-split__copy">
+          <p className="page-hero__eyebrow">How we work</p>
+          <h2>Most pay-per-call companies are brokers. We are buyers.</h2>
+          <p>
+            A broker collects calls from publishers it does not control, adds a
+            margin, and passes them on. When quality drops it files a ticket
+            with the publisher and you wait.
+          </p>
+          <p>
+            We buy media directly. Our own campaigns, our own creative, our own
+            budget. When a source stops performing we shut it off the same day,
+            because it is our money running, not someone else&apos;s. When a
+            buyer says the Monday dump is killing answer rate, we can change
+            the media, not just forward a complaint.
+          </p>
+          <p>
+            Where we go beyond in-house, every partner is screened before
+            activation and held to the same call-quality standards as our own
+            campaigns.
+          </p>
+        </div>
+        <div className="buy-split__visual">
+          <article className="buy-mock buy-mock--mint">
+            <div className="buy-mock__top">
+              <p className="buy-mock__kicker buy-mock__kicker--mint">Supply mix</p>
+              <span className="buy-mock__live">Live</span>
+            </div>
+            <div className="buy-tabs buy-tabs--2" role="tablist" aria-label="How volume is bought">
+              {workTabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={workModel === tab.id}
+                  className={`buy-tabs__btn${workModel === tab.id ? " is-active" : ""}`}
+                  onClick={() => setWorkModel(tab.id)}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            <ul className="buy-mock__rows">
+              {activeWork.rows.map((row) => (
+                <li key={row.name}>
+                  <span>{row.name}</span>
+                  <strong>{row.value}</strong>
+                </li>
+              ))}
+            </ul>
+            <div className="buy-pills">
+              <span className="buy-pill buy-pill--mint">Same-day cutoff</span>
+              <span className="buy-pill">Named partners</span>
+              <span className="buy-pill buy-pill--mint">Our budget</span>
+            </div>
+            <div className="buy-mock__track buy-mock__track--mint" aria-hidden="true">
+              <span className="buy-mock__shimmer buy-mock__shimmer--mint" />
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {PROOF_METRICS_LIVE ? (
+        <section className="stats" aria-label="Campaign proof">
+          <p className="stats__eyebrow">
+            <span className="stats__eyebrow-text">Proof, not slogans</span>
+          </p>
+          <ul className="stats__grid">
+            {proofMetrics.map((metric) => (
+              <li key={metric.label} className="stats__item">
+                <span className="stats__value">{metric.value}</span>
+                <span className="stats__label">{metric.label}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="section-sub section-sub--sm">{proofFootnote}</p>
+        </section>
+      ) : null}
 
       <section className="buy-split">
         <div className="buy-split__visual">
@@ -360,13 +453,15 @@ export default function BuyersPage() {
         </div>
         <div className="buy-split__copy">
           <p className="page-hero__eyebrow">What you buy</p>
-          <h2>Calls that reach agents who can close</h2>
+          <h2>Calls we bought the media for</h2>
           <p>
             Pay per call when you want live transfers billed on duration or
             disposition. Buy CPL leads when your team works forms. Or take
-            qualified traffic straight into your funnel. Volume comes from our
-            own media buying plus a vetted publisher network. Hybrid on purpose,
-            so you can scale without relying on one source.
+            qualified traffic straight into your funnel. We buy the media for
+            these campaigns ourselves. Our accounts, our creative, our budget
+            spent before a call reaches you. A screened publisher layer adds
+            volume when you need more than in-house can carry. Every partner is
+            named to you. No blind sub-affiliate chains.
           </p>
           <ul className="buy-list">
             <li>Exclusive calls or shared calls by market</li>
@@ -383,8 +478,9 @@ export default function BuyersPage() {
           <p>
             Set vertical, geo, schedule, concurrency caps, and exclusivity before
             a campaign goes live. We monitor sources, review recordings where
-            applicable, and cut traffic that fails your rules. Spend follows
-            quality, not vanity volume.
+            applicable, and cut traffic that fails your rules. When a source
+            stops performing we shut it off the same day, because it is our
+            money running.
           </p>
           <ul className="buy-list buy-list--mint">
             <li>Geo, hours, and concurrency controls</li>
@@ -471,65 +567,113 @@ export default function BuyersPage() {
         </ul>
       </section>
 
-      <section className="buy-flow">
-        <div className="buy-flow__head">
-          <p className="page-hero__eyebrow">How buying works</p>
-          <h2 className="section-title section-title--md">Brief, model, then live transfers</h2>
-          <p className="section-sub section-sub--sm">
-            You define demand. We match hybrid supply, price the model, and keep
-            tracking open so you can see what holds.
-          </p>
-        </div>
-        <div className="buy-flow__board">
-          <div className="buy-flow__line" aria-hidden="true">
-            <span className="buy-flow__fill" />
-            <span className="buy-flow__dot" />
+      <section className="buy-flow" aria-labelledby="buy-flow-heading">
+        <div className="buy-flow__layout">
+          <div className="buy-flow__sticky">
+            <p className="page-hero__eyebrow">How buying works</p>
+            <h2 id="buy-flow-heading" className="section-title section-title--md">
+              Brief, model, then live transfers
+            </h2>
+            <p className="section-sub section-sub--sm">
+              You define demand. We match hybrid supply, price the model, and keep
+              tracking open so you can see what holds.
+            </p>
+            <ol className="buy-flow__toc" aria-hidden="true">
+              {steps.map((step) => (
+                <li key={step.num} className="buy-flow__toc-item" data-step={step.num}>
+                  <span>{step.num}</span>
+                  <em>{step.title}</em>
+                </li>
+              ))}
+            </ol>
           </div>
-          <ol className="buy-flow__steps">
-            {steps.map((step) => (
-              <li
-                key={step.num}
-                className={`buy-flow__step${step.mint ? " buy-flow__step--mint" : ""}`}
-              >
-                <span className="buy-flow__icon-wrap">
-                  <span className="buy-flow__ring" aria-hidden="true" />
-                  <span className="buy-flow__icon">
-                    <img src={step.icon} alt="" width={30} height={30} />
+
+          <div className="buy-flow__board">
+            <div className="buy-flow__rail" aria-hidden="true">
+              <span className="buy-flow__rail-track" />
+              <span className="buy-flow__rail-fill" />
+            </div>
+            <ol className="buy-flow__steps">
+              {steps.map((step) => (
+                <li
+                  key={step.num}
+                  className={`buy-flow__step${step.mint ? " buy-flow__step--mint" : ""}`}
+                  data-step={step.num}
+                >
+                  <span className="buy-flow__node" aria-hidden="true">
+                    {step.num}
                   </span>
-                </span>
-                <span className="buy-flow__n">{step.num}</span>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
-              </li>
-            ))}
-          </ol>
+                  <article className="buy-flow__card">
+                    <span className="buy-flow__icon" aria-hidden="true">
+                      <img src={step.icon} alt="" width={30} height={30} />
+                    </span>
+                    <div className="buy-flow__card-copy">
+                      <span className="buy-flow__n">Step {step.num}</span>
+                      <h3>{step.title}</h3>
+                      <p>{step.body}</p>
+                    </div>
+                  </article>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </section>
 
-      <section className="buy-teams">
-        <div className="buy-teams__head">
-          <p className="page-hero__eyebrow">Who we supply</p>
-          <h2 className="section-title section-title--md">Built for teams ready to answer</h2>
-          <p className="section-sub section-sub--sm">
-            See open demand by vertical on our verticals hub. Insurance, Legal,
-            Home Services, Finance, and Education.
-          </p>
+      <section className="buy-teams" aria-labelledby="buy-teams-heading">
+        <div className="buy-teams__pin">
+          <div className="buy-teams__shell">
+            <div className="buy-teams__head">
+              <p className="page-hero__eyebrow">Who we supply</p>
+              <h2 id="buy-teams-heading" className="section-title section-title--md">
+                Built for teams ready to answer
+              </h2>
+              <p className="section-sub section-sub--sm">
+                See open demand by vertical on our verticals hub. Insurance, Legal,
+                Home Services, Finance, and Education.
+              </p>
+              <div className="buy-teams__progress" aria-hidden="true">
+                <span className="buy-teams__progress-fill" />
+              </div>
+            </div>
+
+            <div className="buy-teams__stage">
+              <ul className="buy-teams__track">
+                {teams.map((team, index) => (
+                  <li key={team.label} className="buy-teams__slide">
+                    <Link
+                      to={team.to}
+                      className={`buy-teams__card buy-teams__card--${team.tone}`}
+                    >
+                      <span className="buy-teams__index">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="buy-teams__icon" aria-hidden="true">
+                        <img src={team.icon} alt="" width={32} height={32} />
+                      </span>
+                      <span className="buy-teams__copy">
+                        <strong>{team.label}</strong>
+                        <em>{team.body}</em>
+                      </span>
+                      <span className="buy-teams__cta">
+                        Explore vertical
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                          <path
+                            d="M3 8h10M9 4l4 4-4 4"
+                            stroke="currentColor"
+                            strokeWidth="1.6"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
-        <ul className="buy-teams__grid">
-          {teams.map((team) => (
-            <li key={team.label}>
-              <Link to={team.to} className={`buy-teams__item buy-teams__item--${team.tone}`}>
-                <span className="buy-teams__icon" aria-hidden="true">
-                  <img src={team.icon} alt="" width={28} height={28} />
-                </span>
-                <span>
-                  <strong>{team.label}</strong>
-                  <em>{team.body}</em>
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
       </section>
 
       <FaqSection
@@ -540,17 +684,17 @@ export default function BuyersPage() {
 
       <section className="buy-cta">
         <div className="buy-cta__panel">
-          <h2 className="section-title section-title--md">Discuss a campaign with our team</h2>
+          <h2 className="section-title section-title--md">Start a test campaign with our team</h2>
           <div className="buy-cta__side">
             <p>
-              Bring your vertical, states, hours, and what a qualified call means
-              for your intake. We&apos;ll map CPL or cost-per-call options from
-              there.
+              Send your vertical, states, hours, and what a qualified call means
+              for your intake. We will come back with volume and pricing within
+              one business day.
             </p>
             <div className="buy-cta__actions">
               <Magnetic strength={0.4}>
                 <Link to="/contact?role=buyer" className="btn btn--purple">
-                  Discuss a campaign
+                  Start a test campaign
                 </Link>
               </Magnetic>
               <Magnetic strength={0.4}>

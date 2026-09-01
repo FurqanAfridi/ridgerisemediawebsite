@@ -25,13 +25,18 @@ export function useBuyerMotion(rootRef: RefObject<HTMLElement | null>) {
             ".buy-mock",
             ".buy-chart__bar",
             ".buy-filter__fill",
-            ".buy-flow__fill",
-            ".buy-flow__dot",
-            ".buy-flow__icon",
-            ".buy-flow__ring",
+            ".buy-flow__rail-fill",
+            ".buy-flow__step",
+            ".buy-flow__toc-item",
+            ".buy-teams__track",
+            ".buy-teams__progress-fill",
+            ".buy-teams__card",
           ],
           { clearProps: "all" },
         );
+        root
+          .querySelectorAll(".buy-flow__step, .buy-flow__toc-item")
+          .forEach((el) => el.classList.add("is-active", "is-done"));
         return;
       }
 
@@ -79,36 +84,6 @@ export function useBuyerMotion(rootRef: RefObject<HTMLElement | null>) {
         );
       });
 
-      gsap.fromTo(
-        ".buy-flow__fill",
-        { width: "0%" },
-        {
-          width: "100%",
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".buy-flow__line",
-            start: "top 80%",
-            end: "bottom 40%",
-            scrub: 0.6,
-          },
-        },
-      );
-
-      gsap.fromTo(
-        ".buy-flow__dot",
-        { left: "0%" },
-        {
-          left: "100%",
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".buy-flow__line",
-            start: "top 80%",
-            end: "bottom 40%",
-            scrub: 0.6,
-          },
-        },
-      );
-
       gsap.utils.toArray<HTMLElement>(".buy-mock").forEach((el) => {
         gsap.to(el, {
           y: narrow ? -8 : -14,
@@ -119,45 +94,165 @@ export function useBuyerMotion(rootRef: RefObject<HTMLElement | null>) {
         });
       });
 
-      gsap.utils.toArray<HTMLElement>(".buy-flow__icon").forEach((el, i) => {
-        gsap.to(el, {
-          y: i % 2 === 0 ? -8 : -5,
-          duration: 2.2 + i * 0.25,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-          delay: i * 0.18,
-        });
-      });
+      const flowBoard = root.querySelector<HTMLElement>(".buy-flow__board");
+      const railFill = root.querySelector<HTMLElement>(".buy-flow__rail-fill");
+      const flowSteps = gsap.utils.toArray<HTMLElement>(".buy-flow__step");
+      const tocItems = gsap.utils.toArray<HTMLElement>(".buy-flow__toc-item");
 
-      gsap.utils.toArray<HTMLElement>(".buy-flow__ring").forEach((el, i) => {
+      const syncFlowActive = (index: number) => {
+        flowSteps.forEach((step, i) => {
+          step.classList.toggle("is-active", i === index);
+          step.classList.toggle("is-done", i < index);
+        });
+        tocItems.forEach((item, i) => {
+          item.classList.toggle("is-active", i === index);
+          item.classList.toggle("is-done", i < index);
+        });
+      };
+
+      if (flowBoard && railFill && flowSteps.length) {
+        syncFlowActive(0);
+
         gsap.fromTo(
-          el,
-          { scale: 0.92, opacity: 0.45 },
+          railFill,
+          { height: "0%" },
           {
-            scale: 1.28,
-            opacity: 0,
-            duration: 2.1,
-            ease: "power1.out",
-            repeat: -1,
-            delay: i * 0.35,
+            height: "100%",
+            ease: "none",
+            scrollTrigger: {
+              trigger: flowBoard,
+              start: narrow ? "top 75%" : "top 70%",
+              end: "bottom 55%",
+              scrub: 0.55,
+            },
           },
         );
-      });
 
-      gsap.utils.toArray<HTMLElement>(".buy-teams__icon").forEach((el, i) => {
-        gsap.to(el, {
-          y: i % 2 === 0 ? -5 : 5,
-          rotate: i % 2 === 0 ? -4 : 4,
-          duration: 2.6 + (i % 3) * 0.2,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-          delay: i * 0.12,
+        flowSteps.forEach((step, index) => {
+          ScrollTrigger.create({
+            trigger: step,
+            start: narrow ? "top 82%" : "top 68%",
+            end: "bottom 42%",
+            onEnter: () => syncFlowActive(index),
+            onEnterBack: () => syncFlowActive(index),
+          });
+
+          gsap.fromTo(
+            step,
+            { autoAlpha: 0.35, y: narrow ? 24 : 36 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.7,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: step,
+                start: narrow ? "top 90%" : "top 82%",
+                once: true,
+              },
+            },
+          );
         });
-      });
+      }
+
+      const teamsSection = root.querySelector<HTMLElement>(".buy-teams");
+      const teamsPin = root.querySelector<HTMLElement>(".buy-teams__pin");
+      const teamsTrack = root.querySelector<HTMLElement>(".buy-teams__track");
+      const teamsStage = root.querySelector<HTMLElement>(".buy-teams__stage");
+      const teamsProgress = root.querySelector<HTMLElement>(
+        ".buy-teams__progress-fill",
+      );
+      const teamCards = gsap.utils.toArray<HTMLElement>(".buy-teams__card");
+
+      if (teamsSection && teamsPin && teamsTrack && teamsStage) {
+        const getScrollDistance = () =>
+          Math.max(0, teamsTrack.scrollWidth - teamsStage.clientWidth);
+
+        if (narrow) {
+          gsap.from(teamCards, {
+            y: 36,
+            autoAlpha: 0,
+            rotate: 2,
+            duration: 0.65,
+            stagger: 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: teamsStage,
+              start: "top 88%",
+              once: true,
+            },
+          });
+
+          if (teamsProgress) {
+            gsap.fromTo(
+              teamsProgress,
+              { width: "0%" },
+              {
+                width: "100%",
+                ease: "none",
+                scrollTrigger: {
+                  trigger: teamsSection,
+                  start: "top 70%",
+                  end: "bottom 45%",
+                  scrub: 0.4,
+                },
+              },
+            );
+          }
+        } else {
+          gsap.set(teamCards, { y: 28, autoAlpha: 0.55, rotate: 1.5 });
+
+          const teamsTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: teamsSection,
+              pin: teamsPin,
+              pinSpacing: true,
+              pinType: "fixed",
+              start: "top top",
+              end: () => `+=${Math.max(getScrollDistance() + 240, 1100)}`,
+              scrub: 0.75,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              preventOverlaps: true,
+              onUpdate: (self) => {
+                if (teamsProgress) {
+                  gsap.set(teamsProgress, { width: `${self.progress * 100}%` });
+                }
+              },
+            },
+          });
+
+          teamsTl
+            .to(
+              teamCards,
+              {
+                y: 0,
+                autoAlpha: 1,
+                rotate: 0,
+                stagger: 0.06,
+                duration: 0.35,
+                ease: "power2.out",
+              },
+              0,
+            )
+            .to(
+              teamsTrack,
+              {
+                x: () => -getScrollDistance(),
+                ease: "none",
+                duration: 1,
+              },
+              0.08,
+            );
+        }
+      }
     }, root);
 
-    return () => ctx.revert();
+    const refreshId = window.setTimeout(() => ScrollTrigger.refresh(), 150);
+
+    return () => {
+      window.clearTimeout(refreshId);
+      ctx.revert();
+    };
   }, [rootRef]);
 }

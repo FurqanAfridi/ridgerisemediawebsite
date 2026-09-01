@@ -4,7 +4,7 @@ export const financeAndEducationGuides: Record<string, VerticalGuide> = {
   "debt-settlement": {
     slug: "debt-settlement",
     lede:
-      "Minimum unsecured debt is the qualifier that decides whether a debt settlement call is worth a closer's time. Buyers who skip the floor, mix secured balances into the total, or ignore state rules pay for conversations they cannot enroll. RidgeRise Media sells CPL, cost-per-call, live transfers, and qualified traffic from in-house media buying plus a vetted publisher network, with campaign-specific consent and source-level quality monitoring.",
+      "Minimum unsecured debt is the qualifier that decides whether a debt settlement call is worth a closer's time. Buyers who skip the floor, mix secured balances into the total, or ignore state rules pay for conversations they cannot enroll. RidgeRise Media sells CPL, cost-per-call, live transfers, and qualified traffic from in-house media buying plus screened publishers, with campaign-specific consent and source-level quality monitoring.",
     sections: [
       {
         heading: "Who's on the line when someone asks for debt help",

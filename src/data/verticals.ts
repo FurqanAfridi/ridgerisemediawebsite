@@ -118,18 +118,78 @@ export const verticals: Vertical[] = [
     ],
   },
   {
-    slug: "mass-tort",
-    name: "Mass Tort / Legal",
+    slug: "workers-compensation",
+    name: "Workers' Compensation",
     category: "Legal",
-    summary: "Intake callers for active mass tort dockets.",
+    summary: "Injured workers looking for workplace injury counsel.",
     description:
-      "Demand follows docket calendars and media waves. Product exposure questions, diagnosis criteria, and prior representation screens drive qualification. Buy filtered calls or CPL with campaign-specific consent and case-type rules. Off-docket traffic is not a bargain. It's a wasted intake hour.",
-    buyerFit: "Law firms and legal marketers running active docket campaigns.",
-    publisherFit: "Publishers who can scale compliant legal call paths per docket brief.",
+      "Callers need screening for work-related injury, employer coverage, and whether they already have representation. State rules and claim timing matter. Buy exclusive or shared transfers with hours that match intake capacity, not a generic legal dump.",
+    buyerFit: "Workers' comp firms and legal intake teams with state coverage.",
+    publisherFit: "Workplace injury and local legal intent traffic with clear screening.",
     keywords: [
-      "buy mass tort calls",
-      "mass tort live transfers",
-      "legal pay per call",
+      "buy workers compensation calls",
+      "workers comp live transfers",
+      "workers compensation pay per call",
+    ],
+  },
+  {
+    slug: "disability-ssdi",
+    name: "Disability / SSDI",
+    category: "Legal",
+    summary: "Claimants seeking help with SSDI and disability claims.",
+    description:
+      "Callers often need help with denials, appeals, or first filings. Qualification usually includes claim status, prior representation, and whether they can still work. Buy CPL or cost per call with those screens in the brief before volume scales.",
+    buyerFit: "Disability advocates and SSDI-focused legal intake teams.",
+    publisherFit: "Disability and benefits-intent traffic with compliant consent paths.",
+    keywords: [
+      "buy SSDI calls",
+      "disability live transfers",
+      "SSDI pay per call",
+    ],
+  },
+  {
+    slug: "bankruptcy",
+    name: "Bankruptcy",
+    category: "Legal",
+    summary: "Consumers exploring Chapter 7 and Chapter 13 options.",
+    description:
+      "Debt load, prior filings, and state matter more than raw volume. Filter for chapter fit and exclusive vs shared so attorneys are not competing on the same distressed caller. Phone-ready bankruptcy demand needs a clear qualification script.",
+    buyerFit: "Bankruptcy attorneys and consumer legal intake partners.",
+    publisherFit: "Debt and legal-intent publishers with hardship-aware landing paths.",
+    keywords: [
+      "buy bankruptcy calls",
+      "bankruptcy live transfers",
+      "Chapter 7 pay per call",
+    ],
+  },
+  {
+    slug: "renters-insurance",
+    name: "Renters Insurance",
+    category: "Insurance",
+    summary: "Renters shopping liability and contents coverage.",
+    description:
+      "Callers often need a policy for a lease requirement or after a loss. Age, state, and occupancy filters keep agents on quote-ready conversations. Buy CPL or cost per call when renters demand is strong enough to staff.",
+    buyerFit: "Carriers and agencies writing renters and multi-line personal lines.",
+    publisherFit: "Moving, apartment, and local-intent traffic tied to lease or ZIP.",
+    keywords: [
+      "buy renters insurance calls",
+      "renters insurance live transfers",
+      "renters insurance pay per call",
+    ],
+  },
+  {
+    slug: "commercial-auto-insurance",
+    name: "Commercial Auto Insurance",
+    category: "Insurance",
+    summary: "Business owners shopping fleet and commercial auto coverage.",
+    description:
+      "Fleet size, vehicle type, and state licensing change what a qualified call looks like. Filter for commercial vs personal auto so agents are not quoting the wrong product. Buy on CPL or cost per call with those rules written before the first transfer.",
+    buyerFit: "Commercial lines agencies and carriers writing business auto.",
+    publisherFit: "Small-business and fleet-intent traffic with clear commercial framing.",
+    keywords: [
+      "buy commercial auto insurance calls",
+      "fleet insurance live transfers",
+      "commercial auto pay per call",
     ],
   },
   {
@@ -145,6 +205,81 @@ export const verticals: Vertical[] = [
       "buy debt settlement calls",
       "debt relief live transfers",
       "debt settlement pay per call",
+    ],
+  },
+  {
+    slug: "personal-loans",
+    name: "Personal Loans",
+    category: "Finance",
+    summary: "Consumers shopping personal loan and installment options.",
+    description:
+      "Credit band, loan purpose, and state decide whether a caller is fundable. Filter hard so your closers are not talking to people they cannot place. Buy CPL or cost per call with product and credit rules matched to your book.",
+    buyerFit: "Lenders, brokers, and finance call centers buying loan-intent inbound.",
+    publisherFit: "Credit and finance publishers with loan-comparison and rate intent.",
+    keywords: [
+      "buy personal loan calls",
+      "personal loan live transfers",
+      "personal loans pay per call",
+    ],
+  },
+  {
+    slug: "credit-repair",
+    name: "Credit Repair",
+    category: "Finance",
+    summary: "Consumers seeking help improving credit scores.",
+    description:
+      "Callers usually want dispute help, score goals, and pricing explained on the phone. State compliance and exclusive vs shared routing protect closer capacity. Write qualification into the brief so soft credit curiosity does not fill the queue.",
+    buyerFit: "Credit repair companies and finance call centers with phone closers.",
+    publisherFit: "Credit and finance problem-aware traffic with clear consent language.",
+    keywords: [
+      "buy credit repair calls",
+      "credit repair live transfers",
+      "credit repair pay per call",
+    ],
+  },
+  {
+    slug: "plumbing",
+    name: "Plumbing",
+    category: "Home Services",
+    summary: "Homeowners needing plumbing repair or replacement.",
+    description:
+      "Emergency vs scheduled work changes ticket size and talk track. Geo and homeownership filters keep techs on jobs they can run. Cap concurrency so your board is not overloaded while calls keep landing after hours.",
+    buyerFit: "Plumbing contractors and home-services networks with local capacity.",
+    publisherFit: "Local service-area traffic with emergency and quote intent.",
+    keywords: [
+      "buy plumbing calls",
+      "plumbing live transfers",
+      "plumbing pay per call",
+    ],
+  },
+  {
+    slug: "windows",
+    name: "Windows & Doors",
+    category: "Home Services",
+    summary: "Homeowners requesting window and door replacement quotes.",
+    description:
+      "Homeownership, project size, and geo decide whether a call becomes an in-home estimate. Filter for exclusive vs shared based on setter capacity. Buy CPL or cost per call with those rules before scaling.",
+    buyerFit: "Window and door installers with appointment-setting teams.",
+    publisherFit: "Home improvement traffic with ZIP-level targeting and quote intent.",
+    keywords: [
+      "buy window replacement calls",
+      "windows live transfers",
+      "window replacement pay per call",
+    ],
+  },
+  {
+    slug: "water-damage",
+    name: "Water Damage Restoration",
+    category: "Home Services",
+    summary: "Homeowners seeking water and flood restoration help.",
+    description:
+      "Urgency is high after leaks, storms, and floods. Geo, homeownership, and insurance-claim intent are the usual filters. Buyers who ignore response-time capacity overspend on calls they cannot dispatch. Match hours and concurrency to crew availability.",
+    buyerFit: "Restoration companies and home-services networks with rapid response.",
+    publisherFit: "Storm, emergency, and local-intent publishers ready to surge.",
+    keywords: [
+      "buy water damage calls",
+      "water restoration live transfers",
+      "water damage pay per call",
     ],
   },
   {
@@ -251,6 +386,36 @@ export const verticals: Vertical[] = [
       "buy education calls",
       "college enrollment live transfers",
       "education pay per call",
+    ],
+  },
+  {
+    slug: "trade-schools",
+    name: "Trade Schools",
+    category: "Other",
+    summary: "Students exploring trade and vocational programs.",
+    description:
+      "Callers ask about programs, start dates, and financing for hands-on careers. Enrollment teams need program and geo filters so transfers match what the school can start. CPL and cost-per-call both work when qualification happens before the handoff.",
+    buyerFit: "Trade schools and vocational enrollment centers buying phone transfers.",
+    publisherFit: "Career and skills-intent media with program-matched landing paths.",
+    keywords: [
+      "buy trade school calls",
+      "vocational enrollment live transfers",
+      "trade school pay per call",
+    ],
+  },
+  {
+    slug: "online-education",
+    name: "Online Education",
+    category: "Other",
+    summary: "Students shopping online degree and certificate programs.",
+    description:
+      "Callers want program fit, pacing, and financing explained on the phone. Filter by program type and geo so enrollment advisors only take transfers they can start. Buy CPL or cost per call with those rules in the brief.",
+    buyerFit: "Online schools and enrollment centers with remote advising capacity.",
+    publisherFit: "Education and career-intent publishers with program-specific paths.",
+    keywords: [
+      "buy online education calls",
+      "online degree live transfers",
+      "online education pay per call",
     ],
   },
 ];

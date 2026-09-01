@@ -1,82 +1,36 @@
-/* Sticky heading + footer, wide split cards, tilted sharp deck */
+/* Sticky card stack, wide split cards, tilted deck */
 
 .cis {
-  --cis-heading-h: 140px;
   position: relative;
   z-index: 1;
   isolation: isolate;
   width: 100%;
   color: var(--color-text);
   background: var(--color-bg);
-  padding-bottom: var(--space-xl);
+  padding: var(--section-y) 0 var(--space-xl);
   margin-bottom: 0;
 }
 
-/* Always visible while cards stack underneath */
-.cis__heading {
-  position: sticky;
-  top: var(--header-clearance, 72px);
-  z-index: 30;
-  width: 100%;
-  padding: 12px var(--page-pad) 14px;
-  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--color-border);
+html:not([data-theme="dark"]) .cis {
+  background: var(--color-bg);
 }
 
-.cis__heading-inner {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: var(--max);
-  margin-inline: auto;
+.cis__intro {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--title-gap, 12px);
+  gap: var(--title-gap);
   text-align: center;
-  padding: 10px 8px 8px;
-}
-
-.cis__grid {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.55;
-  background-image:
-    linear-gradient(to right, rgba(79, 79, 79, 0.16) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(79, 79, 79, 0.16) 1px, transparent 1px);
-  background-size: 54px 54px;
-  mask-image: radial-gradient(
-    ellipse 70% 80% at 50% 0%,
-    #000 55%,
-    transparent 100%
-  );
-  -webkit-mask-image: radial-gradient(
-    ellipse 70% 80% at 50% 0%,
-    #000 55%,
-    transparent 100%
-  );
-}
-
-html[data-theme="dark"] .cis__grid {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-}
-
-/* Match shared .section-title / .section-sub — keep sticky shell only */
-.cis__title {
+  width: 100%;
+  max-width: min(1040px, 100%);
+  margin: 0 auto var(--space-2xl);
+  padding: 0 var(--page-pad);
   position: relative;
-  z-index: 1;
-  margin: 0;
+  z-index: 2;
 }
 
-.cis__sub {
-  position: relative;
-  z-index: 1;
+.cis__intro .section-title,
+.cis__intro .section-sub {
   margin: 0;
 }
 
@@ -84,15 +38,13 @@ html[data-theme="dark"] .cis__grid {
   position: relative;
   z-index: 1;
   width: 100%;
-  background: var(--color-bg);
+  background: transparent;
   padding-bottom: 8vh;
 }
 
 .cis__sticky {
   position: sticky;
-  top: calc(
-    var(--header-clearance, 72px) + var(--cis-heading-h) + var(--cis-top, 0px)
-  );
+  top: calc(var(--header-clearance, 72px) + var(--cis-top, 0px));
   width: 100%;
   z-index: var(--cis-layer, 1);
 }
@@ -102,7 +54,7 @@ html[data-theme="dark"] .cis__grid {
   width: 100%;
   min-height: min(
     560px,
-    calc(100dvh - var(--header-clearance, 72px) - var(--cis-heading-h) - 24px)
+    calc(100dvh - var(--header-clearance, 72px) - 24px)
   );
   display: flex;
   align-items: center;
@@ -331,76 +283,36 @@ html[data-theme="dark"] .cis__grid {
 }
 
 @media (max-width: 900px) {
-  .cis {
-    --cis-heading-h: auto;
-    overflow-x: clip;
-  }
-
-  .cis__heading {
-    position: relative;
-    top: auto;
-    padding: 8px var(--page-pad) 12px;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    background: var(--color-bg);
-  }
-
-  .cis__heading-inner {
-    padding: 4px 0 0;
-    gap: 8px;
-  }
-
-  .cis__sub {
-    max-width: 36ch;
+  .cis__intro {
+    margin-bottom: var(--space-lg);
+    gap: var(--space-sm);
   }
 
   .cis__sticky {
-    position: relative;
-    top: auto;
-  }
-
-  .cis__sticky .cis__card {
-    animation: cis-deal-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  .cis__sticky:nth-child(2) .cis__card {
-    animation-delay: 0.06s;
-  }
-
-  .cis__sticky:nth-child(3) .cis__card {
-    animation-delay: 0.12s;
-  }
-
-  .cis__sticky:nth-child(4) .cis__card {
-    animation-delay: 0.18s;
+    position: sticky;
+    top: calc(var(--header-clearance, 64px) + var(--cis-top, 0px));
   }
 
   .cis__figure {
-    min-height: 0;
-    padding: 8px var(--page-pad) 4px;
+    min-height: min(72dvh, 520px);
+    padding: 8px var(--page-pad) 28px;
   }
 
-  .cis__card,
+  .cis__card {
+    width: min(var(--cis-width, 94%), 100%);
+    min-height: min(58dvh, 440px);
+    grid-template-columns: 1fr;
+  }
+
   .cis__card--copy-left,
   .cis__card--copy-right {
-    width: 100% !important;
-    max-width: 100%;
-    min-height: 0;
-    grid-template-columns: 1fr;
     grid-template-areas:
       "media"
-      "body" !important;
-    transform: none;
-    --cis-tilt: 0deg;
+      "body";
   }
 
   .cis__card:hover {
-    transform: none;
-  }
-
-  .cis__card:hover .cis__img {
-    transform: none;
-    animation: none;
+    transform: rotate(var(--cis-tilt, 0deg)) translateY(-6px) scale(1.015);
   }
 
   .cis__media {
@@ -409,13 +321,12 @@ html[data-theme="dark"] .cis__grid {
   }
 
   .cis__img {
-    max-height: 180px;
+    max-height: min(32dvh, 220px);
     max-width: min(280px, 70vw);
-    animation: none;
   }
 
   .cis__body {
-    padding: 12px 16px 20px;
+    padding: 12px 18px 22px;
     gap: 10px;
   }
 
@@ -440,20 +351,6 @@ html[data-theme="dark"] .cis__grid {
     min-width: 0;
     height: 42px;
     font-size: 1rem;
-  }
-
-  .cis__stack {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: stretch;
-    padding: 8px 0 16px;
-  }
-}
-
-@media (max-width: 600px) {
-  .cis__img {
-    max-height: 150px;
   }
 }
 

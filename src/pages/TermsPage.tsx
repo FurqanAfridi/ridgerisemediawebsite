@@ -1,20 +1,17 @@
 import { Link } from "react-router-dom";
 import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
+import { pageSeo } from "@/data/seo";
 import "@/pages/pages.css";
 
 export default function TermsPage() {
   return (
     <main>
-      <Seo
-        title="Terms & Conditions"
-        description="Terms & Conditions for RidgeRise Media publishers and buyers using our pay-per-call platform."
-        path="/terms"
-      />
+      <Seo {...pageSeo.terms} />
       <PageHero
         eyebrow="Legal"
         title="Terms & Conditions"
-        description="These terms govern use of the RidgeRise Media website and network. Final legal language should be reviewed by counsel before production launch."
+        description="These terms govern use of the RidgeRise Media website and platform. Final legal language should be reviewed by counsel before production launch."
       />
       <section className="inner-section">
         <div className="prose">

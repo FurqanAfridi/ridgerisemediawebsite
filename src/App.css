@@ -611,6 +611,8 @@ html[data-theme="dark"] .grad-purple {
 .bouncy-features__title,
 .cta-vertical__title,
 .roles__intro,
+.cis__intro,
+.why-trust,
 .stats__eyebrow,
 .stagger-section__intro,
 .verticals__intro {
@@ -960,13 +962,13 @@ html[data-theme="light"] .hero__sub,
 
 .metric-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   flex: 1 1 min(320px, 100%);
   width: 100%;
   max-width: 520px;
-  min-height: 220px;
-  max-height: 280px;
+  min-height: 400px;
   height: auto;
-  aspect-ratio: 16 / 10;
   border-radius: 16px;
   overflow: hidden;
   cursor: default;
@@ -1043,7 +1045,8 @@ html[data-theme="light"] .hero__sub,
 .metric-card__text {
   position: relative;
   z-index: 2;
-  padding: 32px;
+  flex-shrink: 0;
+  padding: 28px 28px 8px;
 }
 
 .metric-card__label {
@@ -1106,20 +1109,28 @@ html[data-theme="light"] .hero__sub,
 }
 
 .metric-card__art-wrap {
-  position: absolute;
-  inset: 0;
+  position: relative;
   z-index: 1;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 240px;
+  padding: 8px 20px 16px;
   pointer-events: none;
 }
 
-.metric-card__art {
-  position: absolute;
-  bottom: -100px;
-  right: -30px;
-  width: 78%;
-  max-width: 440px;
-  object-fit: cover;
-  transform-origin: 70% 80%;
+.metric-card__art,
+.metric-card__art--calls {
+  position: relative;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  object-position: center bottom;
+  transform-origin: center bottom;
   transition:
     transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
     filter 0.45s ease;
@@ -1127,29 +1138,14 @@ html[data-theme="light"] .hero__sub,
   will-change: transform;
 }
 
-.metric-card__art--calls {
-  bottom: 0;
-  right: 0;
-  left: 0;
-  width: 100%;
-  max-width: none;
-  height: 70%;
-  object-fit: contain;
-  object-position: center bottom;
-  transform-origin: center bottom;
-}
-
-.metric-card:hover .metric-card__art {
-  transform: translate3d(-10px, -18px, 0) scale(1.08) rotate(-2deg);
+.metric-card:hover .metric-card__art,
+.metric-card:hover .metric-card__art--calls {
+  transform: translate3d(0, -8px, 0) scale(1.04);
   filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.28));
 }
 
-.metric-card:hover .metric-card__art--calls {
-  transform: translate3d(0, -14px, 0) scale(1.06);
-}
-
 .metric-card--purple:hover .metric-card__art {
-  transform: translate3d(-14px, -22px, 0) scale(1.1) rotate(3deg);
+  transform: translate3d(0, -8px, 0) scale(1.05);
 }
 
 @keyframes metric-pulse {
@@ -1208,12 +1204,12 @@ html[data-theme="light"] .hero__sub,
   background:
     radial-gradient(
       ellipse 55% 70% at 20% 40%,
-      rgba(93, 98, 221, 0.18) 0%,
+      rgba(82, 72, 212, 0.08) 0%,
       transparent 65%
     ),
     radial-gradient(
       ellipse 50% 60% at 80% 60%,
-      rgba(69, 233, 181, 0.12) 0%,
+      rgba(18, 154, 116, 0.06) 0%,
       transparent 70%
     );
 }
@@ -1611,9 +1607,7 @@ html[data-theme="dark"] .stats::before {
   .metric-card {
     flex: 1 1 300px;
     max-width: 560px;
-    aspect-ratio: 560 / 360;
-    height: auto;
-    min-height: 240px;
+    min-height: 360px;
   }
 
   .feature-cards__money {
@@ -1796,9 +1790,7 @@ html[data-theme="dark"] .stats::before {
   .metric-card {
     flex: 1 1 auto;
     max-width: none;
-    height: auto;
-    min-height: 200px;
-    aspect-ratio: 16 / 10;
+    min-height: 340px;
   }
 
   .metric-card__value {
@@ -1806,10 +1798,13 @@ html[data-theme="dark"] .stats::before {
     gap: 8px;
   }
 
-  .metric-card__art {
-    bottom: -60px;
-    right: -20px;
-    width: 70%;
+  .metric-card__art-wrap {
+    min-height: 190px;
+  }
+
+  .metric-card__art,
+  .metric-card__art--calls {
+    max-height: 200px;
   }
 
   .feature-cards__money {
@@ -1933,7 +1928,7 @@ html[data-theme="dark"] .stats::before {
 
   .metric-card {
     flex: 1 1 0;
-    height: 340px;
+    min-height: 360px;
   }
 
   .feature-cards__money {
@@ -1990,17 +1985,20 @@ html[data-theme="dark"] .stats::before {
   }
 
   .metric-card {
-    min-height: 180px;
-    max-height: 220px;
+    min-height: 340px;
   }
 
   .metric-card__text {
-    padding: 20px 22px;
+    padding: 20px 22px 4px;
   }
 
-  .metric-card__art {
-    width: 58%;
-    bottom: -70px;
+  .metric-card__art-wrap {
+    min-height: 180px;
+  }
+
+  .metric-card__art,
+  .metric-card__art--calls {
+    max-height: 190px;
   }
 
   .hero__deco--money {

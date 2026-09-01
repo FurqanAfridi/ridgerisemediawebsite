@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { DEFAULT_OG, buildTitle, canonicalUrl, ogImageUrl } from "@/data/seo";
 import { site } from "@/data/site";
 
 type SeoProps = {
@@ -6,26 +7,12 @@ type SeoProps = {
   description: string;
   path?: string;
   type?: "website" | "article";
-  keywords?: string[];
+  keywords?: readonly string[];
   image?: string;
   publishedTime?: string;
   modifiedTime?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 };
-
-const DEFAULT_OG = "/assets/og-default.jpg";
-
-function buildTitle(title: string) {
-  const brand = site.name;
-  const trimmed = title.trim();
-  if (!trimmed) return brand;
-  if (trimmed === brand) return brand;
-  if (trimmed.endsWith(`| ${brand}`) || trimmed.endsWith(`— ${brand}`)) {
-    return trimmed;
-  }
-  if (trimmed.includes(brand)) return trimmed;
-  return `${trimmed} | ${brand}`;
-}
 
 export function Seo({
   title,
@@ -39,8 +26,8 @@ export function Seo({
   jsonLd,
 }: SeoProps) {
   const fullTitle = buildTitle(title);
-  const url = `${site.url}${path === "/" ? "" : path}`;
-  const imageUrl = image.startsWith("http") ? image : `${site.url}${image}`;
+  const url = canonicalUrl(path);
+  const imageUrl = ogImageUrl(image);
 
   const organizationLd = {
     "@context": "https://schema.org",
@@ -49,9 +36,17 @@ export function Seo({
     url: site.url,
     email: site.email,
     telephone: site.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "82 Navratil Rd",
+      addressLocality: "Willington",
+      addressRegion: "CT",
+      postalCode: "06279",
+      addressCountry: "US",
+    },
     logo: `${site.url}/assets/logo-icon.svg`,
     description:
-      "US demand aggregator delivering qualified inbound calls, leads, and traffic on CPL and cost per call.",
+      "US pay-per-call media buyer delivering qualified inbound calls, leads, and traffic on CPL and cost per call.",
   };
 
   const websiteLd = {
@@ -105,7 +100,7 @@ export function Seo({
   ];
 
   return (
-    <Helmet>
+    <Helmet prioritizeSeoTags>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       {keywords.length > 0 && (

@@ -10,7 +10,7 @@ Rewrite copy inside the existing JSX only. Section order and components stay as-
 
 ## Home (`/`)
 
-Hero: buyer-facing. One line that says what RidgeRise sells (qualified inbound calls, leads, and traffic in high-intent verticals) and one line on how (in-house media buying + a vetted partner network, CPL and pay-per-call models). Primary CTA → `/buyers` or `/contact`.
+Hero: buyer-facing. One line that says what RidgeRise sells (qualified inbound calls, leads, and traffic in high-intent verticals) and one line on how (in-house media buying plus a screened publisher layer, CPL and pay-per-call models). Primary CTA → `/buyers` or `/contact`.
 Body sections: verticals showcase (buyer framing), how it works for buyers, quality/compliance approach, then ONE publisher section near the bottom with CTA → `/publishers`. Publisher content never appears above buyer content.
 Tagline in `src/data/site.ts` may be rewritten to a buyer-slanted line if the user approves — propose options first.
 
@@ -19,11 +19,11 @@ Tagline in `src/data/site.ts` may be rewritten to a buyer-slanted line if the us
 Must cover, in the reader's order of concern:
 1. What they can buy: exclusive/shared inbound calls, live transfers, CPL leads, qualified traffic.
 2. Pricing models: cost per call (pay per call) and CPL, plus traffic deals — explained in one plain paragraph each, no jargon walls.
-3. Where volume comes from: hybrid model stated honestly (own campaigns + vetted partners) and why that helps them scale without quality collapse.
+3. Where volume comes from: we buy the media ourselves, then add a screened publisher layer when in-house cannot carry the volume.
 4. Quality controls: qualification before transfer, duration rules, tracking, source-level monitoring, dispute handling — described as practices, no invented numbers.
 5. Filters they control: vertical, geo, schedule, concurrency, exclusivity.
 6. Verticals list linking to `/verticals/{slug}`.
-7. CTA: discuss a campaign / get vertical pricing.
+7. CTA: start a test campaign / get vertical pricing.
 
 ## Publishers (`/publishers`)
 

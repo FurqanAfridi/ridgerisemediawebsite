@@ -1,93 +1,74 @@
 /* ——— Light (default) ——— */
 :root {
-  --color-bg: #ffffff;
-  --color-bg-elevated: #f7fbff;
-  --color-surface: #f7f5fd;
+  --color-bg: #fafbfe;
+  --color-bg-elevated: #f4f6fb;
+  --color-surface: #f2f1f8;
   --color-surface-2: #ffffff;
-  --color-surface-3: #eef5ff;
-  --color-border: rgba(76, 22, 120, 0.12);
-  --color-border-strong: rgba(76, 22, 120, 0.2);
+  --color-surface-3: #f4f6fb;
+  --color-border: rgba(55, 18, 95, 0.1);
+  --color-border-strong: rgba(55, 18, 95, 0.18);
 
   --color-black: #000;
-  --color-text: #1a1a1a;
-  --color-heading: #000000;
-  --color-muted: rgba(0, 0, 0, 0.58);
-  --color-gray: #666666;
-  --color-gray-mid: #777777;
+  --color-text: #17141f;
+  --color-heading: #0b0714;
+  --color-muted: rgba(23, 20, 31, 0.72);
+  --color-gray: #4b4658;
+  --color-gray-mid: #5c566c;
 
-  --color-purple: #5d62dd;
-  --color-purple-deep: #4c1678;
+  --color-purple: #5248d4;
+  --color-purple-deep: #3f0f68;
   --color-purple-grad-end: #00045b;
-  --color-mint: #45e9b5;
-  --color-mint-deep: #2ae2a8;
-  --color-mint-grad-end: #008a5e;
-  --color-accent: #8b68e5;
-  --color-stats-bg: linear-gradient(
-    180deg,
-    #f0fefe 0%,
-    #eef5ff 50%,
-    #f7f5fd 100%
-  );
+  --color-mint: #1fbf8f;
+  --color-mint-deep: #129a74;
+  --color-mint-grad-end: #007a54;
+  --color-accent: #6f4fd4;
+  --color-stats-bg: #f2f1f8;
 
   --page-bg: linear-gradient(
     180deg,
-    #e8f6ff 0%,
-    #f4fbff 12%,
-    #f9fffe 28%,
-    #ffffff 55%,
-    #f7fffe 100%
+    #f3f7fc 0%,
+    #fafbfe 28%,
+    #fafbfe 72%,
+    #f4f3fa 100%
   );
   --content-sheet-bg: linear-gradient(
     180deg,
-    #e8f6ff 0%,
-    #f4fbff 12%,
-    #f9fffe 28%,
-    #ffffff 55%,
-    #f7fffe 88%,
-    #f0edff 100%
+    #f3f7fc 0%,
+    #fafbfe 22%,
+    #fafbfe 70%,
+    #f4f3fa 100%
   );
-  --content-sheet-shadow: 0 28px 80px rgba(76, 22, 120, 0.12);
-  --roles-bg: linear-gradient(
-    179deg,
-    #f2fefe 4%,
-    #f0edff 36%,
-    #e6f9ff 63%,
-    #f3fffe 99%
-  );
+  --content-sheet-shadow: 0 28px 80px rgba(55, 18, 95, 0.1);
+  --roles-bg: #f2f1f8;
   --cta-bg: transparent;
-  --footer-sitemap-bg: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #f4fbff 40%,
-    #eef5ff 100%
-  );
-  --mf-bg: linear-gradient(180deg, #f7fffe 0%, #eef5ff 45%, #f0edff 100%);
-  --loader-bg: linear-gradient(165deg, #f4fbff 0%, #eef5ff 40%, #f7f4ff 100%);
-  --chip-bg: rgba(255, 255, 255, 0.85);
+  --footer-sitemap-bg: #f4f6fb;
+  --mf-bg: linear-gradient(180deg, #fafbfe 0%, #f4f6fb 55%, #f2f1f8 100%);
+  --loader-bg: linear-gradient(165deg, #f3f7fc 0%, #f4f6fb 45%, #f2f1f8 100%);
+  --chip-bg: rgba(255, 255, 255, 0.94);
   --chip-bg-hover: #ffffff;
-  --card-bg: #f7f5fd;
+  --card-bg: #ffffff;
   --vignette-top: linear-gradient(
     to bottom,
-    rgba(248, 251, 255, 0.95) 0%,
-    rgba(248, 251, 255, 0.55) 45%,
+    rgba(250, 251, 254, 0.98) 0%,
+    rgba(250, 251, 254, 0.55) 45%,
     transparent 100%
   );
   --vignette-bottom: linear-gradient(
     to top,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 255, 255, 0.55) 45%,
+    rgba(250, 251, 254, 0.98) 0%,
+    rgba(250, 251, 254, 0.55) 45%,
     transparent 100%
   );
   --sky-haze-top: linear-gradient(
     180deg,
-    rgba(186, 228, 255, 0.55) 0%,
-    rgba(230, 248, 255, 0.28) 55%,
+    rgba(186, 214, 245, 0.35) 0%,
+    rgba(243, 247, 252, 0.2) 55%,
     transparent 100%
   );
   --sky-haze-mist: radial-gradient(
     ellipse 75% 55% at 50% 25%,
     rgba(255, 255, 255, 0.7) 0%,
-    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.18) 50%,
     transparent 78%
   );
   --cloud-body:
@@ -104,22 +85,17 @@
     rgba(255, 255, 255, 0.65) 0%,
     transparent 75%
   );
-  --marquee-text: #4c1678;
+  --marquee-text: #3f0f68;
   --on-mint: #0a0810;
   --on-solid: #0a0810;
-  --ht-sticky-bg: linear-gradient(
-    180deg,
-    #e8f6ff 0%,
-    #f0edff 45%,
-    #eef5ff 100%
-  );
-  --ht-hint: rgba(26, 26, 26, 0.45);
+  --ht-sticky-bg: #f4f6fb;
+  --ht-hint: rgba(23, 20, 31, 0.58);
   --mf-pill-bg: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.92),
-    rgba(247, 245, 253, 0.88)
+    rgba(255, 255, 255, 0.96),
+    rgba(244, 246, 251, 0.92)
   );
-  --mf-grid-line: rgba(76, 22, 120, 0.08);
+  --mf-grid-line: rgba(55, 18, 95, 0.08);
 
   --font: "Inter", system-ui, sans-serif;
   --radius-sm: 8px;

@@ -4,7 +4,7 @@ export const insuranceGuides: Record<string, VerticalGuide> = {
   "auto-insurance": {
     slug: "auto-insurance",
     lede:
-      "Drivers call when a renewal jumps, a policy lapses, or they need state-minimum vs full coverage spelled out before they buy. You can take that demand as CPL, cost per call, live or warm transfers, exclusive or shared, or as qualified traffic into your own quote funnel. RidgeRise runs auto from in-house media buying plus a vetted publisher network, with filters and quality monitoring matched to how your intake team actually works.",
+      "Drivers call when a renewal jumps, a policy lapses, or they need state-minimum vs full coverage spelled out before they buy. You can take that demand as CPL, cost per call, live or warm transfers, exclusive or shared, or as qualified traffic into your own quote funnel. RidgeRise runs auto from in-house media buying plus screened publishers, with filters and quality monitoring matched to how your intake team actually works.",
     sections: [
       {
         heading: "Who's on the line, and why they called today",
@@ -94,7 +94,7 @@ export const insuranceGuides: Record<string, VerticalGuide> = {
       {
         heading: "Publisher traffic is part of the mix on purpose",
         paragraphs: [
-          "About twenty percent of this page is for the supply side because that is how the channel works. RidgeRise is a demand aggregator, not a single-source media shop pretending every call is 'proprietary.' We buy auto ourselves and we take search, social, and click-to-call paths from publishers who can show rate-comparison or quote intent. Both streams sit behind the same qualification and the same source monitoring.",
+          "About twenty percent of this page is for the supply side because that is how the channel works. RidgeRise is a pay-per-call media buyer, not a single-source shop pretending every call is 'proprietary.' We buy auto ourselves and we take search, social, and click-to-call paths from publishers who can show rate-comparison or quote intent. Both streams sit behind the same qualification and the same source monitoring.",
           "If you are a publisher reading this, auto is picky about coverage flags and repeat shoppers. Read /publishers for how partner campaigns run. If you are a buyer, the point is simpler: hybrid supply lets us fill states your own brand search cannot fill, without turning your queue into an unvetted affiliate free-for-all. Vetted means we can cut a source. It does not mean every publisher call will bind.",
           "Buyers who insist on 'in-house only' often under-fill their licensed hours. Buyers who insist on 'all the volume' without source-level cutoffs drown. The workable middle is a named mix, watched weekly, with auto-specific rejects (SR-22, wrong coverage, out of age band) applied to every source the same way. That is the job. The rest is decoration.",
         ],
@@ -116,7 +116,7 @@ export const insuranceGuides: Record<string, VerticalGuide> = {
           "Write the IVR or live-qual questions in the order a shopper will tolerate. Include the reject list: commercial vehicles if you do not write them, motorcycles if that is a different desk, out-of-state titles, no-license callers. Auto briefs that skip vehicle type get surprised by box trucks. Put the surprise in writing now.",
           "Tell us how you handle duplicates, recordings, and disputes. Name the person on your side who will actually listen to tape, not the person who forwards emails. Quality dies when the only reviewer is a producer who is also trying to hit a quota. RidgeRise can monitor sources. We cannot replace your internal coaching.",
           "If you also write homeowners, say whether you want a bundle ask on the auto call. Keep it light. Auto shoppers did not call to recast their dwelling policy. A single qualifying question is plenty. Deeper property conversations belong on /verticals/home-insurance, not jammed into an auto transfer. Related demand is useful. Confused demand is not.",
-          "When the brief is real, come through /buyers or /contact and talk through filters before anyone turns media on. Bring what a qualified call looks like in your agency, not a wish for 'good leads.' We will match hybrid supply to that definition, keep TCPA-aware and campaign-specific consent in the setup, and cut sources that drift. Discuss a campaign when you can describe the caller. That is the whole ask.",
+          "When the brief is real, come through /buyers or /contact and talk through filters before anyone turns media on. Bring what a qualified call looks like in your agency, not a wish for 'good leads.' We will match hybrid supply to that definition, keep TCPA-aware and campaign-specific consent in the setup, and cut sources that drift. Start a test campaign when you can describe the caller. That is the whole ask.",
         ],
       },
     ],
@@ -233,7 +233,7 @@ export const insuranceGuides: Record<string, VerticalGuide> = {
           "Define a qualified call in enrollment language. In-window or valid SEP reason if ACA, correct age band, not seeking MA unless routed there, not Medicaid-only if you cannot help, minimum duration, during hours, exclusive or shared. Write the reject list: already enrolled and just shopping extra dental, group-coverage questions your agents do not handle, callers who want to argue a medical bill.",
           "Give us the consent and recording requirements your counsel signed off on. Campaign-specific means we implement yours, not a generic health script from another buyer. If you need different language for short-term vs ACA, that is two paths. Say so now.",
           "Name the quality owner who will listen during OEP, not after. Health campaigns that wait until January to review November tape are doing archaeology. Weekly source cutoffs during the window save the rest of the window.",
-          "Bring the brief to /buyers or /contact. Tell us what a qualified call looks like for your licensed team. We will line up in-house media and vetted publishers against that definition, keep TCPA-aware processes in the setup, and refuse to treat every connect as a bound policy. Discuss a campaign when your calendar, licenses, and product split are on one page. That is enough to start.",
+          "Bring the brief to /buyers or /contact. Tell us what a qualified call looks like for your licensed team. We will line up in-house media and vetted publishers against that definition, keep TCPA-aware processes in the setup, and refuse to treat every connect as a bound policy. Start a test campaign when your calendar, licenses, and product split are on one page. That is enough to start.",
         ],
       },
     ],
@@ -349,7 +349,7 @@ export const insuranceGuides: Record<string, VerticalGuide> = {
           "Write the IVR in consumer words. Term vs whole life vs not sure. Face buckets in numbers people recognize. No medical interrogation. Add replacement questions if compliance needs them. Add a final-expense reject or route if age demands it.",
           "Define qualified without requiring a signature. In-geo, in-hours, in-age, in-face, product match, duration, not a recruiter, not a vendor. Spell the duplicate window. Life shoppers call back after they talk to a spouse. Decide if that is billable.",
           "Name who listens to recordings and who owns pending-case reporting so you do not blame media for underwriting. Bring carrier appetite limits. If a carrier is closed for a class, that is a filter change, not a quality mystery.",
-          "Send it through /buyers or /contact. Tell us what a qualified call looks like for your life desk. We will set TCPA-aware, campaign-specific consent, hybrid supply, and source cutoffs against that sheet. We will not promise every transfer becomes a placed policy. Discuss a campaign when term vs permanent is decided. Everything else is details we can work.",
+          "Send it through /buyers or /contact. Tell us what a qualified call looks like for your life desk. We will set TCPA-aware, campaign-specific consent, hybrid supply, and source cutoffs against that sheet. We will not promise every transfer becomes a placed policy. Start a test campaign when term vs permanent is decided. Everything else is details we can work.",
         ],
       },
     ],
@@ -443,7 +443,7 @@ export const insuranceGuides: Record<string, VerticalGuide> = {
       {
         heading: "Publisher traffic for moving and local intent",
         paragraphs: [
-          "Home supply that works tends to look like moving, homebuying, and local-intent paths with a ZIP attached. Abstract 'protect your biggest asset' content without an address is weaker. RidgeRise buys in-house and takes publishers who can work that local intent, then applies the same property-type and geo filters. The twenty percent publisher note is the same honest hybrid as the other verticals: we are a demand aggregator, not a single-source fairy tale.",
+          "Home supply that works tends to look like moving, homebuying, and local-intent paths with a ZIP attached. Abstract 'protect your biggest asset' content without an address is weaker. RidgeRise buys in-house and takes publishers who can work that local intent, then applies the same property-type and geo filters. The twenty percent publisher note is the same honest hybrid as the other verticals: we are a media buyer, not a single-source fairy tale.",
           "Storm-chasing publisher traffic needs extra monitoring. Some of it is non-renewal gold. Some of it is people who needed a claims adjuster. Vetting and cutoffs are how we keep your producers on new-business files. If a source cannot hold a property-type qual, they do not stay on the campaign.",
           "Publishers apply at /publishers. Buyers stay on /buyers. Home is not a remnant dump for whoever has 'insurance' in a subid. Address-level intent or it does not belong.",
         ],
@@ -465,7 +465,7 @@ export const insuranceGuides: Record<string, VerticalGuide> = {
           "IVR: own/rent, property type, ZIP, reason for shopping, value bucket if needed. Rejects: commercial, farm, vacant, mobile, if those are not your paper. Closing-date capture on purchase. Expiration-date capture on non-renewal if you can get it without killing the call.",
           "Quality owner who understands property, not a life manager moonlighting. Dispute rules that include catastrophe-ZIP and property-type misses. Duplicate windows that respect lender timelines (the same buyer may call twice in a week from two numbers because the spouse called too).",
           "Bundle rules in one sentence. Roof and claims knock-outs only if universal. Carrier closures as a living appendix we can pause against.",
-          "Come in through /buyers or /contact with that sheet. Tell us what a qualified homeowners call looks like for your markets. We will run TCPA-aware, campaign-specific consent, in-house plus vetted publisher supply, and source cutoffs. We will not tell you every transfer binds. Discuss a campaign when you can name the ZIPs you cannot write. That list is more useful than a slogan.",
+          "Come in through /buyers or /contact with that sheet. Tell us what a qualified homeowners call looks like for your markets. We will run TCPA-aware, campaign-specific consent, in-house plus vetted publisher supply, and source cutoffs. We will not tell you every transfer binds. Start a test campaign when you can name the ZIPs you cannot write. That list is more useful than a slogan.",
         ],
       },
     ],

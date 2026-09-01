@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
-import { site } from "@/data/site";
+import { site, trustSignals } from "@/data/site";
 import "./motion-footer.css";
 
 if (typeof window !== "undefined") {
@@ -202,7 +202,7 @@ export function CinematicFooter() {
                 to="/buyers"
                 className="mf-pill mf-pill--primary"
               >
-                Discuss a Campaign
+                Start a Test Campaign
               </MagneticButton>
               <MagneticButton
                 as={Link}
@@ -245,19 +245,43 @@ export function CinematicFooter() {
             <a href={`mailto:${site.email}`}>{site.email}</a>
             <span aria-hidden="true">·</span>
             <a href={site.phoneHref}>{site.phone}</a>
+            <span aria-hidden="true">·</span>
+            <a
+              href={site.mapsHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {site.address}
+            </a>
+            {trustSignals.live && trustSignals.legalName ? (
+              <>
+                <span aria-hidden="true">·</span>
+                <span>{trustSignals.legalName}</span>
+              </>
+            ) : null}
           </div>
+          {trustSignals.live && trustSignals.leadership.length > 0 ? (
+            <div className="mf-contact-row">
+              {trustSignals.leadership.map((person, index) => (
+                <span key={person.name}>
+                  {index > 0 ? <span aria-hidden="true"> · </span> : null}
+                  <a
+                    href={person.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {person.name}
+                  </a>
+                </span>
+              ))}
+            </div>
+          ) : null}
         </div>
 
         <div className="mf-bottom">
           <p className="mf-copy">
             © {new Date().getFullYear()} RidgeRise Media. All rights reserved.
           </p>
-
-          <nav className="mf-legal" aria-label="Legal">
-            <Link to="/privacy">Privacy Policy</Link>
-            <span aria-hidden="true">·</span>
-            <Link to="/terms">Terms &amp; Conditions</Link>
-          </nav>
 
           <MagneticButton
             as="button"

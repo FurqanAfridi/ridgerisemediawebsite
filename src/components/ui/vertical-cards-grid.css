@@ -7,11 +7,21 @@
   background:
     radial-gradient(
       ellipse 70% 55% at 50% 40%,
+      color-mix(in srgb, var(--color-accent-purple, #8b80f9) 8%, transparent) 0%,
+      transparent 70%
+    ),
+    var(--color-surface);
+  color: var(--color-text);
+}
+
+html[data-theme="dark"] .vcg {
+  background:
+    radial-gradient(
+      ellipse 70% 55% at 50% 40%,
       color-mix(in srgb, var(--color-accent-purple, #8b80f9) 10%, transparent) 0%,
       transparent 70%
     ),
     var(--color-bg);
-  color: var(--color-text);
 }
 
 .vcg__intro {

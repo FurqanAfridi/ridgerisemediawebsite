@@ -80,7 +80,7 @@ export const legalAndSeniorGuides: Record<string, VerticalGuide> = {
         heading: "Licensed MA agents and hours that match how seniors actually call",
         paragraphs: [
           "You cannot take Medicare Advantage transfers with a health-insurance generalist who isn't licensed and appointed for MA in that state. Carriers typically also want AHIP (or equivalent) certifications current before someone talks plans. If your floor is mixed ACA and MA, split the queues. An ACA agent guessing through an MAPD comparison is a compliance event waiting for a recording review. Staff the MA line with people who can legally finish the call.",
-          "Appointment status changes. A carrier pauses you in a region. A contract lands late. Your buy has to follow the licensed map, not last year's spreadsheet. Pause geos. Don't \"just take the call and refer.\" That's how you pay for conversations you legally shouldn't be having. Tell the network which states and counties are live this week. During AEP that list should be reviewed more than once.",
+          "Appointment status changes. A carrier pauses you in a region. A contract lands late. Your buy has to follow the licensed map, not last year's spreadsheet. Pause geos. Don't \"just take the call and refer.\" That's how you pay for conversations you legally shouldn't be having. Tell us which states and counties are live this week. During AEP that list should be reviewed more than once.",
           "Senior call hours are a pattern, not a myth. Late morning and early afternoon carry a lot of MA talk. Some markets do well with early evening after caregivers get home. Very late nights and very early mornings tend to attract the wrong traffic mix. Set hours that your licensed agents can cover with a human greeting. Seniors will wait through a short hold. They will not wait through a five-minute IVR and a callback promise that lands tomorrow.",
           "Concurrency and wrap time are harsher in MA than in a 90-second auto quote. Plan comparisons take minutes. Drug lists take minutes. If you set concurrency as if this were a final-expense two-minute pitch, you'll stack callers. Caps, buffer, and overflow-to-CPL or scheduled callback should be in the campaign design. Licensed time is the scarce resource. Media should respect it.",
           "Bilingual licensed coverage is a filter and a staffing plan. Spanish MA demand in Florida, Texas, California, and a list of other counties is not a toggle you flip on a Friday. If you don't have licensed bilingual agents in seat, don't buy the language. You'll pay for transfers your English-only team can't complete, and the recordings will sound like it.",
@@ -177,7 +177,7 @@ export const legalAndSeniorGuides: Record<string, VerticalGuide> = {
           "Listen for pressure and scare creative: fake funeral-home partnerships, countdown-to-death language, \"the government will take your house.\" That traffic can still be old and in-band. It still poisons close rates and complaint risk. Quality-monitored FE means watching creative and intro language, not just ZIP codes. RidgeRise treats FE as its own campaign with its own consent and source cutoffs, on hybrid in-house plus vetted-publisher supply. We don't guarantee issue rates and we don't sell zero-risk compliance.",
           "Wrong-number and caretaker-phone issues show up more in this demo. The lead number is a daughter's cell. The insured is hard of hearing. Build dispositions for \"wrong party\" and \"can't complete health questions on this call.\" Don't fight every one as invalid media. Do cut sources that systematically send numbers that never reach the insured.",
           "Chargebacks should follow the written rules: off-age, off-geo, mute dumps, below duration if you set one, obviously wrong product. Don't invent a \"they didn't sound old\" dispute standard. Age comes from the qualify, not from a reviewer's guess.",
-          "Your agents' talk speed is part of quality you control. Fast term-life closers often talk over FE clients. If your FE close rate is bad on otherwise clean transfers, listen to your side before you blame the network. Slow down. Repeat the premium. Let them get a child on the line. Media can't fix a rushed pitch.",
+          "Your agents' talk speed is part of quality you control. Fast term-life closers often talk over FE clients. If your FE close rate is bad on otherwise clean transfers, listen to your side before you blame the media. Slow down. Repeat the premium. Let them get a child on the line. Media can't fix a rushed pitch.",
         ],
       },
       {
@@ -259,7 +259,7 @@ export const legalAndSeniorGuides: Record<string, VerticalGuide> = {
           "PI firms pay for signed cases, not for conversations. Exclusive live transfers are the default for a reason: the first firm that treats the caller like a client often wins the sign-up. A shared PI call is a race. The other shop may already be texting a contract. If your intake model is a 15-minute sign-up conversation, exclusive is usually the only model that isn't masochism. Warm transfers after a retained-counsel and injury-type screen put a screened person on your intake paralegal or attorney line.",
           "Cost per call / pay per call should bill against a written qualify: injury type you accept, time since incident versus your statute rules, not already retained, geo your licenses cover, hours your intake is live. Duration floors catch hang-ups. They do not catch \"I already hired someone in the first minute.\" Dispositions have to carry that weight.",
           "CPL in PI is a form or chat lead with accident details, then your team outbound. It can work if you dial fast. Accident victims talk to the first competent human who calls back. A CPL that sits until morning in a competitive metro is often already signed. If you buy CPL, staff nights and weekends for auto, or admit you're only chasing premises and slower cases. Qualified traffic into a funnel you own is the same race with extra steps. Some legal marketers want that control. The consent and the speed still have to be real.",
-          "RidgeRise sells these models from hybrid supply: in-house media buying plus a vetted publisher network, quality-monitored against your case criteria. We will not quote you a signed-case rate, an average fee, or a \"guaranteed retain.\" One signed trucking case can justify a lot of dead air. A pile of unsigned soft-tissue calls can look busy and still lose money. Your economics are yours. The media job is to hit the screen you wrote.",
+          "RidgeRise sells these models from hybrid supply: in-house media buying plus screened publishers, quality-monitored against your case criteria. We will not quote you a signed-case rate, an average fee, or a \"guaranteed retain.\" One signed trucking case can justify a lot of dead air. A pile of unsigned soft-tissue calls can look busy and still lose money. Your economics are yours. The media job is to hit the screen you wrote.",
           "Live transfer does not mean the person will sign. They'll comparison-shop firms. They'll get nervous about lawsuits. Their spouse will say no. Buy calls like intake still has to do the job.",
         ],
       },
@@ -348,120 +348,6 @@ export const legalAndSeniorGuides: Record<string, VerticalGuide> = {
           "Name the dead dispositions you'll actually code. Already retained. Too old under SOL. PD only. Wrong type. Off geo. That's how we monitor sources on hybrid supply.",
           "If you want qualified traffic into your own intake form, send the form fields and the speed-to-call plan. If you want live transfers, send the answering path and the cap. If you want both, say which hours belong to which model.",
           "Use /buyers to talk models against your intake, or /contact when the injury list and SOL cutoffs are already on paper. Bring the PI-only facts: injury type, statute window, retained-counsel screen, exclusive transfer need. That's the brief that keeps high case value from turning into a pile of unsignable talk time.",
-        ],
-      },
-    ],
-  },
-  "mass-tort": {
-    slug: "mass-tort",
-    lede:
-      "Mass tort intake follows dockets and media waves, not a steady legal-leads faucet. Callers need the exposure, the diagnosis or injury criteria, and a clean prior-representation screen for that lawsuit, or they're inventory you can't use, and campaign-specific consent is part of that screen, not decoration. If you buy last year's docket with this year's headline, you'll pay for conversations your litigators already know they can't keep.",
-    sections: [
-      {
-        heading: "Who's on a mass tort intake call",
-        paragraphs: [
-          "The caller believes they used a product, took a drug, got an implant, drank the water, served at the base, or worked around the chemical that the ads are talking about. They may have a diagnosis. They may have a stack of pharmacy printouts. They may have a hunch and a TV memory. Your job on the media side is to send people who match this docket's criteria, not people who want \"a lawyer\" in general. A PI auto caller who mashed the wrong number is a failed path, even if they're genuinely hurt.",
-          "Docket shoppers come in waves. A verdict hits the news. A commercial flight turns on. A Facebook library saturates. Suddenly your intake hears the same product name 200 times a day, including from people who used it once in 1998 with no injury. Criteria exist because courts and your co-counsel have an inventory standard. The caller doesn't know that standard. The screener has to.",
-          "Prior representation is its own population. Mass tort ads run for years. A lot of people already signed with a mill in 2021. They call again because a new ad scared them. Unless your campaign buys discharged or second-look inventory on purpose, those are rejects. Ask who they signed with, and when, for this injury and this product. \"I have a lawyer for my car wreck\" is not the same as \"I signed a Roundup contract.\"",
-          "Family members and caregivers call, especially on older dockets and Camp-style exposure claims. Decide whether a spouse can complete intake for a deceased or disabled person under your firm's rules. That's docket-specific and counsel-specific. Don't let a publisher improvise it.",
-          "You will also get the professionally litigious and the confused. People who want to know if they \"qualify for the settlement\" as if a check is in the mail. Education on the first thirty seconds of an ad can reduce that. Qualification still has to catch \"no use, no diagnosis, just curious.\" Curious is not a plaintiff.",
-        ],
-      },
-      {
-        heading: "Buying models when the docket, not the month, sets demand",
-        paragraphs: [
-          "Cost per call and live transfers work when your intake can take a criteria-heavy conversation now. Exclusive transfers are common because the caller will sign the first firm that sounds organized, and because your retain agreement is the asset. Shared mass tort calls are how you collect people who already started a packet with someone else during the same commercial break. Some buyers still use shared on huge awareness waves. They should expect messier inventory.",
-          "CPL is normal in mass tort: a form with product, dates of use, diagnosis, and contact, then rapid outbound. Speed still matters, but less like a same-hour auto PI race and more like \"this week, before the next ad flight confuses them.\" If your packet takes three days to mail, say so, and don't buy live transfers you can't complete. Qualified traffic into a docket-specific landing page is how a lot of legal marketers run TV-to-web. The page has to be this docket, this consent, this criteria. A generic \"class action\" page is how you mix ten lawsuits into one CRM and ruin all of them.",
-          "Pay per call should bill on the criteria you wrote, not on \"they said the product name.\" Duration will lie. People will talk about their medical history for eight minutes and still lack the exposure window. Dispositions must name missing diagnosis, missing use, prior counsel, wrong docket, and off-geo if your firm is state-limited.",
-          "RidgeRise can run mass tort as CPL, cost per call, live/warm transfers, exclusive or shared, and qualified traffic, using in-house media plus vetted publishers. We will not invent fill rates for your docket, settlement values, or how many cases you'll keep after counsel review. Inventory quality is the product. Volume without criteria is a warehouse of folders you'll shred.",
-          "A qualified mass tort call is not a filed case and not a settlement. MDL rules, tolling, science, and your own case-review team decide what survives. Buy media like review will kill a percentage on purpose. That's the vertical working, not the network cheating you.",
-        ],
-      },
-      {
-        heading: "Docket calendars and media waves set the real seasonality",
-        paragraphs: [
-          "Mass tort does not have open enrollment. It has docket calendars. MDL formation, bellwether settings, discovery cutoffs, statute theories, and settlement-program windows change what a \"good\" caller looks like. A campaign that was correct 18 months ago can be wrong after a science ruling or a signup deadline. Re-brief when counsel re-briefs. Don't assume the offer letter from last year still matches inventory the litigators will accept.",
-          "Media waves are the consumer-facing clock. TV, social, and news coverage create spikes that look like a vertical coming alive. Those spikes include the worst criteria misses, because people call after a headline, not after checking their pharmacy history. During a wave, tighten screens. After a wave, volume drops and remaining callers can be either higher-intent or leftover confused. Watch reject reasons week by week, not vibe.",
-          "Multiple dockets in market at once will contaminate each other if you share DIDs and pages. A hernia-mesh caller on a talc line is a wasted intake minute and a confused plaintiff. One campaign, one docket, one consent path, one qualify script. If you run three dockets, run three briefs. Hybrid supply can fill more than one. It should not blend them.",
-          "There is a dying-docket problem. Ads keep running because affiliates still have creative. Your litigators already have enough inventory or the statute theory is tired. If counsel says stop, stop the buy. Paying for late-wave junk to \"keep the lights on\" is how mass tort gets a bad reputation inside a firm.",
-          "Plan staffing around known flights when you control them, and around news you don't control. Intake overtime during a verdict week is cheaper than missed exclusive transfers. Lower caps when your case-review team is underwater. Media should follow inventory capacity, not the other way around.",
-        ],
-      },
-      {
-        heading: "Diagnosis, exposure, and prior representation are the product",
-        paragraphs: [
-          "Each docket has a use or exposure rule: years of taking the drug, implant date and brand, work history, water district, service dates. Each has an injury or diagnosis rule: cancer type, revision surgery, specific complication. Your brief should quote counsel's current criteria, not a marketer's memory of a 2022 Facebook ad. If pharmacy records or implant cards are required before retain, say whether media should ask or whether intake asks after transfer. Asking too much in IVR kills volume. Asking nothing transfers junk.",
-          "Proof of use is the mass-tort cousin of PI's police report. Some campaigns can transfer on a credible story. Some need the caller to have records in hand. That choice changes cost per call and CPL quality. Be explicit. Publishers will fill whatever you pay for. If you pay for name-plus-product and you needed records, that's on the brief.",
-          "Prior representation screens must be docket-specific. Ask whether they already have a lawyer for this product and this injury. If they signed a different mass tort, that might still be okay. If they signed this one, it's usually a kill. If they signed, fired the firm, and have a discharge letter, that's a policy call for your ethics counsel, not for a publisher. Don't let supply make that call.",
-          "Wrong-docket leakage is a daily QA item. Listen for product names you aren't buying. Cut sources that spray \"legal compensation\" traffic across every lawsuit in the news. That traffic is cheap because it's useless to a criteria-driven book.",
-          "Geo still matters when your firm only files in certain states or when a docket is venue-bound. National exposure claims can still have state limitations on who you retain. Put the map in the brief. Mass tort is not automatically fifty-state just because the ads are national.",
-        ],
-      },
-      {
-        heading: "Campaign-specific consent is part of the docket, not a footer",
-        paragraphs: [
-          "Legal intake on a named product is a different consent event than a generic \"contact a lawyer\" checkbox. The path that generated the call should disclose what docket, what kind of contact, and who may call them. Campaign-specific consent means this offer, this injury, this follow-up. Reusing a debt-settlement TCPA blob on a mass tort page is how you buy problems. We run TCPA-aware processes. We will not certify the campaign as legally risk-free. Your legal marketing counsel should still read the page and the intro script.",
-          "Call recording, where applicable, protects criteria disputes and also shows whether the consumer was told they were calling about this lawsuit. Bait-and-switch (\"you may have money waiting\") into a retain pitch is a QA fail even when the person used the product. Creative and consent have to match the conversation.",
-          "Multi-docket marketers love to share leads across sister campaigns. If a caller consented to docket A, that is not automatically consent for docket B. If you want cross-sell inside a firm, get counsel to write that. Don't hide it in publisher instructions. Quality monitoring will treat unexpected docket-switching as a brief violation.",
-          "DNC and re-contact rules get messy on long dockets. People call, don't sign, then see another ad six months later. Your CRM rules and the media path's rules should not fight. Tell us how you want re-inquiries handled so we aren't transferring someone your intake already rejected last quarter for no diagnosis.",
-          "Publisher-level consent proof should be available for the path. If they can't show how this caller agreed to this campaign, the path pauses. That's operational hygiene, not a courtroom promise.",
-        ],
-      },
-      {
-        heading: "Filters, hours, and exclusivity on a criteria campaign",
-        paragraphs: [
-          "Filters start with docket ID in everything: tracking, DIDs, landing pages, screener. Then exposure window, diagnosis list, states, language, exclusive versus shared, hours. Hours in mass tort can be closer to business hours than auto PI, because many callers are older or disabled and calling after a daytime commercial. Evening still matters when TV is the driver. Match hours to the media mix, not to a generic legal nine-to-five if your ads run at 10 p.m.",
-          "Age filters appear on some dockets (certain cancers, certain products). Don't copy FE age bands onto a legal campaign unless counsel said age is a criterion. Do copy the idea that a band exists when it does. Underage or estate calls may be valid on some exposures and invalid on others.",
-          "Concurrency: intake scripts are long. Medical history is long. Caps should assume a 10-minute conversation, not a 90-second quote. Buffer after each retain attempt. If your packet is digital, still budget for questions. If your packet is wet signature via courier, live transfer may be the wrong model except for appointment-setting.",
-          "Exclusive versus shared should follow how fast you retain and whether your ethics rules care about competing solicits. High-value dockets with scarce qualifying plaintiffs usually want exclusive. High-awareness dockets with loose early criteria sometimes accept shared. Revisit that when the docket matures and inventory standards tighten. What worked at wave one can fail at wave four.",
-          "Language and caregiver callers are filters, not afterthoughts. Spanish-language mass tort demand is real on some products and some metros. Staff it or exclude it. Don't discover it on a recording of an English-only paralegal talking past a qualified plaintiff.",
-        ],
-      },
-      {
-        heading: "Quality monitoring when inventory review will kill cases anyway",
-        paragraphs: [
-          "Expect your litigators to reject cases that media thought were qualified. That's normal if the brief was the marketing version of the criteria and counsel uses a tighter grid. Align those two documents. The closer media qualification is to case-review qualification, the less you fight about \"bad leads\" that were actually \"not good enough for this MDL.\" Write the tight grid if that's what you'll keep.",
-          "Source-level review should listen for coaching (\"say you have lymphoma even if…\"). That's a mass-tort-specific fraud mode. Cut it immediately. Vetted publishers stay vetted by not doing that. In-house paths can pick up the same junk if creative over-promises diagnosis. Watch both halves of the hybrid mix.",
-          "Metrics that matter: percent failing exposure, percent failing diagnosis, percent prior counsel, percent wrong docket, speed-to-reject. Duration is a distant fifth. A short call that dies on \"already signed\" is a clean disqualify. A long call that never used the product is a creative miss.",
-          "We quality-monitor against the brief and pause sources that drift. We don't promise your case-review team will love the inventory, and we don't promise TCPA or ethics risk is zero. Your counsel owns retain language. Media owns whether the person should have been in the queue.",
-          "Chargebacks belong on objective misses versus the written screen, not on \"dropped after medical records.\" Records review is downstream. If you want records before a call is billable, that's a different product (often CPL with document upload), and it will fill slower.",
-        ],
-      },
-      {
-        heading: "Who buys mass tort volume",
-        paragraphs: [
-          "Law firms and legal marketers running an active docket campaign are the buyer. You have co-counsel or a filing plan, a criteria sheet from lawyers (not just marketers), intake staff who can take a medical history, and a retain process that ethics counsel has seen. If you're \"testing legal\" with no docket, don't start here. Start with PI or don't buy legal calls.",
-          "Firms that join an MDL late still buy, but their criteria are often tighter and their patience for wave-three junk is lower. Brief it that way. Early-wave buyers might accept weaker proof of use. Late-wave buyers should not pay early-wave prices for early-wave quality, and they should say so.",
-          "Poor fit: PI firms hoping mass tort fills the auto gap this month; buyers who want one generic \"litigation\" campaign across five products; shops with no ability to store medical information securely; anyone who needs every caller to become a filed plaintiff. Inventory review exists because many callers will not.",
-          "If you also buy PI, keep the teams and the tracking separate. The screens do not translate. Retained-counsel in PI is \"do you have a lawyer for this wreck.\" In mass tort it's \"for this product and this injury.\" Train intake on the difference or they'll disqualify the wrong people.",
-        ],
-      },
-      {
-        heading: "If you publish mass tort traffic",
-        paragraphs: [
-          "We need publishers who can run a call or form path per docket brief: exposure questions, diagnosis questions, prior-representation questions, campaign-specific consent. If you scale by cloning last quarter's landing page and swapping a product word, you'll fail QA. Search, social, native, and call paths are all possible. Coaching callers on medical facts is not.",
-          "Payouts depend on the docket and the tightness of the screen. We won't invent numbers here. If you can follow a legal brief without improvising, /publishers is the application. The buyer still owns the criteria.",
-          "Media waves are when leftover pages show up. If the criteria sheet changed after a science ruling, your old form is wrong even if it still converts. Ask for the current brief before you spend.",
-        ],
-      },
-      {
-        heading: "Mistakes that are unique to mass tort buying",
-        paragraphs: [
-          "Running a dead or dying docket because the creative is still cheap. Cheap is not qualified. Ask counsel if they're still accepting this inventory before you refresh media. Docket calendars beat affiliate nostalgia.",
-          "One DID, many lawsuits. You'll never know which publisher sent usable talc versus unusable hernia mesh. You'll also mash consent. Split the campaigns even if it feels fussy. It is fussy. That's the job.",
-          "Skipping prior-representation because you want volume during a TV wave. You'll pay for people who signed in 2020 and forgot the firm's name. Ask. Code it. Cut sources that over-index on already-signed.",
-          "Using PI statute language instead of docket criteria. \"Hurt in the last two years\" is not a substitute for \"diagnosed with X after Y exposure.\" Mass tort timing is about use windows and diagnosis dates your scientists care about, not a generic PI clock. Some dockets still have SOL issues. Those come from counsel, not from a PI template.",
-          "Demanding a compliance guarantee on a product built out of advertising, health data, and retain agreements. Require campaign-specific consent, TCPA-aware handling, recording review, and fast source cutoffs. Skip the fantasy language. It's a tell that the buyer hasn't done this before.",
-        ],
-      },
-      {
-        heading: "How to brief a mass tort campaign",
-        paragraphs: [
-          "Name the docket like a lawyer, not like an ad. Product or exposure. Injury and diagnosis list (in and out). Use/exposure window. Proof-of-use requirement. Prior-representation rule. States you will retain. Estate/caregiver rule. Hours. Exclusive versus shared. CPL versus live transfer versus traffic. What the retain looks like so we don't transfer into a 40-minute packet on a busy TV night without warning.",
-          "Attach the current counsel criteria sheet, even if it's ugly. Marketing summaries drift. The sheet is the product. Note the date. If bellwethers or a cutoff changed last month, the sheet should say so. Re-brief when it changes. Stale criteria is how you buy unusable inventory at full price.",
-          "Write consent language for this campaign and the prohibited creative (guaranteed settlement, fake government compensation, diagnosis coaching). Quality monitoring needs that list. Dispositions should match the criteria kills so hybrid supply can be judged fairly.",
-          "Tell us inventory capacity: how many qualified intakes your review team can stand this week. Caps should follow that number. Mass tort media without a capacity number is how folders pile up unsigned and everyone swears the leads were bad.",
-          "Start on /buyers if you need help matching models to intake, or /contact if the docket sheet is ready. Bring the mass-tort-only facts: calendar and media-wave timing, diagnosis and exposure rules, prior-representation screen, campaign-specific consent. We'll tell you if we can run it before anyone buys a flight against the wrong lawsuit.",
         ],
       },
     ],
