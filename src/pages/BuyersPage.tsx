@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { buyersFaqs } from "@/data/faqs";
 import { pageSeo } from "@/data/seo";
@@ -252,7 +252,8 @@ function WhyArt({ art }: { art: (typeof whyCards)[number]["art"] }) {
 
 export default function BuyersPage() {
   const rootRef = useRef<HTMLElement>(null);
-  useBuyerMotion(rootRef);
+  const location = useLocation();
+  useBuyerMotion(rootRef, location.pathname);
   const [model, setModel] = useState<(typeof modelTabs)[number]["id"]>("ppc");
   const [workModel, setWorkModel] = useState<(typeof workTabs)[number]["id"]>("buyer");
   const [openWhy, setOpenWhy] = useState(0);
@@ -579,8 +580,12 @@ export default function BuyersPage() {
               tracking open so you can see what holds.
             </p>
             <ol className="buy-flow__toc" aria-hidden="true">
-              {steps.map((step) => (
-                <li key={step.num} className="buy-flow__toc-item" data-step={step.num}>
+              {steps.map((step, index) => (
+                <li
+                  key={step.num}
+                  className={`buy-flow__toc-item${index === 0 ? " is-active" : ""}`}
+                  data-step={step.num}
+                >
                   <span>{step.num}</span>
                   <em>{step.title}</em>
                 </li>
@@ -594,10 +599,10 @@ export default function BuyersPage() {
               <span className="buy-flow__rail-fill" />
             </div>
             <ol className="buy-flow__steps">
-              {steps.map((step) => (
+              {steps.map((step, index) => (
                 <li
                   key={step.num}
-                  className={`buy-flow__step${step.mint ? " buy-flow__step--mint" : ""}`}
+                  className={`buy-flow__step${step.mint ? " buy-flow__step--mint" : ""}${index === 0 ? " is-active" : ""}`}
                   data-step={step.num}
                 >
                   <span className="buy-flow__node" aria-hidden="true">

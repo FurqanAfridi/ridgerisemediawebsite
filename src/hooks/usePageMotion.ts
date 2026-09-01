@@ -84,8 +84,6 @@ export function usePageMotion(
             ".footer-sitemap__col",
             ".stagger-section__intro > *",
             ".buy-hero__copy > *",
-            ".buy-flow__step",
-            ".buy-teams__item",
           ],
           { clearProps: "all", opacity: 1, y: 0, x: 0, scale: 1, rotate: 0 },
         );
@@ -110,17 +108,19 @@ export function usePageMotion(
         });
       });
 
-      gsap.utils.toArray<HTMLElement>(".float-bob").forEach((el, i) => {
-        gsap.to(el, {
-          y: -(narrow ? 10 : 16) - (i % 4) * (narrow ? 3 : 5),
-          rotate: i % 2 === 0 ? (narrow ? 4 : 6) : narrow ? -5 : -7,
-          duration: 2.2 + (i % 5) * 0.25,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-          delay: i * 0.14,
+      if (!root.querySelector(".pub-page")) {
+        gsap.utils.toArray<HTMLElement>(".float-bob").forEach((el, i) => {
+          gsap.to(el, {
+            y: -(narrow ? 10 : 16) - (i % 4) * (narrow ? 3 : 5),
+            rotate: i % 2 === 0 ? (narrow ? 4 : 6) : narrow ? -5 : -7,
+            duration: 2.2 + (i % 5) * 0.25,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: i * 0.14,
+          });
         });
-      });
+      }
 
       const cloudScroll = {
         trigger: root,
@@ -442,30 +442,6 @@ export function usePageMotion(
           );
         });
         revealOnce(
-          ".buy-flow__head > *",
-          ".buy-flow",
-          { y: 28, opacity: 0 },
-          { stagger: 0.08 },
-        );
-        revealOnce(
-          ".buy-flow__step",
-          ".buy-flow",
-          { y: narrow ? 32 : 48, opacity: 0 },
-          { stagger: 0.1, start: narrow ? "top 88%" : "top 75%" },
-        );
-        revealOnce(
-          ".buy-teams__head > *",
-          ".buy-teams",
-          { y: 28, opacity: 0 },
-          { stagger: 0.08 },
-        );
-        revealOnce(
-          ".buy-teams__item",
-          ".buy-teams",
-          { y: 24, opacity: 0 },
-          { stagger: 0.06 },
-        );
-        revealOnce(
           ".buy-cta__panel > *",
           ".buy-cta",
           { y: 32, opacity: 0 },
@@ -581,8 +557,6 @@ export function usePageMotion(
       ".footer-sitemap__col",
       ".stagger-section__intro > *",
       ".header__shell",
-      ".buy-flow__step",
-      ".buy-teams__item",
     ]);
 
     return () => {

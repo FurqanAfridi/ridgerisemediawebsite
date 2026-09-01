@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { publishersFaqs } from "@/data/faqs";
 import { pageSeo } from "@/data/seo";
@@ -209,7 +209,8 @@ function WhyArt({ art }: { art: (typeof whyCards)[number]["art"] }) {
 
 export default function PublishersPage() {
   const rootRef = useRef<HTMLElement>(null);
-  usePublisherMotion(rootRef);
+  const location = useLocation();
+  usePublisherMotion(rootRef, location.pathname);
   const [openWhy, setOpenWhy] = useState(0);
 
   return (
@@ -495,7 +496,7 @@ export default function PublishersPage() {
               {sources.map((source, index) => (
                 <li
                   key={source.label}
-                  className="pub-sources__toc-item"
+                  className={`pub-sources__toc-item${index === 0 ? " is-active" : ""}`}
                   data-source={source.label}
                 >
                   <span>{String(index + 1).padStart(2, "0")}</span>
@@ -516,7 +517,7 @@ export default function PublishersPage() {
               {sources.map((source, index) => (
                 <li
                   key={source.label}
-                  className={`pub-source pub-source--${source.tone}`}
+                  className={`pub-source pub-source--${source.tone}${index === 0 ? " is-active" : ""}`}
                   data-source={source.label}
                 >
                   <span className="pub-source__node" aria-hidden="true">

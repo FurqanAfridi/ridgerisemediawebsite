@@ -12,7 +12,38 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
+function refreshAfterImages(container: HTMLElement) {
+  const imgs = container.querySelectorAll("img");
+  if (!imgs.length) return () => {};
+
+  let pending = 0;
+  const bump = () => {
+    pending -= 1;
+    if (pending <= 0) {
+      ScrollTrigger.refresh();
+    }
+  };
+
+  imgs.forEach((img) => {
+    if (img.complete) return;
+    pending += 1;
+    img.addEventListener("load", bump, { once: true });
+    img.addEventListener("error", bump, { once: true });
+  });
+
+  if (pending === 0) return () => {};
+  return () => {
+    imgs.forEach((img) => {
+      img.removeEventListener("load", bump);
+      img.removeEventListener("error", bump);
+    });
+  };
+}
+
+export function usePublisherMotion(
+  rootRef: RefObject<HTMLElement | null>,
+  routeKey = "",
+) {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -194,6 +225,24 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
           });
         });
 
+      gsap.utils.toArray<HTMLElement>(
+        ".pub-sources__sticky > *",
+      ).forEach((el) => {
+        gsap.from(el, {
+          y: narrow ? 20 : 28,
+          autoAlpha: 0,
+          duration: 0.65,
+          ease: "power3.out",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: el,
+            start: narrow ? "top 92%" : "top 85%",
+            once: true,
+            invalidateOnRefresh: true,
+          },
+        });
+      });
+
       const sourcesSection = root.querySelector<HTMLElement>(".pub-sources");
       const sourcesBoard = root.querySelector<HTMLElement>(".pub-sources__board");
       const sourcesRail = root.querySelector<HTMLElement>(
@@ -221,6 +270,14 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
       if (sourcesSection && sourcesBoard && sourceItems.length) {
         syncSourceActive(0);
 
+        const scrubRange = {
+          trigger: sourcesBoard,
+          start: narrow ? "top 78%" : "top 72%",
+          end: "bottom 50%",
+          scrub: 0.45,
+          invalidateOnRefresh: true,
+        } as const;
+
         if (sourcesRail) {
           gsap.fromTo(
             sourcesRail,
@@ -228,12 +285,8 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
             {
               height: "100%",
               ease: "none",
-              scrollTrigger: {
-                trigger: sourcesBoard,
-                start: narrow ? "top 75%" : "top 70%",
-                end: "bottom 55%",
-                scrub: 0.55,
-              },
+              immediateRender: false,
+              scrollTrigger: scrubRange,
             },
           );
         }
@@ -245,12 +298,8 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
             {
               width: "100%",
               ease: "none",
-              scrollTrigger: {
-                trigger: sourcesBoard,
-                start: narrow ? "top 75%" : "top 70%",
-                end: "bottom 55%",
-                scrub: 0.55,
-              },
+              immediateRender: false,
+              scrollTrigger: { ...scrubRange },
             },
           );
         }
@@ -258,24 +307,27 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
         sourceItems.forEach((item, index) => {
           ScrollTrigger.create({
             trigger: item,
-            start: narrow ? "top 82%" : "top 68%",
-            end: "bottom 42%",
+            start: narrow ? "top 85%" : "top 70%",
+            end: "bottom 40%",
+            invalidateOnRefresh: true,
             onEnter: () => syncSourceActive(index),
             onEnterBack: () => syncSourceActive(index),
           });
 
           gsap.fromTo(
             item,
-            { autoAlpha: 0.35, y: narrow ? 22 : 34 },
+            { autoAlpha: 0.4, y: narrow ? 20 : 32 },
             {
               autoAlpha: 1,
               y: 0,
               duration: 0.65,
               ease: "power3.out",
+              immediateRender: false,
               scrollTrigger: {
                 trigger: item,
-                start: narrow ? "top 90%" : "top 82%",
+                start: narrow ? "top 92%" : "top 85%",
                 once: true,
+                invalidateOnRefresh: true,
               },
             },
           );
@@ -283,7 +335,8 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
       }
     }, root);
 
-    const clearScheduled = scheduleScrollTriggerRefresh();
+    const clearImageWait = refreshAfterImages(root);
+    const clearScheduled = scheduleScrollTriggerRefresh([80, 350, 800, 1400, 2200]);
     const unbindRefresh = bindScrollTriggerRefreshListeners();
     const clearSafety = ensureMotionTargetsVisible([
       ".pub-reveal",
@@ -298,11 +351,36 @@ export function usePublisherMotion(rootRef: RefObject<HTMLElement | null>) {
       ".pub-cta__panel",
     ]);
 
+    const clearSourcesSafety = window.setTimeout(() => {
+      root.querySelectorAll<HTMLElement>(".pub-source").forEach((el) => {
+        const opacity = parseFloat(window.getComputedStyle(el).opacity);
+        if (opacity < 0.55) {
+          gsap.set(el, { clearProps: "opacity,visibility,transform" });
+        }
+      });
+    }, 2600);
+
+    const frame1 = window.requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+      window.requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
+
+    const onLoad = () => ScrollTrigger.refresh();
+    if (document.readyState === "complete") {
+      window.setTimeout(onLoad, 0);
+    } else {
+      window.addEventListener("load", onLoad, { once: true });
+    }
+
     return () => {
+      window.cancelAnimationFrame(frame1);
+      window.removeEventListener("load", onLoad);
+      window.clearTimeout(clearSourcesSafety);
+      clearImageWait();
       clearScheduled();
       unbindRefresh();
       clearSafety();
       ctx.revert();
     };
-  }, [rootRef]);
+  }, [rootRef, routeKey]);
 }

@@ -2,14 +2,48 @@ import { useEffect, type RefObject } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
+  bindScrollTriggerRefreshListeners,
   configureScrollTriggerForDevices,
+  ensureMotionTargetsVisible,
   isNarrowViewport,
   prefersReducedMotion,
+  scheduleScrollTriggerRefresh,
 } from "@/lib/motion-env";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function useBuyerMotion(rootRef: RefObject<HTMLElement | null>) {
+function refreshAfterImages(container: HTMLElement) {
+  const imgs = container.querySelectorAll("img");
+  if (!imgs.length) return () => {};
+
+  let pending = 0;
+  const bump = () => {
+    pending -= 1;
+    if (pending <= 0) {
+      ScrollTrigger.refresh();
+    }
+  };
+
+  imgs.forEach((img) => {
+    if (img.complete) return;
+    pending += 1;
+    img.addEventListener("load", bump, { once: true });
+    img.addEventListener("error", bump, { once: true });
+  });
+
+  if (pending === 0) return () => {};
+  return () => {
+    imgs.forEach((img) => {
+      img.removeEventListener("load", bump);
+      img.removeEventListener("error", bump);
+    });
+  };
+}
+
+export function useBuyerMotion(
+  rootRef: RefObject<HTMLElement | null>,
+  routeKey = "",
+) {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -75,6 +109,7 @@ export function useBuyerMotion(rootRef: RefObject<HTMLElement | null>) {
             width,
             duration: 1.1,
             ease: "power2.out",
+            immediateRender: false,
             scrollTrigger: {
               trigger: el,
               start: narrow ? "top 94%" : "top 88%",
@@ -91,6 +126,23 @@ export function useBuyerMotion(rootRef: RefObject<HTMLElement | null>) {
           ease: "sine.inOut",
           yoyo: true,
           repeat: -1,
+        });
+      });
+
+      gsap.utils.toArray<HTMLElement>(
+        ".buy-flow__sticky > *, .buy-teams__head > *",
+      ).forEach((el) => {
+        gsap.from(el, {
+          y: narrow ? 20 : 28,
+          autoAlpha: 0,
+          duration: 0.65,
+          ease: "power3.out",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: el,
+            start: narrow ? "top 92%" : "top 85%",
+            once: true,
+          },
         });
       });
 
@@ -119,11 +171,13 @@ export function useBuyerMotion(rootRef: RefObject<HTMLElement | null>) {
           {
             height: "100%",
             ease: "none",
+            immediateRender: false,
             scrollTrigger: {
               trigger: flowBoard,
-              start: narrow ? "top 75%" : "top 70%",
-              end: "bottom 55%",
-              scrub: 0.55,
+              start: narrow ? "top 78%" : "top 72%",
+              end: "bottom 50%",
+              scrub: 0.45,
+              invalidateOnRefresh: true,
             },
           },
         );
@@ -131,24 +185,27 @@ export function useBuyerMotion(rootRef: RefObject<HTMLElement | null>) {
         flowSteps.forEach((step, index) => {
           ScrollTrigger.create({
             trigger: step,
-            start: narrow ? "top 82%" : "top 68%",
-            end: "bottom 42%",
+            start: narrow ? "top 85%" : "top 70%",
+            end: "bottom 40%",
+            invalidateOnRefresh: true,
             onEnter: () => syncFlowActive(index),
             onEnterBack: () => syncFlowActive(index),
           });
 
           gsap.fromTo(
             step,
-            { autoAlpha: 0.35, y: narrow ? 24 : 36 },
+            { autoAlpha: 0.4, y: narrow ? 20 : 32 },
             {
               autoAlpha: 1,
               y: 0,
-              duration: 0.7,
+              duration: 0.65,
               ease: "power3.out",
+              immediateRender: false,
               scrollTrigger: {
                 trigger: step,
-                start: narrow ? "top 90%" : "top 82%",
+                start: narrow ? "top 92%" : "top 85%",
                 once: true,
+                invalidateOnRefresh: true,
               },
             },
           );
@@ -164,22 +221,24 @@ export function useBuyerMotion(rootRef: RefObject<HTMLElement | null>) {
       );
       const teamCards = gsap.utils.toArray<HTMLElement>(".buy-teams__card");
 
-      if (teamsSection && teamsPin && teamsTrack && teamsStage) {
+      if (teamsSection && teamsPin && teamsTrack && teamsStage && teamCards.length) {
         const getScrollDistance = () =>
           Math.max(0, teamsTrack.scrollWidth - teamsStage.clientWidth);
 
         if (narrow) {
           gsap.from(teamCards, {
-            y: 36,
+            y: 32,
             autoAlpha: 0,
-            rotate: 2,
-            duration: 0.65,
-            stagger: 0.1,
+            rotate: 1.5,
+            duration: 0.6,
+            stagger: 0.08,
             ease: "power3.out",
+            immediateRender: false,
             scrollTrigger: {
               trigger: teamsStage,
-              start: "top 88%",
+              start: "top 90%",
               once: true,
+              invalidateOnRefresh: true,
             },
           });
 
@@ -190,18 +249,18 @@ export function useBuyerMotion(rootRef: RefObject<HTMLElement | null>) {
               {
                 width: "100%",
                 ease: "none",
+                immediateRender: false,
                 scrollTrigger: {
                   trigger: teamsSection,
-                  start: "top 70%",
-                  end: "bottom 45%",
-                  scrub: 0.4,
+                  start: "top 75%",
+                  end: "bottom 40%",
+                  scrub: 0.35,
+                  invalidateOnRefresh: true,
                 },
               },
             );
           }
         } else {
-          gsap.set(teamCards, { y: 28, autoAlpha: 0.55, rotate: 1.5 });
-
           const teamsTl = gsap.timeline({
             scrollTrigger: {
               trigger: teamsSection,
@@ -209,10 +268,11 @@ export function useBuyerMotion(rootRef: RefObject<HTMLElement | null>) {
               pinSpacing: true,
               pinType: "fixed",
               start: "top top",
-              end: () => `+=${Math.max(getScrollDistance() + 240, 1100)}`,
-              scrub: 0.75,
+              end: () => `+=${Math.max(getScrollDistance() + 280, 1200)}`,
+              scrub: 0.55,
               anticipatePin: 1,
               invalidateOnRefresh: true,
+              fastScrollEnd: true,
               preventOverlaps: true,
               onUpdate: (self) => {
                 if (teamsProgress) {
@@ -223,36 +283,65 @@ export function useBuyerMotion(rootRef: RefObject<HTMLElement | null>) {
           });
 
           teamsTl
-            .to(
+            .fromTo(
               teamCards,
+              { y: 24, autoAlpha: 0.5, rotate: 1.2 },
               {
                 y: 0,
                 autoAlpha: 1,
                 rotate: 0,
-                stagger: 0.06,
-                duration: 0.35,
+                stagger: 0.05,
+                duration: 0.32,
                 ease: "power2.out",
+                immediateRender: false,
               },
               0,
             )
-            .to(
+            .fromTo(
               teamsTrack,
+              { x: 0 },
               {
                 x: () => -getScrollDistance(),
                 ease: "none",
                 duration: 1,
+                immediateRender: false,
               },
-              0.08,
+              0.06,
             );
         }
       }
     }, root);
 
-    const refreshId = window.setTimeout(() => ScrollTrigger.refresh(), 150);
+    const clearImageWait = refreshAfterImages(root);
+    const clearScheduled = scheduleScrollTriggerRefresh([80, 350, 800, 1400, 2200]);
+    const unbindRefresh = bindScrollTriggerRefreshListeners();
+    const clearSafety = ensureMotionTargetsVisible([
+      ".buy-flow__step",
+      ".buy-flow__card",
+      ".buy-teams__card",
+      ".buy-teams__track",
+    ]);
+
+    const frame1 = window.requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+      window.requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
+
+    const onLoad = () => ScrollTrigger.refresh();
+    if (document.readyState === "complete") {
+      window.setTimeout(onLoad, 0);
+    } else {
+      window.addEventListener("load", onLoad, { once: true });
+    }
 
     return () => {
-      window.clearTimeout(refreshId);
+      window.cancelAnimationFrame(frame1);
+      window.removeEventListener("load", onLoad);
+      clearImageWait();
+      clearScheduled();
+      unbindRefresh();
+      clearSafety();
       ctx.revert();
     };
-  }, [rootRef]);
+  }, [rootRef, routeKey]);
 }

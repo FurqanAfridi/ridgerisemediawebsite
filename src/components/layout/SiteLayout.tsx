@@ -48,23 +48,19 @@ export function SiteLayout({ children }: { children?: ReactNode }) {
     }
   }, []);
 
-  // Reset scroll before paint so the new page never flashes mid-scroll
+  // Reset scroll + tear down pinned triggers before paint (before child useEffects run)
   useLayoutEffect(() => {
     clearScrollLocks();
     jumpToTop();
-  }, [routeKey]);
-
-  // Reset scroll locks / pin leftovers before page motion re-inits
-  useEffect(() => {
-    configureScrollTriggerForDevices();
-    clearScrollLocks();
-    jumpToTop();
-
-    // Kill any triggers left behind by unmounted pages (e.g. pinned sections)
     ScrollTrigger.getAll().forEach((st) => {
       st.kill(true);
     });
+  }, [routeKey]);
 
+  // Refresh layout after route swap — do not kill triggers here (runs after child effects)
+  useEffect(() => {
+    configureScrollTriggerForDevices();
+    clearScrollLocks();
     jumpToTop();
 
     const frame = window.requestAnimationFrame(() => {

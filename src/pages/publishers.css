@@ -687,6 +687,8 @@ html[data-theme="dark"] .pub-sources {
 .pub-source {
   position: relative;
   display: grid;
+  opacity: 1;
+  visibility: visible;
 }
 
 .pub-source__node {
