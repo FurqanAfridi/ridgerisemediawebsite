@@ -619,8 +619,8 @@ export default function AboutPage() {
           </h1>
           <p className="about-hero__desc">
             RidgeRise Media is a US pay-per-call media buying agency. We build and
-            run the campaigns that produce the calls — paid search, paid social,
-            native, display, and owned properties — on accounts we control, with
+            run the campaigns that produce the calls: paid search, paid social,
+            native, display, and owned properties on accounts we control, with
             consent captured at the source and documented on every call. When a
             buyer needs more volume than in-house can carry, screened partners
             extend it against the same standards. Insurance, legal, home
@@ -724,7 +724,7 @@ export default function AboutPage() {
               </div>
               <p className="about-consent__foot">
                 We are compliance-conscious and we build for it. That is not a legal
-                guarantee, and we won&apos;t pretend otherwise — your counsel should
+                guarantee, and we won&apos;t pretend otherwise. Your counsel should
                 confirm what your product and states require.
               </p>
             </aside>
@@ -1021,8 +1021,8 @@ export default function AboutPage() {
           <p className="page-hero__eyebrow">Our team</p>
           <h2 id="about-team-heading">The people behind the campaigns</h2>
           <p>
-            Media buying, onboarding, compliance ops, and technical infrastructure —
-            each lane owned by a specialist, not a generalist pretending to cover all of it.
+            Media buying, onboarding, compliance ops, and technical infrastructure.
+            Each lane owned by a specialist, not a generalist pretending to cover all of it.
           </p>
         </header>
         <ul className="about-team__grid">

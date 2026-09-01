@@ -67,7 +67,7 @@ type VerticalCardsGridProps = {
 
 export default function VerticalCardsGrid({
   title = "One Platform. Every High-Intent Vertical.",
-  description = "Insurance is our specialty — but we buy media across performance-driven industries. Swipe the stack to browse.",
+  description = "Insurance is our specialty, but we buy media across performance-driven industries. Swipe the stack to browse.",
   ctaLabel = "Explore All Verticals",
   ctaTo = "/verticals",
 }: VerticalCardsGridProps) {

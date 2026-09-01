@@ -52,7 +52,7 @@ function waitForImages(root: HTMLElement) {
 }
 
 /**
- * Scrubbed bento gallery — CodePen GreenSock/vYMzKZx pattern:
+ * Scrubbed bento gallery, CodePen GreenSock/vYMzKZx pattern:
  * Flip layout from compact bento → expanded tiles, driven by ScrollTrigger scrub + pin.
  */
 export default function VerticalsFlipGallery() {
@@ -160,14 +160,14 @@ export default function VerticalsFlipGallery() {
           One Platform. Every High-Intent Vertical.
         </h2>
         <p className="section-sub section-sub--sm">
-          Insurance is our specialty — but we buy media across
+          Insurance is our specialty, but we buy media across
           performance-driven industries. Hover a tile, then scroll to zoom.
         </p>
       </div>
 
-      {/* CodePen: .gallery-wrap — pinned parent */}
+      {/* CodePen: .gallery-wrap, pinned parent */}
       <div className="gallery-wrap vfg-wrap" ref={wrapRef}>
-        {/* CodePen: .gallery.gallery--bento — Flip target; .gallery--final toggled for state */}
+        {/* CodePen: .gallery.gallery--bento, Flip target; .gallery--final toggled for state */}
         <div
           className="vfg gallery--bento"
           id="gallery-verticals"

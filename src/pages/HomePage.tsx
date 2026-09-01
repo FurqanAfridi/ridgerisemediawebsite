@@ -88,12 +88,12 @@ export default function HomePage() {
 
         <section className="hero">
           <div className="hero__stage">
-            {/* Path start — beside hero copy (matches prior deco rocket slot) */}
+            {/* Path start, beside hero copy (matches prior deco rocket slot) */}
             <span
               className="rocket-marker rocket-marker--start"
               data-rocket-marker
             />
-            {/* Figma 1:327 — floating money, top-right */}
+            {/* Figma 1:327, floating money, top-right */}
             <div className="parallax-wrap parallax--money-hero hero__deco hero__deco--money">
               <img
                 className="float-bob"

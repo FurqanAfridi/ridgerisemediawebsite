@@ -403,7 +403,7 @@ export default function ContactPage() {
                     required
                     error={showError("phone")}
                     valid={showValid("phone")}
-                    hint={showError("phone") ? undefined : "US number — 10 digits"}
+                    hint={showError("phone") ? undefined : "US number, 10 digits"}
                   >
                     <input
                       id="phone"
@@ -508,7 +508,7 @@ export default function ContactPage() {
                   error={showError("message")}
                   valid={showValid("message")}
                   showCheck={false}
-                  hint="Optional — vertical, states, hours, volume, or anything we should know"
+                  hint="Optional: vertical, states, hours, volume, or anything we should know"
                 >
                   <textarea
                     id="message"
@@ -517,7 +517,7 @@ export default function ContactPage() {
                     placeholder={
                       form.role === "buyer"
                         ? "Vertical, states, hours, exclusivity, duration floor, and how you define qualified…"
-                        : `Traffic type, verticals, monthly volume — or what you need as a ${roleLabel.toLowerCase()}…`
+                        : `Traffic type, verticals, monthly volume, or what you need as a ${roleLabel.toLowerCase()}…`
                     }
                     value={form.message}
                     onChange={(e) => updateField("message", e.target.value)}
@@ -557,7 +557,7 @@ export default function ContactPage() {
                   )}
                 </button>
                 {formReady ? (
-                  <span className="contact-form__ready-note">All set — ready to send</span>
+                  <span className="contact-form__ready-note">All set. Ready to send</span>
                 ) : null}
               </div>
             </motion.form>

@@ -128,7 +128,7 @@ export const expandedGuides: Record<string, VerticalGuide> = {
       {
         heading: "Who's calling about bankruptcy",
         paragraphs: [
-          "The useful caller has unsecured debt, wage garnishment risk, foreclosure pressure, or medical bills they cannot pay, and they want to know if bankruptcy is an option. They can often name a debt range and whether they have been sued. Curiosity about 'debt relief' without a real balance is a different product—often debt settlement, not bankruptcy counsel.",
+          "The useful caller has unsecured debt, wage garnishment risk, foreclosure pressure, or medical bills they cannot pay, and they want to know if bankruptcy is an option. They can often name a debt range and whether they have been sued. Curiosity about 'debt relief' without a real balance is a different product, often debt settlement, not bankruptcy counsel.",
           "Chapter 7 vs Chapter 13 intent shows up early if you ask. Someone who wants to keep a house and catch up arrears is not the same file as someone who wants to wipe credit cards and has little equity. If your firm only files one chapter in a market, screen for it.",
           "You'll get people who already filed, people who hired a petition preparer, and people who have a lawyer and are shopping a second opinion. Prior filing and prior counsel are filters, not afterthoughts.",
           "Do not mix tax relief, debt settlement, and bankruptcy on one DID unless your intake is trained to fork. The talk tracks and the ethics rules are not the same.",
@@ -158,7 +158,7 @@ export const expandedGuides: Record<string, VerticalGuide> = {
   "renters-insurance": {
     slug: "renters-insurance",
     lede:
-      "Renters call when a lease requires proof of insurance, after a loss, or when a roommate situation changes. Age, state, and occupancy filters keep agents on quote-ready conversations. Buy CPL or cost per call when renters demand is strong enough to staff—and do not dump renters into a homeowners queue.",
+      "Renters call when a lease requires proof of insurance, after a loss, or when a roommate situation changes. Age, state, and occupancy filters keep agents on quote-ready conversations. Buy CPL or cost per call when renters demand is strong enough to staff, and do not dump renters into a homeowners queue.",
     sections: [
       {
         heading: "Who's shopping renters coverage",
@@ -192,7 +192,7 @@ export const expandedGuides: Record<string, VerticalGuide> = {
   "commercial-auto-insurance": {
     slug: "commercial-auto-insurance",
     lede:
-      "Commercial auto callers are business owners shopping fleet and commercial vehicle coverage—not personal auto with a work sticker. Fleet size, vehicle type, and state licensing change what a qualified call looks like. Filter commercial vs personal so agents are not quoting the wrong product.",
+      "Commercial auto callers are business owners shopping fleet and commercial vehicle coverage, not personal auto with a work sticker. Fleet size, vehicle type, and state licensing change what a qualified call looks like. Filter commercial vs personal so agents are not quoting the wrong product.",
     sections: [
       {
         heading: "Who's calling for commercial auto",
@@ -274,7 +274,7 @@ export const expandedGuides: Record<string, VerticalGuide> = {
         paragraphs: [
           "Cost per call and warm transfers fit phone closers. CPL fits education-plus-callback funnels. Exclusive often fits long pitches. Shared fills volume but expect shoppers.",
           "Filters: state, score band or issue type if you specialize, hours, language, exclusive vs shared, concurrency.",
-          "Qualify state, primary credit issues, and that they want repair services (not a loan). Campaign-specific consent. Compliance-conscious—not a legal guarantee.",
+          "Qualify state, primary credit issues, and that they want repair services (not a loan). Campaign-specific consent. Compliance-conscious, not a legal guarantee.",
           "A qualified credit repair call is not a score guarantee and not an enrolled client until your process says so.",
         ],
       },
@@ -291,13 +291,13 @@ export const expandedGuides: Record<string, VerticalGuide> = {
   plumbing: {
     slug: "plumbing",
     lede:
-      "Plumbing callers need repair or replacement—emergency leaks, clogged lines, water heaters, and remodel work. Emergency vs scheduled changes ticket size and talk track. Geo and homeownership filters keep techs on jobs they can run. Cap concurrency so your board is not overloaded while calls keep landing after hours.",
+      "Plumbing callers need repair or replacement: emergency leaks, clogged lines, water heaters, and remodel work. Emergency vs scheduled changes ticket size and talk track. Geo and homeownership filters keep techs on jobs they can run. Cap concurrency so your board is not overloaded while calls keep landing after hours.",
     sections: [
       {
         heading: "Who's calling a plumber",
         paragraphs: [
           "Emergency: active leak, no hot water, sewage backup, burst pipe. These callers want someone today. Scheduled: water heater replacement quotes, fixture installs, remodel rough-in. Mixing both on one untrained setter creates bad ETAs and angry homeowners.",
-          "Homeownership matters for bigger jobs. Renters call about leaks too—decide whether you take landlord-approved work or reject rentals.",
+          "Homeownership matters for bigger jobs. Renters call about leaks too. Decide whether you take landlord-approved work or reject rentals.",
           "You'll get HOA and multi-unit calls that need different dispatch. If you only do single-family, filter.",
           "Keep plumbing off HVAC and water-mitigation DIDs unless you truly run a bundled home desk with a fork.",
         ],
@@ -308,7 +308,7 @@ export const expandedGuides: Record<string, VerticalGuide> = {
           "Pay per call fits emergency dispatch. CPL fits quote-request for replacements. Live transfers should pass emergency vs scheduled, ZIP, and owner/renter.",
           "Filters: service ZIP, emergency hours vs day crew, job types in/out (camera, repipe, slab), concurrency tied to trucks, exclusive vs shared.",
           "Qualification: ZIP in footprint, emergency or schedule, brief issue type, owner if required. Do not diagnose the whole house in IVR.",
-          "A qualified plumbing call is not a completed job. Weather and water-main seasons spike volume—cap to trucks.",
+          "A qualified plumbing call is not a completed job. Weather and water-main seasons spike volume. Cap to trucks.",
         ],
       },
       {
@@ -355,7 +355,7 @@ export const expandedGuides: Record<string, VerticalGuide> = {
       {
         heading: "Who's calling for water restoration",
         paragraphs: [
-          "Active water: supply line break, upstairs overflow, storm intrusion, sewage backup. They want extraction and drying now. Category of water (clean vs sewage) changes crew and price—if you do not do black water, screen it.",
+          "Active water: supply line break, upstairs overflow, storm intrusion, sewage backup. They want extraction and drying now. Category of water (clean vs sewage) changes crew and price. If you do not do black water, screen it.",
           "Insurance vs cash jobs behave differently. Claim intent, adjuster status, and deductible conversations belong in qualification when you can get them without killing the call.",
           "Commercial vs residential: if you only do homes, filter. Multi-unit can be a different dispatch plan.",
           "Keep this separate from plumbing repair-only unless you want a fork: stop the water vs remediate the house.",
@@ -364,10 +364,10 @@ export const expandedGuides: Record<string, VerticalGuide> = {
       {
         heading: "Models and filters",
         paragraphs: [
-          "Pay per call / live transfer is the natural model for emergencies. CPL works for non-emergency moisture and quote follow-up. Shared emergency calls are brutal—exclusive or tight caps usually fit better.",
+          "Pay per call / live transfer is the natural model for emergencies. CPL works for non-emergency moisture and quote follow-up. Shared emergency calls are brutal. Exclusive or tight caps usually fit better.",
           "Filters: ZIP drive-time, residential vs commercial, water category if you exclude sewage, insurance vs cash if you split, 24/7 vs day hours, concurrency to crews and trucks.",
           "Qualify: active water or recent event, ZIP, owner/authorized, insurance intent if needed. A qualified call is not a paid claim.",
-          "Storm surge weeks need expandable caps and a plan to tighten after. Soft weeks after a spike are normal—do not burn good sources.",
+          "Storm surge weeks need expandable caps and a plan to tighten after. Soft weeks after a spike are normal, do not burn good sources.",
         ],
       },
       {
@@ -388,7 +388,7 @@ export const expandedGuides: Record<string, VerticalGuide> = {
       {
         heading: "Who's calling about trade programs",
         paragraphs: [
-          "Career changers, recent grads, and working adults who want a shorter path than a four-year degree. They ask about program length, start dates, cost, and job outcomes. Keep outcome claims honest—your creative and your advisors must match.",
+          "Career changers, recent grads, and working adults who want a shorter path than a four-year degree. They ask about program length, start dates, cost, and job outcomes. Keep outcome claims honest. Your creative and your advisors must match.",
           "Program match is everything. An HVAC shopper transferred into medical billing will feel baited. Map ad groups and IVR options to real programs with seats.",
           "Geo and campus radius matter for in-person labs. Online theory plus local labs still has a map. State authorization matters for distance components.",
           "Diploma/GED and age gates belong in the screen if required. Third-party parents calling need a rule.",
@@ -421,7 +421,7 @@ export const expandedGuides: Record<string, VerticalGuide> = {
       {
         heading: "Who's shopping online programs",
         paragraphs: [
-          "Working adults, parents, and career advancers who need flexible pacing. They compare transfer credits, term length, and tuition. Some are shopping multiple schools the same week—speed and honesty matter.",
+          "Working adults, parents, and career advancers who need flexible pacing. They compare transfer credits, term length, and tuition. Some are shopping multiple schools the same week. Speed and honesty matter.",
           "Program and level splits: undergrad, grad, certificate, bootcamp-style. Dumping all into one 'online' queue trains advisors to mis-pitch.",
           "State authorization and where the student sits while studying are compliance and ops facts. Stale geo lists create avoidable invalids.",
           "Keep campus-only programs off this campaign unless you have a true fork.",
@@ -440,7 +440,7 @@ export const expandedGuides: Record<string, VerticalGuide> = {
         heading: "Quality and briefing",
         paragraphs: [
           "Watch program bait-and-switch and unauthorized-state leakage. Cut drifting sources. Measure early signals (match, appointment keep, application start) before week-two seats.",
-          "Brief authorization list, programs starting, advisor hours, gates. /buyers or /contact with a current state list—not last year's PDF.",
+          "Brief authorization list, programs starting, advisor hours, gates. /buyers or /contact with a current state list, not last year's PDF.",
         ],
       },
     ],

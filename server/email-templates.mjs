@@ -39,7 +39,7 @@ export function buildInternalLeadEmail(lead) {
         ${row("Phone", lead.phone)}
         ${row("Company", lead.company)}
         ${row("EIN", lead.company_ein)}
-        ${row("Vertical", lead.vertical_name || lead.vertical_slug || "—")}
+        ${row("Vertical", lead.vertical_name || lead.vertical_slug || "N/A")}
         ${row("Message", lead.message)}
         ${row("Submitted", new Date().toISOString())}
       </table>
@@ -57,7 +57,7 @@ export function buildInternalLeadEmail(lead) {
     `Phone: ${lead.phone}`,
     `Company: ${lead.company}`,
     `EIN: ${lead.company_ein}`,
-    `Vertical: ${lead.vertical_name || lead.vertical_slug || "—"}`,
+    `Vertical: ${lead.vertical_name || lead.vertical_slug || "N/A"}`,
     "",
     "Message:",
     lead.message,
@@ -95,7 +95,7 @@ export function buildThankYouEmail(lead) {
         </p>
       </div>
       <p style="margin:24px 0 0;font-size:14px;line-height:1.6;color:#6b6580;">
-        — The RidgeRise Media team<br>
+        The RidgeRise Media team<br>
         <a href="mailto:info@ridgerisemedia.com" style="color:#5d62dd;text-decoration:none;">info@ridgerisemedia.com</a>
       </p>
     </td></tr>

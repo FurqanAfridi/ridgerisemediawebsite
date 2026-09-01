@@ -29,7 +29,7 @@ export const hotVerticalGuides: Record<string, VerticalGuide> = {
         heading: "Models: cost per call, CPL, transfers, and traffic",
         paragraphs: [
           "Exclusive live transfers fit firms that need a full fact pattern before retainer paperwork goes out. Shared disability calls are often already shopping advocates. If your retainer process takes twenty minutes, shared will hurt you unless your closers are built for speed.",
-          "Cost per call and pay per call should bill against written rules: SSI intent or eligibility path, state you cover, claim status in/out, not already retained, hours your intake answers, and duration floors that match a real consult—not a wrong-number hang-up.",
+          "Cost per call and pay per call should bill against written rules: SSI intent or eligibility path, state you cover, claim status in/out, not already retained, hours your intake answers, and duration floors that match a real consult, not a wrong-number hang-up.",
           "CPL works when your team outbound dials fast after a form with claim status, state, and contact path. A disability CPL that sits overnight in a competitive metro is often already signed elsewhere. Staff the dialer or buy live transfers.",
           "Qualified traffic into a firm-owned page is fine when the page screens SSI vs SSDI and captures campaign-specific consent. RidgeRise runs in-house media buying plus screened partners with quality monitoring against your brief. A qualified call is not a signed retainer.",
         ],
@@ -38,7 +38,7 @@ export const hotVerticalGuides: Record<string, VerticalGuide> = {
         heading: "Filters, qualification, and compliance",
         paragraphs: [
           "Geo is the states where you are licensed or have co-counsel you actually use. National spray into states you cannot file in wastes media and creates angry callers.",
-          "Claim status filters: new application, denied, pending reconsideration, hearing scheduled, already represented. Retained-counsel is usually a kill. 'I talked to someone' is not the same as signed—train screeners to ask clearly.",
+          "Claim status filters: new application, denied, pending reconsideration, hearing scheduled, already represented. Retained-counsel is usually a kill. 'I talked to someone' is not the same as signed. Train screeners to ask clearly.",
           "Income and resource questions are sensitive. Decide how much the IVR collects vs intake. Never promise approval, payment amounts, or back-pay figures in publisher creative.",
           "TCPA-aware, campaign-specific consent for this legal offer. Compliance-conscious processes with recording review where applicable. We will not certify zero legal risk.",
         ],
@@ -58,7 +58,7 @@ export const hotVerticalGuides: Record<string, VerticalGuide> = {
   "hospital-indemnity": {
     slug: "hospital-indemnity",
     lede:
-      "Hospital indemnity callers shop supplemental coverage that pays cash benefits for hospital stays, admissions, and related events—not major medical replacement. Age, state licensing, and product type decide whether a licensed agent can place the policy. Buy CPL or cost per call with those filters before you scale, and keep major-medical-only agents off a hospital indemnity queue.",
+      "Hospital indemnity callers shop supplemental coverage that pays cash benefits for hospital stays, admissions, and related events, not major medical replacement. Age, state licensing, and product type decide whether a licensed agent can place the policy. Buy CPL or cost per call with those filters before you scale, and keep major-medical-only agents off a hospital indemnity queue.",
     sections: [
       {
         heading: "Who's shopping hospital indemnity",
@@ -116,7 +116,7 @@ export const hotVerticalGuides: Record<string, VerticalGuide> = {
         heading: "Who's calling a pest control company",
         paragraphs: [
           "Emergency callers saw roaches, rodents, wasps, or bed bugs and want someone today or tomorrow. Inspection callers want a termite letter for a refinance or sale. Prevention shoppers want quarterly service quotes. Each path needs a different talk track and truck type.",
-          "Homeownership matters for termite treatment and whole-structure work. Renters call about unit infestations—decide whether you need landlord approval or you reject rentals.",
+          "Homeownership matters for termite treatment and whole-structure work. Renters call about unit infestations. Decide whether you need landlord approval or you reject rentals.",
           "Multi-family and commercial accounts appear on the same numbers as residential if creative is broad. If you only run residential trucks, filter commercial and property-manager calls early.",
           "Seasonality moves ants, mosquitoes, and rodent pressure by region. Cap volume to dispatch capacity when weather spikes, then tighten sources instead of letting ETAs slip.",
         ],
@@ -126,7 +126,7 @@ export const hotVerticalGuides: Record<string, VerticalGuide> = {
         paragraphs: [
           "Pest control is hyper-local. ZIP or county footprints beat state-level buying. A source that looks fine statewide may be a dump of out-of-area clicks from cheap display.",
           "Pest type splits routes: termite/WDO inspections, bed bug heat jobs, general pest, wildlife. If you subcontract wildlife, say so in qualification. Do not promise same-day bed bug if your nearest crew is two days out.",
-          "Hours should match dispatch, not just sales. Overnight pest emergencies happen; if you only book 9–5, reject after-hours or buy CPL for morning callback.",
+          "Hours should match dispatch, not just sales. Overnight pest emergencies happen; if you only book 9 to 5, reject after-hours or buy CPL for morning callback.",
           "Concurrency caps protect technicians. A pest inspection is not a two-minute final expense pitch. Match live transfer volume to open appointment slots.",
         ],
       },
@@ -163,12 +163,12 @@ export const hotVerticalGuides: Record<string, VerticalGuide> = {
   "final-expense-inbounds": {
     slug: "final-expense-inbounds",
     lede:
-      "Final expense inbound callers dial ready to talk about burial, cremation, and smaller face-amount whole life—not term life or large face policies. Age bands, state licensing, and exclusive vs shared routing protect senior agents from junk and three-way shops. Buy inbound and live transfers on cost per call with duration and disposition rules written before volume scales.",
+      "Final expense inbound callers dial ready to talk about burial, cremation, and smaller face-amount whole life, not term life or large face policies. Age bands, state licensing, and exclusive vs shared routing protect senior agents from junk and three-way shops. Buy inbound and live transfers on cost per call with duration and disposition rules written before volume scales.",
     sections: [
       {
         heading: "Who's on a final expense inbound call",
         paragraphs: [
-          "Callers are typically 50–85, phone-first, and deciding on coverage for funeral costs and family peace of mind. Many compare a few carriers the same week. Some call after a family death made costs real. Some respond to mail or digital creative about burial expense.",
+          "Callers are typically 50 to 85, phone-first, and deciding on coverage for funeral costs and family peace of mind. Many compare a few carriers the same week. Some call after a family death made costs real. Some respond to mail or digital creative about burial expense.",
           "Inbound intent is hotter than raw lead forms because the caller chose to dial. That does not mean every inbound is fundable. Health questions, face amount limits, and state licensing still gate the sale.",
           "Confusion with Medicare, ACA, and mortgage protection is common on shared numbers. If this campaign is final expense only, fork or reject health insurance intent immediately.",
           "Caregivers and adult children call for parents. Decide whether the insured must be on the line to proceed.",
@@ -189,7 +189,7 @@ export const hotVerticalGuides: Record<string, VerticalGuide> = {
           "Age band is the primary gate. Carriers differ on issue ages and graded vs level benefit. Put accepted ages in the brief, not 'seniors.'",
           "Health tiers matter. Guaranteed issue, graded, and simplified issue are different products. If you only write simplified issue, screen graded shoppers out before transfer.",
           "Geo follows state licensing and carrier appointments. FE is phone-heavy but not license-free. Match hours to when licensed agents answer.",
-          "Concurrency caps prevent seniors from sitting in hold queues—a fast way to kill close rate on inbound you paid for.",
+          "Concurrency caps prevent seniors from sitting in hold queues. That is a fast way to kill close rate on inbound you paid for.",
         ],
       },
       {
@@ -216,14 +216,14 @@ export const hotVerticalGuides: Record<string, VerticalGuide> = {
   "bathroom-remodel": {
     slug: "bathroom-remodel",
     lede:
-      "Bathroom remodel callers want tub-to-shower conversions, walk-in tubs, tile, vanities, and full bath refreshes—not a whole-home renovation unless you sell that. Homeownership, project scope, and geo decide whether a call becomes an in-home estimate. Buy cost per call or CPL with ZIP-level filters and setter capacity caps before you scale walk-in tub offers nationally.",
+      "Bathroom remodel callers want tub-to-shower conversions, walk-in tubs, tile, vanities, and full bath refreshes, not a whole-home renovation unless you sell that. Homeownership, project scope, and geo decide whether a call becomes an in-home estimate. Buy cost per call or CPL with ZIP-level filters and setter capacity caps before you scale walk-in tub offers nationally.",
     sections: [
       {
         heading: "Who's requesting a bathroom remodel",
         paragraphs: [
           "Aging-in-place callers want walk-in tubs, grab bars, and curbless showers. Value shoppers want a cosmetic refresh before sale. Damage-driven callers had a leak, mold, or failed tile and need remediation plus rebuild.",
           "Project scope changes the setter script. One wet area vs full gut remodel vs multi-bath whole home are different tickets and different crews. Qualify scope band before the in-home visit.",
-          "Homeownership is the usual gate. Renters and 'landlord will pay' calls need a policy. HOAs and condo rules can block certain exterior venting or structural work—know if that matters in your markets.",
+          "Homeownership is the usual gate. Renters and 'landlord will pay' calls need a policy. HOAs and condo rules can block certain exterior venting or structural work. Know if that matters in your markets.",
           "Keep roofing, kitchen-only, and generic handyman traffic off this campaign unless you truly run a bundled remodel desk with a fork.",
         ],
       },
@@ -286,7 +286,7 @@ export const hotVerticalGuides: Record<string, VerticalGuide> = {
           "Medicare Part D requires licensed agents during defined enrollment windows and SEP rules. Discount card programs may not. Mixing them on one campaign without IVR forks creates compliance risk and angry callers.",
           "Hospital indemnity and cancer plans sometimes ride alongside pharmacy creative. If you do not sell those products, reject early.",
           "State licensing still applies to Medicare products. Geo filters follow appointments, not optimism.",
-          "Creative must not imply Social Security or CMS endorsement. Senior pharmacy offers attract scrutiny—keep copy factual.",
+          "Creative must not imply Social Security or CMS endorsement. Senior pharmacy offers attract scrutiny. Keep copy factual.",
         ],
       },
       {

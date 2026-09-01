@@ -19,7 +19,7 @@ export function buildTitle(title: string) {
   const trimmed = title.trim();
   if (!trimmed) return brand;
   if (trimmed === brand) return brand;
-  if (trimmed.endsWith(`| ${brand}`) || trimmed.endsWith(`— ${brand}`)) {
+  if (trimmed.endsWith(`| ${brand}`) || trimmed.endsWith(`\u2014 ${brand}`)) {
     return trimmed;
   }
   if (trimmed.includes(brand)) return trimmed;

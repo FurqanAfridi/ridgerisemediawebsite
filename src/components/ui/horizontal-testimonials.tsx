@@ -14,7 +14,7 @@ const items = [
   {
     id: 1,
     quote:
-      "RidgeRise matched us with high-intent Insurance traffic in days. Payouts hit on schedule — no chasing invoices.",
+      "RidgeRise matched us with high-intent Insurance traffic in days. Payouts hit on schedule, no chasing invoices.",
     by: "Sarah Chen",
     role: "Publisher Partner",
     theme: "purple" as const,

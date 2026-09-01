@@ -143,7 +143,7 @@ export default function CTAWithVerticalMarquee() {
             <p className="cta-vertical__sub">
               RidgeRise Media runs high-intent pay-per-call inventory across
               Insurance, Legal, Home Services, Finance, and 30+ performance
-              verticals. Tell us where you buy or sell — we&apos;ll match you
+              verticals. Tell us where you buy or sell. We&apos;ll match you
               fast.
             </p>
             <div className="cta-vertical__actions">
