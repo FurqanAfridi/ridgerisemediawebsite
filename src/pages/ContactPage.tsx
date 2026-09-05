@@ -18,7 +18,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
 import { site } from "@/data/site";
 import { contactFaqs } from "@/data/faqs";
-import { pageSeo } from "@/data/seo";
+import { pageSeo, breadcrumbLd } from "@/data/seo";
 import {
   contactVerticalGroups,
   verticalLabelForSlug,
@@ -230,7 +230,16 @@ export default function ContactPage() {
 
   return (
     <main>
-      <Seo {...pageSeo.contact} jsonLd={buildFaqJsonLd(contactFaqs)} />
+      <Seo
+        {...pageSeo.contact}
+        jsonLd={[
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+          buildFaqJsonLd(contactFaqs),
+        ]}
+      />
 
       <PageHero
         eyebrow="Contact"

@@ -16,7 +16,7 @@ import {
   hotRidgeRiseSlugs,
 } from "@/data/hot-verticals";
 import { verticalsFaqs } from "@/data/faqs";
-import { pageSeo } from "@/data/seo";
+import { pageSeo, breadcrumbLd } from "@/data/seo";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import { prefersReducedMotion } from "@/lib/motion-env";
 import "./pages.css";
@@ -215,7 +215,16 @@ export default function VerticalsPage() {
 
   return (
     <main>
-      <Seo {...pageSeo.verticals} jsonLd={buildFaqJsonLd(verticalsFaqs)} />
+      <Seo
+        {...pageSeo.verticals}
+        jsonLd={[
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Verticals", path: "/verticals" },
+          ]),
+          buildFaqJsonLd(verticalsFaqs),
+        ]}
+      />
 
       <PageHero
         eyebrow="Verticals"
@@ -329,7 +338,7 @@ export default function VerticalsPage() {
                         <span className="vert-card__media vert-card__media--hot">
                           <img
                             src={`${vertical.hotImage}?v=3`}
-                            alt=""
+                            alt={`${vertical.name} pay per call and leads from RidgeRise Media`}
                             width={800}
                             height={500}
                             loading="lazy"
@@ -384,7 +393,7 @@ export default function VerticalsPage() {
                         <span className="vert-card__media">
                           <img
                             src={`/assets/verticals/${vertical.slug}.webp`}
-                            alt=""
+                            alt={`${vertical.name} pay per call and leads from RidgeRise Media`}
                             width={640}
                             height={420}
                             loading="lazy"

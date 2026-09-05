@@ -3,10 +3,16 @@ import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
 import { getVerticalBySlug, verticals } from "@/data/verticals";
 import { getVerticalGuide } from "@/data/vertical-guides";
-import { site } from "@/data/site";
-import { verticalSeo } from "@/data/seo";
+import {
+  relatedBlogForVertical,
+  verticalDisplayName,
+  verticalSeo,
+  breadcrumbLd,
+  faqPageLd,
+} from "@/data/seo";
 import { verticalDetailFaqs } from "@/data/faqs";
-import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
+import { FaqSection } from "@/components/ui/faq-section";
+import { site } from "@/data/site";
 import "./pages.css";
 
 export default function VerticalDetailPage() {
@@ -18,6 +24,8 @@ export default function VerticalDetailPage() {
   }
 
   const guide = getVerticalGuide(vertical.slug);
+  const name = verticalDisplayName(vertical);
+  const meta = verticalSeo(vertical);
 
   const related = verticals
     .filter(
@@ -31,14 +39,20 @@ export default function VerticalDetailPage() {
       ? related
       : verticals.filter((item) => item.slug !== vertical.slug).slice(0, 3);
 
-  const faqs = verticalDetailFaqs(vertical.name);
+  const relatedPosts = relatedBlogForVertical(vertical.slug);
+  const faqs = verticalDetailFaqs(name);
 
   const jsonLd = [
+    breadcrumbLd([
+      { name: "Home", path: "/" },
+      { name: "Verticals", path: "/verticals" },
+      { name: name, path: meta.path },
+    ]),
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      name: `${vertical.name} Pay Per Call & Leads`,
-      description: vertical.description,
+      name: `${name} Pay Per Call & Leads`,
+      description: meta.description,
       url: `${site.url}/verticals/${vertical.slug}`,
       provider: {
         "@type": "Organization",
@@ -49,18 +63,18 @@ export default function VerticalDetailPage() {
       serviceType: "Pay-per-call marketing",
       category: vertical.category,
     },
-    buildFaqJsonLd(faqs),
+    faqPageLd(faqs),
   ];
 
   return (
     <main>
-      <Seo {...verticalSeo(vertical)} jsonLd={jsonLd} />
+      <Seo {...meta} jsonLd={jsonLd} />
 
       <PageHero
         eyebrow={vertical.category}
         title={
           <>
-            {vertical.name}{" "}
+            {name}{" "}
             <span className="grad-mint">pay per call & leads</span>
           </>
         }
@@ -73,7 +87,7 @@ export default function VerticalDetailPage() {
         <figure className="vert-guide__media">
           <img
             src={`/assets/verticals/${vertical.slug}.webp`}
-            alt=""
+            alt={`${name} pay per call and leads from RidgeRise Media`}
           />
         </figure>
         <article className="prose prose--guide">
@@ -115,7 +129,7 @@ export default function VerticalDetailPage() {
                 to={`/verticals/${item.slug}`}
               >
                 <span className="card-grid__meta">{item.category}</span>
-                <h3>{item.name}</h3>
+                <h3>{verticalDisplayName(item)}</h3>
                 <p>{item.summary}</p>
                 <span className="card-grid__link">View vertical →</span>
               </Link>
@@ -124,15 +138,38 @@ export default function VerticalDetailPage() {
         </ul>
       </section>
 
+      {relatedPosts.length > 0 ? (
+        <section className="inner-section">
+          <div className="inner-section__head">
+            <h2 className="inner-section__title">Related insights</h2>
+            <p className="inner-section__sub">
+              Buyer guides that pair with {name} call and lead campaigns.
+            </p>
+          </div>
+          <ul className="card-grid">
+            {relatedPosts.map((post) => (
+              <li key={post.slug}>
+                <Link className="card-grid__item" to={`/blog/${post.slug}`}>
+                  <span className="card-grid__meta">{post.category}</span>
+                  <h3>{post.title}</h3>
+                  <p>{post.excerpt}</p>
+                  <span className="card-grid__link">Read article →</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
       <FaqSection
-        title={`${vertical.name} FAQ`}
-        description={`Buying ${vertical.name} calls and leads. Models, qualification, and supply.`}
+        title={`${name} FAQ`}
+        description={`Buying ${name} calls and leads. Models, qualification, and supply.`}
         items={faqs}
       />
 
       <section className="cta-band">
         <div className="cta-band__inner">
-          <h2>Need {vertical.name} calls or leads?</h2>
+          <h2>Need {name} calls or leads?</h2>
           <p>
             Tell us your states, hours, and how you define a qualified call.
             We&apos;ll talk CPL, cost per call, or traffic into your funnel.

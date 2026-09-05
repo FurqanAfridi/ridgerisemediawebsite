@@ -21,7 +21,8 @@ function stripManagedHeadTags(html) {
     .replace(/<meta\b[^>]*name=["']keywords["'][^>]*>/gi, "")
     .replace(/<meta\b[^>]*property=["']og:[^"']+["'][^>]*>/gi, "")
     .replace(/<meta\b[^>]*name=["']twitter:[^"']+["'][^>]*>/gi, "")
-    .replace(/<meta\b[^>]*property=["']article:[^"']+["'][^>]*>/gi, "");
+    .replace(/<meta\b[^>]*property=["']article:[^"']+["'][^>]*>/gi, "")
+    .replace(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi, "");
 }
 
 function injectHead(html, tags) {
@@ -63,7 +64,7 @@ try {
       continue;
     }
 
-    const html = injectHead(shell, renderSeoHead(meta));
+    const html = injectHead(shell, renderSeoHead(meta, path));
     const titles = countTag(html, /<title\b/gi);
     const descriptions = countTag(html, /<meta\b[^>]*name=["']description["']/gi);
     const canonicals = countTag(html, /<link\b[^>]*rel=["']canonical["']/gi);

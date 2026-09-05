@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { publishersFaqs } from "@/data/faqs";
-import { pageSeo } from "@/data/seo";
+import { pageSeo, breadcrumbLd } from "@/data/seo";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import { usePublisherMotion } from "@/hooks/usePublisherMotion";
 import { trafficSources } from "@/data/traffic-sources";
@@ -172,7 +172,16 @@ export default function PublishersPage() {
 
   return (
     <main className="pub-page" ref={rootRef}>
-      <Seo {...pageSeo.publishers} jsonLd={buildFaqJsonLd(publishersFaqs)} />
+      <Seo
+        {...pageSeo.publishers}
+        jsonLd={[
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Publishers", path: "/publishers" },
+          ]),
+          buildFaqJsonLd(publishersFaqs),
+        ]}
+      />
 
       <section className="pub-hero">
         <div className="pub-hero__glow" aria-hidden="true" />

@@ -2,8 +2,46 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
 import { blogPosts, getPostBySlug } from "@/data/blog";
-import { postSeo } from "@/data/seo";
+import {
+  blogPostFaqs,
+  blogPostingLd,
+  breadcrumbLd,
+  faqPageLd,
+  postSeo,
+} from "@/data/seo";
+import { FaqSection } from "@/components/ui/faq-section";
 import "./pages.css";
+
+const POST_VERTICAL_LINKS: Record<
+  string,
+  { to: string; label: string }[]
+> = {
+  "what-is-pay-per-call-marketing": [
+    { to: "/verticals/auto-insurance", label: "auto insurance pay per call" },
+    { to: "/verticals/personal-injury", label: "personal injury call campaigns" },
+  ],
+  "insurance-pay-per-call-best-practices": [
+    { to: "/verticals/medicare-advantage", label: "Medicare Advantage calls" },
+    { to: "/verticals/final-expense", label: "final expense inbound calls" },
+  ],
+  "how-publishers-get-paid-faster": [
+    { to: "/verticals/health-insurance", label: "health insurance buyer demand" },
+    { to: "/verticals/debt-settlement", label: "debt settlement campaigns" },
+  ],
+  "buyer-guide-call-quality": [
+    { to: "/verticals/hvac", label: "HVAC pay-per-call filters" },
+    { to: "/verticals/life-insurance", label: "life insurance call quality" },
+  ],
+  "compliance-first-pay-per-call": [
+    { to: "/verticals/medicare-advantage", label: "Medicare Advantage compliance" },
+    { to: "/verticals/personal-loans", label: "personal loan call campaigns" },
+  ],
+  "home-services-call-seasonality": [
+    { to: "/verticals/hvac", label: "HVAC seasonal call demand" },
+    { to: "/verticals/roofing", label: "roofing storm call campaigns" },
+    { to: "/verticals/solar", label: "solar pay per call and CPL" },
+  ],
+};
 
 export default function BlogPostPage() {
   const { slug } = useParams();
@@ -13,13 +51,30 @@ export default function BlogPostPage() {
     return <Navigate to="/blog" replace />;
   }
 
+  const meta = postSeo(post);
+  const faqs = blogPostFaqs(post.slug);
+  const verticalLinks = POST_VERTICAL_LINKS[post.slug] ?? [
+    { to: "/verticals/auto-insurance", label: "auto insurance pay per call" },
+    { to: "/verticals/hvac", label: "HVAC call campaigns" },
+  ];
+
   const related = blogPosts
     .filter((p) => p.slug !== post.slug)
     .slice(0, 3);
 
+  const jsonLd = [
+    breadcrumbLd([
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog" },
+      { name: post.title, path: meta.path },
+    ]),
+    blogPostingLd(post, meta),
+    ...(faqs.length ? [faqPageLd(faqs)] : []),
+  ];
+
   return (
     <main>
-      <Seo {...postSeo(post)} />
+      <Seo {...meta} jsonLd={jsonLd} />
 
       <PageHero
         eyebrow={post.category}
@@ -45,11 +100,34 @@ export default function BlogPostPage() {
 
       <section className="inner-section">
         <article className="prose">
-          {post.content.map((paragraph) => (
-            <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+          {post.content.map((paragraph, index) => (
+            <p key={`${post.slug}-${index}`}>
+              {paragraph}
+              {index === 1 ? (
+                <>
+                  {" "}
+                  Related verticals:{" "}
+                  {verticalLinks.map((link, i) => (
+                    <span key={link.to}>
+                      {i > 0 ? ", " : null}
+                      <Link to={link.to}>{link.label}</Link>
+                    </span>
+                  ))}
+                  .
+                </>
+              ) : null}
+            </p>
           ))}
         </article>
       </section>
+
+      {faqs.length > 0 ? (
+        <FaqSection
+          title="FAQ"
+          description="Common questions buyers and publishers ask about this topic."
+          items={faqs}
+        />
+      ) : null}
 
       <section className="inner-section inner-section--band">
         <div className="inner-section__head">

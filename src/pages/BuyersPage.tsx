@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { buyersFaqs } from "@/data/faqs";
-import { pageSeo } from "@/data/seo";
+import { pageSeo, breadcrumbLd } from "@/data/seo";
 import { PROOF_METRICS_LIVE, proofFootnote, proofMetrics } from "@/data/proof";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import { Magnetic } from "@/components/ui/magnetic";
@@ -359,7 +359,16 @@ export default function BuyersPage() {
 
   return (
     <main className="buy-page" ref={rootRef}>
-      <Seo {...pageSeo.buyers} jsonLd={buildFaqJsonLd(buyersFaqs)} />
+      <Seo
+        {...pageSeo.buyers}
+        jsonLd={[
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Buyers", path: "/buyers" },
+          ]),
+          buildFaqJsonLd(buyersFaqs),
+        ]}
+      />
 
       <section className="buy-hero">
         <div className="buy-hero__glow" aria-hidden="true" />

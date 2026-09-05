@@ -1,0 +1,42 @@
+# Optional host nginx snippet for DIRECT access to :786
+# (when someone hits http://ridgerisemedia.com:786 or http://IP:786)
+#
+# Do NOT apply this blindly as the only server block for :786 if Caddy already
+# reverse-proxies ridgerisemedia.com → 172.17.0.1:786. Redirect only when the
+# request is not already coming through the HTTPS edge proxy.
+#
+# Install (on Contabo), then nginx -t && systemctl reload nginx:
+#
+#   # Inside the RidgeRise server block that listens on 786, add:
+
+# Redirect bare :786 hostnames to the canonical HTTPS origin.
+# Keep serving static files when Host is ridgerisemedia.com without a port
+# (or when X-Forwarded-Proto is https from Caddy).
+
+# if ($host ~* "^(ridgerisemedia\.com|www\.ridgerisemedia\.com):786$") {
+#   return 301 https://ridgerisemedia.com$request_uri;
+# }
+# if ($http_host ~* ":786$") {
+#   return 301 https://ridgerisemedia.com$request_uri;
+# }
+
+# Safer single-purpose server for public :786 exposure:
+#
+# server {
+#   listen 786;
+#   server_name ridgerisemedia.com www.ridgerisemedia.com;
+#
+#   # Direct public hits on :786 → canonical HTTPS (no port)
+#   if ($http_x_forwarded_proto = "") {
+#     return 301 https://ridgerisemedia.com$request_uri;
+#   }
+#
+#   root /var/www/ridgerisemedia;
+#   index index.html;
+#   location / {
+#     try_files $uri $uri/ /index.html;
+#   }
+# }
+#
+# Canonical tags in the app already self-reference https://ridgerisemedia.com
+# and never include :786.

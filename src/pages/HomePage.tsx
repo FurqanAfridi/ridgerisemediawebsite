@@ -11,7 +11,7 @@ import { Seo } from "@/components/Seo";
 import { assets } from "@/data/site";
 import { trafficSources } from "@/data/traffic-sources";
 import { homeFaqs } from "@/data/faqs";
-import { pageSeo } from "@/data/seo";
+import { pageSeo, breadcrumbLd } from "@/data/seo";
 import { usePublisherMotion } from "@/hooks/usePublisherMotion";
 import "./publishers.css";
 
@@ -81,7 +81,13 @@ export default function HomePage() {
 
   return (
     <>
-      <Seo {...pageSeo.home} jsonLd={buildFaqJsonLd(homeFaqs)} />
+      <Seo
+        {...pageSeo.home}
+        jsonLd={[
+          breadcrumbLd([{ name: "Home", path: "/" }]),
+          buildFaqJsonLd(homeFaqs),
+        ]}
+      />
 
       <main className="home-main" ref={homeRef}>
         <ScrollRocketFlight />

@@ -23,7 +23,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Seo } from "@/components/Seo";
 import { aboutFaqs } from "@/data/faqs";
-import { pageSeo } from "@/data/seo";
+import { pageSeo, breadcrumbLd } from "@/data/seo";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
 import { Magnetic } from "@/components/ui/magnetic";
 import { prefersReducedMotion } from "@/lib/motion-env";
@@ -608,7 +608,16 @@ export default function AboutPage() {
 
   return (
     <main className="about-page" ref={rootRef}>
-      <Seo {...pageSeo.about} jsonLd={buildFaqJsonLd(aboutFaqs)} />
+      <Seo
+        {...pageSeo.about}
+        jsonLd={[
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ]),
+          buildFaqJsonLd(aboutFaqs),
+        ]}
+      />
 
       <section className="about-hero">
         <div className="about-hero__copy">
@@ -874,7 +883,7 @@ export default function AboutPage() {
                   key={item.id}
                   className={`about-buy__frame about-buy__frame--${item.tone}${index === 0 ? " is-active" : ""}`}
                 >
-                  <img src={item.image} alt="" width={700} height={500} loading="lazy" />
+                  <img src={item.image} alt={item.title} width={700} height={500} loading="lazy" />
                   <figcaption>
                     <item.Icon size={18} strokeWidth={2.2} />
                     {item.label}
@@ -1036,7 +1045,7 @@ export default function AboutPage() {
               <img
                 className="about-team__avatar"
                 src={member.image}
-                alt=""
+                alt={`${member.name}, ${member.role} at RidgeRise Media`}
                 width={168}
                 height={168}
                 loading="lazy"

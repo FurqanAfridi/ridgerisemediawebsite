@@ -1,5 +1,12 @@
 import { Helmet } from "react-helmet-async";
-import { DEFAULT_OG, buildTitle, canonicalUrl, ogImageUrl } from "@/data/seo";
+import {
+  DEFAULT_OG,
+  buildTitle,
+  canonicalUrl,
+  ogImageUrl,
+  organizationLd,
+  websiteLd,
+} from "@/data/seo";
 import { site } from "@/data/site";
 
 type SeoProps = {
@@ -7,7 +14,6 @@ type SeoProps = {
   description: string;
   path?: string;
   type?: "website" | "article";
-  keywords?: readonly string[];
   image?: string;
   publishedTime?: string;
   modifiedTime?: string;
@@ -19,7 +25,6 @@ export function Seo({
   description,
   path = "/",
   type = "website",
-  keywords = [],
   image = DEFAULT_OG,
   publishedTime,
   modifiedTime,
@@ -29,73 +34,9 @@ export function Seo({
   const url = canonicalUrl(path);
   const imageUrl = ogImageUrl(image);
 
-  const organizationLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: site.name,
-    url: site.url,
-    email: site.email,
-    telephone: site.phone,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "82 Navratil Rd",
-      addressLocality: "Willington",
-      addressRegion: "CT",
-      postalCode: "06279",
-      addressCountry: "US",
-    },
-    logo: `${site.url}/assets/logo-icon.svg`,
-    description:
-      "US pay-per-call media buyer delivering qualified inbound calls, leads, and traffic on CPL and cost per call.",
-  };
-
-  const websiteLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: site.name,
-    url: site.url,
-    description: site.tagline,
-    publisher: {
-      "@type": "Organization",
-      name: site.name,
-      url: site.url,
-    },
-  };
-
-  const articleLd =
-    type === "article"
-      ? {
-          "@context": "https://schema.org",
-          "@type": "Article",
-          headline: fullTitle,
-          description,
-          url,
-          image: imageUrl,
-          datePublished: publishedTime,
-          dateModified: modifiedTime ?? publishedTime,
-          author: {
-            "@type": "Organization",
-            name: site.name,
-          },
-          publisher: {
-            "@type": "Organization",
-            name: site.name,
-            logo: {
-              "@type": "ImageObject",
-              url: `${site.url}/assets/logo-icon.svg`,
-            },
-          },
-          mainEntityOfPage: {
-            "@type": "WebPage",
-            "@id": url,
-          },
-        }
-      : null;
-
   const schemas = [
-    organizationLd,
-    websiteLd,
-    ...(articleLd ? [articleLd] : []),
+    organizationLd(),
+    ...(path === "/" ? [websiteLd()] : []),
     ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
   ];
 
@@ -103,9 +44,6 @@ export function Seo({
     <Helmet prioritizeSeoTags>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      {keywords.length > 0 && (
-        <meta name="keywords" content={keywords.join(", ")} />
-      )}
       <link rel="canonical" href={url} />
 
       <meta property="og:type" content={type} />

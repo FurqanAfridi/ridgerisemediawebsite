@@ -80,44 +80,52 @@ export function FooterSitemap() {
           </ul>
         </div>
 
-        <div className="footer-sitemap__col">
+        <div className="footer-sitemap__col footer-sitemap__col--contact">
           <h2 className="footer-sitemap__title">Contact &amp; Compliance</h2>
-          <ul className="footer-sitemap__list">
-            <li>
-              <a href={`mailto:${site.email}`}>{site.email}</a>
-            </li>
-            <li>
-              <a href={site.phoneHref}>{site.phone}</a>
-            </li>
-            <li>
-              <a
-                className="footer-sitemap__address"
-                href={site.mapsHref}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+          <div className="footer-sitemap__contact">
+            <a className="footer-sitemap__contact-row" href={`mailto:${site.email}`}>
+              <span className="footer-sitemap__contact-label">Email</span>
+              <span className="footer-sitemap__contact-value">{site.email}</span>
+            </a>
+            <a className="footer-sitemap__contact-row" href={site.phoneHref}>
+              <span className="footer-sitemap__contact-label">Phone</span>
+              <span className="footer-sitemap__contact-value">{site.phone}</span>
+            </a>
+            <a
+              className="footer-sitemap__contact-row"
+              href={site.mapsHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="footer-sitemap__contact-label">Office</span>
+              <span className="footer-sitemap__contact-value">
                 {site.addressLines[0]}
                 <br />
                 {site.addressLines[1]}
-              </a>
-            </li>
+              </span>
+            </a>
             {trustSignals.live && trustSignals.legalName ? (
-              <li>{trustSignals.legalName}</li>
+              <p className="footer-sitemap__contact-legal">{trustSignals.legalName}</p>
             ) : null}
             {trustSignals.live
               ? trustSignals.leadership.map((person) => (
-                  <li key={person.name}>
-                    <a
-                      href={person.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                  <a
+                    key={person.name}
+                    className="footer-sitemap__contact-row"
+                    href={person.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="footer-sitemap__contact-label">Team</span>
+                    <span className="footer-sitemap__contact-value">
                       {person.name}
                       {person.role ? ` · ${person.role}` : ""}
-                    </a>
-                  </li>
+                    </span>
+                  </a>
                 ))
               : null}
+          </div>
+          <ul className="footer-sitemap__legal">
             {complianceLinks.map((link) => (
               <li key={link.label}>
                 <Link to={link.to}>{link.label}</Link>

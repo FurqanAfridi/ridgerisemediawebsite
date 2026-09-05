@@ -9,7 +9,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <Link to="/" className={cn("logo", className)} aria-label="RidgeRise Media">
       <span className="logo__mark">
-        <img src={assets.logoIcon} alt="" width={36} height={29} />
+        <img src={assets.logoIcon} alt="RidgeRise Media logo" width={36} height={29} />
       </span>
       <span className="logo__wordmark">
         <img

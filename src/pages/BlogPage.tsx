@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "motion/react";
 import { PageHero } from "@/components/layout/PageHero";
 import { Seo } from "@/components/Seo";
-import { pageSeo } from "@/data/seo";
+import { pageSeo, breadcrumbLd } from "@/data/seo";
 import { blogPosts } from "@/data/blog";
 import { blogFaqs } from "@/data/faqs";
 import { buildFaqJsonLd, FaqSection } from "@/components/ui/faq-section";
@@ -25,7 +25,16 @@ export default function BlogPage() {
 
   return (
     <main>
-      <Seo {...pageSeo.blog} jsonLd={buildFaqJsonLd(blogFaqs)} />
+      <Seo
+        {...pageSeo.blog}
+        jsonLd={[
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+          ]),
+          buildFaqJsonLd(blogFaqs),
+        ]}
+      />
 
       <PageHero
         eyebrow="Blog"
